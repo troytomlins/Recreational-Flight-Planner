@@ -4,8 +4,13 @@ package seng202.group10;
  * Hello world!
  *
  */
-public class App
-{
+public class App {
+    public String goodMorningVietnam() {
+        return "Good morning Vietnam";
+    }
+
+
+
 
     public int zacMethod(int inputInteger) {
         int returnInteger = inputInteger;
