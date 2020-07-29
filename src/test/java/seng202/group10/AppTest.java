@@ -40,4 +40,9 @@ public class AppTest
         App app = new App();
         assertEquals(app.goodbyeWorld(), "Goodbye World!");
     }
+
+    public void testZacMethod() {
+        App testApp = new App();
+        assertEquals(20, testApp.zacMethod(10));
+    }
 }
