@@ -35,4 +35,9 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    public void testGoodbyeWorld() {
+        App app = new App();
+        assertEquals(app.goodbyeWorld(), "Goodbye World!");
+    }
 }
