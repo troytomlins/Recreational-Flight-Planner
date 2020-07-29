@@ -4,7 +4,7 @@ package seng202.group10;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
 
     public int zacMethod(int inputInteger) {
@@ -31,5 +31,8 @@ public class App
     public int intSubtract(int numb1, int numb2) {
         int diff = numb1 - numb2;
         return diff;
+    }
+    public String troyMethod() {
+      return "This is dumb";
     }
 }

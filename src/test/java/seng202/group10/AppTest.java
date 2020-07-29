@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
     extends TestCase
 {
     /**
@@ -55,5 +55,10 @@ public class AppTest
         int int2 = 5;
         int diff = app.intSubtract(int1, int2);
         assertEquals(int1 - int2, diff);
+    }
+
+    public void testTroyMethod() {
+        App app = new App();
+        assertEquals(app.troyMethod(), "This is dumb");
     }
 }
