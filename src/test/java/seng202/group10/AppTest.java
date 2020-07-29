@@ -7,12 +7,10 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
+public class AppTest extends TestCase
 {
     /**
      * Create the test case
-     *
      * @param testName name of the test case
      */
     public AppTest( String testName )
@@ -33,6 +31,13 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+        testGetStartUpMessage();
+//        assertTrue( true );
+    }
+
+    public void testGetStartUpMessage()
+    {
+        App app = new App();
+        assertEquals(app.getStartUpMessage(), "Kia ora, y'all");
     }
 }
