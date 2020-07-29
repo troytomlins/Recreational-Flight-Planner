@@ -66,4 +66,8 @@ public class AppTest extends TestCase
         App app = new App();
         assertEquals(app.troyMethod(), "This is dumb");
     }
-}
+
+    void testGoodMorningVietnam() {
+        App app = new App();
+        assertEquals(App.goodMorningVietnam, "Good Morning Vietnam");
+    }
