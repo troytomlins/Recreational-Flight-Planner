@@ -45,4 +45,15 @@ public class AppTest
         App testApp = new App();
         assertEquals(20, testApp.zacMethod(10));
     }
+
+
+    public void testIntSubtract() {
+        App app = new App();
+
+        // Blue Sky
+        int int1 = 10;
+        int int2 = 5;
+        int diff = app.intSubtract(int1, int2);
+        assertEquals(int1 - int2, diff);
+    }
 }
