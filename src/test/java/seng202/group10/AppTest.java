@@ -7,36 +7,32 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest extends TestCase
-{
+public class AppTest extends TestCase {
     /**
      * Create the test case
+     *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
-    {
-        super( testName );
+    public AppTest(String testName) {
+        super(testName);
     }
 
     /**
      * @return the suite of tests being tested
      */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    public static Test suite() {
+        return new TestSuite(AppTest.class);
     }
 
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
-    {
+    public void testApp() {
         testGetStartUpMessage();
 //        assertTrue( true );
     }
 
-    public void testGetStartUpMessage()
-    {
+    public void testGetStartUpMessage() {
         App app = new App();
         assertEquals(app.getStartUpMessage(), "Kia ora, y'all");
     }
@@ -67,7 +63,8 @@ public class AppTest extends TestCase
         assertEquals(app.troyMethod(), "This is dumb");
     }
 
-    void testGoodMorningVietnam() {
+    public void testGoodMorningVietnam() {
         App app = new App();
-        assertEquals(App.goodMorningVietnam, "Good Morning Vietnam");
+        assertEquals(app.goodMorningVietnam(), "Good Morning Vietnam");
     }
+}
