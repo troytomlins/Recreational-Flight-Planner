@@ -7,15 +7,17 @@ public class AircraftModel {
 
     /**
      * adds new aircraft to ArrayList aircraft
-     * @param craft
+     * @param craft Class Aircraft
      */
     public void addAircraft(Aircraft craft) {
-        aircraft.add(craft);
+        if (!aircraft.contains(craft)) {
+            aircraft.add(craft);
+        }
     }
 
     /**
      * removes aircraft from ArrayList aircraft
-     * @param craft
+     * @param craft Class Aircraft
      */
     public void deleteAircraft(Aircraft craft) {
         aircraft.remove(craft);

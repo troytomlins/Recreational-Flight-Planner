@@ -7,17 +7,19 @@ public class UserModel {
 
     /**
      * adds new user to ArrayList users
-     * @param user
+     * @param user Class User
      */
-    public addUser(User user) {
-        users.add(user);
+    public void addUser(User user) {
+        if (!users.contains(user)) {
+            users.add(user);
+        }
     }
 
     /**
      * removes user from ArrayList users
-     * @param user
+     * @param user Class User
      */
-    public deleteUser(User user) {
+    public void deleteUser(User user) {
         users.remove(user);
     }
 }
