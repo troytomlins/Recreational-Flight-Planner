@@ -9,13 +9,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class App extends Application {
+public class GUIApp extends Application {
+
+    private Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 400, 250));
+        String css = getClass().getResource("styles.css").toExternalForm();
+        root.getStylesheets().add(css);
+        primaryStage.setTitle("Recreational Flight Planner");
+        primaryStage.setScene(new Scene(root, 1000, 650));
         primaryStage.show();
     }
 

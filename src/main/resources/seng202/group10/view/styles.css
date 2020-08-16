@@ -1,0 +1,5 @@
+#imagePane {
+    -fx-background-image: url('map.png');
+    -fx-background-size: cover;
+}
+
