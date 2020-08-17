@@ -41,4 +41,7 @@ public class FlightLeg {
         return legDistance;
     }
 
+    // Distance between two points.
+    // Fuel Efficency.
+
 }
