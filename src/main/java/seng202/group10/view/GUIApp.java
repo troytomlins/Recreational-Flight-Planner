@@ -16,8 +16,6 @@ public class GUIApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        String css = getClass().getResource("styles.css").toExternalForm();
-        root.getStylesheets().add(css);
         primaryStage.setTitle("Recreational Flight Planner");
         primaryStage.setScene(new Scene(root, 1000, 650));
         primaryStage.show();
