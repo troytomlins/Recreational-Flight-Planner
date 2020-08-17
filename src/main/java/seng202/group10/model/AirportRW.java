@@ -20,7 +20,7 @@ public class AirportRW extends RWStream {
         ArrayList<Airport> airportList = new ArrayList<Airport>();
 
         for (ArrayList<String> dataLine: data) {
-            if (ValidateData.validateAirport(dataLine)) {
+            if (true/*ValidateData.validateAirport(dataLine)*/) {
                 Airport airport = new Airport(
                                               dataLine.get(1),
                                               dataLine.get(2),
@@ -35,8 +35,6 @@ public class AirportRW extends RWStream {
                                               dataLine.get(11)
                 );
                 airportList.add(airport);
-            } else {
-
             }
         }
         return airportList;
@@ -61,5 +59,6 @@ public class AirportRW extends RWStream {
                             airport.getTzDatabase()
             )));
         }
+        writeAll(airportStrings);
     }
 }

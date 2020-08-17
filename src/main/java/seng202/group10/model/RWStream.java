@@ -42,7 +42,11 @@ public class RWStream {
     }
 
     public ArrayList<ArrayList<String>> read() {
-        fileReader = new Scanner(inFilename);
+        try {
+            fileReader = new Scanner(new File(inFilename));
+        } catch (FileNotFoundException error) {
+
+        }
         ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
