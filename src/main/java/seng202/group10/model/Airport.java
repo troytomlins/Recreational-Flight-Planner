@@ -3,6 +3,7 @@ package seng202.group10.model;
 public class Airport {
     private String name;
     private String city;
+    private String country;
     private String iata;
     private String icao;
     private float latitude;
@@ -12,9 +13,10 @@ public class Airport {
     private char dstType;
     private String tzDatabase;
 
-    public Airport(String name, String city, String iata, String icao, float latitude, float longitude, float altitude, float timezone, char dstType, String tzDatabase) {
+    public Airport(String name, String city, String country, String iata, String icao, float latitude, float longitude, float altitude, float timezone, char dstType, String tzDatabase) {
         this.name = name;
         this.city = city;
+        this.country = country;
         this.iata = iata;
         this.icao = icao;
         this.latitude = latitude;
@@ -32,6 +34,8 @@ public class Airport {
     public String getCity() {
         return city;
     }
+
+    public String getCountry() { return country; }
 
     public String getIata() {
         return iata;

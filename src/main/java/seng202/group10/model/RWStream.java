@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 import java.util.Arrays;
 
+
+/**
+ * @author Mitchell
+ * @author Niko
+ */
 public class RWStream {
     private Scanner fileReader;
     private FileWriter fileWriter;
