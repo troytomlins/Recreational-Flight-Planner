@@ -1,4 +1,4 @@
-package seng202.group10.view;
+package seng202.group10.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
