@@ -3,12 +3,12 @@ package seng202.group10.model;
 public class FlightLeg {
     private String id;
     private String type;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private float altitude;
     private float legDistance;
 
-    public FlightLeg(String id, String type, float latitude, float longitude, float altitude, float legDistance) {
+    public FlightLeg(String id, String type, double latitude, double longitude, float altitude, float legDistance) {
         this.id = id;
         this.type = type;
         this.latitude = latitude;
@@ -25,11 +25,11 @@ public class FlightLeg {
         return type;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -41,6 +41,9 @@ public class FlightLeg {
         return legDistance;
     }
 
+    public void calculateLegDistance() {
+        
+    }
     // Distance between two points.
     // Fuel Efficency.
 
