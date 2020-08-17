@@ -10,8 +10,12 @@ public class ControllerFacade {
     private MapController mapController;
     private ModelFacade model;
 
-    public void setModel(ModelFacade model) {
-
+    /**
+     * Sets the Model Facade to input
+     * @param modelFacade ModelFacade
+     */
+    public void setModel(ModelFacade modelFacade) {
+        model = modelFacade;
     }
 
 }
