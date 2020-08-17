@@ -17,7 +17,7 @@ public class AircraftModelTest {
     public void init() {
         aircraftModel = new AircraftModel();
         aircraft = new Aircraft("test", "testCraft", "test", 1000);
-        compareCraft = new ArrayList<Aircraft>();
+        compareCraft = new ArrayList<>();
         compareCraft.add(aircraft);
     }
 
