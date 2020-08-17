@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class AircraftModel {
     private ArrayList<Aircraft> aircraft;
 
+    public AircraftModel() {
+        aircraft = new ArrayList<Aircraft>();
+    }
     /**
      * adds new aircraft to ArrayList aircraft
      * @param craft Class Aircraft
@@ -21,5 +24,9 @@ public class AircraftModel {
      */
     public void deleteAircraft(Aircraft craft) {
         aircraft.remove(craft);
+    }
+
+    public ArrayList<Aircraft> getAircraftList() {
+        return aircraft;
     }
 }
