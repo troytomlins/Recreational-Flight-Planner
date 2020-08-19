@@ -3,6 +3,9 @@ package seng202.group10.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @Author Mitchell
+ */
 public class AirlineRW extends RWStream {
     public AirlineRW(String inFile) {
         super(inFile, "airline.csv");
