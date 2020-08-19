@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
@@ -31,6 +32,9 @@ public class ViewController {
     private List<Airline> data;
     private ControllerFacade controllerFacade;
 
+    public void setControllerFacade(ControllerFacade controllerFacade) {
+        this.controllerFacade = controllerFacade;
+    }
 
     /**
      * Sets data for airline table in GUI

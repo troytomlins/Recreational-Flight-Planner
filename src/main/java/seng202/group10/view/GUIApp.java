@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import seng202.group10.controller.ControllerFacade;
+import seng202.group10.controller.ViewController;
 
 import java.io.IOException;
 
@@ -13,10 +14,17 @@ import java.io.IOException;
 public class GUIApp extends Application {
 
     private Stage stage;
+    private ControllerFacade controllerFacade;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        this.controllerFacade = new ControllerFacade();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+        Parent root = fxmlLoader.load();
+        ViewController controller = fxmlLoader.getController();
+        controller.setControllerFacade(this.controllerFacade);
+
         String css = getClass().getResource("mapBackground.css").toExternalForm();
         root.getStylesheets().add(css);
         primaryStage.setTitle("Recreational Flight Planner");
@@ -25,7 +33,6 @@ public class GUIApp extends Application {
     }
 
     public static void main(String[] args) {
-        ControllerFacade controllerFacade = new ControllerFacade();
         launch(args);
 
     }
