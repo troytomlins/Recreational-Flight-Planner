@@ -99,13 +99,13 @@
                                  <children>
                                               <MenuButton mnemonicParsing="false" text="Import" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                                   <items>
-                                                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                                                      <MenuItem fx:id="importAirlinesMenuItem" mnemonicParsing="false" onAction="#showImportAirlines" text="Airlines" />
                                                       <MenuItem mnemonicParsing="false" text="Action 2" />
                                                   </items>
                                               </MenuButton>
                                  </children>
                               </GridPane>
-                              <TableView prefHeight="528.0" prefWidth="725.0" GridPane.rowIndex="1">
+                              <TableView fx:id="airlineTable" prefHeight="461.0" prefWidth="508.0" GridPane.rowIndex="1">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />

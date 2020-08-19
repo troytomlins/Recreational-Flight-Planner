@@ -8,6 +8,7 @@ public class ControllerFacade {
     private AircraftController aircraftController;
     private FlightPlanner flightPlanner;
     private MapController mapController;
+    private AirlineController airlineController;
     private ModelFacade model;
 
     /**
@@ -16,6 +17,14 @@ public class ControllerFacade {
      */
     public void setModel(ModelFacade modelFacade) {
         model = modelFacade;
+    }
+
+    public ControllerFacade() {
+        this.airlineController = new AirlineController();
+    }
+
+    public AirlineController getAirlineController() {
+        return airlineController;
     }
 
 }

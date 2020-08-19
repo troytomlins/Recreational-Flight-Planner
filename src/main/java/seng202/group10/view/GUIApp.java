@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seng202.group10.controller.ControllerFacade;
 
 import java.io.IOException;
 
@@ -22,6 +23,8 @@ public class GUIApp extends Application {
     }
 
     public static void main(String[] args) {
+        ControllerFacade controllerFacade = new ControllerFacade();
         launch(args);
+
     }
 }
