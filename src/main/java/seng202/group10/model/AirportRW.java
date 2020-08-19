@@ -34,7 +34,7 @@ public class AirportRW extends RWStream {
                                               Float.parseFloat(dataLine.get(7)),
                                               Float.parseFloat(dataLine.get(8)),
                                               Float.parseFloat(dataLine.get(9)),
-                                              dataLine.get(10).charAt(0),
+                                              dataLine.get(10),
                                               dataLine.get(11)
                 );
                 airportList.add(airport);
@@ -54,11 +54,11 @@ public class AirportRW extends RWStream {
                             airport.getCountry(),
                             airport.getIata(),
                             airport.getIcao(),
-                            Float.toString(airport.getLatitude()),
-                            Float.toString(airport.getLongitude()),
+                            Double.toString(airport.getLatitude()),
+                            Double.toString(airport.getLongitude()),
                             Float.toString(airport.getAltitude()),
                             Float.toString(airport.getTimezone()),
-                            Character.toString(airport.getDstType()),
+                            airport.getDstType(),
                             airport.getTzDatabase()
             )));
         }
