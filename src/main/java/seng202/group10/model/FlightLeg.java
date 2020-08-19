@@ -5,10 +5,10 @@ public class FlightLeg {
     private String type;
     private double latitude;
     private double longitude;
-    private float altitude;
+    private double altitude;
     private double legDistance;
 
-    public FlightLeg(String id, String type, double latitude, double longitude, float altitude, double legDistance) {
+    public FlightLeg(String id, String type, double latitude, double longitude, double altitude, double legDistance) {
         this.id = id;
         this.type = type;
         this.latitude = latitude;
@@ -33,7 +33,7 @@ public class FlightLeg {
         return longitude;
     }
 
-    public float getAltitude() {
+    public double getAltitude() {
         return altitude;
     }
 
