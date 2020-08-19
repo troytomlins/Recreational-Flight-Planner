@@ -23,6 +23,14 @@ public class Route {
         this.equipment = equipment;
     }
 
+    public Route(String airlineCode, String sourceAirportCode, String destinationAirportCode, int stops, ArrayList<String> equipment) {
+        this.airlineCode = airlineCode;
+        this.sourceAirportCode = sourceAirportCode;
+        this.destinationAirportCode = destinationAirportCode;
+        this.stops = stops;
+        this.equipment = equipment;
+    }
+
     public String getAirlineCode() {
         return airlineCode;
     }

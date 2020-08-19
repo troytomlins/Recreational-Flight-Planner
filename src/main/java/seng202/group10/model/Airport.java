@@ -13,6 +13,7 @@ public class Airport {
     private String dstType;
     private String tzDatabase;
 
+
     public Airport(String name, String city, String country, String iata, String icao, double latitude, double longitude, float altitude, float timezone, String dstType, String tzDatabase) {
         this.name = name;
         this.city = city;
