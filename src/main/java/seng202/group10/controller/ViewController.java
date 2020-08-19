@@ -6,9 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,17 +25,47 @@ public class ViewController {
     @FXML
     private TableView<Airline> airlineTable;
     @FXML
+    private TableColumn nameCol;
+    @FXML
+    private TableColumn aliasCol;
+    @FXML
+    private TableColumn iataCol;
+    @FXML
+    private TableColumn icaoCol;
+    @FXML
+    private TableColumn callsignCol;
+    @FXML
+    private TableColumn countryCol;
+    @FXML
     private MenuItem importAirlinesMenuItem;
 
     private List<Airline> data;
     private ControllerFacade controllerFacade;
 
+    public void setControllerFacade(ControllerFacade controllerFacade) {
+        this.controllerFacade = controllerFacade;
+    }
 
     /**
      * Sets data for airline table in GUI
      */
     public void setAirlineTable() {
         AirlineController airlineController = controllerFacade.getAirlineController();
+        airlineTable.setEditable(true);
+
+        nameCol.setCellValueFactory(
+                new PropertyValueFactory<Airline, String>("name"));
+        aliasCol.setCellValueFactory(
+                new PropertyValueFactory<Airline, String>("alias"));
+        icaoCol.setCellValueFactory(
+                new PropertyValueFactory<Airline, String>("icao"));
+        callsignCol.setCellValueFactory(
+                new PropertyValueFactory<Airline, String>("callsign"));
+        countryCol.setCellValueFactory(
+                new PropertyValueFactory<Airline, String>("country"));
+        iataCol.setCellValueFactory(
+                new PropertyValueFactory<Airline, String>("iata"));
+
         data = airlineController.getAirlines();
         airlineTable.setItems(FXCollections.observableList(data));
     }
@@ -54,10 +83,9 @@ public class ViewController {
         // Check if a file was chosen
         if (file != null) {
             String filepath = file.getPath();
-            System.out.println(filepath);
 
             // Import file
-            AirlineController controller = new AirlineController();
+            AirlineController controller = controllerFacade.getAirlineController();
             try {
                 controller.importAirlines(filepath);
             } catch (IncompatibleFileException | IOException e) {
