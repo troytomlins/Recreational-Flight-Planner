@@ -77,7 +77,7 @@ public class FlightLeg {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         distance = radius * c * 1000; // Distance converted to meters.
 
-        double height = altitude2 - altitude1;
+        double height = (altitude2 - altitude1) / 3.2808; // Height converted to meters (an approximation);
 
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
