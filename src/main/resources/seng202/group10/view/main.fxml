@@ -86,8 +86,12 @@
                            <center>
                               <TableView fx:id="airlineTable" minHeight="-Infinity" prefWidth="508.0" BorderPane.alignment="CENTER">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                    <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+                                  <TableColumn fx:id="aliasCol" prefWidth="75.0" text="Alias" />
+                                  <TableColumn fx:id="callsignCol" prefWidth="75.0" text="Callsign" />
+                                    <TableColumn fx:id="iataCol" prefWidth="75.0" text="Iata" />
+                                    <TableColumn fx:id="icaoCol" prefWidth="75.0" text="Icao" />
+                                    <TableColumn fx:id="countryCol" prefWidth="75.0" text="Country" />
                                 </columns>
                               </TableView>
                            </center>

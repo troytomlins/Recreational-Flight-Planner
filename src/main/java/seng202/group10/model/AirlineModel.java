@@ -10,6 +10,10 @@ public class AirlineModel {
         return airlines;
     }
 
+    public AirlineModel() {
+        this.airlines = new ArrayList();
+    }
+
     /**
      * addAirlines adds an Airline object to an ArrayList of Airline objects.
      * If the Airline object is already in the ArrayList, the Airline object is not added.

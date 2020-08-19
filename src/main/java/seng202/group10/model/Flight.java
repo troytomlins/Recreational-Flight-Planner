@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Flight {
     private ArrayList<FlightLeg> legs;
-    private float totalDistance;
+    private double totalDistance;
 
     public void addLeg(FlightLeg leg, int index) {
         legs.add(index, leg);
@@ -17,7 +17,7 @@ public class Flight {
         }
     }
 
-    public float getTotalDistance() {
+    public double getTotalDistance() {
         return totalDistance;
     }
 }
