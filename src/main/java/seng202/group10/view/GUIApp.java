@@ -11,7 +11,9 @@ import javafx.scene.web.WebEngine;
 
 import seng202.group10.controller.ControllerFacade;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 
 public class GUIApp extends Application {
@@ -31,7 +33,9 @@ public class GUIApp extends Application {
 
         WebView mapView = (WebView) scene.lookup("#mapWebView");
         WebEngine mapEngine = mapView.getEngine();
-        mapEngine.load("https://www.google.co.nz/maps");
+
+        URL url = this.getClass().getResource("GoogleMaps/index.html");
+        mapEngine.load(url.toString());
     }
 
     public static void main(String[] args) {
