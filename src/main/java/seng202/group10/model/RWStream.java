@@ -50,7 +50,7 @@ public class RWStream {
         ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
-            lines.add(new ArrayList<String>(Arrays.asList(line.split(","))));
+            lines.add(new ArrayList<String>(Arrays.asList(line.split("[, ]+"))));
         }
 
         fileReader.close();
