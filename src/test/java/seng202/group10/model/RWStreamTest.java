@@ -14,8 +14,7 @@ public class RWStreamTest {
         String test_string = "this, is, a, test";
         ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-        ArrayList<String> singleList = new ArrayList<String>();
-        singleList.add(test_string);
+        ArrayList<String> singleList = new ArrayList<String>(Arrays.asList(test_string.split("[, ]+")));
         list.add(singleList);
         RWStream rwstream = new RWStream("test.csv");
         data = rwstream.read();
@@ -42,6 +41,7 @@ public class RWStreamTest {
         ArrayList<ArrayList<String>> compareList = new ArrayList<ArrayList<String>>();
         String test1 = "This, Is, a, test, of, the, write, single, class";
         String test2 = "This, Is, a, test, of, the, write, all, class";
+        ArrayList<String> splitList = new ArrayList<String>(Arrays.asList(test2.split("[, ]+")));
         ArrayList<String> list = new ArrayList<String>();
         list.add(test1);
         write_info.add(list);
@@ -51,7 +51,7 @@ public class RWStreamTest {
         RWStream rwstream = new RWStream("test2.csv");
         rwstream.writeAll(write_info);
         read_info = rwstream.read();
-        compareList.add(list);
+        compareList.add(splitList);
         assertEquals(compareList, read_info);
 
     }
