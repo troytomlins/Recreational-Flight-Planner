@@ -3,6 +3,7 @@ package seng202.group10.model;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,12 +26,13 @@ public class RWStreamTest {
     public void testWriteSingle() {
         ArrayList<ArrayList<String>> read_info = new ArrayList<ArrayList<String>>();
         String test1 = "This, Is, a, test, of, the, write, single, class";
+        ArrayList<String> compareList = new ArrayList<String>(Arrays.asList(test1.split("[, ]+")));
         ArrayList<String> list = new ArrayList<String>();
         list.add(test1);
         RWStream rwstream = new RWStream("test1.csv");
         rwstream.writeSingle(list);
         read_info = rwstream.read();
-        assertEquals(list, read_info.get(0));
+        assertEquals(compareList, read_info.get(0));
     }
 
     @Test
@@ -53,4 +55,5 @@ public class RWStreamTest {
         assertEquals(compareList, read_info);
 
     }
+
 }
