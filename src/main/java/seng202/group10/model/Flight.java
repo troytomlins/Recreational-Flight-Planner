@@ -3,8 +3,12 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 public class Flight {
-    private ArrayList<FlightLeg> legs;
+    private ArrayList<FlightLeg> legs = new ArrayList<FlightLeg>();
     private double totalDistance;
+
+    public ArrayList<FlightLeg> getLegs() {
+        return legs;
+    }
 
     public void addLeg(FlightLeg leg, int index) {
         legs.add(index, leg);
@@ -42,6 +46,10 @@ public class Flight {
                 latitudePrev = previousLeg.getLatitude();
                 longitudePrev = previousLeg.getLongitude();
                 altitudePrev = previousLeg.getAltitude();
+            } else {
+                latitudePrev = latitudeCurr;
+                longitudePrev = longitudeCurr;
+                altitudePrev = altitudeCurr;
             }
             legDistance = calculateLegDistance(latitudePrev, latitudeCurr, longitudePrev, longitudeCurr, altitudePrev, altitudeCurr);
             currentLeg.setLegDistance(legDistance);
@@ -67,7 +75,6 @@ public class Flight {
      */
     public double calculateLegDistance(double latitude1, double latitude2, double longitude1, double longitude2, double altitude1, double altitude2) {
         double distance = 0;
-
 
         final int radius = 6371; // Radius of Earth in km.
 
