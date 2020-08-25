@@ -23,7 +23,7 @@ public class FlightTest {
         double long2 = 103.988;
         double alt2 = 0;
 
-        double legDistance = 15333.804671059268;
+        double legDistance = 8404.214781889239;
         assertEquals(legDistance, flight.calculateLegDistance(lat1, lat2, long1, long2, alt1, alt2), 1);
     }
 }

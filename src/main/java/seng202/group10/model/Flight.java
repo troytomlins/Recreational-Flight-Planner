@@ -68,21 +68,23 @@ public class Flight {
     public double calculateLegDistance(double latitude1, double latitude2, double longitude1, double longitude2, double altitude1, double altitude2) {
         double distance = 0;
 
+
         final int radius = 6371; // Radius of Earth in km.
 
         double latitudeDistance = Math.toRadians(latitude2 - latitude1);
         double longitudeDistance = Math.toRadians(longitude2 - longitude1);
 
-        double a = Math.pow(Math.sin(latitudeDistance / 2), 2) + (Math.cos(Math.toRadians(latitude1)) *
-                Math.cos(Math.toRadians(latitude2) * Math.pow(Math.sin(longitudeDistance / 2), 2)));
+        double a = Math.sin(latitudeDistance / 2) * Math.sin(latitudeDistance / 2)
+                + Math.cos(Math.toRadians(latitude1)) * Math.cos(Math.toRadians(latitude2))
+                * Math.sin(longitudeDistance / 2) * Math.sin(longitudeDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         distance = radius * c;
 
-        double height = (altitude2 - altitude1) / (3.2808 * 1000); // Height converted to km (an approximation);
+        double height = (altitude1 - altitude2) / (3.2808 * 1000); // Height converted to km (an approximation);
 
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
-        return (Math.sqrt(distance)); //Convert back to kilometres.
+        return (Math.sqrt(distance));
     }
 
 }
