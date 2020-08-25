@@ -21,14 +21,32 @@ public class Flight {
         return totalDistance;
     }
 
-    public void setLegDistance() {
+    /**
+     * Loops through legs, setting the leg distances.
+     */
+    public void setLegDistances() {
         double latitudePrev = 0;
         double longitudePrev = 0;
         double altitudePrev = 0;
         double latitudeCurr = 0;
         double longitudeCurr = 0;
         double altitudeCurr = 0;
-        double legDistance = calculateLegDistance(latitudePrev, latitudeCurr, longitudePrev, longitudeCurr, altitudePrev, altitudeCurr);
+        double legDistance = 0;
+        for (int i = 0; i < legs.size(); i++) {
+            FlightLeg currentLeg = legs.get(i);
+            latitudeCurr = currentLeg.getLatitude();
+            longitudeCurr = currentLeg.getLongitude();
+            altitudeCurr = currentLeg.getAltitude();
+            if (i != 0) {
+                FlightLeg previousLeg = legs.get(i - 1);
+                latitudePrev = previousLeg.getLatitude();
+                longitudePrev = previousLeg.getLongitude();
+                altitudePrev = previousLeg.getAltitude();
+            }
+            legDistance = calculateLegDistance(latitudePrev, latitudeCurr, longitudePrev, longitudeCurr, altitudePrev, altitudeCurr);
+            currentLeg.setLegDistance(legDistance);
+        }
+
     }
 
     /**
@@ -50,7 +68,7 @@ public class Flight {
     public double calculateLegDistance(double latitude1, double latitude2, double longitude1, double longitude2, double altitude1, double altitude2) {
         double distance = 0;
 
-        final int radius = 6371; // Radius of Earth in km.
+        final int radius = 6371 * 1000; // Radius of Earth in km.
 
         double latitudeDistance = Math.toRadians(latitude2 - latitude1);
         double longitudeDistance = Math.toRadians(longitude2 - longitude1);
@@ -58,14 +76,13 @@ public class Flight {
         double a = Math.pow(Math.sin(latitudeDistance / 2), 2) + (Math.cos(Math.toRadians(latitude1)) *
                 Math.cos(Math.toRadians(latitude2) * Math.pow(Math.sin(longitudeDistance / 2), 2)));
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        distance = radius * c * 1000; // Distance converted to meters.
+        distance = radius * c;
 
         double height = (altitude2 - altitude1) / 3.2808; // Height converted to meters (an approximation);
 
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
-        return Math.sqrt(distance);
-
+        return (Math.sqrt(distance)) / 1000; //Convert back to kilometres.
     }
 
 }
