@@ -4,13 +4,13 @@ public class Aircraft {
     private String iata;
     private String name;
     private String icao;
-    private double fuelRate;
+    private double range;
 
-    public Aircraft(String iata, String name, String icao, double fuelRate) {
+    public Aircraft(String iata, String name, String icao, double range) {
         this.iata = iata;
         this.name = name;
         this.icao = icao;
-        this.fuelRate = fuelRate;
+        this.range = range;
     }
 
     public String getIata() {
@@ -25,7 +25,7 @@ public class Aircraft {
         return icao;
     }
 
-    public double getFuelRate() {
-        return fuelRate;
+    public double getrange() {
+        return range;
     }
 }
