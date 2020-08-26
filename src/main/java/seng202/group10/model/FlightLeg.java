@@ -41,5 +41,9 @@ public class FlightLeg {
         return legDistance;
     }
 
+    public void setLegDistance(double distance) {
+        legDistance = distance;
+    }
+
 
 }
