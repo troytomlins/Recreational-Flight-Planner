@@ -19,9 +19,6 @@ import java.net.URL;
 
 public class GUIApp extends Application {
 
-//    @FXML
-//    WebView mapWebView;
-
     private Stage stage;
     private ControllerFacade controllerFacade;
 
@@ -34,8 +31,6 @@ public class GUIApp extends Application {
         ViewController controller = fxmlLoader.getController();
         controller.setControllerFacade(this.controllerFacade);
 
-        String css = getClass().getResource("mapBackground.css").toExternalForm();
-        root.getStylesheets().add(css);
         primaryStage.setTitle("Recreational Flight Planner");
         Scene scene = new Scene(root, 1000, 650);
         primaryStage.setScene(scene);
