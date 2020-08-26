@@ -25,7 +25,7 @@ public class Aircraft {
         return icao;
     }
 
-    public double getrange() {
+    public double getRange() {
         return range;
     }
 }
