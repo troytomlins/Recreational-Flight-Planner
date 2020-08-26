@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.ViewController">
    <left>
@@ -43,30 +44,9 @@
                 <Tab text="Map">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
-                            <children>
-                        <GridPane fx:id="imagePane" prefHeight="571.0" prefWidth="2163.0" stylesheets="@mapBackground.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                                        <MenuButton alignment="CENTER_RIGHT" mnemonicParsing="false" text="Import" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-                                            <items>
-                                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                                                <MenuItem mnemonicParsing="false" text="Action 2" />
-                                            </items>
-                                        </MenuButton>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </GridPane>
-                            </children>
+                     <children>
+                        <WebView fx:id="mapWebView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </Tab>
