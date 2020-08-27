@@ -1,18 +1,14 @@
 package seng202.group10.view;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.scene.web.WebEngine;
-
 import seng202.group10.controller.ControllerFacade;
 import seng202.group10.controller.ViewController;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
