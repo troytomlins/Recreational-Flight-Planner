@@ -27,7 +27,7 @@ public class FlightBuilder {
         for (FlightLeg leg: legs) {
             totalDistance = totalDistance + leg.getLegDistance();
         }
-        return (checkFlightLength(totalDistance, aircraft) != true);
+        return checkFlightLength(totalDistance, aircraft);
     }
 
     public double getTotalDistance() {
