@@ -9,81 +9,111 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.ViewController">
-   <left>
-        <GridPane fx:id="planFlightPane" prefHeight="650.0" prefWidth="255.0" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="293.8163146972656" minHeight="10.0" prefHeight="38.2497673034668" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="591.2502326965332" minHeight="10.0" prefHeight="591.2502326965332" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Plan Flight" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-            </children>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-        </GridPane>
-   </left>
-   <center>
-        <TabPane prefHeight="636.0" prefWidth="689.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <tabs>
-                <Tab text="Map">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
-                     <children>
-                        <WebView fx:id="mapWebView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Table">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<TabPane prefHeight="628.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.ViewController">
+   <tabs>
+      <Tab closable="false" text="Map">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hoes" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Text>
+                     </left>
+                     <center>
+                        <WebView fx:id="mapWebView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab closable="false" text="Table">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <center>
+                        <TabPane BorderPane.alignment="CENTER">
+                           <tabs>
+                              <Tab closable="false" text="Airlines">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Name" />
+                                        <TableColumn prefWidth="75.0" text="Alias" />
+                                          <TableColumn prefWidth="75.0" text="Call Sign" />
+                                          <TableColumn prefWidth="75.0" text="IATA" />
+                                          <TableColumn prefWidth="75.0" text="ICAO" />
+                                          <TableColumn prefWidth="75.0" text="Country" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab closable="false" text="Airports">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="Name" />
+                                          <TableColumn prefWidth="75.0" text="Alias" />
+                                          <TableColumn prefWidth="75.0" text="Call Sign" />
+                                          <TableColumn prefWidth="75.0" text="IATA" />
+                                          <TableColumn prefWidth="75.0" text="ICAO" />
+                                          <TableColumn prefWidth="75.0" text="Country" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab closable="false" text="Routes">
+                                 <content>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="Name" />
+                                          <TableColumn prefWidth="75.0" text="Alias" />
+                                          <TableColumn prefWidth="75.0" text="Call Sign" />
+                                          <TableColumn prefWidth="75.0" text="IATA" />
+                                          <TableColumn prefWidth="75.0" text="ICAO" />
+                                          <TableColumn prefWidth="75.0" text="Country" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </center>
+                     <left>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <top>
-                                        <MenuButton mnemonicParsing="false" text="Import" BorderPane.alignment="TOP_RIGHT">
-                                            <items>
-                                                <MenuItem fx:id="importAirlinesMenuItem" mnemonicParsing="false" onAction="#showImportAirlines" text="Airlines" />
-                                                <MenuItem mnemonicParsing="false" text="Action 2" />
-                                            </items>
-                                        </MenuButton>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Text>
                            </top>
-                           <center>
-                              <TableView fx:id="airlineTable" minHeight="-Infinity" prefWidth="508.0" BorderPane.alignment="CENTER">
-                                <columns>
-                                    <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                                  <TableColumn fx:id="aliasCol" prefWidth="75.0" text="Alias" />
-                                  <TableColumn fx:id="callsignCol" prefWidth="75.0" text="Callsign" />
-                                    <TableColumn fx:id="iataCol" prefWidth="75.0" text="Iata" />
-                                    <TableColumn fx:id="icaoCol" prefWidth="75.0" text="Icao" />
-                                    <TableColumn fx:id="countryCol" prefWidth="75.0" text="Country" />
-                                </columns>
-                              </TableView>
-                           </center>
+                           <bottom>
+                              <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" BorderPane.alignment="CENTER">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Airlines" />
+                                  <MenuItem mnemonicParsing="false" text="Airports" />
+                                </items>
+                              </MenuButton>
+                           </bottom>
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="10.0" top="10.0" />
                            </padding>
                         </BorderPane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-   </center>
-</BorderPane>
+                     </left>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
