@@ -1,6 +1,5 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.model.Route;
 import seng202.group10.model.RouteModel;

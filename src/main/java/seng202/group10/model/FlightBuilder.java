@@ -107,7 +107,6 @@ public class FlightBuilder {
         return (aircraft.getRange() < distance);
     }
 
-
     public Flight outputFlight() {
         return flight;
     }
