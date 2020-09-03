@@ -15,6 +15,11 @@ public class UserModel {
         }
     }
 
+    public ArrayList<User> getUsers() {
+        return(users);
+    }
+
+
     /**
      * removes user from ArrayList users
      * @param user Class User
