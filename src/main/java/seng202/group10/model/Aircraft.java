@@ -1,9 +1,13 @@
 package seng202.group10.model;
 
 public class Aircraft {
+    // means travel agent code
     private String iata;
+    // name of plane
     private String name;
+    // icao stands for aircraft type code
     private String icao;
+    // range of aircraft
     private double range;
 
     public Aircraft(String iata, String name, String icao, double range) {
