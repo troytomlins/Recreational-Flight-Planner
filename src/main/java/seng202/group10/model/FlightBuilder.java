@@ -22,12 +22,19 @@ public class FlightBuilder {
         legs.add(index, leg);
     }
 
-    public boolean updateDistance() {
+    public String updateDistance() {
         totalDistance = 0;
-        for (FlightLeg leg: legs) {
+        for (FlightLeg leg : legs) {
             totalDistance = totalDistance + leg.getLegDistance();
         }
-        return checkFlightLength(totalDistance, aircraft);
+
+        if (checkHalfFlightLength(totalDistance, aircraft)) {
+            return "Halfway through flight";
+        } else if (checkFlightLength(totalDistance, aircraft)) {
+            return "flight length exceeded max range of aircraft";
+        } else {
+            return "Updated Distance";
+        }
     }
 
     public double getTotalDistance() {
@@ -104,10 +111,18 @@ public class FlightBuilder {
     }
 
     public boolean checkFlightLength(double distance, Aircraft aircraft) {
+        /**
+         * returns false when planned flight is less than aircraft range
+         */
         return (aircraft.getRange() < distance);
     }
 
-
+    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
+        /**
+         * returns true when planned flight is over halfway through max aircraft range
+         */
+        return (aircraft.getRange() / 2 > distance);
+    }
     public Flight outputFlight() {
         return flight;
     }
