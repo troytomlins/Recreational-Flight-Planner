@@ -1,6 +1,5 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,22 +8,21 @@ import static org.junit.Assert.assertTrue;
 
 public class UserModelTest {
 
-    private ArrayList<User> users;
-    private UserModel testUsers;
-    private User testUser;
-
-    @BeforeEach
-    public void init() {
-        UserModel testUsers = new UserModel();
-        User testUser = new User("Steve");
-        testUsers.addUser(testUser);
-    }
+    private UserModel testUsers = new UserModel();
 
     @Test
     public void makeUser(){
+        ArrayList<User> users;
+        boolean found = false;
         User newUser = new User("John");
         testUsers.addUser(newUser);
         users = testUsers.getUsers();
-        assertTrue(users.contains(newUser));
+        for (User user : users) {
+            if (user.getUserName().equals("John")) {
+                found = true;
+                break;
+            }
+        }
+        assertTrue(found);
     }
 }
