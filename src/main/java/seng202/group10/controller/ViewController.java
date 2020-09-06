@@ -90,6 +90,7 @@ public class ViewController {
                 controller.importAirlines(filepath);
             } catch (IncompatibleFileException | IOException e) {
                 e.printStackTrace();
+                // TODO Add error message saying file is incorrect
             }
 
             // Update table
