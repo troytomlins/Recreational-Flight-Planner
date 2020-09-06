@@ -1,4 +1,4 @@
 package seng202.group10.model;
 
-public class ModelTest {
+public class FlightBuilder {
 }
