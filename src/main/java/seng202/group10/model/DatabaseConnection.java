@@ -1,9 +1,10 @@
 package seng202.group10.model;
 
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.ResultSet;
 
 
 public final class DatabaseConnection {
@@ -68,6 +69,17 @@ public final class DatabaseConnection {
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    public ResultSet executeStatement(String sqlStatement) {
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet results = statement.executeQuery(sqlStatement);
+            return results;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
