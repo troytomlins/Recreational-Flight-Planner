@@ -7,3 +7,11 @@ function myMap() {
 
     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 }
+
+function resizeMap() {
+    let mapElement = document.querySelector("#googleMap");
+    mapElement.style.height = window.innerHeight.toString() + "px";
+}
+
+resizeMap();
+window.onresize = resizeMap;

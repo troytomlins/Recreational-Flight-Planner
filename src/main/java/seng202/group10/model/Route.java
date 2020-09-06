@@ -6,13 +6,13 @@ public class Route {
     private String airlineCode;
     private int airlineId;
     private String sourceAirportCode;
-    private Airport sourceAirport;
+    private String sourceAirport;
     private String destinationAirportCode;
-    private Airport destinationAirport;
+    private String destinationAirport;
     private int stops;
     private ArrayList<String> equipment;
 
-    public Route(String airlineCode, int airlineId, String sourceAirportCode, Airport sourceAirport, String destinationAirportCode, Airport destinationAirport, int stops, ArrayList<String> equipment) {
+    public Route(String airlineCode, int airlineId, String sourceAirportCode, String sourceAirport, String destinationAirportCode, String destinationAirport, int stops, ArrayList<String> equipment) {
         this.airlineCode = airlineCode;
         this.airlineId = airlineId;
         this.sourceAirportCode = sourceAirportCode;
@@ -43,7 +43,7 @@ public class Route {
         return sourceAirportCode;
     }
 
-    public Airport getSourceAirport() {
+    public String getSourceAirport() {
         return sourceAirport;
     }
 
@@ -51,7 +51,7 @@ public class Route {
         return destinationAirportCode;
     }
 
-    public Airport getDestinationAirport() {
+    public String getDestinationAirport() {
         return destinationAirport;
     }
 
