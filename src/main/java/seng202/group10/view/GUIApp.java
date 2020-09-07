@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.scene.web.WebEngine;
+import seng202.group10.controller.AirportTabController;
 import seng202.group10.controller.ControllerFacade;
 import seng202.group10.controller.ViewController;
 import java.io.IOException;
@@ -22,10 +23,15 @@ public class GUIApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.controllerFacade = new ControllerFacade();
 
+        // Get the main gui controller
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         Parent root = fxmlLoader.load();
         ViewController controller = fxmlLoader.getController();
         controller.setControllerFacade(this.controllerFacade);
+
+        // Set the airport tab controller in the controller facade.
+        fxmlLoader = new FXMLLoader(getClass().getResource("airportTab.fxml"));
+        controller.controllerFacade.setAirportTabController(fxmlLoader.getController());
 
         primaryStage.setTitle("Recreational Flight Planner");
         Scene scene = new Scene(root, 1000, 650);

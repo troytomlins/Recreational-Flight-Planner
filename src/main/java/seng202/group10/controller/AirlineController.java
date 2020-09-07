@@ -53,17 +53,22 @@ public class AirlineController {
         // Parse each line
         CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
         for (CSVRecord csvRecord : parser) {
-            // Get corresponding values from the value list
-            String name = csvRecord.get(1);
-            String alias = csvRecord.get(2);
-            String iata = csvRecord.get(3);
-            String icao = csvRecord.get(4);
-            String callsign = csvRecord.get(5);
-            String country = csvRecord.get(6);
+            try {
 
-            // Create airline and add to model
-            Airline airline = new Airline(name, alias, iata, icao, callsign, country);
-            model.addAirline(airline);
+                // Get corresponding values from the csv record
+                String name = csvRecord.get(1);
+                String alias = csvRecord.get(2);
+                String iata = csvRecord.get(3);
+                String icao = csvRecord.get(4);
+                String callsign = csvRecord.get(5);
+                String country = csvRecord.get(6);
+
+                // Create airline and add to model
+                Airline airline = new Airline(name, alias, iata, icao, callsign, country);
+                model.addAirline(airline);
+            } catch(Exception e) {
+                throw new IncompatibleFileException();
+            }
         }
 
         // Close reader
