@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class FlightBuilder {
 
     private Flight flight;
-    private Aircraft aircraft;
+    private Aircraft aircraft = new Aircraft("", "", "", 0);
     private double totalDistance;
     private ArrayList<FlightLeg> legs = new ArrayList<FlightLeg>();
 
@@ -125,5 +125,11 @@ public class FlightBuilder {
     }
     public Flight outputFlight() {
         return flight;
+    }
+
+    // For testing purposes.
+    public void setAircraft() {
+        Aircraft aircraftSet = new Aircraft("", "", "", 0);
+        aircraft = aircraftSet;
     }
 }
