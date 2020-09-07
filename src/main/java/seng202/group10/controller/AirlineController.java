@@ -1,13 +1,13 @@
 package seng202.group10.controller;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import seng202.group10.model.Airline;
 import seng202.group10.model.AirlineModel;
 import seng202.group10.model.IncompatibleFileException;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -50,22 +50,16 @@ public class AirlineController {
         String row;
         BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
 
-        // Iterate through file reading each line
-        while ((row = csvReader.readLine()) != null) {
-
-            // Get data points from row
-            String[] data = row.split(",");
-            if (data.length != 8) {
-                throw new IncompatibleFileException();
-            }
-
+        // Parse each line
+        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+        for (CSVRecord csvRecord : parser) {
             // Get corresponding values from the value list
-            String name = data[1];
-            String alias = data[2];
-            String iata = data[3];
-            String icao = data[4];
-            String callsign = data[5];
-            String country = data[6];
+            String name = csvRecord.get(1);
+            String alias = csvRecord.get(2);
+            String iata = csvRecord.get(3);
+            String icao = csvRecord.get(4);
+            String callsign = csvRecord.get(5);
+            String country = csvRecord.get(6);
 
             // Create airline and add to model
             Airline airline = new Airline(name, alias, iata, icao, callsign, country);
