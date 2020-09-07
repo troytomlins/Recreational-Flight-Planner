@@ -17,10 +17,44 @@ public final class DatabaseConnection {
             "id int PRIMARY KEY," +
             "name varchar," +
             "alias varchar," +
-            "iata varchar," +
-            "icao varchar," +
+            "iata char(3)," +
+            "icao char(4)," +
             "callsign varchar," +
             "country varchar" +
+            ")";
+
+    private final String airportTable = "CREATE TABLE IF NOT EXISTS airports (" +
+            "id int PRIMARY KEY," +
+            "name varchar," +
+            "city varchar," +
+            "country varchar," +
+            "iata char(2)," +
+            "icao char(3)," +
+            "latitude double," +
+            "longitude double," +
+            "altitude float," +
+            "timezone float," +
+            "dstType char(1)," +
+            "tzDatabase varchar" +
+            ")";
+
+    private final String aircraftTable = "CREATE TABLE IF NOT EXISTS aircrafts (" +
+            "id int PRIMARY KEY," +
+            "name varchar," +
+            "iata char(3)," +
+            "icao char(4)," +
+            "fuelRate double" +
+            ")";
+
+    private final String routeTable = "CREATE TABLE IF NOT EXISTS routes (" +
+            "id int PRIMARY KEY," +
+            "airline int," +
+            "sourceAirport int," +
+            "destinationAirport int," +
+            "FOREIGN KEY (airline) references airlines(id)," +
+            "FOREIGN KEY (sourceAirport) references airports(id)," +
+            "FOREIGN KEY (destinationAirport) references airports(id)," +
+            "stops int" +
             ")";
 
     private DatabaseConnection() {
@@ -35,7 +69,7 @@ public final class DatabaseConnection {
         return INSTANCE;
     }
 
-    public void connect() {
+    private void connect() {
 
         try {
             // db parameters
@@ -53,10 +87,13 @@ public final class DatabaseConnection {
         }
     }
 
-    public void createTables() {
+    private void createTables() {
         try {
             Statement statement = conn.createStatement();
             statement.execute(airlineTable);
+            statement.execute(airportTable);
+            statement.execute(aircraftTable);
+            statement.execute(routeTable);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
