@@ -8,7 +8,7 @@ public class FlightBuilderTest {
 
     @Test
     public void setLegDistancesTest() {
-        FlightBuilder builder = new FlightBuilder();
+        FlightBuilder flightBuilder = new FlightBuilder();
 
         //Create various legs.
         FlightLeg leg0 = new FlightLeg("NZCH", "APT", -43.4866, 172.534, 0, 0);
@@ -17,15 +17,15 @@ public class FlightBuilderTest {
         FlightLeg leg3 = new FlightLeg("WSSS", "APT", 1.35561, 103.988, 0, 0);
 
         //Add legs to flight.
-        builder.addLeg(leg0, 0);
-        builder.addLeg(leg1, 1);
-        builder.addLeg(leg2, 2);
-        builder.addLeg(leg3, 3);
+        flightBuilder.addLeg(leg0, 0);
+        flightBuilder.addLeg(leg1, 1);
+        flightBuilder.addLeg(leg2, 2);
+        flightBuilder.addLeg(leg3, 3);
 
-        builder.setLegDistances(); // Calculate the leg distances and update them.
-        builder.updateDistance(); // Adds together all the leg distances. Should equal legDistance.
+        flightBuilder.setLegDistances(); // Calculate the leg distances and update them.
+        flightBuilder.updateDistance(); // Adds together all the leg distances. Should equal legDistance.
         double legDistance = 8419.4342074466527;
-        assertEquals(legDistance, builder.getTotalDistance(), 1);
+        assertEquals(legDistance, flightBuilder.getTotalDistance(), 1);
     }
 
 
