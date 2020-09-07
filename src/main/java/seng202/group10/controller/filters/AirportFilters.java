@@ -27,5 +27,23 @@ public class AirportFilters {
         return filteredAirports;
     }
 
+    public ArrayList<Airport> filterByCity(ArrayList<Airport> airportData, String contains) {
+        ArrayList<Airport> filteredAirports = new ArrayList<>();
+        for (Airport airport : airportData) {
+            if (airport.getCity().contains(contains)) {
+                filteredAirports.add(airport);
+            }
+        }
+        return filteredAirports;
+    }
 
+    public ArrayList<Airport> filterByCountry(ArrayList<Airport> airportData, String contains) {
+        ArrayList<Airport> filteredAirports = new ArrayList<>();
+        for (Airport airport : airportData) {
+            if (airport.getCountry().contains(contains)) {
+                filteredAirports.add(airport);
+            }
+        }
+        return filteredAirports;
+    }
 }
