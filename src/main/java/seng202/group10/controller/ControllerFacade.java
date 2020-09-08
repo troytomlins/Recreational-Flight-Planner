@@ -41,10 +41,5 @@ public class ControllerFacade {
         return this.airportController;
     }
 
-    public AirportTabController getAirportTabController() { return this.airportTabController;}
-
-    public void setAirportTabController(AirportTabController controller) {
-        this.airportTabController = controller;
-    }
 
 }

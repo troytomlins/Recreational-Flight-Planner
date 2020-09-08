@@ -3,7 +3,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView fx:id="airportTable" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.AirportTabController">
+<TableView fx:id="airportTable" prefHeight="Infinity" prefWidth="Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.AirportTabController">
     <columns>
         <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
         <TableColumn fx:id="cityCol" prefWidth="75.0" text="City" />

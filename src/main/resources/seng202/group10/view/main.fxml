@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="628.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.ViewController">
    <children>
-   <TabPane prefHeight="628.0" prefWidth="740.0">
+   <TabPane prefHeight="628.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
          <Tab closable="false" text="Map">
            <content>
@@ -41,13 +41,13 @@
             <content>
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                     <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <center>
                            <TabPane BorderPane.alignment="CENTER">
                               <tabs>
                                  <Tab closable="false" text="Airlines">
                                     <content>
-                                       <TableView fx:id="airlineTable" prefHeight="200.0" prefWidth="200.0">
+                                       <TableView fx:id="airlineTable">
                                          <columns>
                                            <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
                                            <TableColumn fx:id="aliasCol" prefWidth="75.0" text="Alias" />
@@ -61,12 +61,12 @@
                                  </Tab>
                                  <Tab closable="false" text="Airports">
                                     <content>
-                                       <fx:include source="airportTab.fxml" />
+                                       <fx:include fx:id="airportTab" source="airportTab.fxml" />
                                     </content>
                                  </Tab>
                                  <Tab closable="false" text="Routes">
                                     <content>
-                                       <TableView prefHeight="200.0" prefWidth="200.0">
+                                       <TableView>
                                           <columns>
                                              <TableColumn prefWidth="75.0" text="Name" />
                                              <TableColumn prefWidth="75.0" text="Alias" />

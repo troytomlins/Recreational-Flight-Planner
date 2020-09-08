@@ -40,12 +40,18 @@ public class ViewController {
     private TableColumn countryCol;
     @FXML
     private MenuItem importAirlinesMenuItem;
+    @FXML
+    private AirportTabController airportTabController;
 
     private List<Airline> data;
     public ControllerFacade controllerFacade;
 
     public void setControllerFacade(ControllerFacade controllerFacade) {
         this.controllerFacade = controllerFacade;
+    }
+
+    @FXML private void initialize() {
+        airportTabController.injectMainController(this);
     }
 
     /**
@@ -122,25 +128,6 @@ public class ViewController {
      * Shows the file explorer, then imports the selected airports file into model.
      */
     public void importAirports() {
-        // Pick file
-        String filepath = showFileExplorer();
-
-        // Check if a file was chosen
-        if (filepath != null) {
-
-            // Import file
-            AirportController controller = controllerFacade.getAirportController();
-            try {
-                controller.importAirports(filepath);
-            } catch (IncompatibleFileException | IOException e) {
-                e.printStackTrace();
-                // TODO Add error message saying file is incorrect
-            }
-
-            // Update table
-            AirportTabController tabController = controllerFacade.getAirportTabController();
-            ArrayList<Airport> data = controller.getAirports();
-            tabController.updateTable(data);
-        }
+        airportTabController.importAirports();
     }
 }

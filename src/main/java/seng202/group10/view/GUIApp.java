@@ -29,10 +29,6 @@ public class GUIApp extends Application {
         ViewController controller = fxmlLoader.getController();
         controller.setControllerFacade(this.controllerFacade);
 
-        // Set the airport tab controller in the controller facade.
-        fxmlLoader = new FXMLLoader(getClass().getResource("airportTab.fxml"));
-        controller.controllerFacade.setAirportTabController(fxmlLoader.getController());
-
         primaryStage.setTitle("Recreational Flight Planner");
         Scene scene = new Scene(root, 1000, 650);
         primaryStage.setScene(scene);
