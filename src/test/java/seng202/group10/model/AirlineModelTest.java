@@ -34,4 +34,12 @@ public class AirlineModelTest {
         assertEquals(compareAirline, airlineModel.getAirlines()); // The duplicate should not be added.
     }
 
+    @Test
+    public void deleteAirlineTest() {
+        compareAirline = new ArrayList<>();
+        airlineModel.addAirline(airline);
+        airlineModel.deleteAirline(airline);
+        assertEquals(compareAirline, airlineModel.getAirlines());
+    }
+
 }
