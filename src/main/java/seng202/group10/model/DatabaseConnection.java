@@ -51,10 +51,10 @@ public final class DatabaseConnection {
             "airline int," +
             "sourceAirport int," +
             "destinationAirport int," +
+            "stops int," +
             "FOREIGN KEY (airline) references airlines(id)," +
             "FOREIGN KEY (sourceAirport) references airports(id)," +
-            "FOREIGN KEY (destinationAirport) references airports(id)," +
-            "stops int" +
+            "FOREIGN KEY (destinationAirport) references airports(id)" +
             ")";
 
     private DatabaseConnection() {
@@ -109,7 +109,16 @@ public final class DatabaseConnection {
         }
     }
 
-    public ResultSet executeStatement(String sqlStatement) {
+    public void executeStatement(String sqlStatement) {
+        try {
+            Statement statement = conn.createStatement();
+            statement.execute(sqlStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ResultSet executeQuery(String sqlStatement) {
         try {
             Statement statement = conn.createStatement();
             ResultSet results = statement.executeQuery(sqlStatement);

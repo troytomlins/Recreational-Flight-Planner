@@ -19,6 +19,7 @@ public class RWStream {
     private FileWriter fileWriter;
     private String inFilename;
     private String outFilename;
+    public DatabaseConnection databaseConnection;
 
     public RWStream(String filename) {
         inFilename = filename;
@@ -39,6 +40,10 @@ public class RWStream {
         } catch(IOException error) {
 
         }
+    }
+
+    private void getDatabase() {
+        databaseConnection = DatabaseConnection.getInstance();
     }
 
     public ArrayList<ArrayList<String>> read() {
