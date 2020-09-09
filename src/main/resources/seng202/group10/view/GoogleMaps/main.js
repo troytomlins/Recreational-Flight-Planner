@@ -3,7 +3,10 @@ var labelIndex = 0;
 
 var map;
 
-
+/**
+ * Initialize the map
+ * Add the listener for adding markers
+ */
 function initMap() {
     var ucPos = {lat: -43.522456, lng: 172.579422};
     map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -16,6 +19,10 @@ function initMap() {
 }
 
 
+/**
+ * Add a marker onto the map at location
+ * call the sendLatLngToJava function
+ */
 function addMarker(location) {
     var markerLabel = labels[labelIndex++ % labels.length];
     sendLatLngToJava(markerLabel, location);
@@ -27,24 +34,22 @@ function addMarker(location) {
 }
 
 
+/**
+ * Control vertical map resizing
+ * Can't size to 100% in css so this how we gotta do it
+ */
 function resizeMap() {
     let mapElement = document.querySelector("#googleMap");
     mapElement.style.height = window.innerHeight.toString() + "px";
 }
-resizeMap();
-window.onresize = resizeMap;
+resizeMap();                    // Initial size
+window.onresize = resizeMap;    // Listener
 
 
+/**
+ * Send a marker to java with id at latLng
+ */
 function sendLatLngToJava(id, latLng) {
     javaConnector.newLatLng(id, latLng.lat(), latLng.lng());
 }
 
-//var jsConnector = {
-//    showResult: function (result) {
-//        document.getElementById('result').innerHTML = result;
-//    }
-//};
-
-//function getJsConnector() {
-//    return jsConnector;
-//}

@@ -138,11 +138,24 @@ public class ViewController {
     }
 
     private int numMarkers = 0;
+    /**
+     * Add a new marker into the plan flight section
+     * @param id - id of marker
+     * @param lat - position latitude
+     * @param lng - position longitude
+     */
     public void newMarker(String id, float lat, float lng) {
         newLocationBox(id, numMarkers, lat, lng);
         numMarkers += 1;
     }
 
+    /**
+     * Make a new box to show the marker location
+     * @param id - id of marker
+     * @param column - column index to place it
+     * @param lat - position latitude
+     * @param lng - position longitude
+     */
     private void newLocationBox(String id, int column, float lat, float lng) {
         // Make the thing
         int height = 100;
