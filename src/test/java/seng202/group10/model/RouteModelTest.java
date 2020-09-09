@@ -19,7 +19,7 @@ public class RouteModelTest {
         model = new RouteModel();
         compare = new ArrayList<>();
         ArrayList<String> equipment = new ArrayList<>();
-        testRoute = new Route("test", "code1", "code2", 5, equipment);
+        testRoute = new Route("test", "code1", "code2", 5);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class RouteModelTest {
     public void bothBothInputTypeTest() {
         int count = 0;
         ArrayList<String> equipment = new ArrayList<>();
-        Route testRoute2 = new Route("test", 1234 ,"code1", "Airport1", "code2", "Airport2", 2, equipment);
+        Route testRoute2 = new Route("code1", "Airport1", "code2", 2);
         model.addRoute(testRoute);
         model.addRoute(testRoute2);
         for (Route route : model.getRoutes()) {

@@ -13,7 +13,11 @@ public class AirportFinder {
 
     public AirportFinder() {
         airportRW = new AirportRW();
-        airports = airportRW.readAirports();
+        try {
+            airports = airportRW.readAirports();
+        } catch(Exception err) {
+            err.printStackTrace();
+        }
     }
 
     public Airport findAirport(String airportCode) {
