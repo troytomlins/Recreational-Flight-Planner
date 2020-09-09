@@ -1,5 +1,13 @@
 package seng202.group10.model;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,25 +23,36 @@ public class AirlineRW extends RWStream {
         super("airline.csv");
     }
 
-    public ArrayList<Airline> readAirlines() {
-        ArrayList<ArrayList<String>> data = read();
+    public ArrayList<Airline> readAirlines() throws IOException, IncompatibleFileException {
 
-        ArrayList<Airline> airlineList = new ArrayList<Airline>();
+        ArrayList<Airline> airlineList = new ArrayList<>();
 
-        for (ArrayList<String> dataLine: data) {
-            if (true/*ValidateData.validateAirline(dataLine)*/) {
-                Airline airline = new Airline(
-                        dataLine.get(1),
-                        dataLine.get(2),
-                        dataLine.get(3),
-                        dataLine.get(4),
-                        dataLine.get(5),
-                        dataLine.get(6)
+        // Initialise file reader and string row variable
+        BufferedReader csvReader = new BufferedReader(new FileReader(super.getInFilename()));
 
-                );
+        // Parse each line
+        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+        for (CSVRecord csvRecord : parser) {
+            try {
+
+                // Get corresponding values from the csv record
+                String name = csvRecord.get(1);
+                String alias = csvRecord.get(2);
+                String iata = csvRecord.get(3);
+                String icao = csvRecord.get(4);
+                String callsign = csvRecord.get(5);
+                String country = csvRecord.get(6);
+
+                // Create airline and add to model
+                Airline airline = new Airline(name, alias, iata, icao, callsign, country);
                 airlineList.add(airline);
+            } catch(Exception e) {
+                throw new IncompatibleFileException();
             }
         }
+
+        // Close reader
+        csvReader.close();
         return airlineList;
     }
 

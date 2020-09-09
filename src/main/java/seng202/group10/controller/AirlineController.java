@@ -5,6 +5,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import seng202.group10.model.Airline;
 import seng202.group10.model.AirlineModel;
+import seng202.group10.model.AirlineRW;
 import seng202.group10.model.IncompatibleFileException;
 
 import java.io.*;
@@ -45,35 +46,11 @@ public class AirlineController {
      * @param filePath Filepath string for file to import.
      */
     public void importAirlines(String filePath) throws IncompatibleFileException, IOException {
-
-        // Initialise file reader and string row variable
-        String row;
-        BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
-
-        // Parse each line
-        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
-        for (CSVRecord csvRecord : parser) {
-            try {
-
-                // Get corresponding values from the csv record
-                String name = csvRecord.get(1);
-                String alias = csvRecord.get(2);
-                String iata = csvRecord.get(3);
-                String icao = csvRecord.get(4);
-                String callsign = csvRecord.get(5);
-                String country = csvRecord.get(6);
-
-                // Create airline and add to model
-                Airline airline = new Airline(name, alias, iata, icao, callsign, country);
-                model.addAirline(airline);
-            } catch(Exception e) {
-                throw new IncompatibleFileException();
-            }
+        AirlineRW stream = new AirlineRW(filePath);
+        ArrayList<Airline> airlines = stream.readAirlines();
+        for (Airline airline : airlines) {
+            model.addAirline(airline);
         }
-
-        // Close reader
-        csvReader.close();
     }
-
 
 }
