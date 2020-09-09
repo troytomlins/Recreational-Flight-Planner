@@ -12,10 +12,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.group10.model.Airline;
+import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewController {
@@ -38,12 +40,18 @@ public class ViewController {
     private TableColumn countryCol;
     @FXML
     private MenuItem importAirlinesMenuItem;
+    @FXML
+    private AirportTabController airportTabController;
 
     private List<Airline> data;
-    private ControllerFacade controllerFacade;
+    public ControllerFacade controllerFacade;
 
     public void setControllerFacade(ControllerFacade controllerFacade) {
         this.controllerFacade = controllerFacade;
+    }
+
+    @FXML private void initialize() {
+        airportTabController.injectMainController(this);
     }
 
     /**
@@ -71,18 +79,35 @@ public class ViewController {
     }
 
     /**
-     * Shows import airlines menu screen
+     * Creates a file explorer window, returns the filepath to the file picked.
+     * Returns null if no file was expected
+     * @return file path string of file selected, or null if none selected.
      */
-    public void showImportAirlines() {
-
+    public String showFileExplorer() {
         // Create a new file chooser stage
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(stage);
 
-        // Check if a file was chosen
+        // Create filepath
+        String filepath = null;
         if (file != null) {
-            String filepath = file.getPath();
+            filepath = file.getPath();
+        }
+
+        return filepath;
+    }
+
+    /**
+     * Shows import airlines menu screen
+     */
+    public void showImportAirlines() {
+
+        // Pick file
+        String filepath = showFileExplorer();
+
+        // Check if a file was chosen
+        if (filepath != null) {
 
             // Import file
             AirlineController controller = controllerFacade.getAirlineController();
@@ -90,6 +115,7 @@ public class ViewController {
                 controller.importAirlines(filepath);
             } catch (IncompatibleFileException | IOException e) {
                 e.printStackTrace();
+                // TODO Add error message saying file is incorrect
             }
 
             // Update table
@@ -98,25 +124,10 @@ public class ViewController {
         }
     }
 
-    public void setViewTable() throws IOException {
-        System.out.println("Table");
-        Stage stage;
-        Parent root;
-        root = FXMLLoader.load(getClass().getResource("table.fxml"));
-        stage = (Stage) dropdownView.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void setViewMap() throws IOException {
-        System.out.println("Map");
-        Stage stage;
-        Parent root;
-        root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        stage = (Stage) dropdownView.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    /**
+     * Shows the file explorer, then imports the selected airports file into model.
+     */
+    public void importAirports() {
+        airportTabController.importAirports();
     }
 }

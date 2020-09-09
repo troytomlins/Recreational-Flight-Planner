@@ -6,6 +6,8 @@ public class AirportModel {
 
     private ArrayList<Airport> airports;
 
+    public AirportModel() { this.airports = new ArrayList<Airport>(); }
+
     public ArrayList<Airport> getAirports() {
         return airports;
     }

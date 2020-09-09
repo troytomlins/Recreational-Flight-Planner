@@ -1,5 +1,9 @@
 package seng202.group10.controller;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
 import seng202.group10.model.AirportModel;
 import seng202.group10.model.IncompatibleFileException;
@@ -45,34 +49,34 @@ public class AirportController {
         String row;
         BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
 
-        // Iterate through file reading each line
-        while ((row = csvReader.readLine()) != null) {
+        // Parse each line
+        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+        for (CSVRecord csvRecord : parser) {
+            try {
 
-            // Get data points from row
-            String[] data = row.split(",");
-            if (data.length != 12) {
+                // Get corresponding values from the csv record
+                String name = csvRecord.get(1);
+                String city = csvRecord.get(2);
+                String country = csvRecord.get(3);
+                String iata = csvRecord.get(4);
+                String icao = csvRecord.get(5);
+                double latitude = Double.parseDouble(csvRecord.get(6));
+                double longitude = Double.parseDouble(csvRecord.get(7));
+                float altitude = Float.parseFloat(csvRecord.get(8));
+                float timezone = Float.parseFloat(csvRecord.get(9));
+                String dstType = csvRecord.get(10);
+                String tzDatabase = csvRecord.get(11);
+
+                // Create airline and add to model
+                Airport airport = new Airport(name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase);
+                model.addAirport(airport);
+            } catch (Exception e) {
                 throw new IncompatibleFileException();
             }
-
-            // Get corresponding values from the value list
-            String name = data[1];
-            String city = data[2];
-            String country = data[3];
-            String iata= data[4];
-            String icao = data[5];
-            double latitude = Double.parseDouble(data[6]);
-            double longitude = Double.parseDouble(data[7]);
-            float altitude = Float.parseFloat(data[8]);
-            float timezone = Float.parseFloat(data[9]);
-            String dstType = data[10];
-            String tzDatabase = data[11];
-
-            // Create airport and add to model
-            Airport airport = new Airport(name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase);
-            model.addAirport(airport);
         }
 
         // Close reader
         csvReader.close();
+
     }
 }

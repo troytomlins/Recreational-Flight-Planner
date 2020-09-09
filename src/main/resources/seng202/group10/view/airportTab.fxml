@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="airportTable" prefHeight="Infinity" prefWidth="Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.AirportTabController">
+    <columns>
+        <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+        <TableColumn fx:id="cityCol" prefWidth="75.0" text="City" />
+        <TableColumn fx:id="countryCol" prefWidth="75.0" text="Country" />
+        <TableColumn fx:id="iataCol" prefWidth="50.0" text="IATA" />
+        <TableColumn fx:id="icaoCol" prefWidth="62.0" text="ICAO" />
+        <TableColumn fx:id="latCol" prefWidth="93.0" text="Latitude" />
+      <TableColumn fx:id="lngCol" prefWidth="95.0" text="Longitude" />
+      <TableColumn fx:id="altCol" prefWidth="75.0" text="Altitude" />
+      <TableColumn fx:id="tzCol" prefWidth="75.0" text="Timezone" />
+      <TableColumn fx:id="distCol" prefWidth="75.0" text="Distance Type" />
+      <TableColumn fx:id="tzdbCol" prefWidth="75.0" text="tz Database" />
+    </columns>
+</TableView>
