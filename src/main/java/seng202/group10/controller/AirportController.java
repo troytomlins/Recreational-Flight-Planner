@@ -48,45 +48,4 @@ public class AirportController {
             model.addAirport(airport);
         }
     }
-
-    /**
-     * Takes a filepath and imports all airports from the file into model.
-     * @param filePath Filepath string for file to import.
-     */
-    public void importAirportsOld(String filePath) throws IncompatibleFileException, IOException {
-
-        // Initialise file reader and string row variable
-        String row;
-        BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
-
-        // Parse each line
-        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
-        for (CSVRecord csvRecord : parser) {
-            try {
-
-                // Get corresponding values from the csv record
-                String name = csvRecord.get(1);
-                String city = csvRecord.get(2);
-                String country = csvRecord.get(3);
-                String iata = csvRecord.get(4);
-                String icao = csvRecord.get(5);
-                double latitude = Double.parseDouble(csvRecord.get(6));
-                double longitude = Double.parseDouble(csvRecord.get(7));
-                float altitude = Float.parseFloat(csvRecord.get(8));
-                float timezone = Float.parseFloat(csvRecord.get(9));
-                String dstType = csvRecord.get(10);
-                String tzDatabase = csvRecord.get(11);
-
-                // Create airline and add to model
-                Airport airport = new Airport(name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase);
-                model.addAirport(airport);
-            } catch (Exception e) {
-                throw new IncompatibleFileException();
-            }
-        }
-
-        // Close reader
-        csvReader.close();
-
-    }
 }
