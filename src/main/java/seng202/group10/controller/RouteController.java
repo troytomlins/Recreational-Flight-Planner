@@ -1,5 +1,6 @@
 package seng202.group10.controller;
 
+import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.model.Route;
 import seng202.group10.model.RouteModel;
@@ -69,7 +70,8 @@ public class RouteController {
             ArrayList<String> equipment = new ArrayList<String>(Arrays.asList(equipmentString.split(" ")));
 
             // Create route and add to model
-            Route route = new Route(airlineCode, airlineId, sourceAirportCode, sourceAirport, destinationAirportCode, destinationAirport, stops, equipment);
+            // Route route = new Route(airlineCode, airlineId, sourceAirportCode, sourceAirport, destinationAirportCode, destinationAirport, stops, equipment);
+            Route route = new Route(airlineCode, sourceAirportCode, destinationAirportCode, stops);
             model.addRoute(route);
         }
 
