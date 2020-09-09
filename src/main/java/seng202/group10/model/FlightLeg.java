@@ -1,5 +1,9 @@
 package seng202.group10.model;
 
+/**
+ * @Author Zach
+ */
+
 public class FlightLeg {
     private String id;
     private String type;

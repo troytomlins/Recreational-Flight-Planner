@@ -4,8 +4,12 @@ import java.util.ArrayList;
 
 public class RouteModel {
 
-    private ArrayList<Route> routes;
+    private ArrayList<Route> routes = new ArrayList<>();
 
+    /**
+     * getRoutes returns an ArrayList of Route objects.
+     * @return routes a ArrayList<Routes> object.
+     */
     public ArrayList<Route> getRoutes() {
         return routes;
     }
@@ -20,4 +24,6 @@ public class RouteModel {
             routes.add(route);
         }
     }
+
+    public void deleteRoute(Route route) { routes.remove(route); }
 }

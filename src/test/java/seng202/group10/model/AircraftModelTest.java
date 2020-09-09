@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AircraftModelTest {
 
@@ -32,5 +33,18 @@ public class AircraftModelTest {
         aircraftModel.addAircraft(aircraft);
         aircraftModel.addAircraft(aircraft); // Try and add the same aircraft again.
         assertEquals(compareCraft, aircraftModel.getAircraftList()); // The duplicate should not be added.
+    }
+
+    @Test
+    public void deleteAircraftTest() {
+        int count = 0;
+        ArrayList<Aircraft> testArray;
+        aircraftModel.addAircraft(aircraft);
+        aircraftModel.deleteAircraft(aircraft);
+        testArray = aircraftModel.getAircraftList();
+        for (Aircraft craft : testArray) {
+            count += 1;
+        }
+        assertEquals(0, count);
     }
 }

@@ -40,4 +40,8 @@ public class Airline {
     public String getCountry() {
         return country;
     }
+
+    public String toString() {
+        return String.format("Airline(%s, %s, %s, %s, %s, %s)", name, alias, iata, icao, callsign, country);
+    }
 }

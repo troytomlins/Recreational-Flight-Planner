@@ -4,7 +4,12 @@ public class User {
 
     private String userName;
 
-    private String getUserName() {
+    public User(String name) {
+        userName = name;
+    }
+
+
+    public String getUserName() {
         return userName;
     }
 }

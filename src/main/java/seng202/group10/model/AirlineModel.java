@@ -4,14 +4,10 @@ import java.util.ArrayList;
 
 public class AirlineModel {
 
-    private ArrayList<Airline> airlines;
+    private ArrayList<Airline> airlines = new ArrayList<>();
 
     public ArrayList<Airline> getAirlines() {
         return airlines;
-    }
-
-    public AirlineModel() {
-        this.airlines = new ArrayList();
     }
 
     /**
@@ -25,4 +21,5 @@ public class AirlineModel {
         }
     }
 
+    public void deleteAirline(Airline airline) { airlines.remove(airline); }
 }
