@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * @Author Jonathon Howe
+ * @Author Niko Tainui
  */
 public class AirlineFilters {
 
@@ -24,6 +25,30 @@ public class AirlineFilters {
         }
         return filteredAirlines;
     }
+
+    public ArrayList<Airline> filterByAlias(ArrayList<Airline> airlineData, String contains) {
+        ArrayList<Airline> filteredAirlines = new ArrayList<>();
+        for (Airline airline : airlineData) {
+            if (airline.getAlias().contains(contains)) {
+                filteredAirlines.add(airline);
+            }
+        }
+        return filteredAirlines;
+    }
+
+    public ArrayList<Airline> filterByCallsign(ArrayList<Airline> airlineData, String contains) {
+        ArrayList<Airline> filteredAirlines = new ArrayList<>();
+        for (Airline airline : airlineData) {
+            if (airline.getCallsign().contains(contains)) {
+                filteredAirlines.add(airline);
+            }
+        }
+        return filteredAirlines;
+    }
+
+
+
+
 
 //    public static void main(String[] args) {
 //        AirlineRW rw = new AirlineRW();
