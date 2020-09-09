@@ -34,10 +34,9 @@ public class RouteRW extends RWStream {
 
                 Route route = new Route(
                         dataLine.get(0),
-                        dataLine.get(2),
-                        dataLine.get(4),
-                        Integer.parseInt(dataLine.get(7)),
-                        equipment
+                        dataLine.get(1),
+                        dataLine.get(3),
+                        Integer.parseInt(dataLine.get(7))
                 );
                 routeList.add(route);
             }
@@ -45,20 +44,18 @@ public class RouteRW extends RWStream {
         return routeList;
     }
 
-    public void writeAirlines(ArrayList<Airline> airlines) {
-        ArrayList<ArrayList<String>> airlineStrings = new ArrayList<ArrayList<String>>();
+    public void writeRoute(ArrayList<Route> routes) {
+        ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
 
-        for (Airline airline: airlines) {
-            airlineStrings.add(
+        for (Route route: routes) {
+            routeStrings.add(
                     new ArrayList<String>(Arrays.asList(
-                            airline.getName(),
-                            airline.getAlias(),
-                            airline.getIata(),
-                            airline.getIcao(),
-                            airline.getCallsign(),
-                            airline.getCountry()
+                            route.getAirlineCode(),
+                            route.getSourceAirportCode(),
+                            route.getDestinationAirportCode(),
+                            Integer.toString(route.getStops())
                     )));
         }
-        writeAll(airlineStrings);
+        writeAll(routeStrings);
     }
 }

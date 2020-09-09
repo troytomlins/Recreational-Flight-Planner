@@ -1,6 +1,5 @@
 package seng202.group10.controller.filters;
 
-import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
 import seng202.group10.model.AirportRW;
 
