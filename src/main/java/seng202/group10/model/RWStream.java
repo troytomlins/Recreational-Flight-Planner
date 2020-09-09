@@ -58,6 +58,10 @@ public class RWStream {
         return lines;
     }
 
+    public String getInFilename() {
+        return inFilename;
+    }
+
     public void writeSingle(ArrayList<String> data) {
         try {
             fileWriter = new FileWriter(outFilename);

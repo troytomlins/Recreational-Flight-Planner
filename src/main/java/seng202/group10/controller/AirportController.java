@@ -3,12 +3,10 @@ package seng202.group10.controller;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import seng202.group10.model.Airline;
-import seng202.group10.model.Airport;
-import seng202.group10.model.AirportModel;
-import seng202.group10.model.IncompatibleFileException;
+import seng202.group10.model.*;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +41,19 @@ public class AirportController {
      * Takes a filepath and imports all airports from the file into model.
      * @param filePath Filepath string for file to import.
      */
-    public void importAirports(String filePath) throws IncompatibleFileException, IOException {
+    public void importAirports(String filePath) throws IncompatibleFileException, IOException{
+        AirportRW stream = new AirportRW(filePath);
+        ArrayList<Airport> airportList = stream.readAirports();
+        for (Airport airport : airportList) {
+            model.addAirport(airport);
+        }
+    }
+
+    /**
+     * Takes a filepath and imports all airports from the file into model.
+     * @param filePath Filepath string for file to import.
+     */
+    public void importAirportsOld(String filePath) throws IncompatibleFileException, IOException {
 
         // Initialise file reader and string row variable
         String row;
