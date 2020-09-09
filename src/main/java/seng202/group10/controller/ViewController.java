@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,6 +43,8 @@ public class ViewController {
     private MenuItem importAirlinesMenuItem;
     @FXML
     private AirportTabController airportTabController;
+    @FXML
+    private GridPane locationsPane;
 
     private List<Airline> data;
     public ControllerFacade controllerFacade;
@@ -129,5 +132,11 @@ public class ViewController {
      */
     public void importAirports() {
         airportTabController.importAirports();
+    }
+
+    private int numMarkers = 0;
+    public void newMarker(String id, float lat, float lng) {
+        locationsPane.add(new Label(id + " " + lat + " " + lng), 0, numMarkers);
+        numMarkers += 1;
     }
 }

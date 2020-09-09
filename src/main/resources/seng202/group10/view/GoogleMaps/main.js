@@ -17,10 +17,11 @@ function initMap() {
 
 
 function addMarker(location) {
-    sendLatLngToJava(location);
+    var markerLabel = labels[labelIndex++ % labels.length];
+    sendLatLngToJava(markerLabel, location);
     var marker = new google.maps.Marker({
         position: location,
-        label: labels[labelIndex++ % labels.length],
+        label: markerLabel,
         map: map
     });
 }
@@ -34,8 +35,8 @@ resizeMap();
 window.onresize = resizeMap;
 
 
-function sendLatLngToJava(latLng) {
-    javaConnector.newLatLng(latLng.lat(), latLng.lng());
+function sendLatLngToJava(id, latLng) {
+    javaConnector.newLatLng(id, latLng.lat(), latLng.lng());
 }
 
 //var jsConnector = {
@@ -44,6 +45,6 @@ function sendLatLngToJava(latLng) {
 //    }
 //};
 
-function getJsConnector() {
-    return jsConnector;
-}
+//function getJsConnector() {
+//    return jsConnector;
+//}
