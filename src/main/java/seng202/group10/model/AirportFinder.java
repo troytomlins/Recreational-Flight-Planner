@@ -2,6 +2,10 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * Class that facilitates the searching of airports
+ * @author Mitchell
+ */
 public class AirportFinder {
     private AirportRW airportRW;
 
