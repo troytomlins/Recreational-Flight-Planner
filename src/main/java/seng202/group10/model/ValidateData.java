@@ -15,7 +15,8 @@ public class ValidateData {
     }
 
     public static boolean Aircraft(ArrayList<String> data) {
-        return true;
+        int targetSize = 4;
+        return (data.size() == targetSize);
     }
 
     public static boolean Route(ArrayList<String> data) {
