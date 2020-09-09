@@ -2,13 +2,16 @@ package seng202.group10.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -136,7 +139,21 @@ public class ViewController {
 
     private int numMarkers = 0;
     public void newMarker(String id, float lat, float lng) {
-        locationsPane.add(new Label(id + " " + lat + " " + lng), 0, numMarkers);
+        newLocationBox(id, numMarkers, lat, lng);
         numMarkers += 1;
+    }
+
+    private void newLocationBox(String id, int column, float lat, float lng) {
+        // Make the thing
+        int height = 100;
+        GridPane pane = new GridPane();
+        pane.add(new Label(id + " " + lat + " " + lng), 0, numMarkers);
+        pane.setMinHeight(height);
+        pane.setMaxHeight(height);
+        pane.setPrefHeight(height);
+
+        // Add the thing
+        locationsPane.setGridLinesVisible(true);
+        locationsPane.add(pane, 0, column);
     }
 }
