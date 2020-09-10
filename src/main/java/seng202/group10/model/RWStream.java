@@ -25,12 +25,14 @@ public class RWStream {
         inFilename = filename;
         outFilename = filename;
         makeFile();
+        getDatabase();
     }
 
     public RWStream(String inFilename, String outFilename) {
         this.inFilename = inFilename;
         this.outFilename = outFilename;
         makeFile();
+        getDatabase();
     }
 
     private void makeFile() {

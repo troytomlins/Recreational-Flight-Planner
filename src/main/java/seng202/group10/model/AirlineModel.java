@@ -4,7 +4,19 @@ import java.util.ArrayList;
 
 public class AirlineModel {
 
+    private AirlineRW airlineRW;
+
     private ArrayList<Airline> airlines = new ArrayList<>();
+
+    public AirlineModel() {
+        airlineRW = new AirlineRW();
+        ArrayList<Airline> databaseAirlines = airlineRW.readDatabaseAirlines();
+        System.out.println("start");
+        for (Airline airline: databaseAirlines) {
+            System.out.println("loop");
+            airlines.add(airline);
+        }
+    }
 
     public ArrayList<Airline> getAirlines() {
         return airlines;
@@ -17,6 +29,7 @@ public class AirlineModel {
      */
     public void addAirline(Airline airline) {
         if (!airlines.contains(airline)) {
+            airlineRW.writeDatabaseAirline(airline);
             airlines.add(airline);
         }
     }

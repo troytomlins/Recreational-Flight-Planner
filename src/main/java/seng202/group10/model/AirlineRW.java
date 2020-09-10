@@ -98,7 +98,8 @@ public class AirlineRW extends RWStream {
     }
 
     public void writeDatabaseAirline(Airline airline) {
-        String statement = String.format("INSERT INTO airlines" +
+        String statement = String.format("INSERT INTO airlines (name, alias, iata, icao, callsign, country)" +
                 "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", airline.getName(), airline.getAlias(), airline.getIata(), airline.getIcao(), airline.getCallsign(), airline.getCountry());
+        databaseConnection.executeStatement(statement);
     }
 }

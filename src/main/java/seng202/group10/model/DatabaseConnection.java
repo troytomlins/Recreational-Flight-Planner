@@ -14,7 +14,7 @@ public final class DatabaseConnection {
     private Connection conn = null;
 
     private final String airlineTable = "CREATE TABLE IF NOT EXISTS airlines (" +
-            "id int PRIMARY KEY AUTO_INCREMENT," +
+            "id integer PRIMARY KEY AUTOINCREMENT," +
             "name varchar," +
             "alias varchar," +
             "iata char(3)," +
