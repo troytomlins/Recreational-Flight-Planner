@@ -51,6 +51,7 @@ public class AirlineController {
         for (Airline airline : airlines) {
             model.addAirline(airline);
         }
+        model.save();
     }
 
 }

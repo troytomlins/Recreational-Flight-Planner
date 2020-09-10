@@ -1,10 +1,6 @@
 package seng202.group10.model;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 
 
 public final class DatabaseConnection {
@@ -115,6 +111,7 @@ public final class DatabaseConnection {
             statement.execute(sqlStatement);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.out.println(sqlStatement);
         }
     }
 
@@ -126,6 +123,34 @@ public final class DatabaseConnection {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    public PreparedStatement getPreparedStatement(String firstline, int nParameters) throws SQLException{
+        String statement = firstline + " VALUES \n";
+
+        statement += "(?";
+        for (int j = 1; j < nParameters; j++) {
+            statement += ", ?";
+        }
+        statement += ")";
+
+        return conn.prepareStatement(statement);
+    }
+
+    public void setAutoCommit(Boolean b) {
+        try {
+            conn.setAutoCommit(b);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void commit() {
+        try {
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 

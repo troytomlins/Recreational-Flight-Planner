@@ -1,5 +1,6 @@
 package seng202.group10.model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.commons.csv.CSVFormat;
@@ -97,9 +98,28 @@ public class AirlineRW extends RWStream {
         return output;
     }
 
-    public void writeDatabaseAirline(Airline airline) {
-        String statement = String.format("INSERT INTO airlines (name, alias, iata, icao, callsign, country)" +
-                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", airline.getName(), airline.getAlias(), airline.getIata(), airline.getIcao(), airline.getCallsign(), airline.getCountry());
-        databaseConnection.executeStatement(statement);
+    public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
+        databaseConnection.setAutoCommit(false);
+        for (int i = 0; i < airlines.size(); i++) {
+            try {
+                PreparedStatement pStatement = databaseConnection.getPreparedStatement(
+                        "INSERT INTO airlines (name, alias, iata, icao, callsign, country)",
+                        6
+                );
+                Airline airline = airlines.get(i);
+                pStatement.setString(1, airline.getName());
+                pStatement.setString(2, airline.getAlias());
+                pStatement.setString(3, airline.getIata());
+                pStatement.setString(4, airline.getIcao());
+                pStatement.setString(5, airline.getCallsign());
+                pStatement.setString(6, airline.getCountry());
+
+
+                pStatement.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        databaseConnection.commit();
     }
 }

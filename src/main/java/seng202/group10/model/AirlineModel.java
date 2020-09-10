@@ -7,6 +7,7 @@ public class AirlineModel {
     private AirlineRW airlineRW;
 
     private ArrayList<Airline> airlines = new ArrayList<>();
+    private ArrayList<Airline> unsavedAirlines = new ArrayList<>();
 
     public AirlineModel() {
         airlineRW = new AirlineRW();
@@ -29,9 +30,14 @@ public class AirlineModel {
      */
     public void addAirline(Airline airline) {
         if (!airlines.contains(airline)) {
-            airlineRW.writeDatabaseAirline(airline);
+            unsavedAirlines.add(airline);
             airlines.add(airline);
         }
+    }
+
+    public void save() {
+        airlineRW.writeDatabaseAirlines(unsavedAirlines);
+        unsavedAirlines = new ArrayList<Airline>();
     }
 
     public void deleteAirline(Airline airline) { airlines.remove(airline); }
