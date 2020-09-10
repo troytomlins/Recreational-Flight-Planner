@@ -54,6 +54,11 @@ public class ViewController {
         airportTabController.injectMainController(this);
     }
 
+    public void loadAllData() {
+
+        setAirlineTable();
+    }
+
     /**
      * Sets data for airline table in GUI
      */

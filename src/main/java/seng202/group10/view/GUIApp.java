@@ -29,8 +29,10 @@ public class GUIApp extends Application {
 
         // Set controller
         ViewController controller = fxmlLoader.getController();
+
         this.controllerFacade = new ControllerFacade();
         controller.setControllerFacade(this.controllerFacade);
+        controller.loadAllData();
 
         // Start Scene
         Scene scene = new Scene(root, 1000, 650);
