@@ -2,6 +2,7 @@ package seng202.group10.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -74,7 +75,9 @@ public class AirportTabController {
                 controller.importAirports(filepath);
             } catch (IncompatibleFileException | IOException e) {
                 e.printStackTrace();
-                // TODO Add error message saying file is incorrect
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setHeaderText("File Not Compatible");
+                errorAlert.showAndWait();
             }
 
             // Update table
