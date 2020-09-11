@@ -121,5 +121,6 @@ public class AirlineRW extends RWStream {
             }
         }
         databaseConnection.commit();
+        databaseConnection.setAutoCommit(true);
     }
 }

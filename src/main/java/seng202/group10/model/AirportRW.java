@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -82,5 +85,62 @@ public class AirportRW extends RWStream {
             )));
         }
         writeAll(airportStrings);
+    }
+
+    public ArrayList<Airport> readDatabaseAirports() {
+        ResultSet results = databaseConnection.executeQuery("SELECT * FROM airports");
+
+        ArrayList<Airport> output = new ArrayList<Airport>();
+
+        try {
+            while (results.next()) {
+                output.add(new Airport(
+                        results.getString("name"),
+                        results.getString("city"),
+                        results.getString("country"),
+                        results.getString("iata"),
+                        results.getString("icao"),
+                        results.getDouble("latitude"),
+                        results.getDouble("longitude"),
+                        results.getFloat("altitude"),
+                        results.getFloat("timezone"),
+                        results.getString("dstType"),
+                        results.getString("tzDatabase")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return output;
+    }
+
+    public void writeDatabaseAirports(ArrayList<Airport> airports) {
+        databaseConnection.setAutoCommit(false);
+        for (int i = 0; i < airports.size(); i++) {
+            try {
+                PreparedStatement pStatement = databaseConnection.getPreparedStatement(
+                        "INSERT INTO airports (name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase)",
+                        11
+                );
+                Airport airport = airports.get(i);
+                pStatement.setString(1, airport.getName());
+                pStatement.setString(2, airport.getCity());
+                pStatement.setString(3, airport.getCountry());
+                pStatement.setString(4, airport.getIata());
+                pStatement.setString(5, airport.getIcao());
+                pStatement.setDouble(6, airport.getLatitude());
+                pStatement.setDouble(7, airport.getLongitude());
+                pStatement.setFloat(8, airport.getAltitude());
+                pStatement.setFloat(9, airport.getTimezone());
+                pStatement.setString(10, airport.getDstType());
+                pStatement.setString(11, airport.getTzDatabase());
+
+                pStatement.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        databaseConnection.commit();
+        databaseConnection.setAutoCommit(true);
     }
 }

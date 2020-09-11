@@ -47,5 +47,6 @@ public class AirportController {
         for (Airport airport : airportList) {
             model.addAirport(airport);
         }
+        model.save();
     }
 }

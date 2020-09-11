@@ -12,9 +12,7 @@ public class AirlineModel {
     public AirlineModel() {
         airlineRW = new AirlineRW();
         ArrayList<Airline> databaseAirlines = airlineRW.readDatabaseAirlines();
-        System.out.println("start");
         for (Airline airline: databaseAirlines) {
-            System.out.println("loop");
             airlines.add(airline);
         }
     }

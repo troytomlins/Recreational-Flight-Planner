@@ -20,12 +20,12 @@ public final class DatabaseConnection {
             ")";
 
     private final String airportTable = "CREATE TABLE IF NOT EXISTS airports (" +
-            "id int PRIMARY KEY," +
+            "id integer PRIMARY KEY AUTOINCREMENT," +
             "name varchar," +
             "city varchar," +
             "country varchar," +
-            "iata char(2)," +
-            "icao char(3)," +
+            "iata char(3)," +
+            "icao char(4)," +
             "latitude double," +
             "longitude double," +
             "altitude float," +
