@@ -18,9 +18,13 @@ public class AirlineFilters {
      */
     public ArrayList<Airline> filterByName(ArrayList<Airline> airlineData, String contains) {
         ArrayList<Airline> filteredAirlines = new ArrayList<>();
-        for (Airline airline : airlineData) {
-            if (airline.getName().contains(contains)) {
-                filteredAirlines.add(airline);
+        if (contains == "") {
+            filteredAirlines = airlineData;
+        } else {
+            for (Airline airline : airlineData) {
+                if (airline.getName().contains(contains)) {
+                    filteredAirlines.add(airline);
+                }
             }
         }
         return filteredAirlines;
@@ -28,9 +32,13 @@ public class AirlineFilters {
 
     public ArrayList<Airline> filterByAlias(ArrayList<Airline> airlineData, String contains) {
         ArrayList<Airline> filteredAirlines = new ArrayList<>();
-        for (Airline airline : airlineData) {
-            if (airline.getAlias().contains(contains)) {
-                filteredAirlines.add(airline);
+        if (contains == "") {
+            filteredAirlines = airlineData;
+        } else {
+            for (Airline airline : airlineData) {
+                if (airline.getAlias().contains(contains)) {
+                    filteredAirlines.add(airline);
+                }
             }
         }
         return filteredAirlines;
@@ -38,9 +46,13 @@ public class AirlineFilters {
 
     public ArrayList<Airline> filterByCallsign(ArrayList<Airline> airlineData, String contains) {
         ArrayList<Airline> filteredAirlines = new ArrayList<>();
-        for (Airline airline : airlineData) {
-            if (airline.getCallsign().contains(contains)) {
-                filteredAirlines.add(airline);
+        if (contains == "") {
+            filteredAirlines = airlineData;
+        } else {
+            for (Airline airline : airlineData) {
+                if (airline.getCallsign().contains(contains)) {
+                    filteredAirlines.add(airline);
+                }
             }
         }
         return filteredAirlines;

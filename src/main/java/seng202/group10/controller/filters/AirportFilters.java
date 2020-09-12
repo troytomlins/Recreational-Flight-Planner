@@ -18,9 +18,13 @@ public class AirportFilters {
 
     public ArrayList<Airport> filterByName(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
-        for (Airport airport : airportData) {
-            if (airport.getName().contains(contains)) {
-                filteredAirports.add(airport);
+        if (contains == "Name") {
+            filteredAirports = airportData;
+        } else {
+            for (Airport airport : airportData) {
+                if (airport.getName().contains(contains)) {
+                    filteredAirports.add(airport);
+                }
             }
         }
         return filteredAirports;
@@ -28,9 +32,13 @@ public class AirportFilters {
 
     public ArrayList<Airport> filterByCity(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
-        for (Airport airport : airportData) {
-            if (airport.getCity().contains(contains)) {
-                filteredAirports.add(airport);
+        if (contains == "City") {
+            filteredAirports = airportData;
+        } else {
+            for (Airport airport : airportData) {
+                if (airport.getCity().contains(contains)) {
+                    filteredAirports.add(airport);
+                }
             }
         }
         return filteredAirports;
@@ -38,11 +46,24 @@ public class AirportFilters {
 
     public ArrayList<Airport> filterByCountry(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
+        if (contains == "Country") {
+            filteredAirports = airportData;
+        }
         for (Airport airport : airportData) {
             if (airport.getCountry().contains(contains)) {
                 filteredAirports.add(airport);
             }
         }
         return filteredAirports;
+    }
+
+    public ArrayList<Airport> filterByAll(ArrayList<Airport> airportData, String name, String city, String country) {
+        ArrayList<Airport> airportsByName = new ArrayList<>();
+        ArrayList<Airport> airportsByNameCity = new ArrayList<>();
+        ArrayList<Airport> airportsByNameCityCountry = new ArrayList<>();
+        airportsByName = filterByName(airportData, name);
+        airportsByNameCity = filterByCity(airportsByName, city);
+        airportsByNameCityCountry = filterByCountry(airportsByNameCity, country);
+        return airportsByNameCityCountry;
     }
 }
