@@ -44,6 +44,7 @@ public class RouteController {
         for (Route route : routeList) {
             model.addRoute(route);
         }
+        model.save();
     }
 
     /**

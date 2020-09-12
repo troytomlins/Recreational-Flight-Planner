@@ -63,6 +63,7 @@ public class ViewController {
     }
 
     public void loadAllData() {
+        routeTabController.updateTable(controllerFacade.getRouteController().getRoutes());
         airportTabController.updateTable(controllerFacade.getAirportController().getAirports());
         setAirlineTable();
     }

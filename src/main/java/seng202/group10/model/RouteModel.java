@@ -9,6 +9,13 @@ public class RouteModel {
 
     private RouteRW routeRW = new RouteRW();
 
+    public RouteModel() {
+        ArrayList<Route> databaseRoutes = routeRW.readDatabaseRoutes();
+        for (Route route: databaseRoutes) {
+            routes.add(route);
+        }
+    }
+
     /**
      * getRoutes returns an ArrayList of Route objects.
      * @return routes a ArrayList<Routes> object.

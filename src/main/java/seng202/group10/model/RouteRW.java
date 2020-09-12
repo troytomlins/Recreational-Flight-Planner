@@ -40,8 +40,8 @@ public class RouteRW extends RWStream {
                 // Get corresponding values from the csv record
                 Route route = new Route(
                         csvRecord.get(0),
-                        csvRecord.get(1),
-                        csvRecord.get(3),
+                        csvRecord.get(2),
+                        csvRecord.get(4),
                         Integer.parseInt(csvRecord.get(7))
                 );
                 routes.add(route);
@@ -106,9 +106,9 @@ public class RouteRW extends RWStream {
         try {
             while (results.next()) {
                 output.add(new Route(
-                        results.getString("airline"),
-                        results.getString("sourceAirport"),
-                        results.getString("destinationAirport"),
+                        results.getString("airlineCode"),
+                        results.getString("sourceAirportCode"),
+                        results.getString("destinationAirportCode"),
                         results.getInt("stops")
                 ));
             }
@@ -132,43 +132,12 @@ public class RouteRW extends RWStream {
                 pStatement.setInt(4, route.getStops());
 
                 pStatement.executeUpdate();
-                ResultSet autoIncrement = pStatement.getGeneratedKeys();
-                autoIncrement.next();
-                int id = autoIncrement.getInt(1);
-
-                String updateStatement = "UPDATE routes" +
-                        "SET airline = (" +
-                        "   SELECT id" +
-                        "   FROM airlines" +
-                        "   WHERE iata = ? OR icao = ?)," +
-                        "sourceAirport = (" +
-                        "   SELECT id" +
-                        "   FROM airports" +
-                        "   WHERE iata = ? OR icao = ?)," +
-                        "destinationAirport = (" +
-                        "   SELECT id" +
-                        "   FROM airports" +
-                        "   WHERE iata = ? OR icao = ?)" +
-                        "WHERE id = ?";
-
-                PreparedStatement updatePStatement = databaseConnection.getPreparedStatement(updateStatement);
-
-                updatePStatement.setString(1, route.getAirlineCode());
-                updatePStatement.setString(2, route.getAirlineCode());
-
-                updatePStatement.setString(3, route.getSourceAirportCode());
-                updatePStatement.setString(4, route.getSourceAirportCode());
-
-                updatePStatement.setString(5, route.getDestinationAirportCode());
-                updatePStatement.setString(6, route.getDestinationAirportCode());
-
-                updatePStatement.setInt(7, id);
-
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
         }
+
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
     }

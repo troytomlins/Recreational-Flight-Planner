@@ -66,7 +66,7 @@ public class RouteTabController {
      * Update routes table with data
      * @param data List of routes to fill table with
      */
-    private void updateTable(ArrayList<Route> data) {
+    public void updateTable(ArrayList<Route> data) {
         routeTable.setEditable(true);
 
         airlineCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineCode"));

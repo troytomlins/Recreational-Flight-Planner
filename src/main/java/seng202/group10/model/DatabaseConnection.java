@@ -13,8 +13,8 @@ public final class DatabaseConnection {
             "id integer PRIMARY KEY AUTOINCREMENT," +
             "name varchar," +
             "alias varchar," +
-            "iata char(3)," +
-            "icao char(4)," +
+            "iata char(3) UNIQUE," +
+            "icao char(4) UNIQUE," +
             "callsign varchar," +
             "country varchar" +
             ")";
@@ -24,8 +24,8 @@ public final class DatabaseConnection {
             "name varchar," +
             "city varchar," +
             "country varchar," +
-            "iata char(3)," +
-            "icao char(4)," +
+            "iata char(3) UNIQUE," +
+            "icao char(4) UNIQUE," +
             "latitude double," +
             "longitude double," +
             "altitude float," +
@@ -35,7 +35,7 @@ public final class DatabaseConnection {
             ")";
 
     private final String aircraftTable = "CREATE TABLE IF NOT EXISTS aircrafts (" +
-            "id int PRIMARY KEY," +
+            "id int PRIMARY KEY AUTOINCREMENT," +
             "name varchar," +
             "iata char(3)," +
             "icao char(4)," +
@@ -44,17 +44,36 @@ public final class DatabaseConnection {
 
     private final String routeTable = "CREATE TABLE IF NOT EXISTS routes (" +
             "id integer PRIMARY KEY AUTOINCREMENT," +
-            "airline int," +
             "airlineCode varchar," +
-            "sourceAirport int," +
             "sourceAirportCode varchar," +
-            "destinationAirport int," +
             "destinationAirportCode varchar," +
             "stops int," +
-            "FOREIGN KEY (airline) references airlines(id) ON DELETE SET NULL," +
-            "FOREIGN KEY (sourceAirport) references airports(id) ON DELETE SET NULL," +
-            "FOREIGN KEY (destinationAirport) references airports(id) ON DELETE SET NULL" +
             ")";
+
+    private final String triggers = "CREATE TRIGGER IF NOT EXISTS airlineTriggerIata\n" +
+            "    AFTER INSERT ON airlines\n" +
+            "    WHEN (NEW.iata = '' OR NEW.iata = '\\N')\n" +
+            "BEGIN\n" +
+            "    UPDATE airlines SET iata = null WHERE id = NEW.id;\n" +
+            "END;\n" +
+            "CREATE TRIGGER IF NOT EXISTS airlineTriggerIcao\n" +
+            "    AFTER INSERT ON airlines\n" +
+            "    WHEN (NEW.icao = '' OR NEW.icao = '\\N')\n" +
+            "BEGIN\n" +
+            "    UPDATE airlines SET icao = null WHERE id = NEW.id;\n" +
+            "END;\n" +
+            "CREATE TRIGGER IF NOT EXISTS airportTriggerIata\n" +
+            "    AFTER INSERT ON airports\n" +
+            "    WHEN (NEW.iata = '' OR NEW.iata = '\\N')\n" +
+            "BEGIN\n" +
+            "    UPDATE airports SET iata = null WHERE id = NEW.id;\n" +
+            "END;\n" +
+            "CREATE TRIGGER IF NOT EXISTS airportTriggerIcao\n" +
+            "    AFTER INSERT ON airports\n" +
+            "    WHEN (NEW.icao = '' OR NEW.icao = '\\N')\n" +
+            "BEGIN\n" +
+            "    UPDATE airports SET icao = null WHERE id = NEW.id;\n" +
+            "END;";
 
     private DatabaseConnection() {
         connect();
@@ -93,6 +112,7 @@ public final class DatabaseConnection {
             statement.execute(airportTable);
             statement.execute(aircraftTable);
             statement.execute(routeTable);
+            statement.execute(triggers);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
