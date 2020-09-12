@@ -43,14 +43,17 @@ public final class DatabaseConnection {
             ")";
 
     private final String routeTable = "CREATE TABLE IF NOT EXISTS routes (" +
-            "id int PRIMARY KEY," +
+            "id integer PRIMARY KEY AUTOINCREMENT," +
             "airline int," +
+            "airlineCode varchar," +
             "sourceAirport int," +
+            "sourceAirportCode varchar," +
             "destinationAirport int," +
+            "destinationAirportCode varchar," +
             "stops int," +
-            "FOREIGN KEY (airline) references airlines(id)," +
-            "FOREIGN KEY (sourceAirport) references airports(id)," +
-            "FOREIGN KEY (destinationAirport) references airports(id)" +
+            "FOREIGN KEY (airline) references airlines(id) ON DELETE SET NULL," +
+            "FOREIGN KEY (sourceAirport) references airports(id) ON DELETE SET NULL," +
+            "FOREIGN KEY (destinationAirport) references airports(id) ON DELETE SET NULL" +
             ")";
 
     private DatabaseConnection() {
@@ -126,7 +129,7 @@ public final class DatabaseConnection {
         }
     }
 
-    public PreparedStatement getPreparedStatement(String firstline, int nParameters) throws SQLException{
+    public PreparedStatement getFormattedPreparedStatement(String firstline, int nParameters) throws SQLException{
         String statement = firstline + " VALUES \n";
 
         statement += "(?";
@@ -135,7 +138,11 @@ public final class DatabaseConnection {
         }
         statement += ")";
 
-        return conn.prepareStatement(statement);
+        return conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
+    }
+
+    public PreparedStatement getPreparedStatement(String sqlStatement) throws SQLException {
+        return conn.prepareStatement(sqlStatement);
     }
 
     public void setAutoCommit(Boolean b) {

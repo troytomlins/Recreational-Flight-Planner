@@ -5,7 +5,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -118,7 +117,7 @@ public class AirportRW extends RWStream {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < airports.size(); i++) {
             try {
-                PreparedStatement pStatement = databaseConnection.getPreparedStatement(
+                PreparedStatement pStatement = databaseConnection.getFormattedPreparedStatement(
                         "INSERT INTO airports (name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase)",
                         11
                 );

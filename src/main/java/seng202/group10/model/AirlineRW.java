@@ -8,7 +8,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,7 +101,7 @@ public class AirlineRW extends RWStream {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < airlines.size(); i++) {
             try {
-                PreparedStatement pStatement = databaseConnection.getPreparedStatement(
+                PreparedStatement pStatement = databaseConnection.getFormattedPreparedStatement(
                         "INSERT INTO airlines (name, alias, iata, icao, callsign, country)",
                         6
                 );
