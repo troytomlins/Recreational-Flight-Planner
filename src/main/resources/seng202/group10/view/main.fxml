@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -106,28 +104,6 @@
                               </tabs>
                            </TabPane>
                         </center>
-                        <left>
-                           <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                              <top>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
-                                    <font>
-                                       <Font size="25.0" />
-                                    </font>
-                                 </Text>
-                              </top>
-                              <bottom>
-                                 <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" BorderPane.alignment="CENTER">
-                                   <items>
-                                     <MenuItem fx:id="importAirlinesMenuItem" mnemonicParsing="false" onAction="#showImportAirlines" text="Airlines" />
-                                     <MenuItem mnemonicParsing="false" onAction="#importAirports" text="Airports" />
-                                   </items>
-                                 </MenuButton>
-                              </bottom>
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </BorderPane>
-                        </left>
                      </BorderPane>
                   </children>
                </AnchorPane>
