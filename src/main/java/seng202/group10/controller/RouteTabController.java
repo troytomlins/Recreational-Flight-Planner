@@ -1,5 +1,7 @@
 package seng202.group10.controller;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
@@ -18,7 +21,10 @@ import java.util.ArrayList;
 public class RouteTabController {
 
     @FXML public TableView routeTable;
-    @FXML public TableColumn nameCol;
+    @FXML public TableColumn airlineCodeCol;
+    @FXML public TableColumn srcAirportCodeCol;
+    @FXML public TableColumn destAirportCodeCol;
+    @FXML public TableColumn stopsCol;
     @FXML private ViewController mainController;
 
     /**
@@ -63,7 +69,12 @@ public class RouteTabController {
     private void updateTable(ArrayList<Route> data) {
         routeTable.setEditable(true);
 
-        nameCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("name"));
+        airlineCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineCode"));
+        srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("sourceAirportCode"));
+
+
+        destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("destinationAirportCode"));
+        stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
     }
 }
