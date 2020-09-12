@@ -1,10 +1,15 @@
 package seng202.group10.controller;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import seng202.group10.controller.filters.AirlineFilters;
+import seng202.group10.controller.filters.AirportFilters;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
@@ -38,11 +43,19 @@ public class AirportTabController {
     private TableColumn icaoCol;
     @FXML
     private TableColumn countryCol;
-    @FXML private ViewController mainController;
+    @FXML
+    private ViewController mainController;
+    @FXML
+    private TextField nameFilterField;
+    @FXML
+    private TextField cityFilterField;
+    @FXML
+    private TextField countryFilterField;
+
+
 
     public void updateTable(ArrayList<Airport> data) {
         airportTable.setEditable(true);
-
         nameCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("name"));
         cityCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("city"));
         latCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("latitude"));
@@ -74,12 +87,22 @@ public class AirportTabController {
                 controller.importAirports(filepath);
             } catch (IncompatibleFileException | IOException e) {
                 e.printStackTrace();
-                // TODO Add error message saying file is incorrect
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setHeaderText("File Not Compatible");
+                errorAlert.showAndWait();
             }
 
             // Update table
             ArrayList<Airport> data = controller.getAirports();
             updateTable(data);
         }
+    }
+
+    public void applyAirportFilters() {
+        AirportFilters filter = new AirportFilters();
+        AirportController airports = new AirportController();
+        ArrayList<Airport> data = new ArrayList<Airport>();
+        data = filter.filterByAll(airports.getAirports(), nameFilterField.getText(), cityFilterField.getText(), countryFilterField.getText());
+        updateTable(data);
     }
 }

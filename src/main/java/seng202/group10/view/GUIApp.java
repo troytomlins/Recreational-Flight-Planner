@@ -19,6 +19,7 @@ public class GUIApp extends Application {
 
     private JavaConnector javaConnector = new JavaConnector();
     private ControllerFacade controllerFacade;
+    public ViewController viewController;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -28,11 +29,9 @@ public class GUIApp extends Application {
         Parent root = fxmlLoader.load();
 
         // Set controller
-        ViewController controller = fxmlLoader.getController();
-
-        this.controllerFacade = new ControllerFacade();
-        controller.setControllerFacade(this.controllerFacade);
-        controller.loadAllData();
+        viewController = fxmlLoader.getController();
+        controllerFacade = new ControllerFacade();
+        viewController.setControllerFacade(controllerFacade);
 
         // Start Scene
         Scene scene = new Scene(root, 1000, 650);
@@ -69,8 +68,8 @@ public class GUIApp extends Application {
      * Used to give the java app the markers set in the google maps API
      */
     public class JavaConnector {
-        public void newLatLng(float lat, float lng) {
-            System.out.println(lat + " " + lng);
+        public void newLatLng(String id, float lat, float lng) {
+            viewController.newMarker(id, lat, lng);
         }
     }
 }

@@ -70,4 +70,9 @@ public class Airport {
         return tzDatabase;
     }
 
+    @Override
+    public String toString(){
+        return getName();
+    }
+
 }

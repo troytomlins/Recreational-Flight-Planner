@@ -3,6 +3,14 @@ package seng202.group10.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,7 +27,35 @@ public class RouteRW extends RWStream {
         super("route.csv");
     }
 
-    public ArrayList<Route> readRoutes() {
+    public ArrayList<Route> readRoutes() throws IOException, IncompatibleFileException {
+        ArrayList<Route> routes = new ArrayList<>();
+
+        // Initialise file reader and string row variable
+        BufferedReader csvReader = new BufferedReader(new FileReader(super.getInFilename()));
+
+        // Parse each line
+        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+        for (CSVRecord csvRecord : parser) {
+            try {
+                // Get corresponding values from the csv record
+                Route route = new Route(
+                        csvRecord.get(0),
+                        csvRecord.get(1),
+                        csvRecord.get(3),
+                        Integer.parseInt(csvRecord.get(7))
+                );
+                routes.add(route);
+            } catch (Exception e) {
+                throw new IncompatibleFileException();
+            }
+        }
+
+        // Close reader
+        csvReader.close();
+        return routes;
+    }
+
+    public ArrayList<Route> readRoutes1() {
         ArrayList<ArrayList<String>> data = read();
 
         ArrayList<Route> routeList = new ArrayList<Route>();

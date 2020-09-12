@@ -2,12 +2,16 @@ package seng202.group10.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +26,7 @@ import java.util.List;
 
 public class ViewController {
 
+    @FXML public RouteTabController routeTabController;
     @FXML
     private MenuButton dropdownView;
     @FXML
@@ -42,6 +47,8 @@ public class ViewController {
     private MenuItem importAirlinesMenuItem;
     @FXML
     private AirportTabController airportTabController;
+    @FXML
+    private GridPane locationsPane;
 
     private List<Airline> data;
     public ControllerFacade controllerFacade;
@@ -51,6 +58,7 @@ public class ViewController {
     }
 
     @FXML private void initialize() {
+        routeTabController.injectMainController(this);
         airportTabController.injectMainController(this);
     }
 
@@ -133,5 +141,38 @@ public class ViewController {
      */
     public void importAirports() {
         airportTabController.importAirports();
+    }
+
+    private int numMarkers = 0;
+    /**
+     * Add a new marker into the plan flight section
+     * @param id - id of marker
+     * @param lat - position latitude
+     * @param lng - position longitude
+     */
+    public void newMarker(String id, float lat, float lng) {
+        newLocationBox(id, numMarkers, lat, lng);
+        numMarkers += 1;
+    }
+
+    /**
+     * Make a new box to show the marker location
+     * @param id - id of marker
+     * @param column - column index to place it
+     * @param lat - position latitude
+     * @param lng - position longitude
+     */
+    private void newLocationBox(String id, int column, float lat, float lng) {
+        // Make the thing
+        int height = 100;
+        GridPane pane = new GridPane();
+        pane.add(new Label(id + " " + lat + " " + lng), 0, numMarkers);
+        pane.setMinHeight(height);
+        pane.setMaxHeight(height);
+        pane.setPrefHeight(height);
+
+        // Add the thing
+        locationsPane.setGridLinesVisible(true);
+        locationsPane.add(pane, 0, column);
     }
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
@@ -37,6 +38,21 @@
                                        </BorderPane.margin>
                                     </Text>
                                  </top>
+                                 <center>
+                                    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" BorderPane.alignment="CENTER">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                                             <children>
+                                                <GridPane fx:id="locationsPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                  </columnConstraints>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </ScrollPane>
+                                 </center>
                               </BorderPane>
                            </left>
                      </BorderPane>
@@ -72,44 +88,11 @@
                                     </content>
                                  </Tab>
                                  <Tab closable="false" text="Routes">
-                                    <content>
-                                       <TableView>
-                                          <columns>
-                                             <TableColumn prefWidth="75.0" text="Name" />
-                                             <TableColumn prefWidth="75.0" text="Alias" />
-                                             <TableColumn prefWidth="75.0" text="Call Sign" />
-                                             <TableColumn prefWidth="75.0" text="IATA" />
-                                             <TableColumn prefWidth="75.0" text="ICAO" />
-                                             <TableColumn prefWidth="75.0" text="Country" />
-                                          </columns>
-                                       </TableView>
-                                    </content>
+                                       <fx:include fx:id="routeTab" source="routesTab.fxml" />
                                  </Tab>
                               </tabs>
                            </TabPane>
                         </center>
-                        <left>
-                           <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                              <top>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
-                                    <font>
-                                       <Font size="25.0" />
-                                    </font>
-                                 </Text>
-                              </top>
-                              <bottom>
-                                 <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" BorderPane.alignment="CENTER">
-                                   <items>
-                                     <MenuItem fx:id="importAirlinesMenuItem" mnemonicParsing="false" onAction="#showImportAirlines" text="Airlines" />
-                                     <MenuItem mnemonicParsing="false" onAction="#importAirports" text="Airports" />
-                                   </items>
-                                 </MenuButton>
-                              </bottom>
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </BorderPane>
-                        </left>
                      </BorderPane>
                   </children>
                </AnchorPane>

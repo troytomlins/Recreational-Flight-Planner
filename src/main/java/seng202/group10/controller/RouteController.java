@@ -1,9 +1,6 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.Airport;
-import seng202.group10.model.IncompatibleFileException;
-import seng202.group10.model.Route;
-import seng202.group10.model.RouteModel;
+import seng202.group10.model.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -39,9 +36,21 @@ public class RouteController {
 
     /**
      * Takes a filepath and imports all routes from the file into model.
+     * @param filepath Filepath string for file to import.
+     */
+    public void importRoutes(String filepath) throws IncompatibleFileException, IOException {
+        RouteRW stream = new RouteRW(filepath);
+        ArrayList<Route> routeList = stream.readRoutes();
+        for (Route route : routeList) {
+            model.addRoute(route);
+        }
+    }
+
+    /**
+     * Takes a filepath and imports all routes from the file into model.
      * @param filePath Filepath string for file to import.
      */
-    public void importRoutes(String filePath) throws IncompatibleFileException, IOException {
+    public void importRoutes1(String filePath) throws IncompatibleFileException, IOException {
 
         // Initialise file reader and string row variable
         String row;
