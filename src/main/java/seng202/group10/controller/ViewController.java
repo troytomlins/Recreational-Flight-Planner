@@ -26,6 +26,7 @@ import java.util.List;
 
 public class ViewController {
 
+    @FXML public RouteTabController routeTabController;
     @FXML
     private MenuButton dropdownView;
     @FXML
@@ -57,6 +58,7 @@ public class ViewController {
     }
 
     @FXML private void initialize() {
+        routeTabController.injectMainController(this);
         airportTabController.injectMainController(this);
     }
 

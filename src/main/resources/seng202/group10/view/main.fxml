@@ -88,18 +88,7 @@
                                     </content>
                                  </Tab>
                                  <Tab closable="false" text="Routes">
-                                    <content>
-                                       <TableView>
-                                          <columns>
-                                             <TableColumn prefWidth="75.0" text="Name" />
-                                             <TableColumn prefWidth="75.0" text="Alias" />
-                                             <TableColumn prefWidth="75.0" text="Call Sign" />
-                                             <TableColumn prefWidth="75.0" text="IATA" />
-                                             <TableColumn prefWidth="75.0" text="ICAO" />
-                                             <TableColumn prefWidth="75.0" text="Country" />
-                                          </columns>
-                                       </TableView>
-                                    </content>
+                                       <fx:include fx:id="routeTab" source="routesTab.fxml" />
                                  </Tab>
                               </tabs>
                            </TabPane>

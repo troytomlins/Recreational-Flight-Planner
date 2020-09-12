@@ -13,6 +13,7 @@ public class ControllerFacade {
     private ModelFacade model;
     private AirportController airportController;
     private AirportTabController airportTabController;
+    private RouteController routeController;
 
     /**
      * Sets the Model Facade to input
@@ -31,6 +32,7 @@ public class ControllerFacade {
         this.flightPlanner = new FlightPlanner();
         this.mapController = new MapController();
         this.model = new ModelFacade();
+        this.routeController = new RouteController();
     }
 
     public AirlineController getAirlineController() {
@@ -40,6 +42,8 @@ public class ControllerFacade {
     public AirportController getAirportController() {
         return this.airportController;
     }
+
+    public RouteController getRouteController () { return this.routeController; }
 
 
 }
