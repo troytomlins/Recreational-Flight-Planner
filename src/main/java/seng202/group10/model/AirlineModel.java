@@ -29,13 +29,13 @@ public class AirlineModel {
     public void addAirline(Airline airline) {
         if (!airlines.contains(airline)) {
             unsavedAirlines.add(airline);
-            airlines.add(airline);
         }
     }
 
     public void save() {
         airlineRW.writeDatabaseAirlines(unsavedAirlines);
         unsavedAirlines = new ArrayList<Airline>();
+        airlines = airlineRW.readDatabaseAirlines();
     }
 
     public void deleteAirline(Airline airline) { airlines.remove(airline); }

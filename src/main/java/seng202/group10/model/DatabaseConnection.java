@@ -47,7 +47,7 @@ public final class DatabaseConnection {
             "airlineCode varchar," +
             "sourceAirportCode varchar," +
             "destinationAirportCode varchar," +
-            "stops int," +
+            "stops int" +
             ")";
 
     private final String triggers = "CREATE TRIGGER IF NOT EXISTS airlineTriggerIata\n" +

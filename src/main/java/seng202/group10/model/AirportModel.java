@@ -33,13 +33,13 @@ public class AirportModel {
     public void addAirport(Airport airport) {
         if (!airports.contains(airport)) {
             unsavedAirports.add(airport);
-            airports.add(airport);
         }
     }
 
     public void save() {
         airportRW.writeDatabaseAirports(unsavedAirports);
         unsavedAirports = new ArrayList<Airport>();
+        airports = airportRW.readDatabaseAirports();
     }
 
 }

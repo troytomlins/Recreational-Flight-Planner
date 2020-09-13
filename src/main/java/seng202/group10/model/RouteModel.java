@@ -32,13 +32,13 @@ public class RouteModel {
     public void addRoute(Route route) {
         if (!routes.contains(route)) {
             unsavedRoutes.add(route);
-            routes.add(route);
         }
     }
 
     public void save() {
         routeRW.writeDatabaseRoutes(unsavedRoutes);
         unsavedRoutes = new ArrayList<>();
+        routes = routeRW.readDatabaseRoutes();
     }
 
     public void deleteRoute(Route route) { routes.remove(route); }
