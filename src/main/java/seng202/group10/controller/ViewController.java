@@ -12,8 +12,7 @@ public class ViewController {
 
     @FXML public RouteTabController routeTabController;
     @FXML private AirportTabController airportTabController;
-    @FXML
-    private AirlinesTabController airlineTabController;
+    @FXML private AirlinesTabController airlineTabController;
     @FXML private MenuButton dropdownView;
     @FXML private MenuItem importAirlinesMenuItem;
     @FXML private GridPane locationsPane;
