@@ -20,9 +20,14 @@ public class RouteFilters {
 
     public ArrayList<Route> filterByAirlineCode(ArrayList<Route> routeData, String contains) {
         ArrayList<Route> filteredRoutes = new ArrayList<>();
-        for (Route route : routeData) {
-            if (route.getAirlineCode().contains(contains)) {
-                filteredRoutes.add(route);
+        if (contains == "") {
+            filteredRoutes = routeData;
+        } else {
+
+            for (Route route : routeData) {
+                if (route.getAirlineCode().contains(contains)) {
+                    filteredRoutes.add(route);
+                }
             }
         }
         return filteredRoutes;
@@ -30,9 +35,13 @@ public class RouteFilters {
 
     public ArrayList<Route> filterBySourceAirportCode(ArrayList<Route> routeData, String contains) {
         ArrayList<Route> filteredRoutes = new ArrayList<>();
-        for (Route route : routeData) {
-            if (route.getSourceAirportCode().contains(contains)) {
-                filteredRoutes.add(route);
+        if (contains == "") {
+            filteredRoutes = routeData;
+        } else {
+            for (Route route : routeData) {
+                if (route.getSourceAirportCode().contains(contains)) {
+                    filteredRoutes.add(route);
+                }
             }
         }
         return filteredRoutes;
@@ -40,12 +49,26 @@ public class RouteFilters {
 
     public ArrayList<Route> filterByDestinationAirportCode(ArrayList<Route> routeData, String contains) {
         ArrayList<Route> filteredRoutes = new ArrayList<>();
-        for (Route route : routeData) {
-            if (route.getDestinationAirportCode().contains(contains)) {
-                filteredRoutes.add(route);
+        if (contains == "") {
+            filteredRoutes = routeData;
+        } else {
+            for (Route route : routeData) {
+                if (route.getDestinationAirportCode().contains(contains)) {
+                    filteredRoutes.add(route);
+                }
             }
         }
         return filteredRoutes;
+    }
+
+    public ArrayList<Route> filterByAll(ArrayList<Route> routeData, String airlineCode, String srcAirportCode, String dstAirportCode, Integer numStops) {
+        ArrayList<Route> routesByAirline = new ArrayList<>();
+        ArrayList<Route> routesByAirlineSrc = new ArrayList<>();
+        ArrayList<Route> routesByAirlineSrcDest = new ArrayList<>();
+        routesByAirline = filterByAirlineCode(routeData, airlineCode);
+        routesByAirlineSrc = filterBySourceAirportCode(routesByAirline, srcAirportCode);
+        routesByAirlineSrcDest = filterByDestinationAirportCode(routesByAirlineSrc, dstAirportCode);
+        return routesByAirlineSrcDest;
     }
 
 

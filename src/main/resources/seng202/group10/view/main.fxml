@@ -70,16 +70,7 @@
                               <tabs>
                                  <Tab closable="false" text="Airlines">
                                     <content>
-                                       <TableView fx:id="airlineTable">
-                                         <columns>
-                                           <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                                           <TableColumn fx:id="aliasCol" prefWidth="75.0" text="Alias" />
-                                             <TableColumn fx:id="callsignCol" prefWidth="75.0" text="Call Sign" />
-                                             <TableColumn fx:id="iataCol" prefWidth="75.0" text="IATA" />
-                                             <TableColumn fx:id="icaoCol" prefWidth="75.0" text="ICAO" />
-                                             <TableColumn fx:id="countryCol" prefWidth="75.0" text="Country" />
-                                         </columns>
-                                       </TableView>
+                                        <fx:include fx:id="airlineTab" source="airlinesTab.fxml" />
                                     </content>
                                  </Tab>
                                  <Tab closable="false" text="Airports">

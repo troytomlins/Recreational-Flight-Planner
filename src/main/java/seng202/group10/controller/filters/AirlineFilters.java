@@ -2,6 +2,7 @@ package seng202.group10.controller.filters;
 
 import seng202.group10.model.Airline;
 import seng202.group10.model.AirlineRW;
+import seng202.group10.model.Airport;
 
 import java.util.ArrayList;
 
@@ -44,18 +45,28 @@ public class AirlineFilters {
         return filteredAirlines;
     }
 
-    public ArrayList<Airline> filterByCallsign(ArrayList<Airline> airlineData, String contains) {
+    public ArrayList<Airline> filterByCountry(ArrayList<Airline> airlineData, String contains) {
         ArrayList<Airline> filteredAirlines = new ArrayList<>();
         if (contains == "") {
             filteredAirlines = airlineData;
         } else {
             for (Airline airline : airlineData) {
-                if (airline.getCallsign().contains(contains)) {
+                if (airline.getCountry().contains(contains)) {
                     filteredAirlines.add(airline);
                 }
             }
         }
         return filteredAirlines;
+    }
+
+    public ArrayList<Airline> filterByAll(ArrayList<Airline> airlineData, String name, String alias, String country) {
+        ArrayList<Airline> airlinesByName = new ArrayList<>();
+        ArrayList<Airline> airlinesByNameAlias = new ArrayList<>();
+        ArrayList<Airline> airlinesByNameAliasCountry = new ArrayList<>();
+        airlinesByName = filterByName(airlineData, name);
+        airlinesByNameAlias = filterByAlias(airlinesByName, alias);
+        airlinesByNameAliasCountry = filterByCountry(airlinesByNameAlias, country);
+        return airlinesByNameAliasCountry;
     }
 
 

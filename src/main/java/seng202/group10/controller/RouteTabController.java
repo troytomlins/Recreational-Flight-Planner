@@ -8,8 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import seng202.group10.controller.filters.AirportFilters;
+import seng202.group10.controller.filters.RouteFilters;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
@@ -25,7 +28,11 @@ public class RouteTabController {
     @FXML public TableColumn srcAirportCodeCol;
     @FXML public TableColumn destAirportCodeCol;
     @FXML public TableColumn stopsCol;
-    @FXML private ViewController mainController;
+    private ViewController mainController;
+    @FXML private TextField airlineCodeFilterField;
+    @FXML private TextField srcAirportCodeFilterField;
+    @FXML private TextField destAirportCodeFilterField;
+    @FXML private TextField numStopsFilterField;
 
     /**
      * Injects main view controller into this controller
@@ -76,5 +83,15 @@ public class RouteTabController {
         destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("destinationAirportCode"));
         stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
+    }
+
+    //TODO write error checking for filters making sure data is loaded.
+
+    public void applyRouteFilters() {
+        RouteFilters filter = new RouteFilters();
+        RouteController routes = new RouteController();
+        ArrayList<Route> data = new ArrayList<Route>();
+        data = filter.filterByAll(routes.getRoutes(), airlineCodeFilterField.getText(), srcAirportCodeFilterField.getText(), destAirportCodeFilterField.getText(), Integer.parseInt(numStopsFilterField.getText()));
+        updateTable(data);
     }
 }
