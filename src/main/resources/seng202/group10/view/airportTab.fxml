@@ -16,7 +16,7 @@
 
 <GridPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.AirportTabController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="276.9999603271484" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40.0" />
 
     </columnConstraints>
@@ -45,22 +45,43 @@
          <center>
             <GridPane prefHeight="419.0" prefWidth="253.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.39996337890625" minWidth="0.0" prefWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="279.20001220703125" prefWidth="295.20001220703125" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="346.8" minHeight="10.0" prefHeight="77.99998779296874" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="346.8" minHeight="10.0" prefHeight="93.79999389648438" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="280.0000457763672" minHeight="0.0" prefHeight="96.20000610351565" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="89.00001831054686" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="77.40000000000003" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="72.2000122070313" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="apply" mnemonicParsing="false" onAction="#applyAirportFilters" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                  <TextField fx:id="nameFilterField" scaleX="0.75" text="Name" GridPane.rowIndex="1" />
-                  <TextField fx:id="cityFilterField" scaleX="0.75" text="City" GridPane.rowIndex="2" />
-                  <TextField fx:id="countryFilterField" scaleX="0.75" text="Country" GridPane.rowIndex="3" />
+                  <Button fx:id="apply" mnemonicParsing="false" onAction="#applyAirportFilters" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <TextField fx:id="nameFilterField" scaleX="0.75" translateX="25.0">
+                     <GridPane.margin>
+                        <Insets top="5.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="cityFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets top="5.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="countryFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets top="5.0" />
+                     </GridPane.margin></TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Text>
                </children>
             </GridPane>
          </center>
