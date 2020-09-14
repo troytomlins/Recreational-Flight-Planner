@@ -58,9 +58,24 @@
               </rowConstraints>
                <children>
                   <Button fx:id="apply" mnemonicParsing="false" onAction="#applyAirportFilters" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                  <TextField fx:id="nameFilterField" scaleX="0.75" text="Name" GridPane.rowIndex="1" />
-                  <TextField fx:id="cityFilterField" scaleX="0.75" text="City" GridPane.rowIndex="2" />
-                  <TextField fx:id="countryFilterField" scaleX="0.75" text="Country" GridPane.rowIndex="3" />
+                  <TextField fx:id="nameFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="cityFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="2" />
+                  <TextField fx:id="countryFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Text>
                </children>
             </GridPane>
          </center>

@@ -18,7 +18,7 @@ public class AirportFilters {
 
     public ArrayList<Airport> filterByName(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
-        if (contains == "Name") {
+        if (contains == "") {
             filteredAirports = airportData;
         } else {
             for (Airport airport : airportData) {
@@ -32,7 +32,7 @@ public class AirportFilters {
 
     public ArrayList<Airport> filterByCity(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
-        if (contains == "City") {
+        if (contains == "") {
             filteredAirports = airportData;
         } else {
             for (Airport airport : airportData) {
@@ -46,7 +46,7 @@ public class AirportFilters {
 
     public ArrayList<Airport> filterByCountry(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
-        if (contains == "Country") {
+        if (contains == "") {
             filteredAirports = airportData;
         }
         for (Airport airport : airportData) {
@@ -56,6 +56,8 @@ public class AirportFilters {
         }
         return filteredAirports;
     }
+
+    //TODO write error checking for filters making sure data is loaded.
 
     public ArrayList<Airport> filterByAll(ArrayList<Airport> airportData, String name, String city, String country) {
         ArrayList<Airport> airportsByName = new ArrayList<>();
