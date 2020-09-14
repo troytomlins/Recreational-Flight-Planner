@@ -42,7 +42,7 @@ public final class DatabaseConnection {
             ")";
 
     private final String aircraftTable = "CREATE TABLE IF NOT EXISTS aircrafts (" +
-            "id int PRIMARY KEY AUTOINCREMENT," +
+            "id integer PRIMARY KEY AUTOINCREMENT," +
             "name varchar," +
             "iata char(3)," +
             "icao char(4)," +
