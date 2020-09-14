@@ -28,7 +28,7 @@ public class RouteTabController {
     @FXML public TableColumn srcAirportCodeCol;
     @FXML public TableColumn destAirportCodeCol;
     @FXML public TableColumn stopsCol;
-    @FXML private ViewController mainController;
+    private ViewController mainController;
     @FXML private TextField airlineCodeFilterField;
     @FXML private TextField srcAirportCodeFilterField;
     @FXML private TextField destAirportCodeFilterField;
@@ -85,7 +85,7 @@ public class RouteTabController {
         routeTable.setItems(FXCollections.observableList(data));
     }
 
-   //TODO write error checking for filters making sure data is loaded.
+    //TODO write error checking for filters making sure data is loaded.
 
     public void applyRouteFilters() {
         RouteFilters filter = new RouteFilters();
