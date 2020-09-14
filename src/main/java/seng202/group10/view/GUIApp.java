@@ -10,9 +10,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 import seng202.group10.controller.ControllerFacade;
-import seng202.group10.controller.ViewController;
 
-import java.io.File;
 import java.net.URL;
 
 public class GUIApp extends Application {

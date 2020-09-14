@@ -1,21 +1,15 @@
-package seng202.group10.controller;
+package seng202.group10.view;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng202.group10.controller.AirlineController;
-import seng202.group10.controller.RouteController;
-import seng202.group10.controller.ViewController;
 import seng202.group10.controller.filters.AirlineFilters;
-import seng202.group10.controller.filters.AirportFilters;
 import seng202.group10.model.Airline;
-import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
-import seng202.group10.model.Route;
 
 import java.io.IOException;
 import java.util.ArrayList;
