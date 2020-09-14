@@ -1,7 +1,10 @@
-var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var labels = ["Start", "A", "B", "C", "more lol"]
 var labelIndex = 0;
 
 var map;
+var javaConnector;      // Placeholder
+var markers = {};
+
 
 /**
  * Initialize the map
@@ -20,17 +23,44 @@ function initMap() {
 
 
 /**
- * Add a marker onto the map at location
- * call the sendLatLngToJava function
+ * Make a new marker
+ * tell java about it with sendLocationToJava
+ * add it to the markers dict
  */
 function addMarker(location) {
-    var markerLabel = labels[labelIndex++ % labels.length];
-    sendLatLngToJava(markerLabel, location);
+    // TODO give more than 26 markers
+    var label = labels[labelIndex++];
+    marker = newMarker(label, location)
+
+    google.maps.event.addListener(marker, 'click', function(event) {
+        removeMarker(label);
+    });
+
+    markers[label] = marker
+    sendLocationToJava(label, location);
+}
+
+
+/**
+ * Create (and return) a new google maps marker
+ * adds it to the map as well
+ */
+function newMarker(label, location) {
     var marker = new google.maps.Marker({
         position: location,
-        label: markerLabel,
+        label: label,
         map: map
     });
+    return marker
+}
+
+
+/**
+ * Remove the marker with label
+ */
+function removeMarker(label) {
+    markers[label].setMap(null);    // Take off map
+    markers[label] = null;          // Forget about it all together
 }
 
 
@@ -49,7 +79,11 @@ window.onresize = resizeMap;    // Listener
 /**
  * Send a marker to java with id at latLng
  */
-function sendLatLngToJava(id, latLng) {
-    javaConnector.newLatLng(id, latLng.lat(), latLng.lng());
+function sendLocationToJava(id, latLng) {
+    if (javaConnector) {
+        javaConnector.newLatLng(id, latLng.lat(), latLng.lng());
+    } else {
+        console.log("No Java connector found! Are you running this in the app?")
+    }
 }
 

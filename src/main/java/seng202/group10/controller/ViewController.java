@@ -48,6 +48,8 @@ public class ViewController {
     private AirportTabController airportTabController;
     @FXML
     private GridPane locationsPane;
+    @FXML
+    private TextField startLocationTextField;
 
     private List<Airline> data;
     public ControllerFacade controllerFacade;
@@ -145,28 +147,30 @@ public class ViewController {
      * @param lng - position longitude
      */
     public void newMarker(String id, float lat, float lng) {
-        newLocationBox(id, numMarkers, lat, lng);
+        int row = numMarkers + 1;   // Plus one as we gotta skip the start box
+        newLocationBox(id, row, lat, lng);
         numMarkers += 1;
     }
 
     /**
      * Make a new box to show the marker location
      * @param id - id of marker
-     * @param column - column index to place it
+     * @param row - row index to place it
      * @param lat - position latitude
      * @param lng - position longitude
      */
-    private void newLocationBox(String id, int column, float lat, float lng) {
+    private void newLocationBox(String id, int row, float lat, float lng) {
         // Make the thing
         int height = 100;
         GridPane pane = new GridPane();
         pane.add(new Label(id + " " + lat + " " + lng), 0, numMarkers);
+//        pane.add(new TextField(), 0, numMarkers);
         pane.setMinHeight(height);
         pane.setMaxHeight(height);
         pane.setPrefHeight(height);
 
         // Add the thing
         locationsPane.setGridLinesVisible(true);
-        locationsPane.add(pane, 0, column);
+        locationsPane.add(pane, 0, row);
     }
 }
