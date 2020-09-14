@@ -2,6 +2,7 @@ package seng202.group10.controller.filters;
 
 import seng202.group10.model.Airport;
 import seng202.group10.model.AirportRW;
+import seng202.group10.model.DatabaseConnection;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ public class AirportFilters {
      * @param contains (String): substring to filter for
      * @return ArrayList<Airline>
      */
+
+    DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     public ArrayList<Airport> filterByName(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();

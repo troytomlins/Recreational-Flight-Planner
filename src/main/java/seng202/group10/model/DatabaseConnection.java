@@ -2,7 +2,14 @@ package seng202.group10.model;
 
 import java.sql.*;
 
-
+/**
+ * Singleton class that handles connection, creation, and sending queries to the database.
+ * This is a singleton so that the database is not connected to multiple times.
+ *
+ * To get a reference to this, call DatabaseConnection.getInstance()
+ * @see DatabaseConnection#getInstance
+ * @author Mitchell
+ */
 public final class DatabaseConnection {
 
     private static DatabaseConnection INSTANCE;
@@ -77,9 +84,13 @@ public final class DatabaseConnection {
 
     private DatabaseConnection() {
         connect();
-        createTables();
+        defineDatabase();
     }
 
+    /**
+     * Creates an instance of DatabaseConnection if there isn't one already
+     * @return The instance of DatabaseConnection
+     */
     public static DatabaseConnection getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new DatabaseConnection();
@@ -87,6 +98,9 @@ public final class DatabaseConnection {
         return INSTANCE;
     }
 
+    /**
+     * Connects to database.db, and if it doesn't exists, creates it
+     */
     private void connect() {
 
         try {
@@ -105,7 +119,10 @@ public final class DatabaseConnection {
         }
     }
 
-    private void createTables() {
+    /**
+     * Sends DDL statements to the database to create the tables and triggers needed for storage
+     */
+    private void defineDatabase() {
         try {
             Statement statement = conn.createStatement();
             statement.execute(airlineTable);
@@ -138,6 +155,11 @@ public final class DatabaseConnection {
         }
     }
 
+    /**
+     * Sends an SQL query to the database
+     * @param sqlStatement The statement to be sent
+     * @return The result of the query
+     */
     public ResultSet executeQuery(String sqlStatement) {
         try {
             Statement statement = conn.createStatement();
@@ -149,8 +171,16 @@ public final class DatabaseConnection {
         }
     }
 
-    public PreparedStatement getFormattedPreparedStatement(String firstline, int nParameters) throws SQLException{
-        String statement = firstline + " VALUES \n";
+    /**
+     * Creates a PreparedStatement formatted specifically so that a row of data can be inserted into the database.
+     * @param firstLine The first part of the insert statement, upto but not including VALUES
+     * @param nParameters The number of parameters to be placed after VALUES
+     * @return A PreparedStatement of which the SQL parameters can be inserted into
+     * @throws SQLException
+     * @see DatabaseConnection#getPreparedStatement
+     */
+    public PreparedStatement getFormattedPreparedStatement(String firstLine, int nParameters) throws SQLException{
+        String statement = firstLine + " VALUES \n";
 
         statement += "(?";
         for (int j = 1; j < nParameters; j++) {
@@ -161,10 +191,26 @@ public final class DatabaseConnection {
         return conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
     }
 
+    /**
+     * Creates a PreparedStatement tied to the database.
+     * The PreparedStatement is used to protect against SQL injection.
+     * This method exists so that the Connection object can remain private.
+     *
+     * @param sqlStatement The statement that will be sent to the database
+     * @return The PreparedStatement
+     * @throws SQLException
+     */
     public PreparedStatement getPreparedStatement(String sqlStatement) throws SQLException {
         return conn.prepareStatement(sqlStatement);
     }
 
+    /**
+     * Sets whether an sql statement is applied immediately after it is sent to the database,
+     * or whether it waits for a commit call.
+     * Used along with commit() to bulk apply multiple statements to the database at once
+     * @param b The state to set
+     * @see DatabaseConnection#commit
+     */
     public void setAutoCommit(Boolean b) {
         try {
             conn.setAutoCommit(b);
@@ -173,6 +219,12 @@ public final class DatabaseConnection {
         }
     }
 
+    /**
+     * Apply all the statements that have been sent to the database but not executed yet.
+     * Only required when AutoCommit is set to false
+     *
+     * @see DatabaseConnection#setAutoCommit
+     */
     public void commit() {
         try {
             conn.commit();
