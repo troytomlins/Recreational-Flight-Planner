@@ -17,7 +17,6 @@ public class AirportFilters {
      * @return ArrayList<Airline>
      */
 
-    DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     public ArrayList<Airport> filterByName(ArrayList<Airport> airportData, String contains) {
         ArrayList<Airport> filteredAirports = new ArrayList<>();
