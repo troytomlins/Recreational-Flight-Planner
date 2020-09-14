@@ -5,11 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng202.group10.controller.AirlineController;
 import seng202.group10.controller.RouteController;
 import seng202.group10.controller.ViewController;
+import seng202.group10.controller.filters.AirlineFilters;
+import seng202.group10.controller.filters.AirportFilters;
 import seng202.group10.model.Airline;
+import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.model.Route;
 
@@ -26,6 +30,9 @@ public class AirlinesTabController {
     @FXML private TableColumn icaoCol;
     @FXML private TableColumn callsignCol;
     @FXML private TableColumn countryCol;
+    @FXML private TextField nameFilterField;
+    @FXML private TextField aliasFilterField;
+    @FXML private TextField countryFilterField;
 
     /**
      * Injects main view controller into this controller
@@ -82,5 +89,13 @@ public class AirlinesTabController {
 
         ArrayList<Airline> data = airlineController.getAirlines();
         airlineTable.setItems(FXCollections.observableList(data));
+    }
+
+    public void applyAirlineFilters(){
+        AirlineFilters filter = new AirlineFilters();
+        AirlineController airlines = new AirlineController();
+        ArrayList<Airline> data = new ArrayList<Airline>();
+        data = filter.filterByAll(airlines.getAirlines(), nameFilterField.getText(), aliasFilterField.getText(), countryFilterField.getText());
+        updateTable();
     }
 }

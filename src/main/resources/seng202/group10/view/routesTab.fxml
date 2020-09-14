@@ -16,7 +16,7 @@
 
 <GridPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.RouteTabController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="400.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="50.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="40" />
 
     </columnConstraints>
@@ -56,9 +56,18 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="airlineCodeFilterField" scaleX="0.75" translateX="50.0" />
-                  <TextField fx:id="srcAirportCodeFilterField" scaleX="0.75" translateX="50.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="destAirportCodeFilterField" scaleX="0.75" translateX="50.0" GridPane.rowIndex="2" />
+                  <TextField fx:id="airlineCodeFilterField" scaleX="0.6" translateX="50.0">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="srcAirportCodeFilterField" scaleX="0.6" translateX="50.0" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="destAirportCodeFilterField" scaleX="0.6" translateX="50.0" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Code">
                      <GridPane.margin>
                         <Insets left="5.0" />
@@ -74,7 +83,10 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextField fx:id="numStopsFilterField" scaleX="0.75" translateX="50.0" GridPane.rowIndex="3" />
+                  <TextField fx:id="numStopsFilterField" scaleX="0.6" translateX="50.0" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Stops" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="5.0" />
