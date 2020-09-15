@@ -45,5 +45,6 @@ public class ControllerFacade {
 
     public RouteController getRouteController () { return this.routeController; }
 
+    public AircraftController getAircraftController () { return this.aircraftController; }
 
 }

@@ -1,10 +1,21 @@
 package seng202.group10.controller;
 
 import seng202.group10.model.Aircraft;
+import seng202.group10.model.AircraftModel;
+import seng202.group10.model.AirlineModel;
 
 import java.util.ArrayList;
 
 public class AircraftController {
+
+    /**
+     * Model
+     */
+    private AircraftModel model;
+
+    public AircraftController() {
+        this.model = new AircraftModel();
+    }
 
     /**
      * Creates and returns an object of Class Aircraft from the parameters
@@ -21,8 +32,8 @@ public class AircraftController {
     /**
      * returns ArrayList of all created Aircraft's
      */
-    public void getAircrafts() { // will return type ArrayList<Aircraft>
-
+    public ArrayList<Aircraft> getAircraft() { // will return type ArrayList<Aircraft>
+        return model.getAircraftList();
     }
 
     /**
