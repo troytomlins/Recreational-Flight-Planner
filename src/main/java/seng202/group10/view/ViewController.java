@@ -36,6 +36,7 @@ public class ViewController {
         airportTabController.injectMainController(this);
         airlineTabController.injectMainController(this);
         aircraftTabController.injectMainController(this);
+        flightTabController.injectController(this);
     }
 
     /**

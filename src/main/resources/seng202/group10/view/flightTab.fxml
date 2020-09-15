@@ -58,9 +58,9 @@
                 </GridPane>
             </center>
         </BorderPane>
-        <TableView fx:id="aircraftTable" GridPane.columnIndex="1">
+        <TableView fx:id="flightsTable" GridPane.columnIndex="1">
             <columns>
-                <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="aircraftCol" prefWidth="75.0" text="Aircraft" />
                 <TableColumn fx:id="iataCol" prefWidth="75.0" text="IATA" />
                 <TableColumn fx:id="icaoCol" prefWidth="75.0" text="ICAO" />
                 <TableColumn fx:id="rangeCol" prefWidth="75.0" text="Range" />
