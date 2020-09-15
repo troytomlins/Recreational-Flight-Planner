@@ -38,5 +38,6 @@
       <TextField fx:id="icaoField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="iataField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <TextField fx:id="rangeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Text fx:id="errorField" fill="#ff1414" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
    </children>
 </GridPane>
