@@ -64,27 +64,10 @@ public class AirportRW extends RWStream {
         return airports;
     }
 
-    public void writeAirports(ArrayList<Airport> airports) {
-        ArrayList<ArrayList<String>> airportStrings = new ArrayList<ArrayList<String>>();
-
-        for (Airport airport: airports) {
-            airportStrings.add(
-                    new ArrayList<String>(Arrays.asList(
-                            airport.getName(),
-                            airport.getCity(),
-                            airport.getCountry(),
-                            airport.getIata(),
-                            airport.getIcao(),
-                            Double.toString(airport.getLatitude()),
-                            Double.toString(airport.getLongitude()),
-                            Float.toString(airport.getAltitude()),
-                            Float.toString(airport.getTimezone()),
-                            airport.getDstType(),
-                            airport.getTzDatabase()
-            )));
-        }
-        writeAll(airportStrings);
-    }
+    /**
+     * reads airports from the database
+     * @return ArrayList of Airport objects
+     */
 
     public ArrayList<Airport> readDatabaseAirports() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM airports");
@@ -113,6 +96,10 @@ public class AirportRW extends RWStream {
         return output;
     }
 
+    /**
+     * writes airports to database
+     * @param airports
+     */
     public void writeDatabaseAirports(ArrayList<Airport> airports) {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < airports.size(); i++) {
