@@ -16,8 +16,12 @@ import seng202.group10.model.Route;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TODO DOCSTRING
+ */
 public class RouteTabController {
 
+    // FXML ID things
     @FXML public TableView routeTable;
     @FXML public TableColumn airlineCodeCol;
     @FXML public TableColumn srcAirportCodeCol;
@@ -74,14 +78,16 @@ public class RouteTabController {
         airlineCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineCode"));
         srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("sourceAirportCode"));
 
-
         destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("destinationAirportCode"));
         stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
     }
 
-    //TODO write error checking for filters making sure data is loaded.
+    // TODO write error checking for filters making sure data is loaded.
 
+    /**
+     * TODO DOCSTRING
+     */
     public void applyRouteFilters() {
         RouteFilters filter = new RouteFilters();
         RouteController routes = new RouteController();

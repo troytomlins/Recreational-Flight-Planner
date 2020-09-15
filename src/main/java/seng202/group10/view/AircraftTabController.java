@@ -17,8 +17,10 @@ import seng202.group10.model.Aircraft;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TODO DOCTRING
+ */
 public class AircraftTabController {
-
 
     @FXML public TableColumn nameCol;
     @FXML public TableColumn iataCol;
