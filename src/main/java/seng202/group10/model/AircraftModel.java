@@ -8,6 +8,7 @@ public class AircraftModel {
     public AircraftModel() {
         aircraft = new ArrayList<Aircraft>();
     }
+
     /**
      * adds new aircraft to ArrayList aircraft
      * @param craft Class Aircraft

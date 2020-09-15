@@ -79,6 +79,9 @@
                                  <Tab closable="false" text="Routes">
                                        <fx:include fx:id="routeTab" source="routesTab.fxml" />
                                  </Tab>
+                                  <Tab closable="false" text="Aircraft">
+                                      <fx:include fx:id="aircraftTab" source="aircraftTab.fxml" />
+                                  </Tab>
                               </tabs>
                            </TabPane>
                         </center>

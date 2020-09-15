@@ -1,6 +1,7 @@
 package seng202.group10.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -16,12 +17,13 @@ public class ViewController {
 
     @FXML public RouteTabController routeTabController;
     @FXML private AirportTabController airportTabController;
-    @FXML
-    private AirlinesTabController airlineTabController;
+    @FXML private AirlinesTabController airlineTabController;
+    @FXML private AircraftTabController aircraftTabController;
     @FXML private MenuButton dropdownView;
     @FXML private MenuItem importAirlinesMenuItem;
     @FXML private GridPane locationsPane;
 
+    public Stage stage;
     public ControllerFacade controllerFacade;
 
     public void setControllerFacade(ControllerFacade controllerFacade) {
@@ -32,6 +34,7 @@ public class ViewController {
         routeTabController.injectMainController(this);
         airportTabController.injectMainController(this);
         airlineTabController.injectMainController(this);
+        aircraftTabController.injectMainController(this);
     }
 
     /**
