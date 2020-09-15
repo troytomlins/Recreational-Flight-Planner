@@ -13,6 +13,12 @@ import seng202.group10.controller.ControllerFacade;
 
 import java.net.URL;
 
+/**
+ * JavaFX GUI app
+ * Must be run from another class
+ *
+ * Handles the creation of the stage, scene and bits inside (loading fxml)
+ */
 public class GUIApp extends Application {
 
     private JavaConnector javaConnector = new JavaConnector();  // Object for js to talk to java
