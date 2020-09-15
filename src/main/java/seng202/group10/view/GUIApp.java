@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 import seng202.group10.controller.ControllerFacade;
 import seng202.group10.controller.ViewController;
+import seng202.group10.model.DatabaseConnection;
 
 import java.io.File;
 import java.net.URL;
@@ -60,6 +61,11 @@ public class GUIApp extends Application {
         webEngine.load(url.toString());
     }
 
+    @Override
+    public void stop() {
+        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+        databaseConnection.disconnect();
+    }
     public static void main(String[] args) {
         launch(args);
     }

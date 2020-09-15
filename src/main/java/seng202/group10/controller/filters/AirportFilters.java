@@ -4,6 +4,9 @@ import seng202.group10.model.Airport;
 import seng202.group10.model.AirportRW;
 import seng202.group10.model.DatabaseConnection;
 
+import java.lang.reflect.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -11,63 +14,43 @@ import java.util.ArrayList;
  */
 
 public class AirportFilters {
-    /**
-     * Get a new Arraylist of all the airports which contains a specific string in name.
-     * @param contains (String): substring to filter for
-     * @return ArrayList<Airline>
-     */
 
+    private FilterSender filterSender;
 
-    public ArrayList<Airport> filterByName(ArrayList<Airport> airportData, String contains) {
-        ArrayList<Airport> filteredAirports = new ArrayList<>();
-        if (contains == "") {
-            filteredAirports = airportData;
-        } else {
-            for (Airport airport : airportData) {
-                if (airport.getName().contains(contains)) {
-                    filteredAirports.add(airport);
-                }
-            }
-        }
-        return filteredAirports;
+    public AirportFilters() {
+        filterSender = new FilterSender();
+        filterSender.setTableName("airports");
     }
 
-    public ArrayList<Airport> filterByCity(ArrayList<Airport> airportData, String contains) {
-        ArrayList<Airport> filteredAirports = new ArrayList<>();
-        if (contains == "") {
-            filteredAirports = airportData;
-        } else {
-            for (Airport airport : airportData) {
-                if (airport.getCity().contains(contains)) {
-                    filteredAirports.add(airport);
-                }
-            }
+    public void addFilter(String columnName, String pattern) {
+        if (pattern != "") {
+            filterSender.addFilter(columnName, pattern);
         }
-        return filteredAirports;
     }
 
-    public ArrayList<Airport> filterByCountry(ArrayList<Airport> airportData, String contains) {
-        ArrayList<Airport> filteredAirports = new ArrayList<>();
-        if (contains == "") {
-            filteredAirports = airportData;
-        }
-        for (Airport airport : airportData) {
-            if (airport.getCountry().contains(contains)) {
-                filteredAirports.add(airport);
+    public ArrayList<Airport> applyFilters() {
+        ArrayList<Airport> resultAirports = new ArrayList<Airport>();
+
+        ResultSet results = filterSender.applyFilter();
+        try {
+            while (results.next()) {
+                resultAirports.add(new Airport(
+                        results.getString("name"),
+                        results.getString("city"),
+                        results.getString("country"),
+                        results.getString("iata"),
+                        results.getString("icao"),
+                        results.getDouble("latitude"),
+                        results.getDouble("longitude"),
+                        results.getFloat("altitude"),
+                        results.getFloat("timezone"),
+                        results.getString("dstType"),
+                        results.getString("tzDatabase")));
             }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        return filteredAirports;
-    }
-
-    //TODO write error checking for filters making sure data is loaded.
-
-    public ArrayList<Airport> filterByAll(ArrayList<Airport> airportData, String name, String city, String country) {
-        ArrayList<Airport> airportsByName = new ArrayList<>();
-        ArrayList<Airport> airportsByNameCity = new ArrayList<>();
-        ArrayList<Airport> airportsByNameCityCountry = new ArrayList<>();
-        airportsByName = filterByName(airportData, name);
-        airportsByNameCity = filterByCity(airportsByName, city);
-        airportsByNameCityCountry = filterByCountry(airportsByNameCity, country);
-        return airportsByNameCityCountry;
+        return resultAirports;
     }
 }

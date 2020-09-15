@@ -102,7 +102,10 @@ public class AirportTabController {
         AirportFilters filter = new AirportFilters();
         AirportController airports = new AirportController();
         ArrayList<Airport> data = new ArrayList<Airport>();
-        data = filter.filterByAll(airports.getAirports(), nameFilterField.getText(), cityFilterField.getText(), countryFilterField.getText());
+        filter.addFilter("name", nameFilterField.getText());
+        filter.addFilter("city", cityFilterField.getText());
+        filter.addFilter("country", countryFilterField.getText());
+        data = filter.applyFilters();
         updateTable(data);
     }
 }

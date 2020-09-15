@@ -13,12 +13,14 @@ import java.util.ArrayList;
 public class FilterSender {
 
     private String tableName;
-    private ArrayList<Filter> filters;
+    private ArrayList<Filter> filters = new ArrayList<Filter>();
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     public void addFilter(String columnName, String pattern) {
-        filters.add(new Filter(columnName, pattern));
+        if (columnName != "") {
+            filters.add(new Filter(columnName, pattern));
+        }
     }
 
     public void setTableName(String tableName) {
@@ -27,7 +29,11 @@ public class FilterSender {
 
     public ResultSet applyFilter() {
         StringBuilder statementBuilder = new StringBuilder();
-        statementBuilder.append(String.format("SELECT * FROM %s WHERE ", tableName));
+        statementBuilder.append(String.format("SELECT * FROM %s ", tableName));
+
+        if (filters.size() > 0) {
+            statementBuilder.append("WHERE ");
+        }
 
         for (int i = 0; i < filters.size(); i++) {
             statementBuilder.append(String.format("(%s LIKE ?)", filters.get(i).getColumnName()));
@@ -51,6 +57,7 @@ public class FilterSender {
             System.out.println(e.getMessage());
         }
 
+        filters = new ArrayList<Filter>();
         return results;
     }
 }
