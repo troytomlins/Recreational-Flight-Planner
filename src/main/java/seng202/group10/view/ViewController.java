@@ -1,4 +1,4 @@
-package seng202.group10.controller;
+package seng202.group10.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -19,7 +19,6 @@ public class ViewController {
     @FXML private AirportTabController airportTabController;
     @FXML private AirlinesTabController airlineTabController;
     @FXML private AircraftTabController aircraftTabController;
-    @FXML private AirlinesTabController airlineTabController;
     @FXML private MenuButton dropdownView;
     @FXML private MenuItem importAirlinesMenuItem;
     @FXML private GridPane locationsPane;
