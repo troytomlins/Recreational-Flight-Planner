@@ -2,6 +2,10 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * @Author Mitchell
+ */
+
 public class AirlineModel {
 
     private AirlineRW airlineRW;
@@ -9,6 +13,9 @@ public class AirlineModel {
     private ArrayList<Airline> airlines = new ArrayList<>();
     private ArrayList<Airline> unsavedAirlines = new ArrayList<>();
 
+    /**
+     * sets read and writer and adds airlines to the database
+     */
     public AirlineModel() {
         airlineRW = new AirlineRW();
         ArrayList<Airline> databaseAirlines = airlineRW.readDatabaseAirlines();
