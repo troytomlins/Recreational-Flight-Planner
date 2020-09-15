@@ -17,6 +17,7 @@ public class AircraftController {
         this.model = new AircraftModel();
     }
 
+
     /**
      * Creates and returns an object of Class Aircraft from the parameters
      * @param name aircraft name
