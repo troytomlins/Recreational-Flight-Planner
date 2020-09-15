@@ -25,8 +25,8 @@ public class AircraftController {
      * @param fuelRate fuel rate of aircraft
      * @return Aircraft
      */
-    public Aircraft addAircraft(String name, String iata, String icao, double fuelRate) {
-        return new Aircraft(name, iata, icao, fuelRate);
+    public void addAircraft(String name, String iata, String icao, double fuelRate) {
+        model.addAircraft(new Aircraft(name, iata, icao, fuelRate));
     }
 
     /**
@@ -41,7 +41,7 @@ public class AircraftController {
      * @param craft Aircraft
      */
     public void deleteAircraft(Aircraft craft) {
-
+        // TODO Implement
     }
 
 }

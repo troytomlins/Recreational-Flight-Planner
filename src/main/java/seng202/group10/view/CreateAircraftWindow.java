@@ -33,19 +33,19 @@ public class CreateAircraftWindow {
         String name = nameField.getText();
         String icao = icaoField.getText();
         String iata = iataField.getText();
-        double range = Double.parseDouble(rangeField.getText());
 
-        if (name == "" ||
-            icao == "" ||
-            iata == "" ||
-            rangeField.getText() == "" ) {
-            System.out.println("TEET");
+        if (name.equals("") ||
+            icao.equals("") ||
+            iata.equals("") ||
+            rangeField.getText().equals("") ) {
             // TODO Implement on incomplete variables
             return;
         } else {
+            double range = Double.parseDouble(rangeField.getText());
             AircraftController aircraftController = controller.mainController.controllerFacade.getAircraftController();
-            aircraftController.addAircraft(name, iata, icao, range);
+            aircraftController.addAircraft(iata, name, icao, range);
             stage.close();
+            controller.updateTable();
         }
 
     }

@@ -51,7 +51,6 @@ public class AircraftTabController {
         CreateAircraftWindow controller = loader.getController();
         controller.injectStage(stage, this);
         stage.show();
-        updateTable();
     }
 
 
