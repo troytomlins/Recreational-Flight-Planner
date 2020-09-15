@@ -13,8 +13,16 @@ import seng202.group10.view.RouteTabController;
 
 import java.io.File;
 
+/**
+ * View Controller
+ * Handles the file explorer, adding and removing markers (NOT IN RELEASE 1!)
+ *
+ * @Author Tom Rizzi
+ * @Author Johnny Howe
+ */
 public class ViewController {
 
+    // Things with FXML ids
     @FXML public RouteTabController routeTabController;
     @FXML private AirportTabController airportTabController;
     @FXML private AirlinesTabController airlineTabController;
@@ -30,6 +38,9 @@ public class ViewController {
         this.controllerFacade = controllerFacade;
     }
 
+    /**
+     * Initialize the routes, airports, airlines and aircraft controllers
+     */
     @FXML private void initialize() {
         routeTabController.injectMainController(this);
         airportTabController.injectMainController(this);
@@ -57,7 +68,7 @@ public class ViewController {
         return filepath;
     }
 
-    private int numMarkers = 0;
+    private int numMarkers = 0;     // How many markers do we currently have?
     /**
      * Add a new marker into the plan flight section
      * @param id - id of marker
