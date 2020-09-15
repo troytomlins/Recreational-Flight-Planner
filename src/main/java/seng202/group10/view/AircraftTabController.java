@@ -25,7 +25,7 @@ public class AircraftTabController {
     @FXML public TableColumn icaoCol;
     @FXML public TableColumn rangeCol;
     @FXML public TableView aircraftTable;
-    private ViewController mainController;
+    public ViewController mainController;
 
     /**
      * Injects main view controller into this controller
@@ -49,8 +49,9 @@ public class AircraftTabController {
         stage.initOwner(
                 (mainController.stage).getScene().getWindow() );
         CreateAircraftWindow controller = loader.getController();
-        controller.injectStage(stage);
+        controller.injectStage(stage, this);
         stage.show();
+        updateTable();
     }
 
 
