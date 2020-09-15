@@ -1,24 +1,26 @@
 package seng202.group10.model;
 
 /**
+ * TODO how to use?
  * @Author Zach
  */
 
-public class FlightLeg {
+public class FlightPoint {
     private String id;
     private String type;
     private double latitude;
     private double longitude;
     private double altitude;
-    private double legDistance;
 
-    public FlightLeg(String id, String type, double latitude, double longitude, double altitude, double legDistance) {
+    /**
+     * Build the flight point
+     */
+    public FlightPoint(String type, String id, double altitude, double lat, double lng) {
         this.id = id;
         this.type = type;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.latitude = lat;
+        this.longitude = lng;
         this.altitude = altitude;
-        this.legDistance = legDistance;
     }
 
     public String getId() {
@@ -40,14 +42,4 @@ public class FlightLeg {
     public double getAltitude() {
         return altitude;
     }
-
-    public double getLegDistance() {
-        return legDistance;
-    }
-
-    public void setLegDistance(double distance) {
-        legDistance = distance;
-    }
-
-
 }
