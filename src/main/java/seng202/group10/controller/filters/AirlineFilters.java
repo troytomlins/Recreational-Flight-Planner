@@ -51,7 +51,7 @@ public class AirlineFilters {
      * @param nameContains substring to filter for in the airline names
      * @param aliasContains substring to filter for in the airline aliases
      * @param countryContains substring to filter for in the airline countries
-     * @return ArrayList<Airline>
+     * @return the airline data filtered by nameContains, aliasContains and countryContains
      */
     public ArrayList<Airline> filterByAll(ArrayList<Airline> airlineData, String nameContains, String aliasContains, String countryContains) {
         ArrayList<Airline> filteredAirlines = new ArrayList<>();
