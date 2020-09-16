@@ -31,7 +31,6 @@ public class AirlineFilters {
      */
     public ArrayList<Airline> filterByAlias(ArrayList<Airline> airlineData, String contains) {
         return filterByAll(airlineData, "", contains, "");
-
     }
 
     /**
@@ -63,6 +62,8 @@ public class AirlineFilters {
                     filteredAirlines.add(airline);
                 }
             }
+        } else {
+            filteredAirlines = airlineData;
         }
         return filteredAirlines;
     }

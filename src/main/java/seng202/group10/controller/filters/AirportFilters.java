@@ -68,6 +68,8 @@ public class AirportFilters {
                     filteredAirports.add(airport);
                 }
             }
+        } else {
+            filteredAirports = airportData;
         }
         return filteredAirports;
     }

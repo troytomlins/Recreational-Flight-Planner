@@ -74,6 +74,8 @@ public class RouteFilters {
                     filteredRoutes.add(route);
                 }
             }
+        } else {
+            filteredRoutes = routeData;
         }
         return filteredRoutes;
     }
