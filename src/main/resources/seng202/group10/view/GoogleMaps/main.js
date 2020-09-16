@@ -1,7 +1,13 @@
+/**
+ * Handles the google maps
+ * When initMap is called, the maps api is added to the window
+ * The map takes the the full space given to the page
+ */
 var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var labelIndex = 0;
 
 var map;
+
 
 /**
  * Initialize the map
