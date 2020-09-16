@@ -11,10 +11,7 @@ import java.util.ArrayList;
  * @author Niko Tainui
  * @author Johnny Howe
  */
-
 public class RouteFilters {
-    // airlineCode, sourceAirportCode, destAirportCode
-
     /**
      * Get a new Arraylist of all the routes with contains string in airline code
      * @param routeData data to filter through
