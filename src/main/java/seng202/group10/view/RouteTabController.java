@@ -90,8 +90,11 @@ public class RouteTabController {
      */
     public void applyRouteFilters() {
         RouteFilters filter = new RouteFilters();
-        RouteController routes = new RouteController();
-        ArrayList<Route> data = filter.filterByAll(routes.getRoutes(), airlineCodeFilterField.getText(), srcAirportCodeFilterField.getText(), destAirportCodeFilterField.getText(), Integer.parseInt(numStopsFilterField.getText()));
+        filter.addFilter("airlineCode", airlineCodeFilterField.getText());
+        filter.addFilter("sourceAirportCode", srcAirportCodeFilterField.getText());
+        filter.addFilter("destinationAirportCode", destAirportCodeFilterField.getText());
+        filter.addFilter("stops", numStopsFilterField.getText());
+        ArrayList<Route> data = filter.applyFilters();
         updateTable(data);
     }
 }

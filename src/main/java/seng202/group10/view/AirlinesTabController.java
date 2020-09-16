@@ -12,6 +12,7 @@ import seng202.group10.model.Airline;
 import seng202.group10.model.IncompatibleFileException;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -63,15 +64,15 @@ public class AirlinesTabController {
             }
 
             // Update table
-            updateTable();
+            ArrayList<Airline> data = controller.getAirlines();
+            updateTable(data);
         }
     }
 
     /**
      * Sets data for airline table in GUI according to airlineController.getAirlines
      */
-    public void updateTable() {
-        AirlineController airlineController = mainController.controllerFacade.getAirlineController();
+    public void updateTable(ArrayList<Airline> data) {
         airlineTable.setEditable(true);
 
         nameCol.setCellValueFactory(
@@ -87,7 +88,6 @@ public class AirlinesTabController {
         iataCol.setCellValueFactory(
                 new PropertyValueFactory<Airline, String>("iata"));
 
-        ArrayList<Airline> data = airlineController.getAirlines();
         airlineTable.setItems(FXCollections.observableList(data));
     }
 
@@ -98,7 +98,10 @@ public class AirlinesTabController {
         AirlineFilters filter = new AirlineFilters();
         AirlineController airlines = new AirlineController();
         ArrayList<Airline> data = new ArrayList<Airline>();
-        data = filter.filterByAll(airlines.getAirlines(), nameFilterField.getText(), aliasFilterField.getText(), countryFilterField.getText());
-        updateTable();
+        filter.addFilter("name", nameFilterField.getText());
+        filter.addFilter("alias", aliasFilterField.getText());
+        filter.addFilter("country", countryFilterField.getText());
+        data = filter.applyFilters();
+        updateTable(data);
     }
 }

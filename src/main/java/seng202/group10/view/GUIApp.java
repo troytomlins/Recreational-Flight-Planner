@@ -10,7 +10,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 import seng202.group10.controller.ControllerFacade;
-import seng202.group10.controller.ViewController;
+import seng202.group10.view.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
 import java.net.URL;
@@ -78,8 +78,6 @@ public class GUIApp extends Application {
         DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         databaseConnection.disconnect();
     }
-    public static void main(String[] args) {
-        launch(args);
     /**
      * Sets the fxml controller facade to a new controllerFacade
      * sets viewController and its stage to primary stage

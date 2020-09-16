@@ -20,7 +20,7 @@ public final class DatabaseConnection {
             "id integer PRIMARY KEY AUTOINCREMENT," +
             "name varchar," +
             "alias varchar," +
-            "iata char(3) UNIQUE," +
+            "iata char(3)," +
             "icao char(4) UNIQUE," +
             "callsign varchar," +
             "country varchar" +
