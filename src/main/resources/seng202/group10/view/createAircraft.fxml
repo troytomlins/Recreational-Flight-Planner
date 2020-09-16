@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.view.CreateAircraftWindow">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="144.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="295.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="161.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="180.0" minHeight="0.0" prefHeight="99.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Aircraft" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="70.0" text="Cancel" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Button fx:id="createButton" mnemonicParsing="false" onAction="#createAircraft" prefHeight="25.0" prefWidth="78.0" text="Create" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ICAO" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IATA" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Range" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="icaoField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="iataField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="rangeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Text fx:id="errorField" fill="#ff1414" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+   </children>
+</GridPane>

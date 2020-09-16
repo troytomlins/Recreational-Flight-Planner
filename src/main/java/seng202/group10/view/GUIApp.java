@@ -13,31 +13,50 @@ import seng202.group10.controller.ControllerFacade;
 import seng202.group10.controller.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
-import java.io.File;
 import java.net.URL;
 
+/**
+ * JavaFX GUI app
+ * Must be run from another class
+ *
+ * Handles the creation of the stage, scene and bits inside (loading fxml)
+ * @author Tom Rizzi
+ * @author Johnny Howe
+ */
 public class GUIApp extends Application {
 
-    private JavaConnector javaConnector = new JavaConnector();
+    private JavaConnector javaConnector = new JavaConnector();  // Object for js to talk to java
     private ControllerFacade controllerFacade;
     public ViewController viewController;
 
+    /**
+     * Override Application.start
+     * Loads up the scene from the main.fxml file, sets the controller (according to setController),
+     *  adds google maps (according to addGoogleMaps).
+     * @param primaryStage - stage to set the scene on
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        // Load FXML
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         Parent root = fxmlLoader.load();
 
-        // Set controller
-        viewController = fxmlLoader.getController();
-        controllerFacade = new ControllerFacade();
-        viewController.setControllerFacade(controllerFacade);
-        viewController.loadAllData();
-
-        // Start Scene
+        setController(fxmlLoader, primaryStage);
         Scene scene = new Scene(root, 1000, 650);
+        addGoogleMaps(scene);
 
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Recreational Flight Planner");
+        primaryStage.show();
+
+    }
+
+    /**
+     * Load up google maps into the scene into the mapsWebView node
+     * Looks for the resource at GoolgeMaps/index.html to insert
+     * @param scene - scene to add maps
+     */
+    public void addGoogleMaps(Scene scene) {
         // Add Google Maps
         WebView webView = (WebView) scene.lookup("#mapWebView");
         URL url = this.getClass().getResource("GoogleMaps/index.html");
@@ -51,13 +70,6 @@ public class GUIApp extends Application {
                 window.setMember("javaConnector", javaConnector);
             }
         });
-
-        // Set the scene
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Recreational Flight Planner");
-        primaryStage.show();
-
-        // now load the page
         webEngine.load(url.toString());
     }
 
@@ -68,6 +80,17 @@ public class GUIApp extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+    /**
+     * Sets the fxml controller facade to a new controllerFacade
+     * sets viewController and its stage to primary stage
+     * @param fxmlLoader - main.fxml loader
+     * @param primaryStage - app stage
+     */
+    public void setController(FXMLLoader fxmlLoader, Stage primaryStage) {
+        viewController = fxmlLoader.getController();
+        controllerFacade = new ControllerFacade();
+        viewController.setControllerFacade(controllerFacade);
+        viewController.stage = primaryStage;
     }
 
     /**
@@ -75,8 +98,23 @@ public class GUIApp extends Application {
      * Used to give the java app the markers set in the google maps API
      */
     public class JavaConnector {
+
+        /**
+         * Add a new marker to the viewController
+         * @param id - string identifier of the marker
+         * @param lat - latitude
+         * @param lng - longitude
+         */
         public void newLatLng(String id, float lat, float lng) {
             viewController.newMarker(id, lat, lng);
         }
+    }
+
+    /**
+     * Run the app
+     * @param args - standard command line args, are ignored
+     */
+    public static void main(String[] args) {
+        launch(args);
     }
 }

@@ -4,8 +4,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="628.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.controller.ViewController">
+<AnchorPane prefHeight="628.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.view.ViewController">
    <children>
    <TabPane prefHeight="628.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
@@ -39,7 +37,7 @@
                                     </Text>
                                  </top>
                                  <center>
-                                    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" BorderPane.alignment="CENTER">
+                                    <ScrollPane hbarPolicy="NEVER" maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0">
                                              <children>
@@ -70,16 +68,7 @@
                               <tabs>
                                  <Tab closable="false" text="Airlines">
                                     <content>
-                                       <TableView fx:id="airlineTable">
-                                         <columns>
-                                           <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                                           <TableColumn fx:id="aliasCol" prefWidth="75.0" text="Alias" />
-                                             <TableColumn fx:id="callsignCol" prefWidth="75.0" text="Call Sign" />
-                                             <TableColumn fx:id="iataCol" prefWidth="75.0" text="IATA" />
-                                             <TableColumn fx:id="icaoCol" prefWidth="75.0" text="ICAO" />
-                                             <TableColumn fx:id="countryCol" prefWidth="75.0" text="Country" />
-                                         </columns>
-                                       </TableView>
+                                        <fx:include fx:id="airlineTab" source="airlinesTab.fxml" />
                                     </content>
                                  </Tab>
                                  <Tab closable="false" text="Airports">
@@ -90,6 +79,12 @@
                                  <Tab closable="false" text="Routes">
                                        <fx:include fx:id="routeTab" source="routesTab.fxml" />
                                  </Tab>
+                                  <Tab closable="false" text="Aircraft">
+                                      <fx:include fx:id="aircraftTab" source="aircraftTab.fxml" />
+                                  </Tab>
+                                  <Tab closable="false" text="Flight">
+                                      <fx:include fx:id="flightTab" source="flightTab.fxml" />
+                                  </Tab>
                               </tabs>
                            </TabPane>
                         </center>

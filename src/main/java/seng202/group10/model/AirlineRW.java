@@ -14,9 +14,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @Author Mitchell
+ * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {
+    /**
+     * creates instance of class with a default outfile
+     * @param inFile
+     */
     public AirlineRW(String inFile) {
         super(inFile, "airline.csv");
     }
@@ -25,6 +29,12 @@ public class AirlineRW extends RWStream {
         super("airline.csv");
     }
 
+    /**
+     * reads airlines from input file
+     * @return ArrayList of Airlines
+     * @throws IOException
+     * @throws IncompatibleFileException
+     */
     public ArrayList<Airline> readAirlines() throws IOException, IncompatibleFileException {
 
         ArrayList<Airline> airlineList = new ArrayList<>();
@@ -58,23 +68,10 @@ public class AirlineRW extends RWStream {
         return airlineList;
     }
 
-    public void writeAirlines(ArrayList<Airline> airlines) {
-        ArrayList<ArrayList<String>> airlineStrings = new ArrayList<ArrayList<String>>();
-
-        for (Airline airline: airlines) {
-            airlineStrings.add(
-                    new ArrayList<String>(Arrays.asList(
-                            airline.getName(),
-                            airline.getAlias(),
-                            airline.getIata(),
-                            airline.getIcao(),
-                            airline.getCallsign(),
-                            airline.getCountry()
-                    )));
-        }
-        writeAll(airlineStrings);
-    }
-
+    /**
+     * reads airlines from database
+     * @return ArrayList of Airlines
+     */
     public ArrayList<Airline> readDatabaseAirlines() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM airlines");
 
@@ -97,6 +94,10 @@ public class AirlineRW extends RWStream {
         return output;
     }
 
+    /**
+     * writes airlines to database
+     * @param airlines
+     */
     public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < airlines.size(); i++) {

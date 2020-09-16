@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Class that facilitates the searching of airports
- * @author Mitchell
+ * @author Mitchell Freeman
  */
 public class AirportFinder {
     private AirportRW airportRW;

@@ -2,7 +2,6 @@ package seng202.group10.controller.filters;
 
 import seng202.group10.model.Airline;
 import seng202.group10.model.AirlineRW;
-import seng202.group10.model.Airport;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

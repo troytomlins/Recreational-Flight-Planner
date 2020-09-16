@@ -1,5 +1,10 @@
 package seng202.group10.model;
 
+/**
+ * @author Troy Tomlins
+ * @author Zac Kaye
+ */
+
 public class Airline {
     private String name;
     private String alias;

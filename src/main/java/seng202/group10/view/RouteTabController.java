@@ -1,38 +1,38 @@
-package seng202.group10.controller;
+package seng202.group10.view;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-import seng202.group10.controller.filters.AirportFilters;
+import seng202.group10.controller.RouteController;
 import seng202.group10.controller.filters.RouteFilters;
 import seng202.group10.model.Airline;
-import seng202.group10.model.Airport;
 import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.model.Route;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Controller for the airlines tab
+ * @author Tom Rizzi
+ */
 public class RouteTabController {
 
+    // FXML ID things
     @FXML public TableView routeTable;
     @FXML public TableColumn airlineCodeCol;
     @FXML public TableColumn srcAirportCodeCol;
     @FXML public TableColumn destAirportCodeCol;
     @FXML public TableColumn stopsCol;
-    @FXML private ViewController mainController;
     @FXML private TextField airlineCodeFilterField;
     @FXML private TextField srcAirportCodeFilterField;
     @FXML private TextField destAirportCodeFilterField;
     @FXML private TextField numStopsFilterField;
+    private ViewController mainController;
 
     /**
      * Injects main view controller into this controller
@@ -79,19 +79,19 @@ public class RouteTabController {
         airlineCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineCode"));
         srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("sourceAirportCode"));
 
-
         destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("destinationAirportCode"));
         stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
     }
+    // TODO write error checking for filters making sure data is loaded.
 
-   //TODO write error checking for filters making sure data is loaded.
-
+    /**
+     * Apply the selected/typed filters to the data, update the shown table
+     */
     public void applyRouteFilters() {
         RouteFilters filter = new RouteFilters();
         RouteController routes = new RouteController();
-        ArrayList<Route> data = new ArrayList<Route>();
-        data = filter.filterByAll(routes.getRoutes(), airlineCodeFilterField.getText(), srcAirportCodeFilterField.getText(), destAirportCodeFilterField.getText(), Integer.parseInt(numStopsFilterField.getText()));
+        ArrayList<Route> data = filter.filterByAll(routes.getRoutes(), airlineCodeFilterField.getText(), srcAirportCodeFilterField.getText(), destAirportCodeFilterField.getText(), Integer.parseInt(numStopsFilterField.getText()));
         updateTable(data);
     }
 }

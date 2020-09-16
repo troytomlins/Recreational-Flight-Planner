@@ -1,7 +1,7 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.Aircraft;
 import seng202.group10.model.ModelFacade;
+import seng202.group10.view.AirportTabController;
 
 public class ControllerFacade {
     private DataController dataController;
@@ -14,6 +14,7 @@ public class ControllerFacade {
     private AirportController airportController;
     private AirportTabController airportTabController;
     private RouteController routeController;
+    private FlightController flightController;
 
     /**
      * Sets the Model Facade to input
@@ -33,6 +34,7 @@ public class ControllerFacade {
         this.mapController = new MapController();
         this.model = new ModelFacade();
         this.routeController = new RouteController();
+        this.flightController = new FlightController();
     }
 
     public AirlineController getAirlineController() {
@@ -45,5 +47,7 @@ public class ControllerFacade {
 
     public RouteController getRouteController () { return this.routeController; }
 
+    public AircraftController getAircraftController () { return this.aircraftController; }
 
+    public FlightController getFlightController() { return this.flightController; }
 }

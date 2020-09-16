@@ -1,14 +1,13 @@
-package seng202.group10.controller;
+package seng202.group10.view;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import seng202.group10.controller.filters.AirlineFilters;
+import seng202.group10.controller.AirportController;
 import seng202.group10.controller.filters.AirportFilters;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
@@ -17,42 +16,29 @@ import seng202.group10.model.IncompatibleFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Controller for the airport tab of the GUI
+ * @author Tom Rizzi
+ */
 public class AirportTabController {
 
-    @FXML
-    public TableView airportTable;
-    @FXML
-    private TableColumn cityCol;
-    @FXML
-    private TableColumn latCol;
-    @FXML
-    private TableColumn lngCol;
-    @FXML
-    private TableColumn altCol;
-    @FXML
-    private TableColumn tzCol;
-    @FXML
-    private TableColumn distCol;
-    @FXML
-    private TableColumn tzdbCol;
-    @FXML
-    private TableColumn nameCol;
-    @FXML
-    private TableColumn iataCol;
-    @FXML
-    private TableColumn icaoCol;
-    @FXML
-    private TableColumn countryCol;
-    @FXML
-    private ViewController mainController;
-    @FXML
-    private TextField nameFilterField;
-    @FXML
-    private TextField cityFilterField;
-    @FXML
-    private TextField countryFilterField;
-
-
+    // FXML things
+    @FXML public TableView airportTable;
+    @FXML private TableColumn cityCol;
+    @FXML private TableColumn latCol;
+    @FXML private TableColumn lngCol;
+    @FXML private TableColumn altCol;
+    @FXML private TableColumn tzCol;
+    @FXML private TableColumn distCol;
+    @FXML private TableColumn tzdbCol;
+    @FXML private TableColumn nameCol;
+    @FXML private TableColumn iataCol;
+    @FXML private TableColumn icaoCol;
+    @FXML private TableColumn countryCol;
+    @FXML private ViewController mainController;
+    @FXML private TextField nameFilterField;
+    @FXML private TextField cityFilterField;
+    @FXML private TextField countryFilterField;
 
     public void updateTable(ArrayList<Airport> data) {
         airportTable.setEditable(true);
@@ -70,10 +56,20 @@ public class AirportTabController {
         airportTable.setItems(FXCollections.observableList(data));
     }
 
+    /**
+     * Sets this.mainController
+     * @param controller to set
+     */
     public void injectMainController(ViewController controller) {
         this.mainController = controller;
     }
 
+    /**
+     * Opens file explorer for user to select a file
+     * once a file is selected, import it to the controller
+     * If file not compatible (not csv), a message is printed to the console.
+     * Once imported, update the table
+     */
     public void importAirports() {
         // Pick file
         String filepath = mainController.showFileExplorer();
@@ -98,6 +94,9 @@ public class AirportTabController {
         }
     }
 
+    /**
+     * Apply the selected/typed filters to the data, update the shown table
+     */
     public void applyAirportFilters() {
         AirportFilters filter = new AirportFilters();
         AirportController airports = new AirportController();

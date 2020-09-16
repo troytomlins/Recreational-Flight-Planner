@@ -1,5 +1,9 @@
 package seng202.group10.model;
 
+/**
+ * @author Tom Rizzi
+ * @author Niko Tainui
+ */
 public class Aircraft {
     // means travel agent code
     private String iata;

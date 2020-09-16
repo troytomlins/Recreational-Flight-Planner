@@ -6,6 +6,8 @@ public class FlightModel {
 
     private ArrayList<Flight> flights;
 
+    public FlightModel() { this.flights = new ArrayList<Flight>(); }
+
     public ArrayList<Flight> getFlights() {
         return flights;
     }

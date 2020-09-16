@@ -2,12 +2,17 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * @author Tom Rizzi
+ */
+
 public class AircraftModel {
     private ArrayList<Aircraft> aircraft;
 
     public AircraftModel() {
         aircraft = new ArrayList<Aircraft>();
     }
+
     /**
      * adds new aircraft to ArrayList aircraft
      * @param craft Class Aircraft
