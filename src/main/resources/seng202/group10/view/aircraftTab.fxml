@@ -36,7 +36,7 @@
                 <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" BorderPane.alignment="CENTER">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#importAircraft" text="From File" />
-                        <MenuItem mnemonicParsing="false" onAction="#createAircraft" text="Create New" />
+                        <MenuItem mnemonicParsing="false" onAction="#showCreateAircraftModel" text="Create New" />
                     </items>
                 </MenuButton>
             </bottom>

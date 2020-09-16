@@ -18,10 +18,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * TODO DOCTRING
+ * Controller for the airlines tab
+ * @author Tom Rizzi
  */
 public class AircraftTabController {
 
+    // FXML things
     @FXML public TableColumn nameCol;
     @FXML public TableColumn iataCol;
     @FXML public TableColumn icaoCol;
@@ -41,7 +43,12 @@ public class AircraftTabController {
         // TODO Implement
     }
 
-    public void showCreateAircraftModal(ActionEvent event) throws IOException {
+    /**
+     * Create a new "create aircraft" window/stage
+     * @param event
+     * @throws IOException
+     */
+    public void showCreateAircraftModel(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("createAircraft.fxml"));
         Parent root = loader.load();
@@ -54,8 +61,6 @@ public class AircraftTabController {
         controller.injectStage(stage, this);
         stage.show();
     }
-
-
 
     /**
      * Updates aircraft table with data currently in the aircraft model
@@ -71,9 +76,5 @@ public class AircraftTabController {
 
         ArrayList<Aircraft> data = controller.getAircraft();
         aircraftTable.setItems(FXCollections.observableList(data));
-    }
-
-    public void createAircraft(ActionEvent actionEvent) throws IOException {
-        showCreateAircraftModal(actionEvent);
     }
 }
