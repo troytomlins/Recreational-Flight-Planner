@@ -17,8 +17,8 @@ import java.io.File;
  * View Controller
  * Handles the file explorer, adding and removing markers (NOT IN RELEASE 1!)
  *
- * @Author Tom Rizzi
- * @Author Johnny Howe
+ * @author Tom Rizzi
+ * @author Johnny Howe
  */
 public class ViewController {
 

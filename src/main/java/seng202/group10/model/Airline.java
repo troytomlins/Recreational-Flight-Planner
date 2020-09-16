@@ -1,8 +1,8 @@
 package seng202.group10.model;
 
 /**
- * @Author Troy
- * @Author Zac
+ * @author Troy Tomlins
+ * @author Zac Kaye
  */
 
 public class Airline {

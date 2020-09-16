@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 /**
  * Class to filter the airport data.
- * @Author Jonathon Howe
- * @Author Niko Tainui
+ * @author Johnny Howe
+ * @author Niko Tainui
  */
 
 public class AirportFilters {

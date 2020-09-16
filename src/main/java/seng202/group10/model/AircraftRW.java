@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @Author Niko
+ * @author Niko Tainui
  */
 
 public class AircraftRW extends RWStream {

@@ -2,7 +2,7 @@ package seng202.group10.model;
 
 /**
  * TODO how to use?
- * @Author Zach
+ * @author Zach Kaye
  */
 
 public class FlightPoint {

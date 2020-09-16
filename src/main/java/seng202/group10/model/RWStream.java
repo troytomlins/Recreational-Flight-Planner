@@ -14,9 +14,9 @@ import java.util.Arrays;
  * Super class for file readers
  * Reads in files, writes to files
  * Connects to database
- * @author Mitchell
- * @author Niko
- * @author Johnny
+ * @author Mitchell Freeman
+ * @author Niko Tainui
+ * @author Johnny Howe
  */
 public class RWStream {
     private Scanner fileReader;

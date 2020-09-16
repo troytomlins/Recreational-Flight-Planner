@@ -3,7 +3,7 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * @Author Tom Rizzi
+ * @author Tom Rizzi
  */
 
 public class AircraftModel {

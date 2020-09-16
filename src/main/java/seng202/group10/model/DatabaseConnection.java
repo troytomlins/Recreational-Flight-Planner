@@ -8,7 +8,7 @@ import java.sql.*;
  *
  * To get a reference to this, call DatabaseConnection.getInstance()
  * @see DatabaseConnection#getInstance
- * @author Mitchell
+ * @author Mitchell Freeman
  */
 public final class DatabaseConnection {
 

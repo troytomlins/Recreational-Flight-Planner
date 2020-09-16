@@ -7,8 +7,8 @@ import java.util.ArrayList;
 //TODO write the filters depending on GUI
 /**
  * Class to filter the airline data.
- * @Author Niko Tainui
- * @Author Johnny Howe
+ * @author Niko Tainui
+ * @author Johnny Howe
  */
 
 // TODO what should it filter?

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 /**
  * TODO write tests
- * @Author Johnny
- * @Author Niko
- * @Author Zach
+ * @author Johnny Howe
+ * @author Niko Tainui
+ * @author Zach Kaye
  */
 
 public class Flight {

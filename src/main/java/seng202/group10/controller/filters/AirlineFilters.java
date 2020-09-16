@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 /**
  * Class to filter the airline data.
- * @Author Jonathon Howe
- * @Author Niko Tainui
+ * @author Johnny Howe
+ * @author Niko Tainui
  */
 public class AirlineFilters {
 

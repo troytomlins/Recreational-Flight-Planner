@@ -18,8 +18,8 @@ import java.net.URL;
  * Must be run from another class
  *
  * Handles the creation of the stage, scene and bits inside (loading fxml)
- * @Author Tom Rizzi
- * @Author Johnny Howe
+ * @author Tom Rizzi
+ * @author Johnny Howe
  */
 public class GUIApp extends Application {
 

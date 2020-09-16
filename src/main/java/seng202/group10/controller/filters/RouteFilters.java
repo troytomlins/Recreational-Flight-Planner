@@ -7,7 +7,7 @@ import seng202.group10.model.RouteRW;
 import java.util.ArrayList;
 
 /**
- * @Author Niko Tainui
+ * @author Niko Tainui
  */
 
 public class RouteFilters {

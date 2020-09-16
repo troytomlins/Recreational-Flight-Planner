@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @Author Mitchell
+ * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {
     /**

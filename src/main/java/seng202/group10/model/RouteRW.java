@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * @Author Mitchell
+ * @author Mitchell Freeman
  */
 public class RouteRW extends RWStream {
     public RouteRW(String inFile) {
