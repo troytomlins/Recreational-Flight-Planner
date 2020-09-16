@@ -23,38 +23,22 @@ import java.util.ArrayList;
 public class AirportTabController {
 
     // FXML things
-    @FXML
-    public TableView airportTable;
-    @FXML
-    private TableColumn cityCol;
-    @FXML
-    private TableColumn latCol;
-    @FXML
-    private TableColumn lngCol;
-    @FXML
-    private TableColumn altCol;
-    @FXML
-    private TableColumn tzCol;
-    @FXML
-    private TableColumn distCol;
-    @FXML
-    private TableColumn tzdbCol;
-    @FXML
-    private TableColumn nameCol;
-    @FXML
-    private TableColumn iataCol;
-    @FXML
-    private TableColumn icaoCol;
-    @FXML
-    private TableColumn countryCol;
-    @FXML
-    private ViewController mainController;
-    @FXML
-    private TextField nameFilterField;
-    @FXML
-    private TextField cityFilterField;
-    @FXML
-    private TextField countryFilterField;
+    @FXML public TableView airportTable;
+    @FXML private TableColumn cityCol;
+    @FXML private TableColumn latCol;
+    @FXML private TableColumn lngCol;
+    @FXML private TableColumn altCol;
+    @FXML private TableColumn tzCol;
+    @FXML private TableColumn distCol;
+    @FXML private TableColumn tzdbCol;
+    @FXML private TableColumn nameCol;
+    @FXML private TableColumn iataCol;
+    @FXML private TableColumn icaoCol;
+    @FXML private TableColumn countryCol;
+    @FXML private ViewController mainController;
+    @FXML private TextField nameFilterField;
+    @FXML private TextField cityFilterField;
+    @FXML private TextField countryFilterField;
 
     public void updateTable(ArrayList<Airport> data) {
         airportTable.setEditable(true);
@@ -83,7 +67,8 @@ public class AirportTabController {
     /**
      * Opens file explorer for user to select a file
      * once a file is selected, import it to the controller
-     * If file not compatable (not csv), a message is printed to the console.
+     * If file not compatible (not csv), a message is printed to the console.
+     * Once imported, update the table
      */
     public void importAirports() {
         // Pick file

@@ -15,10 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * TODO DOCTRING
+ * Controller for the airlines tab
+ * @author Tom Rizzi
  */
 public class AirlinesTabController {
 
+    // FXML things
     private ViewController mainController;
     @FXML private TableView<Airline> airlineTable;
     @FXML private TableColumn nameCol;
@@ -40,7 +42,9 @@ public class AirlinesTabController {
     }
 
     /**
-     * Shows import airlines menu screen
+     * Opens file explorer for user to select a file
+     * once a file is selected, import it to the controller
+     * Once imported, update the table
      */
     public void importAirlines() {
 
@@ -60,12 +64,11 @@ public class AirlinesTabController {
 
             // Update table
             updateTable();
-
         }
     }
 
     /**
-     * Sets data for airline table in GUI
+     * Sets data for airline table in GUI according to airlineController.getAirlines
      */
     public void updateTable() {
         AirlineController airlineController = mainController.controllerFacade.getAirlineController();
@@ -88,6 +91,9 @@ public class AirlinesTabController {
         airlineTable.setItems(FXCollections.observableList(data));
     }
 
+    /**
+     * Apply the selected/typed filters to the data, update the shown table
+     */
     public void applyAirlineFilters(){
         AirlineFilters filter = new AirlineFilters();
         AirlineController airlines = new AirlineController();
