@@ -11,21 +11,14 @@ import java.util.ArrayList;
 
 /**
  * @Author Niko Tainui
+ * @Author Mitchell Freeman
  */
 
-public class AirportFilters {
+public class AirportFilters extends GenericFilters {
 
-    private FilterSender filterSender;
 
     public AirportFilters() {
-        filterSender = new FilterSender();
-        filterSender.setTableName("airports");
-    }
-
-    public void addFilter(String columnName, String pattern) {
-        if (pattern != "") {
-            filterSender.addFilter(columnName, pattern);
-        }
+        super("airports");
     }
 
     public ArrayList<Airport> applyFilters() {

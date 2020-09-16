@@ -2,75 +2,41 @@ package seng202.group10.controller.filters;
 
 import seng202.group10.model.Airline;
 import seng202.group10.model.AirlineRW;
+import seng202.group10.model.Airport;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  * @Author Jonathon Howe
  * @Author Niko Tainui
+ * @Author Mitchell Freeman
  */
-public class AirlineFilters {
-
-    /**
-     * Get a new Arraylist of all the airlines with contains string in name.
-     * @param contains (String): substring to filter for
-     * @return ArrayList<Airline>
-     */
-    public ArrayList<Airline> filterByName(ArrayList<Airline> airlineData, String contains) {
-        ArrayList<Airline> filteredAirlines = new ArrayList<>();
-        if (contains == "") {
-            filteredAirlines = airlineData;
-        } else {
-            for (Airline airline : airlineData) {
-                if (airline.getName().contains(contains)) {
-                    filteredAirlines.add(airline);
-                }
-            }
-        }
-        return filteredAirlines;
+public class AirlineFilters extends GenericFilters {
+    public AirlineFilters() {
+        super("airlines");
     }
 
-    public ArrayList<Airline> filterByAlias(ArrayList<Airline> airlineData, String contains) {
-        ArrayList<Airline> filteredAirlines = new ArrayList<>();
-        if (contains == "") {
-            filteredAirlines = airlineData;
-        } else {
-            for (Airline airline : airlineData) {
-                if (airline.getAlias().contains(contains)) {
-                    filteredAirlines.add(airline);
-                }
+    public ArrayList<Airline> applyFilters() {
+        ArrayList<Airline> resultAirlines = new ArrayList<Airline>();
+
+        ResultSet results = filterSender.applyFilter();
+        try {
+            while (results.next()) {
+                resultAirlines.add(new Airline(
+                        results.getString("name"),
+                        results.getString("alias"),
+                        results.getString("iata"),
+                        results.getString("icao"),
+                        results.getString("callsign"),
+                        results.getString("country")
+                ));
             }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        return filteredAirlines;
+        return resultAirlines;
     }
-
-    public ArrayList<Airline> filterByCallsign(ArrayList<Airline> airlineData, String contains) {
-        ArrayList<Airline> filteredAirlines = new ArrayList<>();
-        if (contains == "") {
-            filteredAirlines = airlineData;
-        } else {
-            for (Airline airline : airlineData) {
-                if (airline.getCallsign().contains(contains)) {
-                    filteredAirlines.add(airline);
-                }
-            }
-        }
-        return filteredAirlines;
-    }
-
-
-
-
-
-//    public static void main(String[] args) {
-//        AirlineRW rw = new AirlineRW();
-//        ArrayList<Airline> airlines = rw.readAirlines();
-//
-//        AirlineFilters airlineFilters = new AirlineFilters();
-//
-//        ArrayList<Airline> filtered = airlineFilters.filterByName(airlines, "Blue");
-//        for (Airline airline : filtered) {
-//            System.out.println(airline);
-//        }
-//    }
 }
