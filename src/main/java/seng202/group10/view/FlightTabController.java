@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng202.group10.controller.FlightController;
+import seng202.group10.model.Aircraft;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Flight;
 import seng202.group10.model.IncompatibleFileException;
@@ -18,6 +19,9 @@ public class FlightTabController {
 
 
     @FXML public TableColumn aircraftCol;
+    @FXML public TableColumn startLatCol;
+    @FXML public TableColumn destLatCol;
+    @FXML public TableColumn distCol;
     @FXML private TableView flightsTable;
 
 
@@ -53,7 +57,10 @@ public class FlightTabController {
         ArrayList<Flight> flights = mainController.controllerFacade.getFlightController().getFlights();
 
         flightsTable.setEditable(true);
-        aircraftCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("points"));
+        aircraftCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("aircraftName"));
+        startLatCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("startLatitudeString"));
+        destLatCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("destLatitudeString"));
+        distCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("totalDistance"));
 
         flightsTable.setItems(FXCollections.observableList(flights));
 

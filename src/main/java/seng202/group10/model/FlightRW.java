@@ -57,6 +57,7 @@ public class FlightRW extends RWStream {
                 throw new IncompatibleFileException();
             }
         }
+
         // Close reader
         csvReader.close();
         return flight;
