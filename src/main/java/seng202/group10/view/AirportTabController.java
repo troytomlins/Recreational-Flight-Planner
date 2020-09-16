@@ -17,10 +17,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * TODO DOCSTRING
+ * Controller for the airport tab of the GUI
+ * @author Tom Rizzi
  */
 public class AirportTabController {
 
+    // FXML things
     @FXML
     public TableView airportTable;
     @FXML
@@ -54,8 +56,6 @@ public class AirportTabController {
     @FXML
     private TextField countryFilterField;
 
-
-
     public void updateTable(ArrayList<Airport> data) {
         airportTable.setEditable(true);
         nameCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("name"));
@@ -72,10 +72,19 @@ public class AirportTabController {
         airportTable.setItems(FXCollections.observableList(data));
     }
 
+    /**
+     * Sets this.mainController
+     * @param controller to set
+     */
     public void injectMainController(ViewController controller) {
         this.mainController = controller;
     }
 
+    /**
+     * Opens file explorer for user to select a file
+     * once a file is selected, import it to the controller
+     * If file not compatable (not csv), a message is printed to the console.
+     */
     public void importAirports() {
         // Pick file
         String filepath = mainController.showFileExplorer();
@@ -100,6 +109,9 @@ public class AirportTabController {
         }
     }
 
+    /**
+     * Apply the selected/typed filters to the data, update the shown table
+     */
     public void applyAirportFilters() {
         AirportFilters filter = new AirportFilters();
         AirportController airports = new AirportController();
