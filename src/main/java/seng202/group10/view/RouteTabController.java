@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * TODO DOCSTRING
+ * Controller for the airlines tab
+ * @author Tom Rizzi
  */
 public class RouteTabController {
 
@@ -27,11 +28,11 @@ public class RouteTabController {
     @FXML public TableColumn srcAirportCodeCol;
     @FXML public TableColumn destAirportCodeCol;
     @FXML public TableColumn stopsCol;
-    private ViewController mainController;
     @FXML private TextField airlineCodeFilterField;
     @FXML private TextField srcAirportCodeFilterField;
     @FXML private TextField destAirportCodeFilterField;
     @FXML private TextField numStopsFilterField;
+    private ViewController mainController;
 
     /**
      * Injects main view controller into this controller
@@ -82,11 +83,10 @@ public class RouteTabController {
         stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
     }
-
     // TODO write error checking for filters making sure data is loaded.
 
     /**
-     * TODO DOCSTRING
+     * Apply the selected/typed filters to the data, update the shown table
      */
     public void applyRouteFilters() {
         RouteFilters filter = new RouteFilters();
