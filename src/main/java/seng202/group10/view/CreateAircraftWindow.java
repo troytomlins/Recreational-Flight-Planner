@@ -10,8 +10,12 @@ import javafx.stage.Stage;
 import seng202.group10.controller.AircraftController;
 import seng202.group10.model.Aircraft;
 
-public class CreateAircraftWindow {
 
+/**
+ * Controller for the create aircraft window
+ * @author Tom Rizzi
+ */
+public class CreateAircraftWindow {
 
     @FXML public Button cancelButton;
     @FXML public Button createButton;
@@ -25,9 +29,11 @@ public class CreateAircraftWindow {
     public Stage stage;
 
     /**
+     * Attempts to create aircraft from the information in the text fields
      * Validates entry fields, then add to model and update table
      */
     public void createAircraft() {
+        // TODO split function up?
 
         // Get Strings
         String name = nameField.getText();
