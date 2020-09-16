@@ -82,6 +82,9 @@
                                   <Tab closable="false" text="Aircraft">
                                       <fx:include fx:id="aircraftTab" source="aircraftTab.fxml" />
                                   </Tab>
+                                  <Tab closable="false" text="Flight">
+                                      <fx:include fx:id="flightTab" source="flightTab.fxml" />
+                                  </Tab>
                               </tabs>
                            </TabPane>
                         </center>

@@ -16,6 +16,7 @@ public class Flight {
     private ArrayList<FlightPoint> points;
 
     public Flight() {
+        totalDistance = 0;
         points = new ArrayList<>();
     }
 
@@ -29,8 +30,26 @@ public class Flight {
         calculateDistance();
     }
 
-    public double getDistance() {
+    public double getTotalDistance() {
         return totalDistance;
+    }
+
+    public String getAircraftName() {return this.aircraft != null ? this.aircraft.getName() : null; }
+
+    public String getStartLatitudeString() {
+        if (points.size() == 0) {
+            return "";
+        } else {
+            return "" + points.get(0).getLatitude();
+        }
+    }
+
+    public String getDestLatitudeString() {
+        if (points.size() <= 1) {
+            return "";
+        } else {
+            return "" + points.get(points.size() - 1).getLatitude();
+        }
     }
 
     /**
@@ -98,8 +117,10 @@ public class Flight {
         return "TODO";
     }
 
-    public void setAircraft() {
-        Aircraft aircraftSet = new Aircraft("", "", "", 0);
-        aircraft = aircraftSet;
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
     }
+
+
+
 }

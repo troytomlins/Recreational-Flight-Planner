@@ -27,6 +27,7 @@ public class ViewController {
     @FXML private AirportTabController airportTabController;
     @FXML private AirlinesTabController airlineTabController;
     @FXML private AircraftTabController aircraftTabController;
+    @FXML private FlightTabController flightTabController;
     @FXML private MenuButton dropdownView;
     @FXML private MenuItem importAirlinesMenuItem;
     @FXML private GridPane locationsPane;
@@ -46,6 +47,7 @@ public class ViewController {
         airportTabController.injectMainController(this);
         airlineTabController.injectMainController(this);
         aircraftTabController.injectMainController(this);
+        flightTabController.injectController(this);
     }
 
     /**
