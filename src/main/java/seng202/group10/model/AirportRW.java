@@ -32,6 +32,7 @@ public class AirportRW extends RWStream {
     }
 
     public ArrayList<Airport> readAirports(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
+        // Initialise file reader and airports list
         ArrayList<Airport> airports = new ArrayList<>();
         BufferedReader csvReader;
         try {
@@ -39,10 +40,8 @@ public class AirportRW extends RWStream {
         } catch (Exception e) {
             throw new IncompatibleFileException();
         }
-        // Initialise file reader and string row variable
+
         try {
-
-
             // Parse each line
             CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
             Integer lineNum = 1;
@@ -96,8 +95,7 @@ public class AirportRW extends RWStream {
             // Close reader
             try {
                 csvReader.close();
-            } catch (IOException e)
-            {}
+            } catch (IOException ignored) {}
         }
     }
 
