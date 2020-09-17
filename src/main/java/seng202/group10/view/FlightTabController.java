@@ -47,14 +47,13 @@ public class FlightTabController {
             // TODO Implement error
             return;
         }
-        updateTable();
+        updateTable(flightController.getFlights());
     }
 
     /**
      * Updates flight table with current model data
      */
-    public void updateTable() {
-        ArrayList<Flight> flights = mainController.controllerFacade.getFlightController().getFlights();
+    public void updateTable(ArrayList<Flight> flights) {
 
         flightsTable.setEditable(true);
         aircraftCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("aircraftName"));

@@ -65,8 +65,7 @@ public class AircraftTabController {
     /**
      * Updates aircraft table with data currently in the aircraft model
      */
-    public void updateTable() {
-        AircraftController controller = mainController.controllerFacade.getAircraftController();
+    public void updateTable(ArrayList<Aircraft> data) {
         aircraftTable.setEditable(true);
 
         nameCol.setCellValueFactory(new PropertyValueFactory<Aircraft, String>("name"));
@@ -74,7 +73,6 @@ public class AircraftTabController {
         icaoCol.setCellValueFactory(new PropertyValueFactory<Aircraft, String>("icao"));
         rangeCol.setCellValueFactory(new PropertyValueFactory<Aircraft, String>("range"));
 
-        ArrayList<Aircraft> data = controller.getAircraft();
         aircraftTable.setItems(FXCollections.observableList(data));
     }
 }

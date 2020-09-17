@@ -63,14 +63,14 @@ public class AirlinesTabController {
             }
 
             // Update table
-            updateTable();
+            updateTable(controller.getAirlines());
         }
     }
 
     /**
      * Sets data for airline table in GUI according to airlineController.getAirlines
      */
-    public void updateTable() {
+    public void updateTable(ArrayList<Airline> data) {
         AirlineController airlineController = mainController.controllerFacade.getAirlineController();
         airlineTable.setEditable(true);
 
@@ -87,7 +87,6 @@ public class AirlinesTabController {
         iataCol.setCellValueFactory(
                 new PropertyValueFactory<Airline, String>("iata"));
 
-        ArrayList<Airline> data = airlineController.getAirlines();
         airlineTable.setItems(FXCollections.observableList(data));
     }
 
@@ -99,6 +98,6 @@ public class AirlinesTabController {
         AirlineController airlines = new AirlineController();
         ArrayList<Airline> data = new ArrayList<Airline>();
         data = filter.filterByAll(airlines.getAirlines(), nameFilterField.getText(), aliasFilterField.getText(), countryFilterField.getText());
-        updateTable();
+        updateTable(data);
     }
 }

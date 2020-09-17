@@ -11,6 +11,7 @@ import seng202.group10.controller.AirportController;
 import seng202.group10.controller.filters.AirportFilters;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
+import seng202.group10.model.FileFormatException;
 import seng202.group10.model.IncompatibleFileException;
 
 import java.io.IOException;
@@ -61,6 +62,7 @@ public class AirportTabController {
      * @param controller to set
      */
     public void injectMainController(ViewController controller) {
+
         this.mainController = controller;
     }
 
@@ -81,16 +83,35 @@ public class AirportTabController {
             AirportController controller = mainController.controllerFacade.getAirportController();
             try {
                 controller.importAirports(filepath);
-            } catch (IncompatibleFileException | IOException e) {
-                e.printStackTrace();
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setHeaderText("File Not Compatible");
-                errorAlert.showAndWait();
+
+                // Update table
+                ArrayList<Airport> data = controller.getAirports();
+                updateTable(data);
+
+            } catch (IncompatibleFileException e) {
+                mainController.showIncompatibleFileError(e);
+
+            } catch (FileFormatException e) {
+                Boolean tryAgain = mainController.showFileFormatError(e);
+                if (tryAgain) {
+
+                    // Try import airports again, this time ignoring error lines
+
+                    try {
+                        controller.importAirports(filepath, e.getLines());
+                    } catch (IncompatibleFileException | FileFormatException err) {
+                        err.printStackTrace();
+                    }
+
+                    // Update table
+                    ArrayList<Airport> data = controller.getAirports();
+                    updateTable(data);
+
+
+                }
             }
 
-            // Update table
-            ArrayList<Airport> data = controller.getAirports();
-            updateTable(data);
+
         }
     }
 

@@ -7,11 +7,14 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.group10.controller.ControllerFacade;
+import seng202.group10.model.FileFormatException;
+import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.view.AirlinesTabController;
 import seng202.group10.view.AirportTabController;
 import seng202.group10.view.RouteTabController;
 
 import java.io.File;
+import java.util.Optional;
 
 /**
  * View Controller
@@ -48,6 +51,19 @@ public class ViewController {
         airlineTabController.injectMainController(this);
         aircraftTabController.injectMainController(this);
         flightTabController.injectController(this);
+        controllerFacade = new ControllerFacade();
+        updateAllTables();
+    }
+
+    /**
+     * Populates all tables with data
+     */
+    private void updateAllTables() {
+        airportTabController.updateTable(controllerFacade.getAirportController().getAirports());
+        routeTabController.updateTable(controllerFacade.getRouteController().getRoutes());
+        airlineTabController.updateTable(controllerFacade.getAirlineController().getAirlines());
+        aircraftTabController.updateTable(controllerFacade.getAircraftController().getAircraft());
+        flightTabController.updateTable(controllerFacade.getFlightController().getFlights());
     }
 
     /**
@@ -68,6 +84,34 @@ public class ViewController {
         }
 
         return filepath;
+    }
+
+    /**
+     * Shows the error window for an incompatible file
+     * @param e Exception to display
+     */
+    public void showIncompatibleFileError(IncompatibleFileException e) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setHeaderText("File Not Compatible");
+        errorAlert.showAndWait();
+    }
+
+    /**
+     * Shows an error window for a file format exception,
+     * then waits for users choice of either import lines that are not causing errors or cancel
+     * @param e Exception to display
+     * @return Boolean value, representing weather to import non-erroneous lines
+     */
+    public Boolean showFileFormatError(FileFormatException e) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("File Format Error");
+        String message = String.format("%d line%s with incorrect format in file '%s'!",
+                e.getLines().size(), e.getLines().size() > 1 ? "s" : "", e.getFileName());
+        alert.setHeaderText(message);
+        alert.setContentText("Do you want to ignore these lines and import the rest?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
     }
 
     private int numMarkers = 0;     // How many markers do we currently have?
@@ -102,4 +146,5 @@ public class ViewController {
         locationsPane.setGridLinesVisible(true);
         locationsPane.add(pane, 0, column);
     }
+
 }
