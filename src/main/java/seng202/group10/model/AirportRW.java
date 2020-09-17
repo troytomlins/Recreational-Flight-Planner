@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @author Mitchell Freeman
+ * @author Mitchell Freeman, Tom Rizzi
  */
 public class AirportRW extends RWStream {
 
@@ -27,41 +27,78 @@ public class AirportRW extends RWStream {
         super("airport.csv");
     }
 
-    public ArrayList<Airport> readAirports() throws IOException, IncompatibleFileException {
+    public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
+        return readAirports(new ArrayList<Integer>());
+    }
+
+    public ArrayList<Airport> readAirports(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         ArrayList<Airport> airports = new ArrayList<>();
-
-        // Initialise file reader and string row variable
-        BufferedReader csvReader = new BufferedReader(new FileReader(super.getInFilename()));
-
-        // Parse each line
-        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
-        for (CSVRecord csvRecord : parser) {
-            try {
-
-                // Get corresponding values from the csv record
-                String name = csvRecord.get(1);
-                String city = csvRecord.get(2);
-                String country = csvRecord.get(3);
-                String iata = csvRecord.get(4);
-                String icao = csvRecord.get(5);
-                double latitude = Double.parseDouble(csvRecord.get(6));
-                double longitude = Double.parseDouble(csvRecord.get(7));
-                float altitude = Float.parseFloat(csvRecord.get(8));
-                float timezone = Float.parseFloat(csvRecord.get(9));
-                String dstType = csvRecord.get(10);
-                String tzDatabase = csvRecord.get(11);
-
-                // Create airline and add to model
-                Airport airport = new Airport(name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase);
-                airports.add(airport);
-            } catch (Exception e) {
-                throw new IncompatibleFileException();
-            }
+        BufferedReader csvReader;
+        try {
+            csvReader = new BufferedReader(new FileReader(super.getInFilename()));
+        } catch (Exception e) {
+            throw new IncompatibleFileException();
         }
+        // Initialise file reader and string row variable
+        try {
 
-        // Close reader
-        csvReader.close();
-        return airports;
+
+            // Parse each line
+            CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+            Integer lineNum = 1;
+            ArrayList<Integer> errorLines = new ArrayList<>();
+
+            for (CSVRecord csvRecord : parser) {
+
+                // Check if the line is to be ignored
+                if (!ignoreLines.contains(lineNum)) {
+                    try {
+
+                        // Get corresponding values from the csv record
+                        String name = csvRecord.get(1);
+                        String city = csvRecord.get(2);
+                        String country = csvRecord.get(3);
+                        String iata = csvRecord.get(4);
+                        String icao = csvRecord.get(5);
+                        double latitude = Double.parseDouble(csvRecord.get(6));
+                        double longitude = Double.parseDouble(csvRecord.get(7));
+                        float altitude = Float.parseFloat(csvRecord.get(8));
+                        float timezone = Float.parseFloat(csvRecord.get(9));
+                        String dstType = csvRecord.get(10);
+                        String tzDatabase = csvRecord.get(11);
+
+                        // Create airline and add to model
+                        Airport airport = new Airport(name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase);
+                        airports.add(airport);
+                    } catch (Exception e) {
+
+                        // There was an error parsing the line, add to errorLines
+                        errorLines.add(lineNum);
+                    }
+                }
+                // Increment line counter
+                lineNum++;
+            }
+
+            // Deal with any errors
+            if (errorLines.size() == (lineNum-1)) {
+                // Every single line caused an error
+                throw new IncompatibleFileException();
+            } else if (errorLines.size() > 0) {
+                // Some of the lines had errors
+                throw new FileFormatException(errorLines, super.getInFilename());
+            }
+
+            return airports;
+        } catch (IOException e) {
+            throw new IncompatibleFileException();
+        } finally {
+            // Close reader
+            try {
+                csvReader.close();
+            } catch (IOException e)
+            {}
+        }
     }
 
     /**

@@ -26,7 +26,6 @@ import java.net.URL;
 public class GUIApp extends Application {
 
     private JavaConnector javaConnector = new JavaConnector();  // Object for js to talk to java
-    private ControllerFacade controllerFacade;
     public ViewController viewController;
 
     /**
@@ -86,8 +85,6 @@ public class GUIApp extends Application {
      */
     public void setController(FXMLLoader fxmlLoader, Stage primaryStage) {
         viewController = fxmlLoader.getController();
-        controllerFacade = new ControllerFacade();
-        viewController.setControllerFacade(controllerFacade);
         viewController.stage = primaryStage;
     }
 

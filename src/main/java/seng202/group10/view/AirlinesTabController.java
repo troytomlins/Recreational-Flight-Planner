@@ -64,8 +64,7 @@ public class AirlinesTabController {
             }
 
             // Update table
-            ArrayList<Airline> data = controller.getAirlines();
-            updateTable(data);
+            updateTable(controller.getAirlines());
         }
     }
 

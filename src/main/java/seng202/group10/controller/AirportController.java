@@ -41,12 +41,17 @@ public class AirportController {
      * Takes a filepath and imports all airports from the file into model.
      * @param filePath Filepath string for file to import.
      */
-    public void importAirports(String filePath) throws IncompatibleFileException, IOException{
+    public void importAirports(String filePath, ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         AirportRW stream = new AirportRW(filePath);
-        ArrayList<Airport> airportList = stream.readAirports();
+        ArrayList<Airport> airportList = stream.readAirports(ignoreLines);
         for (Airport airport : airportList) {
             model.addAirport(airport);
         }
         model.save();
+    }
+
+    public void importAirports(String filePath)
+            throws IncompatibleFileException, FileFormatException {
+        importAirports(filePath, new ArrayList<>());
     }
 }

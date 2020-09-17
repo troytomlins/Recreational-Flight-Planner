@@ -72,7 +72,7 @@ public class CreateAircraftWindow {
             AircraftController aircraftController = controller.mainController.controllerFacade.getAircraftController();
             aircraftController.addAircraft(iata, name, icao, range);
             stage.close();
-            controller.updateTable();
+            controller.updateTable(aircraftController.getAircraft());
         }
     }
 
