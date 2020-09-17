@@ -27,10 +27,6 @@ public class AirportRW extends RWStream {
         super("airport.csv");
     }
 
-    public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
-        return readAirports(new ArrayList<Integer>());
-    }
-
     public ArrayList<Airport> readAirports(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
         ArrayList<Airport> airports = new ArrayList<>();
@@ -97,6 +93,10 @@ public class AirportRW extends RWStream {
                 csvReader.close();
             } catch (IOException ignored) {}
         }
+    }
+
+    public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
+        return readAirports(new ArrayList<Integer>());
     }
 
     /**

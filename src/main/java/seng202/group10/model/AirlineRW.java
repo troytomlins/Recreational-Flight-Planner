@@ -29,43 +29,82 @@ public class AirlineRW extends RWStream {
         super("airline.csv");
     }
 
+    public ArrayList<Airline> readAirlines() throws IncompatibleFileException, FileFormatException {
+        return readAirlines(new ArrayList<Integer>());
+    }
+
     /**
-     * reads airlines from input file
-     * @return ArrayList of Airlines
-     * @throws IOException
+     * Read airlines from file
+     * @param ignoreLines List of lines index's to ignore (1 origin)
+     * @return Arraylist of airlines read from file
      * @throws IncompatibleFileException
+     * @throws FileFormatException
      */
-    public ArrayList<Airline> readAirlines() throws IOException, IncompatibleFileException {
-
-        ArrayList<Airline> airlineList = new ArrayList<>();
-
-        // Initialise file reader and string row variable
-        BufferedReader csvReader = new BufferedReader(new FileReader(super.getInFilename()));
-
-        // Parse each line
-        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
-        for (CSVRecord csvRecord : parser) {
-            try {
-
-                // Get corresponding values from the csv record
-                String name = csvRecord.get(1);
-                String alias = csvRecord.get(2);
-                String iata = csvRecord.get(3);
-                String icao = csvRecord.get(4);
-                String callsign = csvRecord.get(5);
-                String country = csvRecord.get(6);
-
-                // Create airline and add to model
-                Airline airline = new Airline(name, alias, iata, icao, callsign, country);
-                airlineList.add(airline);
-            } catch(Exception e) {
-                throw new IncompatibleFileException();
-            }
+    public ArrayList<Airline> readAirlines(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
+        // Initialise file reader and airports list
+        ArrayList<Airline> airlines = new ArrayList<>();
+        BufferedReader csvReader;
+        try {
+            csvReader = new BufferedReader(new FileReader(super.getInFilename()));
+        } catch (Exception e) {
+            throw new IncompatibleFileException();
         }
 
-        // Close reader
-        csvReader.close();
-        return airlineList;
+        try {
+            // Parse each line
+            CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+            Integer lineNum = 1;
+            ArrayList<Integer> errorLines = new ArrayList<>();
+
+            try {
+                for (CSVRecord csvRecord : parser) {
+
+                    // Check if the line is to be ignored
+                    if (!ignoreLines.contains(lineNum)) {
+                        try {
+                            // Get corresponding values from the csv record
+                            String name = csvRecord.get(1);
+                            String alias = csvRecord.get(2);
+                            String iata = csvRecord.get(3);
+                            String icao = csvRecord.get(4);
+                            String callsign = csvRecord.get(5);
+                            String country = csvRecord.get(6);
+
+                            // Create airline and add to model
+                            Airline airline = new Airline(name, alias, iata, icao, callsign, country);
+                            airlines.add(airline);
+
+                        } catch (Exception e) {
+
+                            // There was an error parsing the line, add to errorLines
+                            errorLines.add(lineNum);
+                        }
+                    }
+                    // Increment line counter
+                    lineNum++;
+                }
+            } catch (IllegalStateException err) {
+                throw new IncompatibleFileException();
+            }
+
+            // Deal with any errors
+            if (errorLines.size() == (lineNum-1)) {
+                // Every single line caused an error
+                throw new IncompatibleFileException();
+            } else if (errorLines.size() > 0) {
+                // Some of the lines had errors
+                throw new FileFormatException(errorLines, super.getInFilename());
+            }
+
+            return airlines;
+        } catch (IOException e) {
+            throw new IncompatibleFileException();
+        } finally {
+            // Close reader
+            try {
+                csvReader.close();
+            } catch (IOException ignored) {}
+        }
     }
 
     /**
