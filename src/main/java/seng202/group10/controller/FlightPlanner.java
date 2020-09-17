@@ -12,7 +12,6 @@ public class FlightPlanner {
     }
 
     public void setAircraft(Aircraft craft) {
-
     }
 
     public void setStart(Airport port) {
