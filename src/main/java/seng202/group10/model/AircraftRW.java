@@ -1,5 +1,8 @@
 package seng202.group10.model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -69,5 +72,50 @@ public class AircraftRW extends RWStream {
                     )));
         }
         writeAll(aircraftStrings);
+    }
+
+    public ArrayList<Aircraft> readDatabaseAircrafts() {
+        ResultSet results = databaseConnection.executeQuery("SELECT * FROM aircrafts");
+
+        ArrayList<Aircraft> output = new ArrayList<Aircraft>();
+
+        try {
+            while (results.next()) {
+                output.add(new Aircraft(
+                        results.getString("iata"),
+                        results.getString("name"),
+                        results.getString("icao"),
+                        results.getDouble("range")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return output;
+    }
+
+
+    public void writeDatabaseAircrafts(ArrayList<Aircraft> aircrafts) {
+        databaseConnection.setAutoCommit(false);
+        for (int i = 0; i < aircrafts.size(); i++) {
+            try {
+                PreparedStatement pStatement = databaseConnection.getFormattedPreparedStatement(
+                        "INSERT INTO aircrafts (iata, name, icao, range)",
+                        4
+                );
+                Aircraft aircraft = aircrafts.get(i);
+                pStatement.setString(1, aircraft.getIata());
+                pStatement.setString(2, aircraft.getName());
+                pStatement.setString(3, aircraft.getIcao());
+                pStatement.setDouble(4, aircraft.getRange());
+
+
+                pStatement.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        databaseConnection.commit();
+        databaseConnection.setAutoCommit(true);
     }
 }

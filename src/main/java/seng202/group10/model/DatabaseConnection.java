@@ -46,7 +46,7 @@ public final class DatabaseConnection {
             "name varchar," +
             "iata char(3)," +
             "icao char(4)," +
-            "fuelRate double" +
+            "range double" +
             ")";
 
     private final String routeTable = "CREATE TABLE IF NOT EXISTS routes (" +

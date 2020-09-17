@@ -8,9 +8,14 @@ import java.util.ArrayList;
 
 public class AircraftModel {
     private ArrayList<Aircraft> aircraft;
+    private AircraftRW aircraftRW = new AircraftRW();
 
     public AircraftModel() {
         aircraft = new ArrayList<Aircraft>();
+        ArrayList<Aircraft> databaseAircraft = aircraftRW.readDatabaseAircrafts();
+        for (Aircraft aircraftSingle: databaseAircraft) {
+            aircraft.add(aircraftSingle);
+        }
     }
 
     /**
@@ -19,8 +24,11 @@ public class AircraftModel {
      */
     public void addAircraft(Aircraft craft) {
         if (!aircraft.contains(craft)) {
-            aircraft.add(craft);
+            ArrayList<Aircraft> toAdd = new ArrayList<Aircraft>();
+            toAdd.add(craft);
+            aircraftRW.writeDatabaseAircrafts(toAdd);
         }
+        aircraft = aircraftRW.readDatabaseAircrafts();
     }
 
     /**
