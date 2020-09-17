@@ -2,7 +2,6 @@ package seng202.group10.view;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -10,10 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import seng202.group10.controller.RouteController;
 import seng202.group10.controller.filters.RouteFilters;
 import seng202.group10.model.Airline;
+import seng202.group10.model.FileFormatException;
 import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.model.Route;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -23,11 +22,11 @@ import java.util.ArrayList;
 public class RouteTabController {
 
     // FXML ID things
-    @FXML public TableView routeTable;
-    @FXML public TableColumn airlineCodeCol;
-    @FXML public TableColumn srcAirportCodeCol;
-    @FXML public TableColumn destAirportCodeCol;
-    @FXML public TableColumn stopsCol;
+    @FXML public TableView<Route> routeTable;
+    @FXML public TableColumn<Airline, String> airlineCodeCol;
+    @FXML public TableColumn<Airline, String> srcAirportCodeCol;
+    @FXML public TableColumn<Airline, String> destAirportCodeCol;
+    @FXML public TableColumn<Airline, Integer> stopsCol;
     @FXML private TextField airlineCodeFilterField;
     @FXML private TextField srcAirportCodeFilterField;
     @FXML private TextField destAirportCodeFilterField;
@@ -43,7 +42,9 @@ public class RouteTabController {
     }
 
     /**
-     * Import routes from file using file explorer window and update table
+     * Opens file explorer for user to select a file
+     * once a file is selected, import it to the controller
+     * Once imported, update the table
      */
     public void importRoutes() {
         // Pick file
@@ -56,16 +57,33 @@ public class RouteTabController {
             RouteController controller = mainController.controllerFacade.getRouteController();
             try {
                 controller.importRoutes(filepath);
-            } catch (IncompatibleFileException | IOException e) {
-                e.printStackTrace();
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setHeaderText("File Not Compatible");
-                errorAlert.showAndWait();
-            }
+                // Update table
+                updateTable(controller.getRoutes());
+                // Show success message
+                mainController.showInfoWindow("Successfully imported route data");
 
-            // Update table
-            ArrayList<Route> data = controller.getRoutes();
-            updateTable(data);
+            } catch (IncompatibleFileException e) {
+                mainController.showIncompatibleFileError(e);
+
+            } catch (FileFormatException e) {
+                Boolean tryAgain = mainController.showFileFormatError(e);
+                if (tryAgain) {
+
+                    // Try import data again, this time ignoring error lines
+                    try {
+                        controller.importRoutes(filepath, e.getLines());
+                    } catch (IncompatibleFileException | FileFormatException err) {
+                        mainController.showErrorWindow(err.getMessage());
+                    }
+
+                    // Update table
+                    ArrayList<Route> data = controller.getRoutes();
+                    updateTable(data);
+
+                    // Show success message
+                    mainController.showInfoWindow("Successfully imported route data");
+                }
+            }
         }
     }
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * @author Mitchell Freeman
+ * @author Mitchell Freeman, Tom Rizzi
  */
 public class RouteRW extends RWStream {
     public RouteRW(String inFile) {
@@ -27,33 +27,87 @@ public class RouteRW extends RWStream {
         super("route.csv");
     }
 
-    public ArrayList<Route> readRoutes() throws IOException, IncompatibleFileException {
+    /**
+     * Reads routes from routes data file
+     * @return List of routes read from the file
+     * @throws FileFormatException
+     * @throws IncompatibleFileException
+     */
+    public ArrayList<Route> readRoutes() throws FileFormatException, IncompatibleFileException {
+        return readRoutes(new ArrayList<Integer>());
+    }
+
+    /**
+     * Read routes from routes data file
+     * @param ignoreLines List of line indices to ignore (1 origin)
+     * @return List of routes read from the file
+     * @throws IncompatibleFileException
+     * @throws FileFormatException
+     */
+    public ArrayList<Route> readRoutes(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
+        // Initialise file reader and airports list
         ArrayList<Route> routes = new ArrayList<>();
-
-        // Initialise file reader and string row variable
-        BufferedReader csvReader = new BufferedReader(new FileReader(super.getInFilename()));
-
-        // Parse each line
-        CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
-        for (CSVRecord csvRecord : parser) {
-            try {
-                // Get corresponding values from the csv record
-                Route route = new Route(
-                        csvRecord.get(0),
-                        csvRecord.get(2),
-                        csvRecord.get(4),
-                        Integer.parseInt(csvRecord.get(7))
-                );
-                routes.add(route);
-            } catch (Exception e) {
-                throw new IncompatibleFileException();
-            }
+        BufferedReader csvReader;
+        try {
+            csvReader = new BufferedReader(new FileReader(super.getInFilename()));
+        } catch (Exception e) {
+            throw new IncompatibleFileException();
         }
 
-        // Close reader
-        csvReader.close();
-        return routes;
+        try {
+            // Parse each line
+            CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
+            Integer lineNum = 1;
+            ArrayList<Integer> errorLines = new ArrayList<>();
+
+            try {
+                for (CSVRecord csvRecord : parser) {
+
+                    // Check if the line is to be ignored
+                    if (!ignoreLines.contains(lineNum)) {
+                        try {
+                            // Get corresponding values from the csv record
+                            Route route = new Route(
+                                    csvRecord.get(0),
+                                    csvRecord.get(2),
+                                    csvRecord.get(4),
+                                    Integer.parseInt(csvRecord.get(7))
+                            );
+                            routes.add(route);
+
+                        } catch (Exception e) {
+
+                            // There was an error parsing the line, add to errorLines
+                            errorLines.add(lineNum);
+                        }
+                    }
+                    // Increment line counter
+                    lineNum++;
+                }
+            } catch (IllegalStateException err) {
+                throw new IncompatibleFileException();
+            }
+
+            // Deal with any errors
+            if (errorLines.size() == (lineNum-1)) {
+                // Every single line caused an error
+                throw new IncompatibleFileException();
+            } else if (errorLines.size() > 0) {
+                // Some of the lines had errors
+                throw new FileFormatException(errorLines, super.getInFilename());
+            }
+
+            return routes;
+        } catch (IOException e) {
+            throw new IncompatibleFileException();
+        } finally {
+            // Close reader
+            try {
+                csvReader.close();
+            } catch (IOException ignored) {}
+        }
     }
+
 
     public ArrayList<Route> readRoutes1() {
         ArrayList<ArrayList<String>> data = read();

@@ -35,7 +35,7 @@
             <bottom>
                 <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" BorderPane.alignment="CENTER">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#importAirlines" text="Routes" />
+                        <MenuItem mnemonicParsing="false" onAction="#importAirlines" text="Airlines File" />
                     </items>
                 </MenuButton>
             </bottom>
