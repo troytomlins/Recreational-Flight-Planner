@@ -50,7 +50,7 @@ public class FlightTest {
         FlightPoint point2 = new FlightPoint("VOR","CH",400,-43.5041,172.515);
         long expected = Math.round(2.509); // calculated distance between the two points
         long actual = Math.round(flight.getLegDistance(point, point2));
-        assertEquals(expected,actual); //
+        assertEquals(expected,actual);
     }
 
 }

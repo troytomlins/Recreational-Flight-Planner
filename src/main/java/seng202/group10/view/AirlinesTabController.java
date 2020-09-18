@@ -96,7 +96,6 @@ public class AirlinesTabController {
      */
     public void updateTable(ArrayList<Airline> data) {
         airlineTable.setEditable(true);
-
         nameCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("name"));
         aliasCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("alias"));
         icaoCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("icao"));

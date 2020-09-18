@@ -1,4 +1,6 @@
 package seng202.group10.model;
+import javafx.scene.control.Alert;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -51,7 +53,7 @@ public class RWStream {
             File file = new File(outFilename);
             file.createNewFile();
         } catch(IOException error) {
-            // TODO error tihngs
+            displayError("Unable to make file");
         }
     }
 
@@ -72,7 +74,7 @@ public class RWStream {
         try {
             fileReader = new Scanner(new File(inFilename));
         } catch (FileNotFoundException error) {
-            // TODO error tinghs
+            displayError("File not found");
         }
         ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
         while (fileReader.hasNextLine()) {
@@ -109,7 +111,7 @@ public class RWStream {
 
             fileWriter.close();
         } catch (IOException error) {
-            // TODO error htings
+            displayError("Unable to write to file");
         }
     }
 
@@ -132,5 +134,11 @@ public class RWStream {
         for (ArrayList<String> dataLine: data) {
             writeSingle(dataLine);
         }
+    }
+
+    public void displayError(String message) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setHeaderText(message);
+        errorAlert.showAndWait();
     }
 }

@@ -113,7 +113,6 @@ public class AirportTabController {
 
         }
     }
-
     /**
      * Apply the selected/typed filters to the data, update the shown table
      */

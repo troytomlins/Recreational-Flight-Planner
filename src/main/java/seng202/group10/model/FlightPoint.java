@@ -1,7 +1,7 @@
 package seng202.group10.model;
 
 /**
- * TODO how to use?
+ * Flight point is a point the flight passes through, each leg of the flight has two FlightPoints
  * @author Zach Kaye
  */
 
