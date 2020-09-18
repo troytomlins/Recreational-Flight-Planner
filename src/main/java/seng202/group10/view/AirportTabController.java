@@ -2,7 +2,6 @@ package seng202.group10.view;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -14,7 +13,6 @@ import seng202.group10.model.Airport;
 import seng202.group10.model.FileFormatException;
 import seng202.group10.model.IncompatibleFileException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -24,18 +22,18 @@ import java.util.ArrayList;
 public class AirportTabController {
 
     // FXML things
-    @FXML public TableView airportTable;
-    @FXML private TableColumn cityCol;
-    @FXML private TableColumn latCol;
-    @FXML private TableColumn lngCol;
-    @FXML private TableColumn altCol;
-    @FXML private TableColumn tzCol;
-    @FXML private TableColumn distCol;
-    @FXML private TableColumn tzdbCol;
-    @FXML private TableColumn nameCol;
-    @FXML private TableColumn iataCol;
-    @FXML private TableColumn icaoCol;
-    @FXML private TableColumn countryCol;
+    @FXML public TableView<Airport> airportTable;
+    @FXML private TableColumn<Airline, String> cityCol;
+    @FXML private TableColumn<Airline, String> latCol;
+    @FXML private TableColumn<Airline, String> lngCol;
+    @FXML private TableColumn<Airline, String> altCol;
+    @FXML private TableColumn<Airline, String> tzCol;
+    @FXML private TableColumn<Airline, String> distCol;
+    @FXML private TableColumn<Airline, String> tzdbCol;
+    @FXML private TableColumn<Airline, String> nameCol;
+    @FXML private TableColumn<Airline, String> iataCol;
+    @FXML private TableColumn<Airline, String> icaoCol;
+    @FXML private TableColumn<Airline, String> countryCol;
     @FXML private ViewController mainController;
     @FXML private TextField nameFilterField;
     @FXML private TextField cityFilterField;
@@ -100,14 +98,15 @@ public class AirportTabController {
                     try {
                         controller.importAirports(filepath, e.getLines());
                     } catch (IncompatibleFileException | FileFormatException err) {
-                        err.printStackTrace();
+                        mainController.showErrorWindow(err.getMessage());
                     }
 
                     // Update table
                     ArrayList<Airport> data = controller.getAirports();
                     updateTable(data);
 
-
+                    // Show success message
+                    mainController.showInfoWindow("Successfully imported airport data");
                 }
             }
 
@@ -121,7 +120,7 @@ public class AirportTabController {
     public void applyAirportFilters() {
         AirportFilters filter = new AirportFilters();
         AirportController airports = new AirportController();
-        ArrayList<Airport> data = new ArrayList<Airport>();
+        ArrayList<Airport> data = new ArrayList<>();
         filter.addFilter("name", nameFilterField.getText());
         filter.addFilter("city", cityFilterField.getText());
         filter.addFilter("country", countryFilterField.getText());

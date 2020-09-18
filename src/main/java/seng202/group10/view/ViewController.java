@@ -87,13 +87,31 @@ public class ViewController {
     }
 
     /**
+     * Shows an information window with provided message
+     * @param message Message to display on window
+     */
+    public void showInfoWindow(String message) {
+        Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+        errorAlert.setHeaderText(message);
+        errorAlert.showAndWait();
+    }
+
+    /**
+     * Shows an error window with provided message
+     * @param message Message to display on window
+     */
+    public void showErrorWindow(String message) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setHeaderText(message);
+        errorAlert.showAndWait();
+    }
+
+    /**
      * Shows the error window for an incompatible file
      * @param e Exception to display
      */
     public void showIncompatibleFileError(IncompatibleFileException e) {
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setHeaderText("File Not Compatible");
-        errorAlert.showAndWait();
+        showErrorWindow(e.getMessage());
     }
 
     /**

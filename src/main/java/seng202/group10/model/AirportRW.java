@@ -27,11 +27,15 @@ public class AirportRW extends RWStream {
         super("airport.csv");
     }
 
-    public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
-        return readAirports(new ArrayList<Integer>());
-    }
-
+    /**
+     * Parses an airports data file
+     * @param ignoreLines List of line indices to ignore (1 origin)
+     * @return Arraylist of airports read from the in file
+     * @throws IncompatibleFileException
+     * @throws FileFormatException
+     */
     public ArrayList<Airport> readAirports(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
+        // Initialise file reader and airports list
         ArrayList<Airport> airports = new ArrayList<>();
         BufferedReader csvReader;
         try {
@@ -39,10 +43,8 @@ public class AirportRW extends RWStream {
         } catch (Exception e) {
             throw new IncompatibleFileException();
         }
-        // Initialise file reader and string row variable
+
         try {
-
-
             // Parse each line
             CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
             Integer lineNum = 1;
@@ -96,16 +98,24 @@ public class AirportRW extends RWStream {
             // Close reader
             try {
                 csvReader.close();
-            } catch (IOException e)
-            {}
+            } catch (IOException ignored) {}
         }
+    }
+
+    /**
+     * Parses all lines from an airports data file
+     * @return Arraylist of airports read from the in file
+     * @throws IncompatibleFileException
+     * @throws FileFormatException
+     */
+    public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
+        return readAirports(new ArrayList<Integer>());
     }
 
     /**
      * reads airports from the database
      * @return ArrayList of Airport objects
      */
-
     public ArrayList<Airport> readDatabaseAirports() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM airports");
 

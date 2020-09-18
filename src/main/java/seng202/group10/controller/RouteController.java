@@ -38,9 +38,20 @@ public class RouteController {
      * Takes a filepath and imports all routes from the file into model.
      * @param filepath Filepath string for file to import.
      */
-    public void importRoutes(String filepath) throws IncompatibleFileException, IOException {
+    public void importRoutes(String filepath) throws IncompatibleFileException, FileFormatException {
+        importRoutes(filepath, new ArrayList<Integer>());
+    }
+
+    /**
+     * Takes a filepath and imports all routes from the file into model.
+     * @param filepath Filepath string for file to import.
+     * @param indices List of line indices to ignore from file (1 origin)
+     * @throws IncompatibleFileException
+     * @throws FileFormatException
+     */
+    public void importRoutes(String filepath, ArrayList<Integer> indices) throws IncompatibleFileException, FileFormatException {
         RouteRW stream = new RouteRW(filepath);
-        ArrayList<Route> routeList = stream.readRoutes();
+        ArrayList<Route> routeList = stream.readRoutes(indices);
         for (Route route : routeList) {
             model.addRoute(route);
         }
