@@ -86,6 +86,9 @@ public class AirportTabController {
                 ArrayList<Airport> data = controller.getAirports();
                 updateTable(data);
 
+                // Show success message
+                mainController.showInfoWindow("Successfully imported airline data");
+
             } catch (IncompatibleFileException e) {
                 mainController.showIncompatibleFileError(e);
 

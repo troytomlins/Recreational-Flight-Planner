@@ -92,7 +92,7 @@ public class AirportRW extends RWStream {
             }
 
             return airports;
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new IncompatibleFileException();
         } finally {
             // Close reader
