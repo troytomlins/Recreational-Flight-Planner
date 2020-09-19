@@ -8,7 +8,6 @@ public class ModelFacade {
     private AircraftModel aircraftModel;
     private AirlineModel airlineModel;
 
-    private UserModel userModel;
     //private MainGuiFacade GUI;
     //private MapConnection map;
 
@@ -31,9 +30,5 @@ public class ModelFacade {
 
     public AirlineModel getAirlineModel() {
         return airlineModel;
-    }
-
-    public UserModel getUserModel() {
-        return userModel;
     }
 }
