@@ -100,6 +100,5 @@ public class CreateAircraftWindow {
      */
     public void cancel(ActionEvent actionEvent) {
         stage.close();
-
     }
 }

@@ -58,7 +58,7 @@ public class AircraftTabController {
         stage.initOwner(
                 (mainController.stage).getScene().getWindow() );
         CreateAircraftWindow controller = loader.getController();
-        controller.injectStage(stage, this);
+            controller.injectStage(stage, this);
         stage.show();
     }
 
