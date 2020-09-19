@@ -40,7 +40,15 @@ public class Flight {
         if (points.size() == 0) {
             return "";
         } else {
-            return "" + points.get(0).getLatitude();
+            return String.format("%.8f", points.get(0).getLatitude());
+        }
+    }
+
+    public String getStartLongitudeString() {
+        if (points.size() == 0) {
+            return "";
+        } else {
+            return String.format("%.8f", points.get(0).getLongitude());
         }
     }
 
@@ -48,8 +56,28 @@ public class Flight {
         if (points.size() <= 1) {
             return "";
         } else {
-            return "" + points.get(points.size() - 1).getLatitude();
+            return String.format("%.8f", points.get(points.size() - 1).getLatitude());
         }
+    }
+
+    public String getDestLongitudeString() {
+        if (points.size() <= 1) {
+            return "";
+        } else {
+            return String.format("%.8f", points.get(points.size() - 1).getLongitude());
+        }
+    }
+
+    public String getStartCoordString() {
+        return getStartLatitudeString() + ", " + getStartLongitudeString();
+    }
+
+    public String getDestCoordString() {
+        return getDestLatitudeString() + ", " + getDestLongitudeString();
+    }
+
+    public String getLegCount() {
+        return "" + (points.size() - 1);
     }
 
     /**
