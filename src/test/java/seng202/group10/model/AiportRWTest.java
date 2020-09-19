@@ -1,8 +1,11 @@
 package seng202.group10.model;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -15,6 +18,20 @@ public class AiportRWTest {
     private final String goodFileString = "src/test/resources/seng202.group10/model/airportsGood.dat";
     private final String badFileString = "src/test/resources/seng202.group10/model/airportsBad.dat";
     private final String corruptFileString = "src/test/resources/seng202.group10/model/airportsCorrupt.dat";
+
+    static DatabaseConnection database;
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        database = DatabaseConnection.getInstance();
+    }
+
+    @AfterClass
+    public static void tearDown() throws Exception {
+        database.disconnect();
+        File file = new File("database.db");
+        file.delete();
+    }
 
     @Test
     public void readFileReturnsCorrectArrayGoodFile() throws FileFormatException, IncompatibleFileException {
@@ -48,4 +65,14 @@ public class AiportRWTest {
         assertThrows(IncompatibleFileException.class, stream::readAirports);
     }
 
+    @Disabled
+    public void readDatabaseTest() {
+        database.executeStatement("INSERT INTO airports (name, city, country, iata, icao, latitude, longitude, altitude, timezone, dstType, tzDatabase)" +
+                "VALUES ('Test', 'Test', 'Test', '000', '0000', 0.0, 0.0, 0, 0,'0','Test')");
+        AirportRW stream = new AirportRW();
+        ArrayList<Airport> expected = new ArrayList<Airport>();
+        expected.add(new Airport("Test", "Test", "Test", "000", "0000", 0.0, 0.0, 0, 0,"0","Test"));
+        assertEquals(expected, stream.readDatabaseAirports());
+        database.executeStatement("DELETE * FROM airports");
+    }
 }
