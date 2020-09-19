@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class AiportRWTest {
+public class AirportRWTest {
 
     private final String goodFileString = "src/test/resources/seng202.group10/model/airportsGood.dat";
     private final String badFileString = "src/test/resources/seng202.group10/model/airportsBad.dat";
