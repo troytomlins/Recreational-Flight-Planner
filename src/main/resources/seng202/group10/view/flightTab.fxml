@@ -61,9 +61,10 @@
         <TableView fx:id="flightsTable" GridPane.columnIndex="1">
             <columns>
                 <TableColumn fx:id="aircraftCol" prefWidth="75.0" text="Aircraft" />
-                <TableColumn fx:id="startLatCol" prefWidth="100.0" text="Start Latitude" />
-                <TableColumn fx:id="destLatCol" prefWidth="124.0" text="Destination Latitude" />
-                <TableColumn fx:id="distCol" prefWidth="86.0" text="Distance" />
+                <TableColumn fx:id="startCoordCol" prefWidth="169.0" text="Start Coordinates" />
+                <TableColumn fx:id="destCoordCol" prefWidth="153.0" text="Destination Coordinates" />
+                <TableColumn fx:id="distCol" prefWidth="77.0" text="Distance" />
+            <TableColumn fx:id="legCountCol" prefWidth="134.0" text="Leg Count" />
             </columns>
         </TableView>
     </children>
