@@ -33,7 +33,7 @@ public class AircraftTabController {
 
     /**
      * Injects main view controller into this controller
-     * @param controller View controller to inject
+     * @param controller - View controller to inject
      */
     public void injectMainController(ViewController controller) {
         this.mainController = controller;
@@ -45,8 +45,8 @@ public class AircraftTabController {
 
     /**
      * Create a new "create aircraft" window/stage
-     * @param event
-     * @throws IOException
+     * @param event - when user clicks on create aircraft
+     * @throws IOException - when loader does not load correctly this exception is thrown
      */
     public void showCreateAircraftModel(ActionEvent event) throws IOException {
         Stage stage = new Stage();

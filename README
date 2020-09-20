@@ -15,3 +15,5 @@ RUNNING APPLICATION
 1. Ensure Java 11 is installed on your machine.
 2. Open the supplied zip folder in a terminal window.
 3. Run the JAR file by entering "java -jar RecreationlFlightPlanner.jar"
+
+

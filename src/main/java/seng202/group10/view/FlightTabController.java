@@ -14,6 +14,7 @@ import seng202.group10.model.IncompatibleFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 public class FlightTabController {
 
 
@@ -29,14 +30,16 @@ public class FlightTabController {
 
     /**
      * Injects main controller into flight tab
+     * @param controller - controller that is used in the flight tab
      */
     public void injectController(ViewController controller) {
         this.mainController = controller;
     }
 
     /**
-     *
-     * @param actionEvent
+     * @param actionEvent - importing flights brings up file-manager
+     * @throws IOException - thrown when a flight is unable to be imported
+     * @throws IncompatibleFileException - thrown when a incompatible file is tried to be imported
      */
     public void importFlights(ActionEvent actionEvent) throws IOException, IncompatibleFileException {
         FlightController flightController = mainController.controllerFacade.getFlightController();
@@ -52,6 +55,7 @@ public class FlightTabController {
 
     /**
      * Updates flight table with current model data
+     * @param flights - flights to update table with
      */
     public void updateTable(ArrayList<Flight> flights) {
 

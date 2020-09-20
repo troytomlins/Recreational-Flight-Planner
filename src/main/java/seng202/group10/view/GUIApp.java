@@ -33,7 +33,7 @@ public class GUIApp extends Application {
      * Loads up the scene from the main.fxml file, sets the controller (according to setController),
      *  adds google maps (according to addGoogleMaps).
      * @param primaryStage - stage to set the scene on
-     * @throws Exception
+     * @throws Exception - Subclass of RuntimeException
      */
     @Override
     public void start(Stage primaryStage) throws Exception {

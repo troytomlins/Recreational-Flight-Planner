@@ -37,7 +37,7 @@ public class AirlinesTabController {
 
     /**
      * Injects main view controller into this controller
-     * @param controller View controller to inject
+     * @param controller - View controller to inject
      */
     public void injectMainController(ViewController controller) {
         this.mainController = controller;
@@ -93,6 +93,7 @@ public class AirlinesTabController {
 
     /**
      * Sets data for airline table in GUI according to airlineController.getAirlines
+     * @param data - data to update table with
      */
     public void updateTable(ArrayList<Airline> data) {
         airlineTable.setEditable(true);

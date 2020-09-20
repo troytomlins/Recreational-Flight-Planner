@@ -33,8 +33,6 @@ public class CreateAircraftWindow {
      * Validates entry fields, then add to model and update table
      */
     public void createAircraft() {
-        // TODO split function up?
-
         // Get Strings
         String name = nameField.getText();
         String icao = icaoField.getText();
@@ -78,7 +76,7 @@ public class CreateAircraftWindow {
 
     /**
      * Show error message on window
-     * @param message Message to show on the window
+     * @param message - Message to show on the window
      */
     public void showErrorMessage(String message) {
         errorField.setText(message);
@@ -87,7 +85,8 @@ public class CreateAircraftWindow {
 
     /**
      * Injects the stage into controller
-     * @param stage Stage of the window
+     * @param stage - Stage of the window
+     * @param controller - the controller for AircraftTabs
      */
     public void injectStage(Stage stage, AircraftTabController controller) {
         this.stage = stage;
@@ -96,7 +95,7 @@ public class CreateAircraftWindow {
 
     /**
      * Closes the create aircraft modal
-     * @param actionEvent
+     * @param actionEvent - cancel button is pressed
      */
     public void cancel(ActionEvent actionEvent) {
         stage.close();
