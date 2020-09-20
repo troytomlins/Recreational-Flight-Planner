@@ -108,7 +108,7 @@ public class AirlineRW extends RWStream {
     }
 
     /**
-     * reads airlines from database
+     * Reads airlines from database
      * @return ArrayList of Airlines
      */
     public ArrayList<Airline> readDatabaseAirlines() {
@@ -134,7 +134,7 @@ public class AirlineRW extends RWStream {
     }
 
     /**
-     * writes airlines to database
+     * Writes airlines to database
      * @param airlines
      */
     public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
