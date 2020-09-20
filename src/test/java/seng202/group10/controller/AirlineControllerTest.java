@@ -1,6 +1,6 @@
 package seng202.group10.controller;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AirlineControllerTest {
 

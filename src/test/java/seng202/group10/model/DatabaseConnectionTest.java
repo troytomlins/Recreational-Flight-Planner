@@ -1,25 +1,30 @@
 package seng202.group10.model;
 
-import org.junit.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class DatabaseConnectionTest {
 
     static DatabaseConnection database;
 
-    @BeforeClass
+    @BeforeEach
     public static void setUp() throws Exception {
         database = DatabaseConnection.getInstance();
     }
 
-    @AfterClass
+    @AfterEach
     public static void tearDown() throws Exception {
         database.disconnect();
         File file = new File("database.db");
