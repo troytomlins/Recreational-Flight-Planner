@@ -19,10 +19,8 @@ public class AirportModelTest {
     @BeforeEach
     public void init() {
         airportModel = new AirportModel();
-
         File file = new File("database.db");
         file.delete();
-
         airport = new Airport("Christchurch Intl","Christchurch","New Zealand","CHCa","NZCHa",-43.489358,172.532225,123,12,"Z","Pacific/Auckland");
         compareAirport = new ArrayList<>();
         compareAirport.add(airport);
