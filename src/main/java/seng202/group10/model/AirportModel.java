@@ -31,9 +31,35 @@ public class AirportModel {
      * @param airport an Airport object.
      */
     public void addAirport(Airport airport) {
-        if (!airports.contains(airport)) {
-            unsavedAirports.add(airport);
+        unsavedAirports.add(airport);
+        save();
+    }
+
+    /**
+     * Returns the index in arraylist of the airport with the same values as provided.
+     * @param airport Airport to look for in list
+     * @return Index in arraylist or -1 if non existant
+     */
+    public int getIndexOfAirport(Airport airport) {
+        for (int i = 0; i < airports.size(); i++) {
+            Airport cur = airports.get(i);
+            if (cur.sameValues(airport)) {
+                return i;
+            }
         }
+        return -1;
+    }
+
+    /**
+     * Deletes an airport from model
+     * @param airport Airport to delete
+     */
+    public void deleteAirport(Airport airport) {
+        airportRW.deleteDatabaseAirports(airport);
+        if (getIndexOfAirport(airport) > -1) {
+            airports.remove(getIndexOfAirport(airport));
+        }
+        save();
     }
 
     public void save() {

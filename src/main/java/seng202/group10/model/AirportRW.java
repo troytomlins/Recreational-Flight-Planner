@@ -176,4 +176,14 @@ public class AirportRW extends RWStream {
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
     }
+
+    /**
+     * Deletes an aircraft from the database
+     * @param airport Aircraft to be deleted
+     */
+    public void deleteDatabaseAirports(Airport airport) {
+        String sql = "DELETE FROM airports WHERE name = '%s' AND city = '%s' AND country = '%s' AND icao = '%s'";
+        sql = String.format(sql, airport.getName(), airport.getCity(), airport.getCity(), airport.getIata(), airport.getIcao());
+        databaseConnection.executeStatement(sql);
+    }
 }
