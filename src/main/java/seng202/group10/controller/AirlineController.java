@@ -15,9 +15,6 @@ public class AirlineController {
      */
     private AirlineModel model;
 
-    /**
-     * Constructor
-     */
     public AirlineController(AirlineModel model) {
         this.model = model;
     }
@@ -37,14 +34,19 @@ public class AirlineController {
     /**
      * Takes a filepath and imports all airlines from the file into model.
      * @param filePath Filepath string for file to import.
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws FileFormatException when file is incorrectly formatted
      */
     public void importAirlines(String filePath) throws IncompatibleFileException, FileFormatException {
         importAirlines(filePath, new ArrayList<>());
     }
+
     /**
      * Takes a filepath and imports all airlines from the file into model.
      * @param filePath Filepath string for file to import.
      * @param lines List of line indices to ignore when importing
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws FileFormatException when file is incorrectly formatted
      */
     public void importAirlines(String filePath, ArrayList<Integer> lines) throws IncompatibleFileException, FileFormatException {
         AirlineRW stream = new AirlineRW(filePath);

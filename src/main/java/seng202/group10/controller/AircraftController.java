@@ -6,6 +6,7 @@ import seng202.group10.model.AirlineModel;
 
 import java.util.ArrayList;
 
+
 public class AircraftController {
 
     /**
@@ -24,14 +25,13 @@ public class AircraftController {
      * @param iata iata code
      * @param icao icao code
      * @param fuelRate fuel rate of aircraft
-     * @return Aircraft
      */
     public void addAircraft(String name, String iata, String icao, double fuelRate) {
         model.addAircraft(new Aircraft(name, iata, icao, fuelRate));
     }
 
     /**
-     * returns ArrayList of all created Aircraft's
+     * @return ArrayList of all created Aircrafts
      */
     public ArrayList<Aircraft> getAircraft() { // will return type ArrayList<Aircraft>
         return model.getAircraftList();
