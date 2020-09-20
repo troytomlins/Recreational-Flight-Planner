@@ -41,5 +41,5 @@ public class RouteModel {
         routes = routeRW.readDatabaseRoutes();
     }
 
-    public void deleteRoute(Route route) { routes.remove(route); }
+//    public void deleteRoute(Route route) { routes.remove(route); }
 }
