@@ -23,7 +23,7 @@ public class AircraftModel {
      * @param craft Class Aircraft
      */
     public void addAircraft(Aircraft craft) {
-        if (!aircraft.contains(craft)) {
+        if (getIndexOf(craft) == -1) {
             ArrayList<Aircraft> toAdd = new ArrayList<Aircraft>();
             toAdd.add(craft);
             aircraftRW.writeDatabaseAircrafts(toAdd);
@@ -32,11 +32,35 @@ public class AircraftModel {
     }
 
     /**
+     * Gets the index of an aircraft with the same values in the list.
+     * @param craft Aircraft to look for in the list
+     * @return Index of the aircraft or -1 if not found.
+     */
+    public int getIndexOf(Aircraft craft) {
+
+        for (int i = 0; i < aircraft.size(); i++) {
+            Aircraft oldCraft = aircraft.get(i);
+            if (oldCraft.sameValues(craft)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * removes aircraft from ArrayList aircraft
      * @param craft Class Aircraft
      */
     public void deleteAircraft(Aircraft craft) {
-        aircraft.remove(craft);
+        for (Aircraft oldCraft : aircraft) {
+            if (oldCraft.sameValues(craft)) {
+                aircraft.remove(oldCraft);
+                aircraftRW.deleteDatabaseAircraft(craft);
+                return;
+            }
+        }
+
     }
 
     public ArrayList<Aircraft> getAircraftList() {

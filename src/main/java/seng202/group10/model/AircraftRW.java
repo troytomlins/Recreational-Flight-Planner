@@ -94,7 +94,6 @@ public class AircraftRW extends RWStream {
         return output;
     }
 
-
     public void writeDatabaseAircrafts(ArrayList<Aircraft> aircrafts) {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < aircrafts.size(); i++) {
@@ -117,5 +116,14 @@ public class AircraftRW extends RWStream {
         }
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
+    }
+
+    /**
+     * Deletes the aircraft from the database
+     * @param craft Aircraft to be deleted
+     */
+    public void deleteDatabaseAircraft(Aircraft craft) {
+        String sql = String.format("DELETE FROM aircrafts WHERE name = '%s' AND iata = '%s' AND icao = '%s' and range = %f", craft.getName(), craft.getIata(), craft.getIcao(), craft.getRange());
+        databaseConnection.executeStatement(sql);
     }
 }

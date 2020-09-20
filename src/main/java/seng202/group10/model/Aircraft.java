@@ -36,4 +36,11 @@ public class Aircraft {
     public double getRange() {
         return range;
     }
+
+    public Boolean sameValues(Aircraft other) {
+        return iata.equals(other.getIata()) &&
+                name.equals(other.getName()) &&
+                icao.equals(other.getIcao()) &&
+                range == (other.getRange());
+    }
 }
