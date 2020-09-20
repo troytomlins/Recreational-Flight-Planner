@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * @Author Jonathon Howe
- * @Author Niko Tainui
- * @Author Mitchell Freeman
+ * @author Johnny Howe
+ * @author Niko Tainui
+ * @author Mitchell Freeman
  */
 public class AirlineFilters extends GenericFilters {
     public AirlineFilters() {

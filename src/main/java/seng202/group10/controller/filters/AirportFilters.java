@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * @Author Niko Tainui
- * @Author Mitchell Freeman
+ * @author Niko Tainui
+ * @author Mitchell Freeman
  */
 
 public class AirportFilters extends GenericFilters {

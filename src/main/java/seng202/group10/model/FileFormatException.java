@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Exception for files with only some lines that aren't of the correct format
- * @Author Tom Rizzi
+ * @author Tom Rizzi
  */
 public class FileFormatException extends Exception{
 
