@@ -16,7 +16,7 @@ public class AircraftModelTest {
 
     @BeforeEach
     public void init() {
-        aircraftModel = new AircraftModel(false);
+        aircraftModel = new AircraftModel();
         aircraft = new Aircraft("test", "testCraft", "test", 1000);
         compareCraft = new ArrayList<>();
         compareCraft.add(aircraft);
@@ -24,29 +24,32 @@ public class AircraftModelTest {
 
     @Test
     public void addAircraftTest() {
+        Integer beforeSize = aircraftModel.getAircraftList().size();
         aircraftModel.addAircraft(aircraft);
-        System.out.println(aircraftModel.getAircraftList());
-        System.out.println(compareCraft);
-        assertEquals(compareCraft, aircraftModel.getAircraftList());
+        Integer afterSize = aircraftModel.getAircraftList().size();
+        assertEquals((beforeSize + 1), (int) afterSize);
     }
 
     @Test
     public void addDuplicateAircraftTest() {
+        System.out.println(aircraftModel.getIndexOf(aircraft));
+        while (aircraftModel.getIndexOf(aircraft) != -1) {
+            aircraftModel.deleteAircraft(aircraft);
+        }
+        int beforeSize = aircraftModel.getAircraftList().size();
         aircraftModel.addAircraft(aircraft);
         aircraftModel.addAircraft(aircraft); // Try and add the same aircraft again.
-        assertEquals(compareCraft, aircraftModel.getAircraftList()); // The duplicate should not be added.
+        int afterSize = aircraftModel.getAircraftList().size();
+        assertEquals((beforeSize + 1), (int) afterSize); // The duplicate should not be added.
     }
 
     @Test
     public void deleteAircraftTest() {
-        int count = 0;
-        ArrayList<Aircraft> testArray;
+        aircraftModel.deleteAircraft(aircraft);
+        int beforeCount = aircraftModel.getAircraftList().size();
         aircraftModel.addAircraft(aircraft);
         aircraftModel.deleteAircraft(aircraft);
-        testArray = aircraftModel.getAircraftList();
-        for (Aircraft craft : testArray) {
-            count += 1;
-        }
-        assertEquals(0, count);
+        int afterCount = aircraftModel.getAircraftList().size();
+        assertEquals(beforeCount, afterCount);
     }
 }
