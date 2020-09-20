@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * Read write stream for the airlines
  * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {
     /**
      * creates instance of class with a default outfile
-     * @param inFile
+     * @param inFile filename to import from
      */
     public AirlineRW(String inFile) {
         super(inFile, "airline.csv");

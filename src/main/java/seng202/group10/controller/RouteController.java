@@ -10,14 +10,8 @@ import java.util.Arrays;
 
 public class RouteController {
 
-    /**
-     * Model
-     */
     private RouteModel model;
 
-    /**
-     * Constructor
-     */
     public RouteController(RouteModel model) {
         this.model = model;
     }
@@ -37,6 +31,8 @@ public class RouteController {
     /**
      * Takes a filepath and imports all routes from the file into model.
      * @param filepath Filepath string for file to import.
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws FileFormatException when file is incorrectly formatted
      */
     public void importRoutes(String filepath) throws IncompatibleFileException, FileFormatException {
         importRoutes(filepath, new ArrayList<Integer>());
@@ -46,8 +42,8 @@ public class RouteController {
      * Takes a filepath and imports all routes from the file into model.
      * @param filepath Filepath string for file to import.
      * @param indices List of line indices to ignore from file (1 origin)
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws FileFormatException when file is incorrectly formatted
      */
     public void importRoutes(String filepath, ArrayList<Integer> indices) throws IncompatibleFileException, FileFormatException {
         RouteRW stream = new RouteRW(filepath);
@@ -61,6 +57,8 @@ public class RouteController {
     /**
      * Takes a filepath and imports all routes from the file into model.
      * @param filePath Filepath string for file to import.
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws IOException Signals that an I/O exception of some sort has occurred
      */
     public void importRoutes1(String filePath) throws IncompatibleFileException, IOException {
 

@@ -1,9 +1,6 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.Flight;
-import seng202.group10.model.FlightModel;
-import seng202.group10.model.FlightRW;
-import seng202.group10.model.IncompatibleFileException;
+import seng202.group10.model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +19,8 @@ public class FlightController {
     /**
      * Import flight
      * @param filepath Filepath for flight to import
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws IOException Signals that an I/O exception of some sort has occurred
      */
     public void importFlight(String filepath) throws IOException, IncompatibleFileException {
         FlightRW stream = new FlightRW(filepath);

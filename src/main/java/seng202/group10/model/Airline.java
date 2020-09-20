@@ -24,6 +24,8 @@ public class Airline {
 
     /**
      * Does this and other have the same values?
+     * @param other Airline to check equalness
+     * @return whether this and other have the same values
      */
     public boolean equals(Airline other) {
         return name.equals(other.name) &&

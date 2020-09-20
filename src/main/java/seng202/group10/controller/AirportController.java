@@ -13,14 +13,8 @@ import java.util.ArrayList;
 
 public class AirportController {
 
-    /**
-     * Model
-     */
     private AirportModel model;
 
-    /**
-     * Constructor
-     */
     public AirportController(AirportModel model) {
         this.model = model;
     }
@@ -40,6 +34,9 @@ public class AirportController {
     /**
      * Takes a filepath and imports all airports from the file into model.
      * @param filePath Filepath string for file to import.
+     * @param ignoreLines List of line indices to ignore (1 origin)
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws FileFormatException when file is incorrectly formatted
      */
     public void importAirports(String filePath, ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         AirportRW stream = new AirportRW(filePath);

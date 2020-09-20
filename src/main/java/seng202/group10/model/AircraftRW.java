@@ -14,7 +14,7 @@ public class AircraftRW extends RWStream {
 
     /**
      * creates Aircraft read writer with a defined infile and a default outfile
-     * @param inFile
+     * @param inFile filename to import from
      */
     public AircraftRW(String inFile) {
         super(inFile, "aircraft.csv");
@@ -56,7 +56,7 @@ public class AircraftRW extends RWStream {
 
     /**
      * takes aircraft objects as an arraylist and writes it to the outfile
-     * @param aircrafts
+     * @param aircrafts arraylist of aircrafts to write to the outfile
      */
 
     public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
