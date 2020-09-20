@@ -45,5 +45,5 @@ public class AirlineModel {
         airlines = airlineRW.readDatabaseAirlines();
     }
 
-    public void deleteAirline(Airline airline) { airlines.remove(airline); }
+//    public void deleteAirline(Airline airline) { airlines.remove(airline); }
 }

@@ -22,6 +22,18 @@ public class Airline {
         this.country = country;
     }
 
+    /**
+     * Does this and other have the same values?
+     */
+    public boolean equals(Airline other) {
+        return name.equals(other.name) &&
+                alias.equals(other.alias) &&
+                iata.equals(other.iata) &&
+                icao.equals(other.icao) &&
+                callsign.equals(other.callsign) &&
+                country.equals(other.country);
+    }
+
     public String getName() {
         return name;
     }
