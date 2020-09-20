@@ -94,6 +94,10 @@ public class AircraftRW extends RWStream {
         return output;
     }
 
+    /**
+     * Write aircrafts to the airport
+     * @param aircrafts to write to the database
+     */
     public void writeDatabaseAircrafts(ArrayList<Aircraft> aircrafts) {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < aircrafts.size(); i++) {

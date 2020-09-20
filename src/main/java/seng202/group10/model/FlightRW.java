@@ -31,8 +31,8 @@ public class FlightRW extends RWStream {
     /**
      * Read the file at inFile and create a Flight object
      * @return Flight object
-     * @throws IOException
-     * @throws IncompatibleFileException
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws IOException Signals that an I/O exception of some sort has occurred
      */
     public Flight readFlight() throws IOException, IncompatibleFileException {
         Flight flight = new Flight();
@@ -63,6 +63,11 @@ public class FlightRW extends RWStream {
         return flight;
     }
 
+    /**
+     * @param args default command line args
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws IOException Signals that an I/O exception of some sort has occurred
+     */
     public static void main(String[] args) throws IOException, IncompatibleFileException {
         FlightRW test = new FlightRW();
         test.readFlight();

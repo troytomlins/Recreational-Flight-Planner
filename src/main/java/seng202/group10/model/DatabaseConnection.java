@@ -180,8 +180,8 @@ public final class DatabaseConnection {
      * @param firstLine The first part of the insert statement, upto but not including VALUES
      * @param nParameters The number of parameters to be placed after VALUES
      * @return A PreparedStatement of which the SQL parameters can be inserted into
-     * @throws SQLException
-     * @see DatabaseConnection#getPreparedStatement
+     * @throws SQLException Error with SQL
+     * @see DatabaseConnection #getPreparedStatement
      */
     public PreparedStatement getFormattedPreparedStatement(String firstLine, int nParameters) throws SQLException{
         String statement = firstLine + " VALUES \n";
@@ -202,7 +202,7 @@ public final class DatabaseConnection {
      *
      * @param sqlStatement The statement that will be sent to the database
      * @return The PreparedStatement
-     * @throws SQLException
+     * @throws SQLException Error with SQL
      */
     public PreparedStatement getPreparedStatement(String sqlStatement) throws SQLException {
         return conn.prepareStatement(sqlStatement);

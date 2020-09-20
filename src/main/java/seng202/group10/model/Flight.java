@@ -127,23 +127,23 @@ public class Flight {
         return Math.sqrt(distance);
     }
 
-    /**
-     * @return can the aircraft go the distance?
-     */
-    public boolean checkFlightLength(double distance, Aircraft aircraft) {
-        // TODO should this be here?
-        return (aircraft.getRange() < distance);
-    }
-
-    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
-        // TODO does this need to exists - if so, here?
-        return false;
-    }
-
-    public String getDistanceMessage() {
-        // TODO decide if should be here or not
-        return "TODO";
-    }
+//    /**
+//     * @return can the aircraft go the distance?
+//     */
+//    public boolean checkFlightLength(double distance, Aircraft aircraft) {
+//        // TODO should this be here?
+//        return (aircraft.getRange() < distance);
+//    }
+//
+//    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
+//        // TODO does this need to exists - if so, here?
+//        return false;
+//    }
+//
+//    public String getDistanceMessage() {
+//        // TODO decide if should be here or not
+//        return "";
+//    }
 
     public void setAircraft(Aircraft aircraft) {
         this.aircraft = aircraft;

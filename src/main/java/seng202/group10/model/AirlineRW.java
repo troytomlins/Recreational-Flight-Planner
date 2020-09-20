@@ -38,8 +38,8 @@ public class AirlineRW extends RWStream {
      * Read airlines from file
      * @param ignoreLines List of lines index's to ignore (1 origin)
      * @return Arraylist of airlines read from file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException when a non csv file is given
+     * @throws FileFormatException when file is incorrectly formatted
      */
     public ArrayList<Airline> readAirlines(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -136,7 +136,7 @@ public class AirlineRW extends RWStream {
 
     /**
      * Writes airlines to database
-     * @param airlines
+     * @param airlines to write to the database
      */
     public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
         databaseConnection.setAutoCommit(false);
