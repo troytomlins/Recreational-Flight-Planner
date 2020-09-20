@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * Read/Write Class for Airline.
  * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {

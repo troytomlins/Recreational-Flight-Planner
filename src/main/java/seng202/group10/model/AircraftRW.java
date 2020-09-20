@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * Read/Write Class for Aircraft.
  * @author Niko Tainui
  */
 
@@ -14,7 +15,7 @@ public class AircraftRW extends RWStream {
 
     /**
      * creates Aircraft read writer with a defined infile and a default outfile
-     * @param inFile
+     * @param inFile inFile name
      */
     public AircraftRW(String inFile) {
         super(inFile, "aircraft.csv");
@@ -34,7 +35,7 @@ public class AircraftRW extends RWStream {
     public ArrayList<Aircraft> readAircraft() {
         ArrayList<ArrayList<String>> data = read();
 
-        ArrayList<Aircraft> aircraftList = new ArrayList<Aircraft>();
+        ArrayList<Aircraft> aircraftList = new ArrayList<>();
 
         for (ArrayList<String> dataLine: data) {
             if (true/*ValidateData.validateAircraft(dataLine)*/) {
@@ -56,11 +57,11 @@ public class AircraftRW extends RWStream {
 
     /**
      * takes aircraft objects as an arraylist and writes it to the outfile
-     * @param aircrafts
+     * @param aircrafts ArrayList of Aircraft
      */
 
     public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
-        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
 
         for (Aircraft aircraft: aircrafts) {
             aircraftStrings.add(
@@ -77,7 +78,7 @@ public class AircraftRW extends RWStream {
     public ArrayList<Aircraft> readDatabaseAircrafts() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM aircrafts");
 
-        ArrayList<Aircraft> output = new ArrayList<Aircraft>();
+        ArrayList<Aircraft> output = new ArrayList<>();
 
         try {
             while (results.next()) {

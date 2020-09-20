@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * Read/Write Class for Airport.
  * @author Mitchell Freeman, Tom Rizzi
  */
 public class AirportRW extends RWStream {
@@ -109,7 +110,7 @@ public class AirportRW extends RWStream {
      * @throws FileFormatException
      */
     public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
-        return readAirports(new ArrayList<Integer>());
+        return readAirports(new ArrayList<>());
     }
 
     /**
@@ -119,7 +120,7 @@ public class AirportRW extends RWStream {
     public ArrayList<Airport> readDatabaseAirports() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM airports");
 
-        ArrayList<Airport> output = new ArrayList<Airport>();
+        ArrayList<Airport> output = new ArrayList<>();
 
         try {
             if (results != null) {
@@ -147,7 +148,7 @@ public class AirportRW extends RWStream {
 
     /**
      * writes airports to database
-     * @param airports
+     * @param airports ArrayList of Airports
      */
     public void writeDatabaseAirports(ArrayList<Airport> airports) {
         databaseConnection.setAutoCommit(false);
