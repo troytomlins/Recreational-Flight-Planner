@@ -10,16 +10,6 @@ public class AircraftModel {
     private ArrayList<Aircraft> aircraft;
     private AircraftRW aircraftRW = new AircraftRW();
 
-    public AircraftModel(Boolean db) {
-        aircraft = new ArrayList<Aircraft>();
-        if (db) {
-            ArrayList<Aircraft> databaseAircraft = aircraftRW.readDatabaseAircrafts();
-            for (Aircraft aircraftSingle : databaseAircraft) {
-                aircraft.add(aircraftSingle);
-            }
-        }
-    }
-
     public AircraftModel() {
         aircraft = new ArrayList<Aircraft>();
         ArrayList<Aircraft> databaseAircraft = aircraftRW.readDatabaseAircrafts();

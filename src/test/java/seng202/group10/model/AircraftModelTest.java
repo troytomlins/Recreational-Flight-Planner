@@ -16,7 +16,7 @@ public class AircraftModelTest {
 
     @BeforeEach
     public void init() {
-        aircraftModel = new AircraftModel();
+        aircraftModel = new AircraftModel(false);
         aircraft = new Aircraft("test", "testCraft", "test", 1000);
         compareCraft = new ArrayList<>();
         compareCraft.add(aircraft);
@@ -25,6 +25,8 @@ public class AircraftModelTest {
     @Test
     public void addAircraftTest() {
         aircraftModel.addAircraft(aircraft);
+        System.out.println(aircraftModel.getAircraftList());
+        System.out.println(compareCraft);
         assertEquals(compareCraft, aircraftModel.getAircraftList());
     }
 

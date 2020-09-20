@@ -1,7 +1,7 @@
 package seng202.group10.model;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.lang.reflect.Field;
