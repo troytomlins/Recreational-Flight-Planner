@@ -28,7 +28,21 @@ public class Route {
         this.stops = stops;
     }
 
-
+    /**
+     * Is the other route the same as this?
+     * Checks the values, not reference
+     * @return other == this
+     */
+    public boolean equals(Route other) {
+        return airlineCode.equals(other.airlineCode) &&
+                airlineId == other.airlineId &&
+                sourceAirportCode.equals(other.sourceAirportCode) &&
+                sourceAirport.equals(other.sourceAirport) &&
+                destinationAirport.equals(other.destinationAirport) &&
+                destinationAirportCode.equals(other.destinationAirportCode) &&
+                stops == other.stops &&
+                equipment.equals(other.equipment);
+    }
 
     public String getAirlineCode() {
         return airlineCode;
