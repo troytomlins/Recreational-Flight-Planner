@@ -122,20 +122,22 @@ public class AirportRW extends RWStream {
         ArrayList<Airport> output = new ArrayList<Airport>();
 
         try {
-            while (results.next()) {
-                output.add(new Airport(
-                        results.getString("name"),
-                        results.getString("city"),
-                        results.getString("country"),
-                        results.getString("iata"),
-                        results.getString("icao"),
-                        results.getDouble("latitude"),
-                        results.getDouble("longitude"),
-                        results.getFloat("altitude"),
-                        results.getFloat("timezone"),
-                        results.getString("dstType"),
-                        results.getString("tzDatabase")
-                ));
+            if (results != null) {
+                while (results.next()) {
+                    output.add(new Airport(
+                            results.getString("name"),
+                            results.getString("city"),
+                            results.getString("country"),
+                            results.getString("iata"),
+                            results.getString("icao"),
+                            results.getDouble("latitude"),
+                            results.getDouble("longitude"),
+                            results.getFloat("altitude"),
+                            results.getFloat("timezone"),
+                            results.getString("dstType"),
+                            results.getString("tzDatabase")
+                    ));
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

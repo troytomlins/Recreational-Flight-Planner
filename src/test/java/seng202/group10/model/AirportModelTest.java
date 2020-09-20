@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AirportModelTest {
@@ -17,9 +18,11 @@ public class AirportModelTest {
 
     @BeforeEach
     public void init() {
+        airportModel = new AirportModel();
+
         File file = new File("database.db");
         file.delete();
-        airportModel = new AirportModel();
+
         airport = new Airport("Christchurch Intl","Christchurch","New Zealand","CHCa","NZCHa",-43.489358,172.532225,123,12,"Z","Pacific/Auckland");
         compareAirport = new ArrayList<>();
         compareAirport.add(airport);
@@ -27,6 +30,7 @@ public class AirportModelTest {
 
     @Test
     public void addAirportTest() {
+        airportModel.deleteAirport(airport);
         int beforeCount = airportModel.getAirports().size();
         airportModel.addAirport(airport);
         int afterCount = airportModel.getAirports().size();
