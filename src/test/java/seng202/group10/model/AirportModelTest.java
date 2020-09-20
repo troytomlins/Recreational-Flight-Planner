@@ -31,6 +31,7 @@ public class AirportModelTest {
         airportModel.deleteAirport(airport);
         int beforeCount = airportModel.getAirports().size();
         airportModel.addAirport(airport);
+        airportModel.save();
         int afterCount = airportModel.getAirports().size();
         assertEquals(beforeCount + 1, afterCount);
     }
