@@ -3,6 +3,7 @@ package seng202.group10.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +16,8 @@ public class RouteModelTest {
 
     @BeforeEach
     public void init() {
+        File file = new File("database.db");
+        file.delete();
         model = new RouteModel();
         compare = new ArrayList<>();
         ArrayList<String> equipment = new ArrayList<>();
