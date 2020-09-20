@@ -142,6 +142,7 @@ public final class DatabaseConnection {
         try {
             if (conn != null) {
                 conn.close();
+                INSTANCE = null;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -75,4 +75,23 @@ public class Airport {
         return getName();
     }
 
+    /**
+     * Returns true if all values of other airport match this airport
+     * @param airport Airport to compare
+     * @return bool if all values match
+     */
+    public Boolean sameValues(Airport airport) {
+        return (this.getName().equals(airport.getName()) &&
+                this.getCity().equals(airport.getCity()) &&
+                this.getCountry().equals(airport.getCountry()) &&
+                this.getIata().equals(airport.getIata()) &&
+                this.getIcao().equals(airport.getIcao()) &&
+                this.getDstType().equals(airport.getDstType()) &&
+                this.getTzDatabase().equals(airport.getTzDatabase()) &&
+                this.getLatitude() == airport.getLatitude() &&
+                this.getLongitude() == airport.getLongitude() &&
+                this.getAltitude() == airport.getAltitude() &&
+                this.getTimezone() == airport.getTimezone());
+    }
+
 }

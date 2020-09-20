@@ -122,20 +122,22 @@ public class AirportRW extends RWStream {
         ArrayList<Airport> output = new ArrayList<Airport>();
 
         try {
-            while (results.next()) {
-                output.add(new Airport(
-                        results.getString("name"),
-                        results.getString("city"),
-                        results.getString("country"),
-                        results.getString("iata"),
-                        results.getString("icao"),
-                        results.getDouble("latitude"),
-                        results.getDouble("longitude"),
-                        results.getFloat("altitude"),
-                        results.getFloat("timezone"),
-                        results.getString("dstType"),
-                        results.getString("tzDatabase")
-                ));
+            if (results != null) {
+                while (results.next()) {
+                    output.add(new Airport(
+                            results.getString("name"),
+                            results.getString("city"),
+                            results.getString("country"),
+                            results.getString("iata"),
+                            results.getString("icao"),
+                            results.getDouble("latitude"),
+                            results.getDouble("longitude"),
+                            results.getFloat("altitude"),
+                            results.getFloat("timezone"),
+                            results.getString("dstType"),
+                            results.getString("tzDatabase")
+                    ));
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -175,5 +177,15 @@ public class AirportRW extends RWStream {
         }
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
+    }
+
+    /**
+     * Deletes an aircraft from the database
+     * @param airport Aircraft to be deleted
+     */
+    public void deleteDatabaseAirports(Airport airport) {
+        String sql = "DELETE FROM airports WHERE name = '%s' AND city = '%s' AND country = '%s' AND icao = '%s'";
+        sql = String.format(sql, airport.getName(), airport.getCity(), airport.getCity(), airport.getIata(), airport.getIcao());
+        databaseConnection.executeStatement(sql);
     }
 }

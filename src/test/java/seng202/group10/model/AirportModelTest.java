@@ -3,9 +3,11 @@ package seng202.group10.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AirportModelTest {
@@ -17,22 +19,19 @@ public class AirportModelTest {
     @BeforeEach
     public void init() {
         airportModel = new AirportModel();
-        airport = new Airport("Christchurch Intl","Christchurch","New Zealand","CHC","NZCH",-43.489358,172.532225,123,12,"Z","Pacific/Auckland");
+        File file = new File("database.db");
+        file.delete();
+        airport = new Airport("Christchurch Intl","Christchurch","New Zealand","CHCa","NZCHa",-43.489358,172.532225,123,12,"Z","Pacific/Auckland");
         compareAirport = new ArrayList<>();
         compareAirport.add(airport);
     }
 
     @Test
     public void addAirportTest() {
+        airportModel.deleteAirport(airport);
+        int beforeCount = airportModel.getAirports().size();
         airportModel.addAirport(airport);
-        assertEquals(compareAirport, airportModel.getAirports());
+        int afterCount = airportModel.getAirports().size();
+        assertEquals(beforeCount + 1, afterCount);
     }
-
-    @Test
-    public void addDuplicateAirportTest() {
-        airportModel.addAirport(airport);
-        airportModel.addAirport(airport); // Try and add the same airport again.
-        assertEquals(compareAirport, airportModel.getAirports()); // The duplicate should not be added.
-    }
-
 }
