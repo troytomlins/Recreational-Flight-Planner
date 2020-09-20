@@ -32,7 +32,6 @@ public class AirportModel {
      */
     public void addAirport(Airport airport) {
         unsavedAirports.add(airport);
-        save();
     }
 
     /**
