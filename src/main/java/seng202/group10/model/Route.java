@@ -31,6 +31,7 @@ public class Route {
     /**
      * Is the other route the same as this?
      * Checks the values, not reference
+     * @param other - other route
      * @return other == this
      */
     public boolean equals(Route other) {

@@ -30,8 +30,8 @@ public class RouteRW extends RWStream {
     /**
      * Reads routes from routes data file
      * @return List of routes read from the file
-     * @throws FileFormatException
-     * @throws IncompatibleFileException
+     * @throws FileFormatException - throws when file is not in the right format
+     * @throws IncompatibleFileException - throws when file is not compatible
      */
     public ArrayList<Route> readRoutes() throws FileFormatException, IncompatibleFileException {
         return readRoutes(new ArrayList<Integer>());
@@ -41,8 +41,8 @@ public class RouteRW extends RWStream {
      * Read routes from routes data file
      * @param ignoreLines List of line indices to ignore (1 origin)
      * @return List of routes read from the file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException - throws when file is not compatible
+     * @throws FileFormatException - throws when file is not in the right format
      */
     public ArrayList<Route> readRoutes(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list

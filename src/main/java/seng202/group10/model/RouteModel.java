@@ -18,7 +18,7 @@ public class RouteModel {
 
     /**
      * getRoutes returns an ArrayList of Route objects.
-     * @return routes a ArrayList<Routes> object.
+     * @return routes a ArrayList object.
      */
     public ArrayList<Route> getRoutes() {
         return routes;
