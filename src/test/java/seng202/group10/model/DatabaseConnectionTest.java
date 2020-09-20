@@ -3,7 +3,6 @@ package seng202.group10.model;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -17,24 +16,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DatabaseConnectionTest {
 
-    static DatabaseConnection database;
+    DatabaseConnection database;
 
     @BeforeEach
-    public static void setUp() throws Exception {
+    public void setUp() throws Exception {
         database = DatabaseConnection.getInstance();
+        File file = new File("database.db");
+        assertTrue(file.exists());
     }
 
     @AfterEach
-    public static void tearDown() throws Exception {
+    public void tearDown() throws Exception {
         database.disconnect();
         File file = new File("database.db");
         file.delete();
-    }
-
-    @Test
-    public void databaseFileCreationTest() {
-        File file = new File("database.db");
-        assertTrue(file.exists());
     }
 
     @Test
