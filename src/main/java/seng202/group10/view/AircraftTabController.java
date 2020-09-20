@@ -64,6 +64,7 @@ public class AircraftTabController {
 
     /**
      * Updates aircraft table with data currently in the aircraft model
+     * @param data - updates table with aircraft data
      */
     public void updateTable(ArrayList<Aircraft> data) {
         aircraftTable.setEditable(true);
