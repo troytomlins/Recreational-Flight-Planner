@@ -37,6 +37,11 @@ public class Aircraft {
         return range;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Name: %s, Range: %f", name, range);
+    }
+
     public Boolean sameValues(Aircraft other) {
         return iata.equals(other.getIata()) &&
                 name.equals(other.getName()) &&

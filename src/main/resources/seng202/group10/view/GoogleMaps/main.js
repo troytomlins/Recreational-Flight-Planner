@@ -19,9 +19,9 @@ function initMap() {
         center:new google.maps.LatLng(ucPos.lat, ucPos.lng),
         zoom:15,
     });
-//    google.maps.event.addListener(map, 'click', function(event) {
-//        addMarker(event.latLng);
-//    });
+    google.maps.event.addListener(map, 'click', function(event) {
+        addMarker(event.latLng);
+    });
 }
 
 
