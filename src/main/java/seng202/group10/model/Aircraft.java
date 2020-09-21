@@ -1,10 +1,12 @@
 package seng202.group10.model;
 
 /**
+ * Class to represent an aircraft
  * @author Tom Rizzi
  * @author Niko Tainui
  */
 public class Aircraft {
+
     // means travel agent code
     private String iata;
     // name of plane

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Controller for the airlines tab
+ * Controller for the aircraft tab
  * @author Tom Rizzi
  */
 public class AircraftTabController {

@@ -1,6 +1,7 @@
 package seng202.group10.model;
 
 /**
+ * Class to represent an airline
  * @author Troy Tomlins
  * @author Zac Kaye
  */

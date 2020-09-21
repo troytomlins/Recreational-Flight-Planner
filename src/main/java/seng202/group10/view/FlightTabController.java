@@ -15,8 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+/**
+ * Controller for the flight tab
+ */
 public class FlightTabController {
-
 
     @FXML public TableColumn<Flight, String> aircraftCol;
     @FXML public TableColumn<Flight, String> startCoordCol;

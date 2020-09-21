@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * Read write stream for aircrafts
  * @author Niko Tainui
  */
 
