@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Read write stream for the airlines
+ * Read/Write Class for Airline.
  * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {
     /**
      * creates instance of class with a default outfile
-     * @param inFile filename to import from
+     * @param inFile
      */
     public AirlineRW(String inFile) {
         super(inFile, "airline.csv");
@@ -38,8 +38,8 @@ public class AirlineRW extends RWStream {
      * Read airlines from file
      * @param ignoreLines List of lines index's to ignore (1 origin)
      * @return Arraylist of airlines read from file
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws FileFormatException when file is incorrectly formatted
+     * @throws IncompatibleFileException
+     * @throws FileFormatException
      */
     public ArrayList<Airline> readAirlines(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -136,7 +136,7 @@ public class AirlineRW extends RWStream {
 
     /**
      * Writes airlines to database
-     * @param airlines to write to the database
+     * @param airlines
      */
     public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
         databaseConnection.setAutoCommit(false);

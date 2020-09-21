@@ -2,6 +2,9 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * Holds a list of Airport's in an ArrayList.
+ */
 public class AirportModel {
 
     private ArrayList<Airport> airports;
@@ -9,9 +12,12 @@ public class AirportModel {
 
     private AirportRW airportRW;
 
+    /**
+     * Constructor to set the read and writer and make a new ArrayList of Airline's from the database.
+     */
     public AirportModel() {
-        this.airports = new ArrayList<Airport>();
-        this.unsavedAirports = new ArrayList<Airport>();
+        this.airports = new ArrayList<>();
+        this.unsavedAirports = new ArrayList<>();
 
         airportRW = new AirportRW();
 
@@ -61,9 +67,12 @@ public class AirportModel {
         save();
     }
 
+    /**
+     * Saves all unsaved airports to the database and updates the airports ArrayList.
+     */
     public void save() {
         airportRW.writeDatabaseAirports(unsavedAirports);
-        unsavedAirports = new ArrayList<Airport>();
+        unsavedAirports = new ArrayList<>();
         airports = airportRW.readDatabaseAirports();
     }
 

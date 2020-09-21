@@ -1,12 +1,10 @@
 package seng202.group10.model;
 
 /**
- * Class to represent an aircraft
  * @author Tom Rizzi
  * @author Niko Tainui
  */
 public class Aircraft {
-
     // means travel agent code
     private String iata;
     // name of plane
@@ -16,6 +14,13 @@ public class Aircraft {
     // range of aircraft
     private double range;
 
+    /**
+     * Constructor for Aircraft class.
+     * @param iata Travel agent code.
+     * @param name Name of plane.
+     * @param icao Aircraft type code.
+     * @param range Aircraft's range.
+     */
     public Aircraft(String iata, String name, String icao, double range) {
         this.iata = iata;
         this.name = name;
@@ -39,6 +44,11 @@ public class Aircraft {
         return range;
     }
 
+    /**
+     * Checks if this Aircraft has the same values as 'other' Aircraft.
+     * @param other Other Aircraft for checking values.
+     * @return Boolean value to say if they are equal.
+     */
     public Boolean sameValues(Aircraft other) {
         return iata.equals(other.getIata()) &&
                 name.equals(other.getName()) &&

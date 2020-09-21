@@ -1,5 +1,9 @@
 package seng202.group10.model;
 
+/**
+ * Class for defining an Airport.
+ * @author Troy Tomlins
+ */
 public class Airport {
     private String name;
     private String city;
@@ -13,7 +17,20 @@ public class Airport {
     private String dstType;
     private String tzDatabase;
 
-
+    /**
+     * Constructor for the Airport Class.
+     * @param name Name of the Airport.
+     * @param city City Airport is located in.
+     * @param country Country Airport is located in.
+     * @param iata Airports iata code.
+     * @param icao Airports icao code.
+     * @param latitude Airports latitude value.
+     * @param longitude Airports longitude value.
+     * @param altitude Airports altitude.
+     * @param timezone Timezone of Airport.
+     * @param dstType dstType.
+     * @param tzDatabase tzDatabase.
+     */
     public Airport(String name, String city, String country, String iata, String icao, double latitude, double longitude, float altitude, float timezone, String dstType, String tzDatabase) {
         this.name = name;
         this.city = city;

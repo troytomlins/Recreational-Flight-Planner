@@ -3,15 +3,18 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * Handles the importing and saving of aircrafts
  * @author Tom Rizzi
  */
+
 public class AircraftModel {
     private ArrayList<Aircraft> aircraft;
     private AircraftRW aircraftRW = new AircraftRW();
 
+    /**
+     * Constructor to set the read and writer and make a new ArrayList of Aircraft's from the database.
+     */
     public AircraftModel() {
-        aircraft = new ArrayList<Aircraft>();
+        aircraft = new ArrayList<>();
         ArrayList<Aircraft> databaseAircraft = aircraftRW.readDatabaseAircrafts();
         for (Aircraft aircraftSingle: databaseAircraft) {
             aircraft.add(aircraftSingle);
@@ -19,12 +22,12 @@ public class AircraftModel {
     }
 
     /**
-     * adds new aircraft to ArrayList aircraft
+     * Adds new aircraft to the ArrayList and the database.
      * @param craft Class Aircraft
      */
     public void addAircraft(Aircraft craft) {
         if (getIndexOf(craft) == -1) {
-            ArrayList<Aircraft> toAdd = new ArrayList<Aircraft>();
+            ArrayList<Aircraft> toAdd = new ArrayList<>();
             toAdd.add(craft);
             aircraftRW.writeDatabaseAircrafts(toAdd);
         }

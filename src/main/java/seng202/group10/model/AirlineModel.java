@@ -3,7 +3,7 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * Handles the importing and saving of airlines
+ * Holds a list of Airline's in an ArrayList.
  * @author Mitchell Freeman
  */
 
@@ -15,7 +15,7 @@ public class AirlineModel {
     private ArrayList<Airline> unsavedAirlines = new ArrayList<>();
 
     /**
-     * sets read and writer and adds airlines to the database
+     * Constructor to set the read and writer and make a new ArrayList of Aircraft's from the database.
      */
     public AirlineModel() {
         airlineRW = new AirlineRW();
@@ -30,7 +30,7 @@ public class AirlineModel {
     }
 
     /**
-     * addAirlines adds an Airline object to an ArrayList of Airline objects.
+     * Adds an Airline object to an ArrayList of Airline objects.
      * If the Airline object is already in the ArrayList, the Airline object is not added.
      * @param airline an Airline object.
      */
@@ -40,9 +40,12 @@ public class AirlineModel {
         }
     }
 
+    /**
+     * Saves all unsaved airlines to the database and updates the airlines ArrayList.
+     */
     public void save() {
         airlineRW.writeDatabaseAirlines(unsavedAirlines);
-        unsavedAirlines = new ArrayList<Airline>();
+        unsavedAirlines = new ArrayList<>();
         airlines = airlineRW.readDatabaseAirlines();
     }
 
