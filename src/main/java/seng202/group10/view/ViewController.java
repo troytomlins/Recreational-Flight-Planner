@@ -315,11 +315,8 @@ public class ViewController {
 
             }
         };
-        // problem is will list whole aircraft rather than just the name?
-        // probably will
         aircraft = aircraftmodel.getAircraftList();
         observableAircraft = FXCollections.observableArrayList(aircraft);
-        System.out.println(observableAircraft);
         aircraftSelector.setItems(observableAircraft);
     }
 
