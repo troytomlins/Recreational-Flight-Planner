@@ -1,5 +1,9 @@
 package seng202.group10.controller.filters;
 
+
+/**
+ * TODO
+ */
 public class Filter {
 
     private String columnName;

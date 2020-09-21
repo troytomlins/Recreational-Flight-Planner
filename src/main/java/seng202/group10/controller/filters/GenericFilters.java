@@ -1,5 +1,9 @@
 package seng202.group10.controller.filters;
 
+
+/**
+ * TODO
+ */
 public class GenericFilters {
     protected FilterSender filterSender;
 
@@ -9,7 +13,7 @@ public class GenericFilters {
     }
 
     public void addFilter(String columnName, String pattern) {
-        if (pattern != "") {
+        if (!pattern.equals("")) {
             filterSender.addFilter(columnName, pattern);
         }
     }

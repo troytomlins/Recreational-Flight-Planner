@@ -4,11 +4,8 @@ import seng202.group10.model.*;
 
 import java.util.ArrayList;
 
-//TODO write the filters depending on GUI
 /**
- * Class to filter the airline data.
- * @author Niko Tainui
- * @author Johnny Howe
+ * Placeholder
  */
 
 // TODO what should it filter?

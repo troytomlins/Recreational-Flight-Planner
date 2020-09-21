@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
+ * Filters the airline data
  * @author Johnny Howe
  * @author Niko Tainui
  * @author Mitchell Freeman

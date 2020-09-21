@@ -9,11 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
+ * Filters the airport data
+ * @author Johnny Howe
  * @author Niko Tainui
  * @author Mitchell Freeman
  */
-
 public class AirportFilters extends GenericFilters {
 
 

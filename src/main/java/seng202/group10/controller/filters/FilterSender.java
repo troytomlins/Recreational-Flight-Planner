@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * TODO
  * @author Mitchell
  */
 public class FilterSender {
+    // TODO method docs and split up methods
 
     private String tableName;
     private ArrayList<Filter> filters = new ArrayList<Filter>();
@@ -18,7 +20,7 @@ public class FilterSender {
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     public void addFilter(String columnName, String pattern) {
-        if (columnName != "") {
+        if (!columnName.equals("")) {
             filters.add(new Filter(columnName, pattern));
         }
     }
