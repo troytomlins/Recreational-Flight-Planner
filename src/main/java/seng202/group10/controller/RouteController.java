@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+/**
+ * Retrieves route data from the model
+ * @author Johnny Howe
+ * @author Mitchell Freeman
+ */
 public class RouteController {
 
     private RouteModel model;

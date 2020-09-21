@@ -5,13 +5,15 @@ import seng202.group10.model.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ * Retrieves flight data from the model
+ * @author Johnny Howe
+ */
 public class FlightController {
 
     private FlightModel model;
 
-    /**
-     * Constructor
-     */
     public FlightController() {
         this.model = new FlightModel();
     }

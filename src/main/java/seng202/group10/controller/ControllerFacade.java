@@ -3,6 +3,12 @@ package seng202.group10.controller;
 import seng202.group10.model.ModelFacade;
 import seng202.group10.view.AirportTabController;
 
+
+/**
+ * Allows access to any controller from one place
+ * Facade pattern over all the controllers
+ * @author Johnny Howe
+ */
 public class ControllerFacade {
     private DataController dataController;
     private RawDataController rawDataController;

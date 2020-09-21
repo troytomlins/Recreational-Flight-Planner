@@ -11,6 +11,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ * Retrieves airport data from the model
+ * @author Johnny Howe
+ * @author Mitchell Freeman
+ */
 public class AirportController {
 
     private AirportModel model;

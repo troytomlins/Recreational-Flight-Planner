@@ -7,17 +7,19 @@ import seng202.group10.model.AirlineModel;
 import java.util.ArrayList;
 
 
+
+/**
+ * Retrieves aircraft data from the model
+ * @author Johnny Howe
+ * @author Mitchell Freeman
+ */
 public class AircraftController {
 
-    /**
-     * Model
-     */
     private AircraftModel model;
 
     public AircraftController() {
         this.model = new AircraftModel();
     }
-
 
     /**
      * Creates and returns an object of Class Aircraft from the parameters
@@ -25,6 +27,7 @@ public class AircraftController {
      * @param iata iata code
      * @param icao icao code
      * @param fuelRate fuel rate of aircraft
+     * TODO what units?
      */
     public void addAircraft(String name, String iata, String icao, double fuelRate) {
         model.addAircraft(new Aircraft(name, iata, icao, fuelRate));

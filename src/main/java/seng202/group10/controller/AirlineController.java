@@ -5,20 +5,25 @@ import seng202.group10.model.*;
 import java.util.ArrayList;
 
 /**
- * Controller class for airlines.
- *
+ * Retrieves airline data from the model
+ * @author Johnny Howe
+ * @author Mitchell Freeman
  */
 public class AirlineController {
 
-    /**
-     * Model
-     */
     private AirlineModel model;
 
+    /**
+     * Constructor that takes an already initialized airline model
+     * @param model model to use
+     */
     public AirlineController(AirlineModel model) {
         this.model = model;
     }
 
+    /**
+     * Constructor that initializes its own airline model
+     */
     public AirlineController() {
         this.model = new AirlineModel();
     }
