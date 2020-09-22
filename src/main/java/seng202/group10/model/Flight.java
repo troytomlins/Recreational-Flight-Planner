@@ -94,6 +94,10 @@ public class Flight {
         totalDistance = total;
     }
 
+    public ArrayList<FlightPoint> getFlightPoints() {
+        return points;
+    }
+
     /**
      * Calculates the Great-circle distance between two points.
      * This distance is calculated using the Haversine formula:
