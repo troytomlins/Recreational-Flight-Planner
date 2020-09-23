@@ -1,10 +1,38 @@
-var labels = ["Start", "A", "B", "C", "more lol"]
+var labels = ["Start", "A", "B", "C", "D", "E", "F", "aaaaaaaaaaaa"]
 var labelIndex = 0;
 
 var map;
-var javaConnector;      // Placeholder
+var javaConnector; // Placeholder
 var markers = [];
 
+
+class MyMarker {
+
+    constructor(label, latLng) {
+        this.label = label;
+        this.latLng = latLng;
+
+        this.mapsMarker = new google.maps.Marker({
+            position: latLng,
+            label: this.label,
+            map: map,
+            draggable: true
+        });
+
+        google.maps.event.addListener(this.mapsMarker, 'click', function(event) {
+            removeMarker(this.label);
+        });
+    }
+
+    delete() {
+        this.mapsMarker.setMap(null);
+    }
+
+    setLabel(newLabel) {
+        this.label = newLabel;
+        this.mapsMarker.setLabel(this.label);
+    }
+}
 
 
 /**
@@ -12,10 +40,10 @@ var markers = [];
  * Add the listener for adding markers
  */
 function initMap() {
-    var ucPos = {lat: -43.522456, lng: 172.579422};
+    var ucPos = { lat: -43.522456, lng: 172.579422 };
     map = new google.maps.Map(document.getElementById('googleMap'), {
-        center:new google.maps.LatLng(ucPos.lat, ucPos.lng),
-        zoom:15,
+        center: new google.maps.LatLng(ucPos.lat, ucPos.lng),
+        zoom: 15,
     });
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
@@ -32,61 +60,75 @@ function addMarker(location) {
     // TODO give more than 26 markers
     let currentIndex = labelIndex
     var label = labels[labelIndex++];
-    marker = newMarker(label, location)
-
-    google.maps.event.addListener(marker, 'click', function(event) {
-        removeMarker(currentIndex);
-    });
-
+    let marker = new MyMarker(label, location);
     markers[currentIndex] = marker
-    sendLocationToJava(label, location);
+    sendMarkersToJava();
 }
 
 
-/**
- * Create (and return) a new google maps marker
- * adds it to the map as well
- */
-function newMarker(label, location) {
-    var marker = new google.maps.Marker({
-        position: location,
-        label: label,
-        map: map
-    });
-    return marker
-}
-
-
-/**
- * Remove the marker with label
- */
 function removeMarker(label) {
+    let markerIndex = labels.indexOf(label);
+    let marker = markers[markerIndex];
+    // Remove from map
+    marker.delete();
+    // Remove from markers array
+    markers.splice(markerIndex, 1);
+    // Reshuffle marker labels
+    for (let i = 0; i < markers.length; i++) {
+        // Change labels
+        markers[i].setLabel(labels[i]);
+    }
     labelIndex -= 1;
-    markers[label].setMap(null);    // Take off map
-    markers[label] = null;          // Forget about it all together
-    relabelMarkers();
-    // TODO Tell java
+    sendMarkersToJava();
 }
 
 
-// Set marker labels so they are in order and none are missing
-function relabelMarkers() {
-    // Remove non existent markers
-    for (let i in markers) {
-        let marker = markers[i];
-        if (marker == null) {
-            markers.splice(i, 1);
+// Get a list of labels, lats and lngs to pass to java
+function makeJavaMarkerLists() {
+    let labels = [];
+    let lats = [];
+    let lngs = [];
+    for (let marker of markers) {
+        labels.push(marker.label);
+        lats.push(marker.latLng.lat());
+        lngs.push(marker.latLng.lng());
+    }
+    return [labels, lats, lngs];
+}
+
+
+/**
+ * Send shit to java
+ */
+function sendMarkersToJava() {
+    let [labels, lats, lngs] = makeJavaMarkerLists();
+    if (javaConnector) {
+        let [labels, lats, lngs] = makeJavaMarkerLists();
+        javaConnector.clearMarkers();
+        for (let i = 0; i < labels.length; i++) {
+            javaConnector.addMarker(labels[i], lats[i], lngs[i]);
         }
-    }
-
-    // Relabel markers
-    for (let i in markers) {
-        let marker = markers[i];
-        let newLabel = labels[i];
-        marker.label = newLabel;
-        marker.setLabel(newLabel);
+        javaConnector.confirmMarkers();
+    } else {
+        console.log("Cannot find javaConnector. Are you running the app?");
     }
 }
+
+//
+///**
+// * Add a marker onto the map at location
+// * call the sendLatLngToJava function
+// */
+//function addMarker(location) {
+//    var markerLabel = labels[labelIndex++ % labels.length];
+//    sendLatLngToJava(markerLabel, location);
+//    var marker = new google.maps.Marker({
+//        position: location,
+//        label: markerLabel,
+//        map: map
+//    });
+//}
+
 
 /**
  * Control vertical map resizing
@@ -96,19 +138,5 @@ function resizeMap() {
     let mapElement = document.querySelector("#googleMap");
     mapElement.style.height = window.innerHeight.toString() + "px";
 }
-resizeMap();                    // Initial size
-window.onresize = resizeMap;    // Listener
-
-
-/**
- * Send a marker to java with id at latLng
- */
-function sendLocationToJava(id, latLng) {
-    if (javaConnector) {
-        javaConnector.newLatLng(id, latLng.lat(), latLng.lng());
-    } else {
-        console.log("No Java connector found! Are you running this in the app?")
-    }
-}
-
-
+resizeMap(); // Initial size
+window.onresize = resizeMap; // Listener
