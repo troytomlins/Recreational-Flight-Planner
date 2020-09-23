@@ -2,6 +2,9 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * Class for defining a Route
+ */
 public class Route {
     private String airlineCode;
     private int airlineId;
@@ -12,6 +15,15 @@ public class Route {
     private int stops;
     private ArrayList<String> equipment;
 
+    /**
+     * First Constructor for the Route Class
+     * @param airlineCode Airline code
+     * @param sourceAirportCode Start airport code
+     * @param sourceAirport Start airport
+     * @param destinationAirportCode End airport code
+     * @param destinationAirport End airport
+     * @param stops Number of stops
+     */
     public Route(String airlineCode, String sourceAirportCode, Airport sourceAirport, String destinationAirportCode, Airport destinationAirport, int stops) {
         this.airlineCode = airlineCode;
         this.sourceAirportCode = sourceAirportCode;
@@ -21,6 +33,13 @@ public class Route {
         this.stops = stops;
     }
 
+    /**
+     * Second Constructor for the Route Class
+     * @param airlineCode Airline code
+     * @param sourceAirportCode Start airport code
+     * @param destinationAirportCode End airport code
+     * @param stops Number of stops
+     */
     public Route(String airlineCode, String sourceAirportCode, String destinationAirportCode, int stops) {
         this.airlineCode = airlineCode;
         this.sourceAirportCode = sourceAirportCode;

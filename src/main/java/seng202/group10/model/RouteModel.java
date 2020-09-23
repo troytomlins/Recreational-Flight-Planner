@@ -2,6 +2,9 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * Model Class for holding Route's in an ArrayList
+ */
 public class RouteModel {
 
     private ArrayList<Route> routes = new ArrayList<>();
@@ -9,11 +12,13 @@ public class RouteModel {
 
     private RouteRW routeRW = new RouteRW();
 
+    /**
+     * Constructor for RouteModel Class.
+     * Reads Routes from the database and adds them to ArrayList.
+     */
     public RouteModel() {
         ArrayList<Route> databaseRoutes = routeRW.readDatabaseRoutes();
-        for (Route route: databaseRoutes) {
-            routes.add(route);
-        }
+        routes.addAll(databaseRoutes);
     }
 
     /**
@@ -35,6 +40,10 @@ public class RouteModel {
         }
     }
 
+    /**
+     * Saves all Routes in unsavedRoutes to the database.
+     * Re-sets unsavedRoutes and re-reads database
+     */
     public void save() {
         routeRW.writeDatabaseRoutes(unsavedRoutes);
         unsavedRoutes = new ArrayList<>();

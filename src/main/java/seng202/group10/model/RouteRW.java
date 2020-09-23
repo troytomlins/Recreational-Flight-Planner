@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+ * Read/Write Class for Route
  * @author Mitchell Freeman, Tom Rizzi
  */
 public class RouteRW extends RWStream {
@@ -30,19 +31,19 @@ public class RouteRW extends RWStream {
     /**
      * Reads routes from routes data file
      * @return List of routes read from the file
-     * @throws FileFormatException
-     * @throws IncompatibleFileException
+     * @throws FileFormatException Wrong File Format
+     * @throws IncompatibleFileException Incompatible File
      */
     public ArrayList<Route> readRoutes() throws FileFormatException, IncompatibleFileException {
-        return readRoutes(new ArrayList<Integer>());
+        return readRoutes(new ArrayList<>());
     }
 
     /**
      * Read routes from routes data file
      * @param ignoreLines List of line indices to ignore (1 origin)
      * @return List of routes read from the file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Route> readRoutes(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -112,14 +113,14 @@ public class RouteRW extends RWStream {
     public ArrayList<Route> readRoutes1() {
         ArrayList<ArrayList<String>> data = read();
 
-        ArrayList<Route> routeList = new ArrayList<Route>();
+        ArrayList<Route> routeList = new ArrayList<>();
 
         for (ArrayList<String> dataLine: data) {
             if (true/*ValidateData.validateRoute(dataLine)*/) {
                 Scanner scanner = new Scanner(dataLine.get(8));
                 scanner.useDelimiter(" ");
 
-                ArrayList<String> equipment = new ArrayList<String>();
+                ArrayList<String> equipment = new ArrayList<>();
 
                 while (scanner.hasNext()) {
                     equipment.add(scanner.next());
@@ -138,7 +139,7 @@ public class RouteRW extends RWStream {
     }
 
     public void writeRoute(ArrayList<Route> routes) {
-        ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> routeStrings = new ArrayList<>();
 
         for (Route route: routes) {
             routeStrings.add(
@@ -155,7 +156,7 @@ public class RouteRW extends RWStream {
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
 
-        ArrayList<Route> output = new ArrayList<Route>();
+        ArrayList<Route> output = new ArrayList<>();
 
         try {
             while (results.next()) {
