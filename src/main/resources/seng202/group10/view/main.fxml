@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
@@ -39,37 +40,37 @@
                                     </Text>
                                  </top>
                                  <center>
-                                    <ScrollPane hbarPolicy="NEVER" maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                                       <content>
-                                          <GridPane prefHeight="539.0" prefWidth="200.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="0.0" prefWidth="0.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints maxHeight="264.6000122070312" minHeight="10.0" prefHeight="98.40000610351562" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="264.6000122070312" minHeight="10.0" prefHeight="98.40000610351562" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <ComboBox fx:id="aircraftSelector" prefWidth="150.0" GridPane.halignment="CENTER" />
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Aircraft" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                                                   <GridPane.margin>
-                                                      <Insets top="10.0" />
-                                                   </GridPane.margin>
-                                                </Text>
-                                                <GridPane fx:id="locationsPane" GridPane.rowIndex="1">
+                                    <GridPane BorderPane.alignment="CENTER">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.99999237060547" minWidth="10.0" prefWidth="95.20001983642578" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="266.6000122070312" minHeight="10.0" prefHeight="129.80002441406248" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="425.799951171875" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="107.40004882812502" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <content>
+                                                <GridPane fx:id="locationsPane" prefHeight="62.0" prefWidth="198.0">
                                                   <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.39999389648438" minWidth="0.0" prefWidth="0.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                 </GridPane>
-                                             </children>
-                                          </GridPane>
-                                       </content>
-                                    </ScrollPane>
+                                             </content>
+                                          </ScrollPane>
+                                          <ComboBox fx:id="aircraftSelector" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Aircraft" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets top="10.0" />
+                                             </GridPane.margin>
+                                          </Text>
+                                          <Button mnemonicParsing="false" text="Save Flight" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
                                  </center>
                               </BorderPane>
                            </left>

@@ -29,6 +29,10 @@ public class FlightController {
         model.addFlight(flight);
     }
 
+    public void addFlight(Flight flight) {
+        model.addFlight(flight);
+    }
+
     public ArrayList<Flight> getFlights() {
         return model.getFlights();
     }

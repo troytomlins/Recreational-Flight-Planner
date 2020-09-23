@@ -3,7 +3,8 @@ var labelIndex = 0;
 
 var map;
 var javaConnector;      // Placeholder
-var markers = {};
+var markers = [];
+
 
 
 /**
@@ -29,14 +30,15 @@ function initMap() {
  */
 function addMarker(location) {
     // TODO give more than 26 markers
+    let currentIndex = labelIndex
     var label = labels[labelIndex++];
     marker = newMarker(label, location)
 
     google.maps.event.addListener(marker, 'click', function(event) {
-        removeMarker(label);
+        removeMarker(currentIndex);
     });
 
-    markers[label] = marker
+    markers[currentIndex] = marker
     sendLocationToJava(label, location);
 }
 
@@ -59,11 +61,32 @@ function newMarker(label, location) {
  * Remove the marker with label
  */
 function removeMarker(label) {
+    labelIndex -= 1;
     markers[label].setMap(null);    // Take off map
     markers[label] = null;          // Forget about it all together
+    relabelMarkers();
     // TODO Tell java
 }
 
+
+// Set marker labels so they are in order and none are missing
+function relabelMarkers() {
+    // Remove non existent markers
+    for (let i in markers) {
+        let marker = markers[i];
+        if (marker == null) {
+            markers.splice(i, 1);
+        }
+    }
+
+    // Relabel markers
+    for (let i in markers) {
+        let marker = markers[i];
+        let newLabel = labels[i];
+        marker.label = newLabel;
+        marker.setLabel(newLabel);
+    }
+}
 
 /**
  * Control vertical map resizing
@@ -87,3 +110,5 @@ function sendLocationToJava(id, latLng) {
         console.log("No Java connector found! Are you running this in the app?")
     }
 }
+
+
