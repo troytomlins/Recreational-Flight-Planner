@@ -132,8 +132,8 @@ public class AircraftRW extends RWStream {
      * The Aircraft object attributes have to be converted to strings.
      * @param aircrafts An ArrayList of Aircraft objects.
      */
-    public void writeAircraftFile(ArrayList<Aircraft> aircrafts) {
-        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+    public void writeAircraft(ArrayList<Aircraft> aircrafts) {
+        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<ArrayList<String>>();
         for (Aircraft aircraft: aircrafts) {
             ArrayList<String> tempData = new ArrayList<String>();
 
@@ -143,9 +143,9 @@ public class AircraftRW extends RWStream {
             String range = Double.toString(aircraft.getRange());
             tempData.add(range);
 
-            data.add(tempData);
+            aircraftStrings.add(tempData);
         }
-        writeAll(data);
+        writeAll(aircraftStrings);
     }
 
 }
