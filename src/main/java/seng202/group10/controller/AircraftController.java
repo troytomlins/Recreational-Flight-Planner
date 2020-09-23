@@ -39,10 +39,10 @@ public class AircraftController {
 
     /**
      * deletes Aircraft from ArrayList
-     * @param craft Aircraft
+     * @param craft Aircraft to delete
      */
     public void deleteAircraft(Aircraft craft) {
-        // TODO Implement
+        model.deleteAircraft(craft);
     }
 
 }
