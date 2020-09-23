@@ -59,7 +59,6 @@ public class AircraftRW extends RWStream {
      * takes aircraft objects as an arraylist and writes it to the outfile
      * @param aircrafts ArrayList of Aircraft
      */
-
     public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
         ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
 
@@ -127,4 +126,26 @@ public class AircraftRW extends RWStream {
         String sql = String.format("DELETE FROM aircrafts WHERE name = '%s' AND iata = '%s' AND icao = '%s' and range = %f", craft.getName(), craft.getIata(), craft.getIcao(), craft.getRange());
         databaseConnection.executeStatement(sql);
     }
+
+    /**
+     * Uses the super class RWStream to write all aircrafts to a file.
+     * The Aircraft object attributes have to be converted to strings.
+     * @param aircrafts An ArrayList of Aircraft objects.
+     */
+    public void writeAircraftFile(ArrayList<Aircraft> aircrafts) {
+        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        for (Aircraft aircraft: aircrafts) {
+            ArrayList<String> tempData = new ArrayList<String>();
+
+            tempData.add(aircraft.getName());
+            tempData.add(aircraft.getIata());
+            tempData.add(aircraft.getIcao());
+            String range = Double.toString(aircraft.getRange());
+            tempData.add(range);
+
+            data.add(tempData);
+        }
+        writeAll(data);
+    }
+
 }
