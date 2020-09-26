@@ -106,13 +106,10 @@ public class GUIApp extends Application {
             viewController.newMarker(id, lat, lng);
         }
 
-        public void test() {
-            System.out.println("AAAAAAAA");
-        }
-
         ArrayList<String> labels;
         ArrayList<Float> lats;
         ArrayList<Float> lngs;
+
         public void clearMarkers() {
             labels = new ArrayList<>();
             lats = new ArrayList<>();
@@ -127,9 +124,11 @@ public class GUIApp extends Application {
 
         public void confirmMarkers() {
             // Example on how things go
-            System.out.println();
             for (int i = 0; i < labels.size(); i ++) {
-                System.out.println(labels.get(i) + " " + lats.get(i) + " " + lngs.get(i));
+                String id = labels.get(i);
+                float lat = lats.get(i);
+                float lng = lngs.get(i);
+                viewController.newMarker(id, lat, lng);
             }
         }
     }
