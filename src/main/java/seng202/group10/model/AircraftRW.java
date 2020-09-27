@@ -109,11 +109,11 @@ public class AircraftRW extends RWStream {
     }
 
     /**
-     * Uses the super class RWStream to write all aircrafts to a file.
+     * Uses the super class RWStream to write all aircraft to a file.
      * The Aircraft object attributes have to be converted to strings.
      * @param aircrafts An ArrayList of Aircraft objects.
      */
-    public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
+    public void writeAircraft(ArrayList<Aircraft> aircrafts) {
         ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
 
         for (Aircraft aircraft: aircrafts) {

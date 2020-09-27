@@ -189,4 +189,32 @@ public class AirportRW extends RWStream {
         sql = String.format(sql, airport.getName(), airport.getCity(), airport.getCity(), airport.getIata(), airport.getIcao());
         databaseConnection.executeStatement(sql);
     }
+
+    /**
+     * Uses the super class RWStream to write all airports to a file.
+     * The Airport object attributes have to be converted to strings.
+     * @param airports An ArrayList of Airport objects.
+     */
+    public void writeAirports(ArrayList<Airport> airports) {
+        ArrayList<ArrayList<String>> airportStrings = new ArrayList<>();
+
+        for (Airport airport: airports) {
+            airportStrings.add(
+                    new ArrayList<String>(Arrays.asList(
+                            airport.getName(),
+                            airport.getCity(),
+                            airport.getCountry(),
+                            airport.getIata(),
+                            airport.getIcao(),
+                            Double.toString(airport.getLatitude()),
+                            Double.toString(airport.getLongitude()),
+                            Float.toString(airport.getAltitude()),
+                            Float.toString(airport.getTimezone()),
+                            airport.getDstType(),
+                            airport.getTzDatabase()
+                    )));
+        }
+        writeAll(airportStrings);
+    }
+
 }

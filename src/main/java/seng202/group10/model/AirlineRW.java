@@ -163,4 +163,27 @@ public class AirlineRW extends RWStream {
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
     }
+
+    /**
+     * Uses the super class RWStream to write all airlines to a file.
+     * The Airline object attributes have to be converted to strings.
+     * @param airlines An ArrayList of Airline objects.
+     */
+    public void writeAirlines(ArrayList<Airline> airlines) {
+        ArrayList<ArrayList<String>> airlineStrings = new ArrayList<>();
+
+        for (Airline airline: airlines) {
+            airlineStrings.add(
+                    new ArrayList<String>(Arrays.asList(
+                            airline.getName(),
+                            airline.getAlias(),
+                            airline.getIata(),
+                            airline.getIcao(),
+                            airline.getCallsign(),
+                            airline.getCountry()
+                    )));
+        }
+        writeAll(airlineStrings);
+    }
+
 }

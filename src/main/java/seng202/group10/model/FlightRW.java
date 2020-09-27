@@ -67,4 +67,14 @@ public class FlightRW extends RWStream {
         FlightRW test = new FlightRW();
         test.readFlight();
     }
+
+    /**
+     * Uses the super class RWStream to write all flights to a file.
+     * The Flight object attributes have to be converted to strings.
+     * @param flights An ArrayList of Flight objects.
+     */
+    public void writeFlights(ArrayList<Flight> flights) {
+
+    }
+
 }

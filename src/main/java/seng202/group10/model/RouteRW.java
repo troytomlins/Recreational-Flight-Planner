@@ -137,6 +137,11 @@ public class RouteRW extends RWStream {
         return routeList;
     }
 
+    /**
+     * Uses the super class RWStream to write all a route to a file.
+     * The Route object attributes have to be converted to strings.
+     * @param routes An ArrayList of Route objects.
+     */
     public void writeRoute(ArrayList<Route> routes) {
         ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
 
@@ -151,6 +156,7 @@ public class RouteRW extends RWStream {
         }
         writeAll(routeStrings);
     }
+
 
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
