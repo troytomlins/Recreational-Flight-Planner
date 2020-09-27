@@ -175,12 +175,14 @@ public class AirlineRW extends RWStream {
         for (Airline airline: airlines) {
             airlineStrings.add(
                     new ArrayList<String>(Arrays.asList(
+                            null, // Field is not preserved in database.
                             airline.getName(),
                             airline.getAlias(),
                             airline.getIata(),
                             airline.getIcao(),
                             airline.getCallsign(),
-                            airline.getCountry()
+                            airline.getCountry(),
+                            null // Field is not preserved in database.
                     )));
         }
         writeAll(airlineStrings);

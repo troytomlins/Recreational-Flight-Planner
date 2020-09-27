@@ -201,6 +201,7 @@ public class AirportRW extends RWStream {
         for (Airport airport: airports) {
             airportStrings.add(
                     new ArrayList<String>(Arrays.asList(
+                            null, // Field not preserved in database.
                             airport.getName(),
                             airport.getCity(),
                             airport.getCountry(),
@@ -211,7 +212,9 @@ public class AirportRW extends RWStream {
                             Float.toString(airport.getAltitude()),
                             Float.toString(airport.getTimezone()),
                             airport.getDstType(),
-                            airport.getTzDatabase()
+                            airport.getTzDatabase(),
+                            null, // Field not preserved in database.
+                            null  // Field not preserved in database.
                     )));
         }
         writeAll(airportStrings);

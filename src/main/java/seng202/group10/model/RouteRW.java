@@ -137,27 +137,6 @@ public class RouteRW extends RWStream {
         return routeList;
     }
 
-    /**
-     * Uses the super class RWStream to write all a route to a file.
-     * The Route object attributes have to be converted to strings.
-     * @param routes An ArrayList of Route objects.
-     */
-    public void writeRoute(ArrayList<Route> routes) {
-        ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
-
-        for (Route route: routes) {
-            routeStrings.add(
-                    new ArrayList<String>(Arrays.asList(
-                            route.getAirlineCode(),
-                            route.getSourceAirportCode(),
-                            route.getDestinationAirportCode(),
-                            Integer.toString(route.getStops())
-                    )));
-        }
-        writeAll(routeStrings);
-    }
-
-
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
 
@@ -201,4 +180,30 @@ public class RouteRW extends RWStream {
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
     }
+
+    /**
+     * Uses the super class RWStream to write all a route to a file.
+     * The Route object attributes have to be converted to strings.
+     * @param routes An ArrayList of Route objects.
+     */
+    public void writeRoute(ArrayList<Route> routes) {
+        ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
+
+        for (Route route: routes) {
+            routeStrings.add(
+                    new ArrayList<String>(Arrays.asList(
+                            route.getAirlineCode(),
+                            null, // Field not preserved in database.
+                            route.getSourceAirportCode(),
+                            null, // Field not preserved in database.
+                            route.getDestinationAirportCode(),
+                            null, // Field not preserved in database.
+                            null, // Field not preserved in database.
+                            Integer.toString(route.getStops()),
+                            null  // Field not preserved in database.
+                    )));
+        }
+        writeAll(routeStrings);
+    }
+
 }
