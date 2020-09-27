@@ -55,25 +55,6 @@ public class AircraftRW extends RWStream {
         return aircraftList;
     }
 
-    /**
-     * takes aircraft objects as an arraylist and writes it to the outfile
-     * @param aircrafts ArrayList of Aircraft
-     */
-    public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
-        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
-
-        for (Aircraft aircraft: aircrafts) {
-            aircraftStrings.add(
-                    new ArrayList<String>(Arrays.asList(
-                            aircraft.getIata(),
-                            aircraft.getName(),
-                            aircraft.getIcao(),
-                            Double.toString(aircraft.getRange())
-                    )));
-        }
-        writeAll(aircraftStrings);
-    }
-
     public ArrayList<Aircraft> readDatabaseAircrafts() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM aircrafts");
 
@@ -132,18 +113,17 @@ public class AircraftRW extends RWStream {
      * The Aircraft object attributes have to be converted to strings.
      * @param aircrafts An ArrayList of Aircraft objects.
      */
-    public void writeAircraft(ArrayList<Aircraft> aircrafts) {
-        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<ArrayList<String>>();
+    public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
+        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
+
         for (Aircraft aircraft: aircrafts) {
-            ArrayList<String> tempData = new ArrayList<String>();
-
-            tempData.add(aircraft.getName());
-            tempData.add(aircraft.getIata());
-            tempData.add(aircraft.getIcao());
-            String range = Double.toString(aircraft.getRange());
-            tempData.add(range);
-
-            aircraftStrings.add(tempData);
+            aircraftStrings.add(
+                    new ArrayList<String>(Arrays.asList(
+                            aircraft.getIata(),
+                            aircraft.getName(),
+                            aircraft.getIcao(),
+                            Double.toString(aircraft.getRange())
+                    )));
         }
         writeAll(aircraftStrings);
     }
