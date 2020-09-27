@@ -174,6 +174,19 @@ public class ViewController {
         aircraftSelector.setItems(observableAircraft);
     }
 
+    /**
+     * (re)set all the markers in the window
+     * @param labels
+     * @param lats
+     * @param lngs
+     */
+    public void setMarkers(ArrayList<String> labels, ArrayList<Float> lats, ArrayList<Float> lngs) {
+        locationsPane.getChildren().clear();    // Delete old
+        for (int i = 0; i < labels.size(); i++) {
+            newMarker(labels.get(i), lats.get(i), lngs.get(i));
+        }
+    }
+
     private int numMarkers = 1;     // How many markers do we currently have?
 
     /**
