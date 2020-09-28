@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -45,9 +46,9 @@
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.99999237060547" minWidth="10.0" prefWidth="95.20001983642578" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints maxHeight="266.6000122070312" minHeight="10.0" prefHeight="129.80002441406248" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="425.799951171875" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="107.40004882812502" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="266.6000122070312" minHeight="10.0" prefHeight="98.20001831054688" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="354.1999816894531" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="95.60001220703123" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -62,13 +63,26 @@
                                                 </GridPane>
                                              </content>
                                           </ScrollPane>
-                                          <ComboBox fx:id="aircraftSelector" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                          <ComboBox fx:id="aircraftSelector" onAction="#listAircraft" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Aircraft" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets top="10.0" />
                                              </GridPane.margin>
                                           </Text>
-                                          <Button mnemonicParsing="false" text="Save Flight" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                          <Button mnemonicParsing="false" onAction="#saveFlight" text="Save" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin></Button>
+                                          <TextField fx:id="filename" maxWidth="-Infinity" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filename" translateX="-20.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets top="10.0" />
+                                             </GridPane.margin>
+                                          </Text>
                                        </children>
                                     </GridPane>
                                  </center>

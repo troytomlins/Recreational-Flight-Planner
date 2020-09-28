@@ -60,6 +60,8 @@ public class ViewController {
     private GridPane locationsPane;
     @FXML
     private ComboBox aircraftSelector;
+    @FXML
+    private TextField filename;
 
     public Stage stage;
     public ControllerFacade controllerFacade;
@@ -80,8 +82,8 @@ public class ViewController {
         aircraftTabController.injectMainController(this);
         flightTabController.injectController(this);
         controllerFacade = new ControllerFacade();
-        listAircraft();
         updateAllTables();
+        listAircraft();
     }
 
     /**
@@ -235,9 +237,20 @@ public class ViewController {
         //Add the thing
         locationsPane.add(pane, 0, row);
         if (setAltitude.isPressed()) {
-            FlightPoint point = new FlightPoint(id, "NA", lat, lng, Double.parseDouble(altitude.getText()));
-            flight.addPoint(point);
-            setAltitude.disarm();
+            try {
+                FlightPoint point = new FlightPoint(id, "NA", lat, lng, Double.parseDouble(altitude.getText()));
+                flight.addPoint(point);
+                setAltitude.disarm();
+            } catch (NumberFormatException e) {
+                showErrorWindow("Altitude field not valid");
+            }
         }
+    }
+
+    public void saveFlight() {
+        locationsPane.getChildren().clear();
+        FlightModel model= new FlightModel();
+        model.addFlight(flight);
+        flight = new Flight();
     }
 }
