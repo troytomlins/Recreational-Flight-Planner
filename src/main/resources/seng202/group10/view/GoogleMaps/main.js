@@ -179,21 +179,6 @@ function sendMarkersToJava() {
     }
 }
 
-//
-///**
-// * Add a marker onto the map at location
-// * call the sendLatLngToJava function
-// */
-//function addMarker(location) {
-//    var markerLabel = labels[labelIndex++ % labels.length];
-//    sendLatLngToJava(markerLabel, location);
-//    var marker = new google.maps.Marker({
-//        position: location,
-//        label: markerLabel,
-//        map: map
-//    });
-//}
-
 
 /**
  * Control vertical map resizing
