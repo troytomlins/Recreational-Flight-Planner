@@ -17,9 +17,7 @@ public class AircraftModel {
     public AircraftModel() {
         aircraft = new ArrayList<>();
         ArrayList<Aircraft> databaseAircraft = aircraftRW.readDatabaseAircrafts();
-        for (Aircraft aircraftSingle: databaseAircraft) {
-            aircraft.add(aircraftSingle);
-        }
+        aircraft.addAll(databaseAircraft);
     }
 
     /**
@@ -53,7 +51,7 @@ public class AircraftModel {
     }
 
     /**
-     * removes aircraft from ArrayList aircraft
+     * Removes aircraft from ArrayList aircraft.
      * @param craft Class Aircraft
      */
     public void deleteAircraft(Aircraft craft) {

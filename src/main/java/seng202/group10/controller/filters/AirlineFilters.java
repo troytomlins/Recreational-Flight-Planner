@@ -1,24 +1,33 @@
 package seng202.group10.controller.filters;
 
 import seng202.group10.model.Airline;
-import seng202.group10.model.AirlineRW;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Class to filter Airline data.
  * @author Johnny Howe
  * @author Niko Tainui
  * @author Mitchell Freeman
  */
 public class AirlineFilters extends GenericFilters {
+
+    /**
+     * Constructor for AirlineFilters.
+     * Sets table to "airlines".
+     */
     public AirlineFilters() {
         super("airlines");
     }
 
+    /**
+     * Apply filters and returns list of Airlines fitting applied conditions.
+     * @return ArrayList of Airline
+     */
     public ArrayList<Airline> applyFilters() {
-        ArrayList<Airline> resultAirlines = new ArrayList<Airline>();
+        ArrayList<Airline> resultAirlines = new ArrayList<>();
 
         ResultSet results = filterSender.applyFilter();
         try {

@@ -8,25 +8,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Apply Filters on the dataViewer.
  * @author Mitchell
  */
 public class FilterSender {
 
     private String tableName;
-    private ArrayList<Filter> filters = new ArrayList<Filter>();
+    private ArrayList<Filter> filters = new ArrayList<>();
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
+    /**
+     * Adds a filter to ArrayList filters.
+     * @param columnName Name of Column
+     * @param pattern Pattern of text to match
+     */
     public void addFilter(String columnName, String pattern) {
-        if (columnName != "") {
+        if (!columnName.equals("")) {
             filters.add(new Filter(columnName, pattern));
         }
     }
 
+    /**
+     * Sets the table name for filters.
+     * @param tableName Name of table
+     */
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
+    /**
+     * Applies filters to data in database.
+     * @return ResultSet of data
+     */
     public ResultSet applyFilter() {
         StringBuilder statementBuilder = new StringBuilder();
         statementBuilder.append(String.format("SELECT * FROM %s ", tableName));
@@ -57,7 +71,7 @@ public class FilterSender {
             System.out.println(e.getMessage());
         }
 
-        filters = new ArrayList<Filter>();
+        filters = new ArrayList<>();
         return results;
     }
 }

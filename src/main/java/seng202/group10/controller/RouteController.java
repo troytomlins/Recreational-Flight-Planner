@@ -8,26 +8,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Controller Class for Route.
+ */
 public class RouteController {
 
-    /**
-     * Model
-     */
     private RouteModel model;
 
     /**
-     * Constructor
+     * Constructor for RouteController.
+     * Sets model to an inputted instance of model.
+     * @param model Instance of RouteModel class
      */
     public RouteController(RouteModel model) {
         this.model = model;
     }
 
+    /**
+     * Constructor for RouteController.
+     * Sets model to a new instance of RouteModel.
+     */
     public RouteController() {
         this.model = new RouteModel();
     }
 
     /**
-     * Get a list of routes from model
+     * Get a list of routes from model.
      * @return Arraylist of routes
      */
     public ArrayList<Route> getRoutes() {
@@ -39,15 +45,15 @@ public class RouteController {
      * @param filepath Filepath string for file to import.
      */
     public void importRoutes(String filepath) throws IncompatibleFileException, FileFormatException {
-        importRoutes(filepath, new ArrayList<Integer>());
+        importRoutes(filepath, new ArrayList<>());
     }
 
     /**
      * Takes a filepath and imports all routes from the file into model.
      * @param filepath Filepath string for file to import.
      * @param indices List of line indices to ignore from file (1 origin)
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public void importRoutes(String filepath, ArrayList<Integer> indices) throws IncompatibleFileException, FileFormatException {
         RouteRW stream = new RouteRW(filepath);
@@ -88,7 +94,7 @@ public class RouteController {
             String equipmentString = data[8];
 
             // Convert values to the type required for creating a route.
-            ArrayList<String> equipment = new ArrayList<String>(Arrays.asList(equipmentString.split(" ")));
+            ArrayList<String> equipment = new ArrayList<>(Arrays.asList(equipmentString.split(" ")));
 
             // Create route and add to model
             // Route route = new Route(airlineCode, airlineId, sourceAirportCode, sourceAirport, destinationAirportCode, destinationAirport, stops, equipment);
