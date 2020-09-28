@@ -61,7 +61,6 @@ class MyMarker {
     constructor(label, labelIndex, latLng) {
         this.label = label;
         this.labelIndex = labelIndex;
-        this.latLng = latLng;
 
         this.mapsMarker = new google.maps.Marker({
             position: latLng,
@@ -74,6 +73,14 @@ class MyMarker {
         google.maps.event.addListener(this.mapsMarker, 'click', function(event) {
             removeMarker(self);
         });
+
+        google.maps.event.addListener(this.mapsMarker, 'drag', function(event) {
+            sendMarkersToJava();
+        });
+    }
+
+    getPosition() {
+        return this.mapsMarker.getPosition();
     }
 
     delete() {
@@ -148,8 +155,8 @@ function makeJavaMarkerLists() {
     let lngs = [];
     for (let marker of markers) {
         labels.push(marker.label);
-        lats.push(marker.latLng.lat());
-        lngs.push(marker.latLng.lng());
+        lats.push(marker.getPosition().lat());
+        lngs.push(marker.getPosition().lng());
     }
     return [labels, lats, lngs];
 }
