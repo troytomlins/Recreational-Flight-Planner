@@ -69,11 +69,24 @@ public class FlightRW extends RWStream {
     }
 
     /**
-     * Uses the super class RWStream to write all flights to a file.
+     * Uses the super class RWStream to write a flight to a file.
      * The Flight object attributes have to be converted to strings.
-     * @param flights An ArrayList of Flight objects.
+     * @param flight A Flight object which contains points.
      */
-    public void writeFlights(ArrayList<Flight> flights) {
+    public void writeFlight(Flight flight) {
+        ArrayList<ArrayList<String>> flightString = new ArrayList<ArrayList<String>>();
+
+        for (FlightPoint point: flight.getFlightPoints()) {
+            flightString.add(
+                    new ArrayList<String>(Arrays.asList(
+                            point.getType(),
+                            point.getId(),
+                            Double.toString(point.getAltitude()),
+                            Double.toString(point.getLatitude()),
+                            Double.toString(point.getLongitude())
+                    )));
+        }
+        writeAll(flightString);
 
     }
 
