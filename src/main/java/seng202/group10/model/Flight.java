@@ -3,7 +3,6 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * TODO write tests
  * @author Johnny Howe
  * @author Niko Tainui
  * @author Zach Kaye

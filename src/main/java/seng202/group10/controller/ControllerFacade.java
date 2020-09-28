@@ -1,7 +1,9 @@
 package seng202.group10.controller;
 
+import seng202.group10.model.Flight;
 import seng202.group10.model.ModelFacade;
 import seng202.group10.view.AirportTabController;
+import seng202.group10.view.FlightTabController;
 
 public class ControllerFacade {
     private DataController dataController;

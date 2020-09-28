@@ -14,6 +14,8 @@ import seng202.group10.view.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JavaFX GUI app
@@ -102,6 +104,41 @@ public class GUIApp extends Application {
          */
         public void newLatLng(String id, float lat, float lng) {
             viewController.newMarker(id, lat, lng);
+        }
+
+        ArrayList<String> labels;
+        ArrayList<Float> lats;
+        ArrayList<Float> lngs;
+
+        public void clearMarkers() {
+            labels = new ArrayList<>();
+            lats = new ArrayList<>();
+            lngs = new ArrayList<>();
+        }
+
+        public void addMarker(String label, float lat, float lng) {
+            labels.add(label);
+            lats.add(lat);
+            lngs.add(lng);
+        }
+
+        public void confirmMarkers() {
+            // Example on how things go
+//            for (int i = 0; i < labels.size(); i ++) {
+//                String id = labels.get(i);
+//                float lat = lats.get(i);
+//                float lng = lngs.get(i);
+//                viewController.newMarker(id, lat, lng);
+//            }
+            viewController.setMarkers(labels, lats, lngs);
+        }
+
+        /**
+         * Throw some text in the java console
+         * @param text text to print
+         */
+        public void println(String text) {
+            System.out.println(text);
         }
     }
 
