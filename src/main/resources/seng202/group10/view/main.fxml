@@ -50,7 +50,7 @@
                                           <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="107.40004882812502" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                          <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                              <content>
                                                 <GridPane fx:id="locationsPane" prefHeight="62.0" prefWidth="198.0">
                                                   <columnConstraints>
