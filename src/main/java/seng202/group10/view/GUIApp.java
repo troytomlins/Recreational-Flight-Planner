@@ -132,6 +132,14 @@ public class GUIApp extends Application {
 //            }
             viewController.setMarkers(labels, lats, lngs);
         }
+
+        /**
+         * Throw some text in the java console
+         * @param text text to print
+         */
+        public void println(String text) {
+            System.out.println(text);
+        }
     }
 
     /**

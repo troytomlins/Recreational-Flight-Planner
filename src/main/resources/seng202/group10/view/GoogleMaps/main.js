@@ -179,6 +179,13 @@ function sendMarkersToJava() {
     }
 }
 
+/**
+ * Print some text into the java console
+ */
+function println(text) {
+    javaConnector.println(text);
+}
+
 
 /**
  * Control vertical map resizing
@@ -188,5 +195,6 @@ function resizeMap() {
     let mapElement = document.querySelector("#googleMap");
     mapElement.style.height = window.innerHeight.toString() + "px";
 }
+
 resizeMap(); // Initial size
 window.onresize = resizeMap; // Listener
