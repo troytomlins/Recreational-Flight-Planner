@@ -123,13 +123,14 @@ public class RWStream {
      */
     public void writeAll(ArrayList<ArrayList<String>> data) {
         File file = new File(outFilename);
+
         if (file.exists()) {
             file.delete();
         }
         try {
             file.createNewFile();
         } catch(IOException error) {
-
+            error.printStackTrace();
         }
         for (ArrayList<String> dataLine: data) {
             writeSingle(dataLine);
