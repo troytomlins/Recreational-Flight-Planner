@@ -98,21 +98,44 @@ public class RWStream {
     public void writeSingle(ArrayList<String> data) {
         try {
             fileWriter = new FileWriter(outFilename);
-
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < data.size() - 1; i++) {
-                builder.append(data.get(i));
-                builder.append(',');
-            }
-            builder.append(data.get(data.size() - 1));
-            builder.append('\n');
-
-            fileWriter.write(builder.toString());
-
+            fileWriter.write(getDataString(data));
             fileWriter.close();
         } catch (IOException error) {
             displayError("Unable to write to file");
         }
+    }
+
+    /**
+     * Write the data from dataArr to a file
+     * Assumes file exists and is writable
+     * @param dataArr list of lists of strings to write
+     */
+    public void writeLines(ArrayList<ArrayList<String>> dataArr) {
+        try {
+            fileWriter = new FileWriter(outFilename);
+            for (ArrayList<String> data : dataArr) {
+                fileWriter.write(getDataString(data));
+            }
+            fileWriter.close();
+        } catch (IOException error) {
+            displayError("Unable to write to file");
+        }
+    }
+
+    /**
+     *
+     * @param data list of data to write on the line
+     * @return string representation of data
+     */
+    public String getDataString(ArrayList<String> data) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < data.size() - 1; i++) {
+            builder.append(data.get(i));
+            builder.append(',');
+        }
+        builder.append(data.get(data.size() - 1));
+        builder.append('\n');
+        return builder.toString();
     }
 
     /**
@@ -132,9 +155,7 @@ public class RWStream {
         } catch(IOException error) {
             error.printStackTrace();
         }
-        for (ArrayList<String> dataLine: data) {
-            writeSingle(dataLine);
-        }
+        writeLines(data);
     }
 
     public void displayError(String message) {
