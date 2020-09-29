@@ -136,7 +136,8 @@ public class AirportTabController {
      * @param filepath
      */
     public void exportData(String filepath) {
-
+        AirportController controller = mainController.controllerFacade.getAirportController();
+        controller.writeAirports(filepath);
     }
 
     /**
@@ -144,12 +145,17 @@ public class AirportTabController {
      * @param actionEvent
      */
     public void exportDataCsv(ActionEvent actionEvent) {
-
+        String filepath = mainController.showFileWriterCsv();
+        exportData(filepath);
     }
 
     public void exportDataDat(ActionEvent actionEvent) {
+        String filepath = mainController.showFileWriterDat();
+        exportData(filepath);
     }
 
     public void exportDataTxt(ActionEvent actionEvent) {
+        String filepath = mainController.showFileWriterTxt();
+        exportData(filepath);
     }
 }

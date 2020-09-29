@@ -51,8 +51,22 @@ public class AirportController {
         model.save();
     }
 
+    /**
+     * Imports airport data into the model from the specified filepath
+     * @param filePath Filepath of the file to import
+     * @throws IncompatibleFileException
+     * @throws FileFormatException
+     */
     public void importAirports(String filePath)
             throws IncompatibleFileException, FileFormatException {
         importAirports(filePath, new ArrayList<>());
+    }
+
+    /**
+     * Writes airport data from model into the specified filepath
+     * @param filepath Filepath to write to
+     */
+    public void writeAirports(String filepath) {
+        model.saveToFile(filepath);
     }
 }

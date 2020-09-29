@@ -2,6 +2,7 @@ package seng202.group10.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seng202.group10.controller.AirportController;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,5 +35,25 @@ public class AirportModelTest {
         airportModel.save();
         int afterCount = airportModel.getAirports().size();
         assertEquals(beforeCount + 1, afterCount);
+    }
+
+    @Test
+    public void saveToFileTest() {
+        String filepath = "testAirports";
+        try {
+            ArrayList<Airport> beforeArray = airportModel.getAirports();
+            airportModel.saveToFile(filepath);
+            AirportController newController = new AirportController();
+            newController.importAirports(filepath);
+            assertEquals(beforeArray, newController.getAirports());
+        }
+        catch (Exception error) {
+            error.printStackTrace();
+        }
+        finally {
+            File file = new File(filepath);
+            file.delete();
+        }
+
     }
 }

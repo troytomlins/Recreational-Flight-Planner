@@ -1,6 +1,7 @@
 package seng202.group10.view;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -118,5 +119,14 @@ public class AirlinesTabController {
         filter.addFilter("country", countryFilterField.getText());
         data = filter.applyFilters();
         updateTable(data);
+    }
+
+    public void exportDataCsv(ActionEvent actionEvent) {
+    }
+
+    public void exportDataDat(ActionEvent actionEvent) {
+    }
+
+    public void exportDataTxt(ActionEvent actionEvent) {
     }
 }

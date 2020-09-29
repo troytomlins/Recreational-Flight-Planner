@@ -76,4 +76,13 @@ public class AirportModel {
         airports = airportRW.readDatabaseAirports();
     }
 
+    /**
+     * Saves all current airports in file to specified filepath
+     * @param filepath Filepath to save airports to
+     */
+    public void saveToFile(String filepath) {
+        AirportRW stream = new AirportRW(filepath);
+        stream.writeAirports(airports);
+    }
+
 }
