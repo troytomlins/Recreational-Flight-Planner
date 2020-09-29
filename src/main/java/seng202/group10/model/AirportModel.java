@@ -81,7 +81,8 @@ public class AirportModel {
      * @param filepath Filepath to save airports to
      */
     public void saveToFile(String filepath) {
-        AirportRW stream = new AirportRW(filepath);
+        AirportRW stream = new AirportRW();
+        stream.setOutFileName(filepath);
         stream.writeAirports(airports);
     }
 
