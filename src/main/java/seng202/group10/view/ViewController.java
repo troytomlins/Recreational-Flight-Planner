@@ -28,6 +28,7 @@ import seng202.group10.view.RouteTabController;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -65,7 +66,7 @@ public class ViewController {
 
     public Stage stage;
     public ControllerFacade controllerFacade;
-    public Flight flight;
+    public Flight flight = new Flight();
 
     public void setControllerFacade(ControllerFacade controllerFacade) {
         this.controllerFacade = controllerFacade;
@@ -118,6 +119,20 @@ public class ViewController {
         return filepath;
     }
 
+    public String showFileWriter() {
+        // Create a new file chooser stage
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showSaveDialog(stage);
+
+        // Create filepath
+        String filepath = null;
+        if (file != null) {
+            filepath = file.getPath();
+        }
+
+        return filepath;
+    }
     /**
      * Shows an information window with provided message
      *
@@ -248,9 +263,13 @@ public class ViewController {
     }
 
     public void saveFlight() {
+        String filepath = new String();
         locationsPane.getChildren().clear();
         FlightModel model= new FlightModel();
+        filepath = showFileWriter();
+        FlightRW write = new FlightRW(filepath);
         model.addFlight(flight);
+        write.writeFlight(flight);
         flight = new Flight();
     }
 }
