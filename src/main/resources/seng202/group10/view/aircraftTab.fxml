@@ -24,6 +24,11 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
+
+
+
+
+
         <BorderPane prefHeight="500.0" prefWidth="50" BorderPane.alignment="CENTER" GridPane.columnIndex="0">
             <top>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
