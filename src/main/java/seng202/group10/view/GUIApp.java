@@ -123,14 +123,8 @@ public class GUIApp extends Application {
         }
 
         public void confirmMarkers() {
-            // Example on how things go
-//            for (int i = 0; i < labels.size(); i ++) {
-//                String id = labels.get(i);
-//                float lat = lats.get(i);
-//                float lng = lngs.get(i);
-//                viewController.newMarker(id, lat, lng);
-//            }
             viewController.setMarkers(labels, lats, lngs);
+            // Check the flight distance
         }
 
         /**

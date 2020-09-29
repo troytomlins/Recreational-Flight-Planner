@@ -133,15 +133,15 @@ public class Flight {
     /**
      * @return can the aircraft go the distance?
      */
-    public boolean checkFlightLength(double distance, Aircraft aircraft) {
+    public boolean canFly(double distance, Aircraft aircraft) {
         // TODO should this be here?
         return (aircraft.getRange() < distance);
     }
 
-    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
-        // TODO does this need to exists - if so, here?
-        return false;
-    }
+//    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
+//        // TODO does this need to exists - if so, here?
+//        return false;
+//    }
 
     public String getDistanceMessage() {
         // TODO decide if should be here or not
@@ -152,6 +152,14 @@ public class Flight {
         this.aircraft = aircraft;
     }
 
+    public String toString() {
+        StringBuilder s = new StringBuilder("Flight(");
+        for (FlightPoint point : getFlightPoints()) {
+            s.append(point.toString()).append(", ");
+        }
+        s.append(")");
+        return s.toString();
+    }
 
 
 }

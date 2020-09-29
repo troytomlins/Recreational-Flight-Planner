@@ -206,8 +206,17 @@ public class ViewController {
      */
     public void setMarkers(ArrayList<String> labels, ArrayList<Float> lats, ArrayList<Float> lngs) {
         locationsPane.getChildren().clear();    // Delete old
+        flight = new Flight();
+
         for (int i = 0; i < labels.size(); i++) {
-            newMarker(labels.get(i), lats.get(i), lngs.get(i));
+            String label = labels.get(i);
+            double lat = lats.get(i);
+            double lng = lngs.get(i);
+
+            newMarker(label, lat, lng);
+
+            FlightPoint point = new FlightPoint("NA", label, lat, lng, 0);
+            flight.addPoint(point);
         }
     }
 
@@ -258,15 +267,18 @@ public class ViewController {
 
         //Add the thing
         locationsPane.add(pane, 0, row);
-        if (setAltitude.isPressed()) {
-            try {
-                FlightPoint point = new FlightPoint(id, "NA", lat, lng, Double.parseDouble(altitude.getText()));
-                flight.addPoint(point);
-                setAltitude.disarm();
-            } catch (NumberFormatException e) {
-                showErrorWindow("Altitude field not valid");
-            }
-        }
+
+        // This broken
+//        if (setAltitude.isPressed()) {
+//            try {
+//                FlightPoint point = new FlightPoint(id, "NA", lat, lng, Double.parseDouble(altitude.getText()));
+//                flight.addPoint(point);
+//                System.out.println(point);
+//                setAltitude.disarm();
+//            } catch (NumberFormatException e) {
+//                showErrorWindow("Altitude field not valid");
+//            }
+//        }
     }
 
     /**
