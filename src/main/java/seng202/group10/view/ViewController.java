@@ -37,6 +37,7 @@ import java.util.List;
  * View Controller
  * Handles the file explorer, adding and removing markers (NOT IN RELEASE 1!)
  *
+ * @author Niko Tainui
  * @author Tom Rizzi
  * @author Johnny Howe
  */
@@ -119,6 +120,12 @@ public class ViewController {
         return filepath;
     }
 
+    /**
+     * Creates a file explorer window, returns the filepath to the file to write.
+     * Returns null if no file was expected
+     *
+     * @return file path string of file selected, or null if none selected.
+     */
     public String showFileWriter() {
         // Create a new file chooser stage
         Stage stage = new Stage();
@@ -262,14 +269,18 @@ public class ViewController {
         }
     }
 
+    /**
+     * writes flight to file overwrites existing global flight
+     */
     public void saveFlight() {
         String filepath = new String();
         locationsPane.getChildren().clear();
         FlightModel model= new FlightModel();
         filepath = showFileWriter();
-        FlightRW write = new FlightRW(filepath);
+        FlightRW write = new FlightRW(filepath,filepath);
         model.addFlight(flight);
         write.writeFlight(flight);
+        System.out.println(flight);
         flight = new Flight();
     }
 }
