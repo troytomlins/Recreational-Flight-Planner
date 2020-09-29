@@ -123,17 +123,28 @@ public class RWStream {
      */
     public void writeAll(ArrayList<ArrayList<String>> data) {
         File file = new File(outFilename);
+        System.out.println(outFilename);
         if (file.exists()) {
             file.delete();
         }
         try {
             file.createNewFile();
+            System.out.println("Made File!");
         } catch(IOException error) {
 
         }
         for (ArrayList<String> dataLine: data) {
             writeSingle(dataLine);
+            System.out.println("write single");
         }
+    }
+
+    /**
+     * Sets the out file path
+     * @param filepath
+     */
+    public void setOutFileName(String filepath) {
+        outFilename = filepath;
     }
 
     public void displayError(String message) {
