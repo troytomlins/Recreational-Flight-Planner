@@ -119,10 +119,54 @@ public class ViewController {
         return filepath;
     }
 
+    /**
+     * Shows the file saving window for .txt files
+     * @return File path
+     */
+    public String showFileWriterTxt() {
+        return showFileWriter("TXT files (*.txt)", "*.txt");
+    }
+
+    /**
+     * Shows the file saving window for .csv files
+     * @return File path
+     */
+    public String showFileWriterCsv() {
+        return showFileWriter("CSV files (*.csv)", "*.csv");
+    }
+
+    /**
+     * Shows the file saving window for .dat files
+     * @return File path
+     */
+    public String showFileWriterDat() {
+        return showFileWriter("DAT files (*.dat)", "*.dat");
+    }
+
+    /**
+     * Default show file write window method, uses csv files
+     * @return File path
+     */
     public String showFileWriter() {
+        return showFileWriterCsv();
+    }
+
+    /**
+     * Shows file explorer for writing files.
+     * @param extensionString File extension representation string
+     * @param extensionRegex File extension regex expression
+     * @return String representation of filepath
+     */
+    public String showFileWriter(String extensionString, String extensionRegex) {
         // Create a new file chooser stage
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
+
+        // Add extensions checker
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(extensionString, extensionRegex);
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file window
         File file = fileChooser.showSaveDialog(stage);
 
         // Create filepath
