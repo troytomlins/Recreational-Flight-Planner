@@ -1,6 +1,7 @@
 package seng202.group10.view;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -128,5 +129,27 @@ public class AirportTabController {
         filter.addFilter("country", countryFilterField.getText());
         data = filter.applyFilters();
         updateTable(data);
+    }
+
+    /**
+     * Exports data to the specified filepath
+     * @param filepath
+     */
+    public void exportData(String filepath) {
+
+    }
+
+    /**
+     * Method runs when export airports to csv is clicked. Opens dialogue for exporting data.
+     * @param actionEvent
+     */
+    public void exportDataCsv(ActionEvent actionEvent) {
+
+    }
+
+    public void exportDataDat(ActionEvent actionEvent) {
+    }
+
+    public void exportDataTxt(ActionEvent actionEvent) {
     }
 }

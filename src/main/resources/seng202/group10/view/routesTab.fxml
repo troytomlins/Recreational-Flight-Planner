@@ -113,9 +113,9 @@
                     <children>
                         <MenuButton mnemonicParsing="false" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="CSV File" />
-                                <MenuItem mnemonicParsing="false" text="Dat File" />
-                                <MenuItem mnemonicParsing="false" text="Txt File" />
+                                <MenuItem mnemonicParsing="false" onAction="#exportDataCsv" text="CSV File" />
+                                <MenuItem mnemonicParsing="false" onAction="#exportDataDat" text="Dat File" />
+                                <MenuItem mnemonicParsing="false" onAction="#exportDataTxt" text="Txt File" />
                             </items>
                             <GridPane.margin>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
