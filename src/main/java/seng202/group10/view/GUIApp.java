@@ -1,6 +1,7 @@
 package seng202.group10.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 import seng202.group10.controller.ControllerFacade;
+import seng202.group10.model.Airport;
 import seng202.group10.view.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
@@ -71,6 +73,7 @@ public class GUIApp extends Application {
                 window.setMember("javaConnector", javaConnector);
             }
         });
+        javaConnector.setEngine(webEngine);
         webEngine.load(url.toString());
     }
 
@@ -139,6 +142,31 @@ public class GUIApp extends Application {
          */
         public void println(String text) {
             System.out.println(text);
+        }
+        WebEngine webEngine;
+
+        public void setEngine(WebEngine engine) {
+            webEngine = engine;
+        }
+
+        public void setAirports() {
+            System.out.println("Here");
+            ArrayList<Airport> airports = new ArrayList<Airport>();
+            for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
+                //TODO: Only send airports that are on the screen
+                airports.add(airport);
+            }
+
+            for (int i = 0; i < Math.min(100, airports.size()); i++) {
+                Airport airport = airports.get(i);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        webEngine.executeScript(String.format("addAirport('%s', %f, %f)", airport.getName(), airport.getLatitude(), airport.getLongitude()));
+                    }
+                });
+            }
         }
     }
 

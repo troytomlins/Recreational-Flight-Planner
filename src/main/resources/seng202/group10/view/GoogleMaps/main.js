@@ -111,6 +111,9 @@ function initMap() {
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
     });
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function(event) {
+        javaConnector.setAirports();
+    });
 }
 
 
@@ -186,6 +189,17 @@ function println(text) {
     javaConnector.println(text);
 }
 
+var airports = [];
+var airportIndex = 0;
+
+function addAirport(name, lat, long) {
+    println(name);
+    airports[airportIndex] = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, long),
+        label: name,
+        map: map
+    });
+}
 
 /**
  * Control vertical map resizing
