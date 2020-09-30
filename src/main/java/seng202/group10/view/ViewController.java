@@ -297,12 +297,12 @@ public class ViewController {
      */
     public void saveFlight() {
         String filepath = new String();
-        locationsPane.getChildren().clear();
+//        locationsPane.getChildren().clear();
         FlightModel model= new FlightModel();
         filepath = showFileWriter();
         FlightRW write = new FlightRW(filepath,filepath);
         model.addFlight(flight);
         write.writeFlight(flight);
-        flight = new Flight();
+//        flight = new Flight();
     }
 }
