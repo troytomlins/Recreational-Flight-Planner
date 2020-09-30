@@ -107,6 +107,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(ucPos.lat, ucPos.lng),
         zoom: 15,
+        disableDefaultUI: true,
     });
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
