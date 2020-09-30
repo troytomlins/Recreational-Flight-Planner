@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng202.group10.controller.AirlineController;
+import seng202.group10.controller.AirportController;
 import seng202.group10.controller.filters.AirlineFilters;
 import seng202.group10.model.Airline;
 import seng202.group10.model.Airport;
@@ -121,12 +122,39 @@ public class AirlinesTabController {
         updateTable(data);
     }
 
+    /**
+     * Exports data to the specified filepath
+     * @param filepath
+     */
+    public void exportData(String filepath) {
+        AirlineController controller = mainController.controllerFacade.getAirlineController();
+        controller.writeAirports(filepath);
+    }
+
+    /**
+     * Method runs when export airlines to csv is clicked. Opens dialogue for exporting data.
+     * @param actionEvent
+     */
     public void exportDataCsv(ActionEvent actionEvent) {
+        String filepath = mainController.showFileWriterCsv();
+        exportData(filepath);
     }
 
+    /**
+     * Method runs when export airlines to dat is clicked. Opens dialogue for exporting data.
+     * @param actionEvent
+     */
     public void exportDataDat(ActionEvent actionEvent) {
+        String filepath = mainController.showFileWriterDat();
+        exportData(filepath);
     }
 
+    /**
+     * Method runs when export airlines to txt is clicked. Opens dialogue for exporting data.
+     * @param actionEvent
+     */
     public void exportDataTxt(ActionEvent actionEvent) {
+        String filepath = mainController.showFileWriterTxt();
+        exportData(filepath);
     }
 }
