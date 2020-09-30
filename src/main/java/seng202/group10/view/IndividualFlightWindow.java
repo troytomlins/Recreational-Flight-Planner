@@ -75,6 +75,7 @@ public class IndividualFlightWindow {
         SingleSelectionModel<Tab> selectionModel = mainController.mainTabPane.getSelectionModel();
         selectionModel.select(0);
         // Add markers
+        mainController.clearMarkers();
         for (FlightPoint point : flight.getFlightPoints()) {
             Platform.runLater(new Runnable() {
                 @Override
