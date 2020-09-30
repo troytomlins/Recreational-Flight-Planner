@@ -152,6 +152,7 @@ function removeAllMarkers() {
     for (let marker of markers) {
         marker.delete();
     }
+    labelHandler.labelIndex = 0;
     markers = [];
 }
 
