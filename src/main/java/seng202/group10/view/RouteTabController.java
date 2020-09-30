@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import seng202.group10.controller.AirlineController;
 import seng202.group10.controller.RouteController;
 import seng202.group10.controller.filters.RouteFilters;
 import seng202.group10.model.Airline;
@@ -117,12 +118,45 @@ public class RouteTabController {
         updateTable(data);
     }
 
-    public void exportDataCsv(ActionEvent actionEvent) {
+    /**
+     * Exports data to the specified filepath
+     * @param filepath Filepath to save the data to
+     */
+    public void exportData(String filepath) {
+        RouteController controller = mainController.controllerFacade.getRouteController();
+        controller.writeRoutes(filepath);
     }
 
-    public void exportDataDat(ActionEvent actionEvent) {
+    /**
+     * Opens a file explorer window to select where to save it to as a csv.
+     * Then exports the data to the specified filepath
+     */
+    public void exportDataCsv() {
+        String filepath = mainController.showFileWriterCsv();
+        if (filepath != null) {
+            exportData(filepath);
+        }
     }
 
-    public void exportDataTxt(ActionEvent actionEvent) {
+    /**
+     * Opens a file explorer window to select where to save it to as a dat.
+     * Then exports the data to the specified filepath
+     */
+    public void exportDataDat() {
+        String filepath = mainController.showFileWriterDat();
+        if (filepath != null) {
+            exportData(filepath);
+        }
+    }
+
+    /**
+     * Opens a file explorer window to select where to save it to as a txt.
+     * Then exports the data to the specified filepath
+     */
+    public void exportDataTxt() {
+        String filepath = mainController.showFileWriterTxt();
+        if (filepath != null) {
+            exportData(filepath);
+        }
     }
 }

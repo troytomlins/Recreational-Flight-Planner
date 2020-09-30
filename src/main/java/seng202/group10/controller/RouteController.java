@@ -100,4 +100,13 @@ public class RouteController {
         csvReader.close();
     }
 
+    /**
+     * Writes data that is currently in the model to a file
+     * @param filepath Filepath to save the file to
+     */
+    public void writeRoutes(String filepath) {
+        RouteRW stream = new RouteRW();
+        stream.setOutFileName(filepath);
+        stream.writeRoute(model.getRoutes());
+    }
 }

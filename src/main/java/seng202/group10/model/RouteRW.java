@@ -109,35 +109,6 @@ public class RouteRW extends RWStream {
         }
     }
 
-
-    public ArrayList<Route> readRoutes1() {
-        ArrayList<ArrayList<String>> data = read();
-
-        ArrayList<Route> routeList = new ArrayList<>();
-
-        for (ArrayList<String> dataLine: data) {
-            if (true/*ValidateData.validateRoute(dataLine)*/) {
-                Scanner scanner = new Scanner(dataLine.get(8));
-                scanner.useDelimiter(" ");
-
-                ArrayList<String> equipment = new ArrayList<>();
-
-                while (scanner.hasNext()) {
-                    equipment.add(scanner.next());
-                }
-
-                Route route = new Route(
-                        dataLine.get(0),
-                        dataLine.get(1),
-                        dataLine.get(3),
-                        Integer.parseInt(dataLine.get(7))
-                );
-                routeList.add(route);
-            }
-        }
-        return routeList;
-    }
-
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
 
