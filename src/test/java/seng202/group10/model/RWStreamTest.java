@@ -37,23 +37,27 @@ public class RWStreamTest {
 
     @Test
     public void testWriteAll() {
-        ArrayList<ArrayList<String>> read_info = new ArrayList<ArrayList<String>>();
-        ArrayList<ArrayList<String>> write_info = new ArrayList<ArrayList<String>>();
-        ArrayList<ArrayList<String>> compareList = new ArrayList<ArrayList<String>>();
-        String test1 = "This, Is, a, test, of, the, write, single, class";
-        String test2 = "This, Is, a, test, of, the, write, all, class";
-        ArrayList<String> splitList = new ArrayList<String>(Arrays.asList(test2.split("[, ]+")));
-        ArrayList<String> list = new ArrayList<String>();
-        list.add(test1);
-        write_info.add(list);
-        list.remove(test1);
-        list.add(test2);
-        write_info.add(list);
+        ArrayList<ArrayList<String>> writeInfo = new ArrayList<ArrayList<String>>();
+//        ArrayList<ArrayList<String>> compareList = new ArrayList<ArrayList<String>>();
+
+        String line1 = "This, Is, a, test, of, the, write, single, class";
+        String line2 = "This, Is, a, test, of, the, write, all, class";
+
+        ArrayList<String> arr1 = new ArrayList<String>(Arrays.asList(line1.split("[, ]+")));
+        ArrayList<String> arr2 = new ArrayList<String>(Arrays.asList(line2.split("[, ]+")));
+
+        ArrayList<ArrayList<String>> expectedArr = new ArrayList<>();
+
+        writeInfo.add(arr1);
+        writeInfo.add(arr2);
+        expectedArr.add(arr1);
+        expectedArr.add(arr2);
+
         RWStream rwstream = new RWStream("test2.csv");
-        rwstream.writeAll(write_info);
-        read_info = rwstream.read();
-        compareList.add(splitList);
-        assertEquals(compareList, read_info);
+
+        rwstream.writeAll(writeInfo);
+        ArrayList<ArrayList<String>> readInfo = rwstream.read();
+        assertEquals(expectedArr, readInfo);
 
     }
 

@@ -292,7 +292,6 @@ public class ViewController {
         FlightRW write = new FlightRW(filepath,filepath);
         model.addFlight(flight);
         write.writeFlight(flight);
-        System.out.println(flight);
         flight = new Flight();
     }
 }
