@@ -106,13 +106,30 @@ function initMap() {
     var ucPos = { lat: -43.522456, lng: 172.579422 };
     map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(ucPos.lat, ucPos.lng),
-        zoom: 15,
+        zoom: 10,
     });
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
     });
-    google.maps.event.addListenerOnce(map, 'tilesloaded', function(event) {
-        javaConnector.setAirports();
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+        var bounds = map.getBounds();
+        javaConnector.setAirports(map.getZoom(),
+            bounds.getNorthEast().lat(),
+            bounds.getNorthEast().lng(),
+            bounds.getSouthWest().lat(),
+            bounds.getSouthWest().lng()
+        );
+    });
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+        println("Bounds changed");
+        removeAirports();
+        var bounds = map.getBounds();
+        javaConnector.setAirports(map.getZoom(),
+            bounds.getNorthEast().lat(),
+            bounds.getNorthEast().lng(),
+            bounds.getSouthWest().lat(),
+            bounds.getSouthWest().lng()
+        );
     });
 }
 
@@ -193,12 +210,25 @@ var airports = [];
 var airportIndex = 0;
 
 function addAirport(name, lat, long) {
-    println(name);
     airports[airportIndex] = new google.maps.Marker({
         position: new google.maps.LatLng(lat, long),
         label: name,
         map: map
     });
+    println(airportIndex);
+    airportIndex += 1;
+    println(airportIndex);
+}
+
+function removeAirports() {
+    println("Start deleting");
+    for (var i = 0; i < airportIndex; i++) {
+        airports[i].setMap(null);
+        println("Deleting");
+    }
+    println("Deleted");
+    airports = [];
+    airportIndex = 0;
 }
 
 /**

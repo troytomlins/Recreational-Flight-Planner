@@ -17,6 +17,7 @@ import seng202.group10.model.DatabaseConnection;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -149,13 +150,26 @@ public class GUIApp extends Application {
             webEngine = engine;
         }
 
-        public void setAirports() {
-            System.out.println("Here");
+        public void setAirports(int zoom, double lat1, double long1, double lat2, double long2) {
             ArrayList<Airport> airports = new ArrayList<Airport>();
+            System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
             for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
-                //TODO: Only send airports that are on the screen
-                airports.add(airport);
+                if (airport.getLatitude() <= lat1 &&
+                        airport.getLatitude() >= lat2 &&
+                        ((airport.getLongitude() <= long1 &&
+                                airport.getLongitude() >= long2 &&
+                                long2 <= long1) /*||
+                        (airport.getLongitude() >= long1 &&
+                                airport.getLongitude() <= long2 &&
+                                long2 > long1)*/
+                        )
+                        ) {
+                    System.out.println("Adding " + airport.getName());
+                    airports.add(airport);
+                }
             }
+
+            Collections.shuffle(airports);
 
             for (int i = 0; i < Math.min(100, airports.size()); i++) {
                 Airport airport = airports.get(i);
@@ -163,7 +177,7 @@ public class GUIApp extends Application {
                     @Override
                     public void run() {
 
-                        webEngine.executeScript(String.format("addAirport('%s', %f, %f)", airport.getName(), airport.getLatitude(), airport.getLongitude()));
+                        webEngine.executeScript(String.format("addAirport('', %f, %f)", airport.getLatitude(), airport.getLongitude()));
                     }
                 });
             }
