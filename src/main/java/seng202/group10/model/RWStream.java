@@ -1,15 +1,14 @@
 package seng202.group10.model;
 import javafx.scene.control.Alert;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.util.Arrays;
+
+import com.google.common.base.Joiner;
 
 
 /**
@@ -129,6 +128,7 @@ public class RWStream {
      * @param data list of line lists
      */
     public void writeAll(ArrayList<ArrayList<String>> data) {
+
         File file = new File(outFilename);
         if (file.exists()) {
             file.delete();
@@ -138,8 +138,30 @@ public class RWStream {
         } catch(IOException error) {
 
         }
-        for (ArrayList<String> dataLine: data) {
-            writeSingle(dataLine);
+        try {
+            fileWriter = new FileWriter(outFilename);
+            StringBuilder builder;
+            StringBuilder fileContent = new StringBuilder();
+            for (ArrayList<String> line: data) {
+                builder = new StringBuilder();
+                for (int i = 0; i < line.size(); i++) {
+                    builder.append(line.get(i));
+                    if (i < line.size() -1) {
+                        builder.append(", ");
+                    }
+                }
+                builder.append('\n');
+                fileContent.append(builder.toString());
+            }
+            fileWriter.write(fileContent.toString());
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+        finally {
+            try {
+                fileWriter.close();
+            } catch (IOException ignore) {
+            }
         }
     }
 
