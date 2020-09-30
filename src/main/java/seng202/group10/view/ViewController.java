@@ -65,6 +65,8 @@ public class ViewController {
     private ComboBox aircraftSelector;
     @FXML
     private TextField filename;
+    @FXML
+    public TabPane mainTabPane;
 
     public WebEngine webEngine;
 

@@ -114,6 +114,12 @@ function initMap() {
 }
 
 
+function newMarker(lat, lng) {
+//    addMarker(new google.maps.LatLng(lat, lng));
+    addMarker(new google.maps.LatLng(lat, lng));
+}
+
+
 /**
  * Make a new marker
  * tell java about it with sendLocationToJava
@@ -128,6 +134,7 @@ function addMarker(location) {
     markers[currentIndex] = marker
     sendMarkersToJava();
 }
+
 
 
 function removeMarker(marker) {
@@ -187,6 +194,7 @@ function sendMarkersToJava() {
         console.log("Cannot find javaConnector. Are you running the app?");
     }
 }
+
 
 /**
  * Print some text into the java console

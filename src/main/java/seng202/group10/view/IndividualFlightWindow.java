@@ -1,11 +1,10 @@
 package seng202.group10.view;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,6 +28,8 @@ public class IndividualFlightWindow {
     private ViewController mainController;
     private Stage stage;
 
+    private Flight flight;
+
     /**
      * Injects the main view controller and stage into object
      * @param controller View Controller to inject into object
@@ -38,6 +39,7 @@ public class IndividualFlightWindow {
         // Inject variables
         this.mainController = controller;
         this.stage = stage;
+        this.flight = flight;
 
         // Set table and text fields
         updateTable(flight.getFlightPoints());
@@ -64,5 +66,23 @@ public class IndividualFlightWindow {
      */
     public void closeWindow() {
         stage.close();
+    }
+
+    /**
+     * View the currently selected flight on the map
+     */
+    public void viewOnMap() {
+        SingleSelectionModel<Tab> selectionModel = mainController.mainTabPane.getSelectionModel();
+        selectionModel.select(0);
+        // Add markers
+        for (FlightPoint point : flight.getFlightPoints()) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    String code = String.format("newMarker(%f, %f)", point.getLatitude(), point.getLongitude());
+                    mainController.webEngine.executeScript(code);
+                }
+            });
+        }
     }
 }

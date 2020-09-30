@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,8 +30,8 @@ public class FlightTabController {
     @FXML public TableColumn<Flight, String> legCountCol;
     @FXML private TableView<Flight> flightsTable;
 
-
     public ViewController mainController;
+    private Flight flight;
 
     /**
      * Injects main controller into flight tab
@@ -98,7 +95,6 @@ public class FlightTabController {
      * Updates flight table with current model data
      */
     public void updateTable(ArrayList<Flight> flights) {
-
         flightsTable.setEditable(true);
         aircraftCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("aircraftName"));
         startCoordCol.setCellValueFactory(new PropertyValueFactory<Flight, String>("startCoordString"));
@@ -107,6 +103,7 @@ public class FlightTabController {
         legCountCol.setCellValueFactory(new PropertyValueFactory<>("legCount"));
 
         flightsTable.setItems(FXCollections.observableList(flights));
-
     }
+
+
 }
