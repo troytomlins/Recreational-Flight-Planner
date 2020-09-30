@@ -61,7 +61,7 @@ public class AirlineController {
      * Writes airports to a file using RW class to specified filepath
      * @param filepath Filepath to write data file to
      */
-    public void writeAirports(String filepath) {
+    public void writeAirlines(String filepath) {
         AirlineRW stream = new AirlineRW();
         stream.setOutFileName(filepath);
         stream.writeAirlines(model.getAirlines());

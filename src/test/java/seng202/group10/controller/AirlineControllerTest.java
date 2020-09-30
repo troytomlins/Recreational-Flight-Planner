@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import seng202.group10.model.*;
 
 import java.io.File;
+import java.util.ArrayList;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,17 +24,18 @@ public class AirlineControllerTest {
     @Test
     public void writeAirportsTest() throws FileFormatException, IncompatibleFileException {
         String outFile = "test.txt";
-        AirlineController controllerA = new AirlineController();
-        AirlineController controllerB = new AirlineController();;
+        AirlineController controller = new AirlineController();
         try {
+            // Setup
+            controller.importAirlines("src/test/resources/seng202.group10/model/airportsGood.dat");
+            controller.writeAirlines(outFile);
+            ArrayList<Airline> beforeContent = controller.getAirlines();
 
-            controllerA.importAirlines("src/test/resources/seng202.group10/model/airportsGood.dat");
-            controllerA.writeAirports(outFile);
+            // Load file and check correct
+            DatabaseConnection.getInstance().disconnect();
+            controller = new AirlineController();
 
-
-            controllerB.importAirlines(outFile);
-
-            assertEquals(controllerA.getAirlines().size(), controllerB.getAirlines().size());
+            assertEquals(controller.getAirlines().size(), beforeContent.size());
         } finally {
 
             File file = new File(outFile);

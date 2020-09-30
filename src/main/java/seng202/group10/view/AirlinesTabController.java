@@ -8,14 +8,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import seng202.group10.controller.AirlineController;
-import seng202.group10.controller.AirportController;
 import seng202.group10.controller.filters.AirlineFilters;
 import seng202.group10.model.Airline;
-import seng202.group10.model.Airport;
 import seng202.group10.model.FileFormatException;
 import seng202.group10.model.IncompatibleFileException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -128,7 +125,7 @@ public class AirlinesTabController {
      */
     public void exportData(String filepath) {
         AirlineController controller = mainController.controllerFacade.getAirlineController();
-        controller.writeAirports(filepath);
+        controller.writeAirlines(filepath);
     }
 
     /**
