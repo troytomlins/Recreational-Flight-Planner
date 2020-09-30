@@ -1,5 +1,6 @@
 package seng202.group10.model;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,10 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class RouteRWTest {
-    public class AirlineRWTest {
+    public static class AirlineRWTest {
         private final String goodFileString = "src/test/resources/seng202.group10/model/routesGood.dat";
         private final String badFileString = "src/test/resources/seng202.group10/model/routesBad.dat";
         private final String corruptFileString = "src/test/resources/seng202.group10/model/routesCorrupt.dat";
+
+        @AfterAll
+        public static void tearDown() {
+            DatabaseConnection.getInstance().disconnect();
+        }
 
         @Test
         public void readFileReturnsCorrectArrayGoodFile() throws FileFormatException, IncompatibleFileException {
@@ -24,6 +30,8 @@ public class RouteRWTest {
             RouteRW stream = new RouteRW(goodFileString);
             assertEquals(stream.readRoutes().size(), correctArray.size());
         }
+
+
 
         @Test
         public void readFileThrowsErrorBadFile() {

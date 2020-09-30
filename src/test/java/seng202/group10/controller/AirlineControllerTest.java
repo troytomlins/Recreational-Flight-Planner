@@ -41,9 +41,7 @@ public class AirlineControllerTest {
     }
 
     @AfterAll
-    static void tearDown() {
-        RWStream stream = new RWStream("Test");
-        stream.closeDb();
-        System.out.println("a");
+    public static void tearDown() {
+        DatabaseConnection.getInstance().disconnect();
     }
 }

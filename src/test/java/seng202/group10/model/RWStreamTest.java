@@ -1,5 +1,6 @@
 package seng202.group10.model;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,6 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class RWStreamTest {
+
+    @AfterAll
+    public static void tearDown() {
+        DatabaseConnection.getInstance().disconnect();
+    }
 
     @Test
     public void testRead() {

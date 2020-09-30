@@ -1,5 +1,6 @@
 package seng202.group10.model;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,12 @@ public class AirlineModelTest {
         airline = new Airline("Air New Zealand", "N/A","NZ","ANZ","NEW ZEALAND","New Zealand");
         compareAirline = new ArrayList<>();
         compareAirline.add(airline);
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        RWStream stream = new RWStream("a");
+        stream.closeDb();
     }
 
     @Test

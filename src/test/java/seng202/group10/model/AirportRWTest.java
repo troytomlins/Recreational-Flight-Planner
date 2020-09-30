@@ -1,6 +1,7 @@
 package seng202.group10.model;
 
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -17,6 +18,12 @@ public class AirportRWTest {
     private final String goodFileString = "src/test/resources/seng202.group10/model/airportsGood.dat";
     private final String badFileString = "src/test/resources/seng202.group10/model/airportsBad.dat";
     private final String corruptFileString = "src/test/resources/seng202.group10/model/airportsCorrupt.dat";
+
+    @AfterAll
+    public static void tearDown() {
+        RWStream stream = new RWStream("a");
+        stream.closeDb();
+    }
 
     @Test
     public void readFileReturnsCorrectArrayGoodFile() throws FileFormatException, IncompatibleFileException {
