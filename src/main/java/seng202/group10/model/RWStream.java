@@ -49,7 +49,7 @@ public class RWStream {
      * Closes the database connection
      */
     public void closeDb() {
-        databaseConnection.closeConnection();
+        databaseConnection.disconnect();
     }
 
     /**
