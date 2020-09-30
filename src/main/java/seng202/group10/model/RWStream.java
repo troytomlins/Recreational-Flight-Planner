@@ -46,6 +46,13 @@ public class RWStream {
     }
 
     /**
+     * Closes the database connection
+     */
+    public void closeDb() {
+        databaseConnection.closeConnection();
+    }
+
+    /**
      * Creates file at outFilename
      */
     private void makeFile() {

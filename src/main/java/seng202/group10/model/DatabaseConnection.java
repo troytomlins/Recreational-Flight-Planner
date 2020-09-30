@@ -99,6 +99,17 @@ public final class DatabaseConnection {
     }
 
     /**
+     * Closes the database connection
+     */
+    public void closeConnection() {
+        try {
+            conn.close();
+            INSTANCE = null;
+        } catch (SQLException ignored) {
+        }
+    }
+
+    /**
      * Connects to database.db, and if it doesn't exists, creates it
      */
     private void connect() {
