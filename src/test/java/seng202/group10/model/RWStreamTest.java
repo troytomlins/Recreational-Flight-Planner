@@ -3,6 +3,10 @@ package seng202.group10.model;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,23 +47,30 @@ public class RWStreamTest {
 
     @Test
     public void testWriteAll() {
-        ArrayList<ArrayList<String>> read_info = new ArrayList<ArrayList<String>>();
-        ArrayList<ArrayList<String>> write_info = new ArrayList<ArrayList<String>>();
-        ArrayList<ArrayList<String>> compareList = new ArrayList<ArrayList<String>>();
-        String test1 = "This, Is, a, test, of, the, write, single, class";
-        String test2 = "This, Is, a, test, of, the, write, all, class";
-        ArrayList<String> splitList = new ArrayList<String>(Arrays.asList(test2.split("[, ]+")));
-        ArrayList<String> list = new ArrayList<String>();
-        list.add(test1);
-        write_info.add(list);
-        list.remove(test1);
-        list.add(test2);
-        write_info.add(list);
-        RWStream rwstream = new RWStream("test2.csv");
-        rwstream.writeAll(write_info);
-        read_info = rwstream.read();
-        compareList.add(splitList);
-        assertEquals(compareList, read_info);
+        String filePath = "testWriteAll.txt";
+        File testFile = new File(filePath);
+        try {
+            // Setup
+            ArrayList<ArrayList<String>> testArray = new ArrayList<>();
+            testArray.add(new ArrayList<>(Arrays.asList("1", "2", "3")));
+            testArray.add(new ArrayList<>(Arrays.asList("4", "5", "6")));
+            String expected = "1, 2, 3\n4, 5, 6\n";
+
+            // Write to file
+            RWStream stream = new RWStream("", filePath);
+            stream.writeAll(testArray);
+
+            // Check file
+            String readString = Files.readString(Path.of(filePath));
+            assertEquals(readString, expected);
+
+        } catch (IOException ignore) {
+        } finally {
+            testFile.delete();
+        }
+
+
+
 
     }
 
