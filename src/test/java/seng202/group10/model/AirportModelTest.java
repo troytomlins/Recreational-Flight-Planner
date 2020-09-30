@@ -45,7 +45,7 @@ public class AirportModelTest {
             airportModel.saveToFile(filepath);
             AirportController newController = new AirportController();
             newController.importAirports(filepath);
-            assertEquals(beforeArray, newController.getAirports());
+            assertEquals(beforeArray.size(), newController.getAirports().size());
         }
         catch (Exception error) {
             error.printStackTrace();

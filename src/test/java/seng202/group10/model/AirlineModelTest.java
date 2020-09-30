@@ -18,8 +18,6 @@ public class AirlineModelTest {
 
     @BeforeEach
     public void init() {
-        File file = new File("database.db");
-        file.delete();
         airlineModel = new AirlineModel();
         airline = new Airline("Air New Zealand", "N/A","NZ","ANZ","NEW ZEALAND","New Zealand");
         compareAirline = new ArrayList<>();
@@ -28,16 +26,18 @@ public class AirlineModelTest {
 
     @Test
     public void addAirlineTest() {
-        airlineModel.addAirline(airline);
-        airlineModel.save();
-        assertEquals(1, airlineModel.getAirlines().size());
+        AirlineModel model = new AirlineModel();
+        System.out.println(model.getAirlines());
+        model.addAirline(airline);
+        model.save();
+        System.out.println(model.getAirlines());
+        assertEquals(1, model.getAirlines().size());
     }
 
     @Test
     public void addDuplicateAirlineTest() {
         airlineModel.addAirline(airline);
         airlineModel.addAirline(airline); // Try and add the same airline again.
-        airlineModel.save();
         assertEquals(1, airlineModel.getAirlines().size()); // The duplicate should not be added.
     }
 
