@@ -133,9 +133,8 @@ public class Flight {
     /**
      * @return can the aircraft go the distance?
      */
-    public boolean canFly(double distance, Aircraft aircraft) {
-        // TODO should this be here?
-        return (aircraft.getRange() < distance);
+    public boolean canFly() {
+        return (aircraft.getRange() < totalDistance);
     }
 
 //    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {

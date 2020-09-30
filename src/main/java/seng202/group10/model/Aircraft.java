@@ -58,6 +58,6 @@ public class Aircraft {
     }
 
     public String toString() {
-        return name;
+        return String.format("Name: %s, Range: %fkm",name,range);
     }
 }

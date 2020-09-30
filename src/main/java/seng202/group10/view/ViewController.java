@@ -218,7 +218,7 @@ public class ViewController {
 
             newMarker(label, lat, lng);
 
-            FlightPoint point = new FlightPoint("NA", label, lat, lng, 0);
+            FlightPoint point = new FlightPoint("NA", label, 0, lat, lng);
             flight.addPoint(point);
         }
     }
