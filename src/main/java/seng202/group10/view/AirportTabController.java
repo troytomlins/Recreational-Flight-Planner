@@ -149,11 +149,19 @@ public class AirportTabController {
         exportData(filepath);
     }
 
+    /**
+     * Method runs when export airports to csv is clicked. Opens dialogue for exporting data.
+     * @param actionEvent
+     */
     public void exportDataDat(ActionEvent actionEvent) {
         String filepath = mainController.showFileWriterDat();
         exportData(filepath);
     }
 
+    /**
+     * Method runs when export airports to csv is clicked. Opens dialogue for exporting data.
+     * @param actionEvent
+     */
     public void exportDataTxt(ActionEvent actionEvent) {
         String filepath = mainController.showFileWriterTxt();
         exportData(filepath);
