@@ -148,6 +148,14 @@ function removeMarker(marker) {
 }
 
 
+function removeAllMarkers() {
+    for (let marker of markers) {
+        marker.delete();
+    }
+    markers = [];
+}
+
+
 // Get a list of labels, lats and lngs to pass to java
 function makeJavaMarkerLists() {
     let labels = [];

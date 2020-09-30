@@ -49,7 +49,6 @@ public class GUIApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Recreational Flight Planner");
         primaryStage.show();
-
     }
 
     /**
@@ -72,6 +71,7 @@ public class GUIApp extends Application {
             }
         });
         webEngine.load(url.toString());
+        viewController.webEngine = webEngine;
     }
 
     @Override

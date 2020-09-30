@@ -17,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,6 +65,8 @@ public class ViewController {
     private ComboBox aircraftSelector;
     @FXML
     private TextField filename;
+
+    public WebEngine webEngine;
 
     public Stage stage;
     public ControllerFacade controllerFacade;
@@ -279,6 +282,14 @@ public class ViewController {
 //                showErrorWindow("Altitude field not valid");
 //            }
 //        }
+    }
+
+    /**
+     * Clear all the markers
+     */
+    public void clearMarkers() {
+        locationsPane.getChildren().clear();
+        webEngine.executeScript("removeAllMarkers()");
     }
 
     /**
