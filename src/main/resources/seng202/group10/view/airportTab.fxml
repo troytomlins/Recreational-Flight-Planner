@@ -53,9 +53,10 @@
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints maxHeight="346.8" minHeight="10.0" prefHeight="93.79999389648438" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="280.0000457763672" minHeight="0.0" prefHeight="96.20000610351565" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="89.00001831054686" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="77.40000000000003" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="280.0000457763672" minHeight="0.0" prefHeight="124.5" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="124.5" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="58.5" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="276.6000122070312" minHeight="10.0" prefHeight="49.5" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <Button fx:id="apply" mnemonicParsing="false" onAction="#applyAirportFilters" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -86,6 +87,7 @@
                                         <Insets left="5.0" />
                                     </GridPane.margin>
                                 </Text>
+                        <Button mnemonicParsing="false" onAction="#clearFilters" text="Clear" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                             </children>
                         </GridPane>
                     </center>

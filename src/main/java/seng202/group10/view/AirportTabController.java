@@ -56,6 +56,17 @@ public class AirportTabController {
         airportTable.setItems(FXCollections.observableList(data));
     }
 
+
+    /**
+     * Remove any filters that have been applied
+     */
+    public void clearFilters() {
+        nameFilterField.setText("");
+        cityFilterField.setText("");
+        countryFilterField.setText("");
+        applyAirportFilters();
+    }
+
     /**
      * Sets this.mainController
      * @param controller to set
