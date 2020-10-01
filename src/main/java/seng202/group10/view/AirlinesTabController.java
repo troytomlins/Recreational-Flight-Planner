@@ -120,6 +120,16 @@ public class AirlinesTabController {
     }
 
     /**
+     * Remove any filters that have been applied
+     */
+    public void clearFilters() {
+        nameFilterField.setText("");
+        aliasFilterField.setText("");
+        countryFilterField.setText("");
+        applyAirlineFilters();
+    }
+
+    /**
      * Exports data to the specified filepath
      * @param filepath
      */
