@@ -1,7 +1,6 @@
 package seng202.group10.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -9,9 +8,6 @@ import javafx.stage.Stage;
 import seng202.group10.controller.ControllerFacade;
 import seng202.group10.model.FileFormatException;
 import seng202.group10.model.IncompatibleFileException;
-import seng202.group10.view.AirlinesTabController;
-import seng202.group10.view.AirportTabController;
-import seng202.group10.view.RouteTabController;
 
 import java.io.File;
 import java.util.Optional;

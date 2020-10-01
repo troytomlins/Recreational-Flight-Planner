@@ -7,17 +7,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
-import java.util.List;
 
+/**
+ * Model class for Airport Traffic
+ */
 public class AirportTrafficModel {
 
     private static int TIME_RANGE = 500;
@@ -26,6 +22,10 @@ public class AirportTrafficModel {
 
     private static HttpTransport TRANSPORT;
 
+    /**
+     * Creates a new NetHttpTransport if no current TRANSPORT
+     * @return HttpTransport
+     */
     private static HttpTransport transport() {
         if (null == TRANSPORT) {
             TRANSPORT = new NetHttpTransport();
@@ -35,6 +35,10 @@ public class AirportTrafficModel {
 
     private static HttpRequestFactory REQ_FACTORY;
 
+    /**
+     * Creates a new request factory if currently none
+     * @return HttpRequestFactory
+     */
     private static HttpRequestFactory reqFactory() {
         if (null == REQ_FACTORY) {
             REQ_FACTORY = transport().createRequestFactory();
@@ -43,10 +47,10 @@ public class AirportTrafficModel {
     }
 
     /**
-     * Returns the number of flights arround the airport at the sepcified time
-     * @param airport
-     * @param dateTimeStr
-     * @return
+     * Returns the number of flights around the airport at the specified time
+     * @param airport Airport
+     * @param dateTimeStr date & Time
+     * @return int, number of flights
      */
     public int getAirportTraffic(Airport airport, String dateTimeStr) throws IOException, java.text.ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS");
@@ -56,12 +60,12 @@ public class AirportTrafficModel {
 
     /**
      * Performs an http get request to specified url
-     * @param reqUrl Url for http get rewuest
+     * @param reqUrl Url for http get request
      * @param icao Airport icao
      * @param begin Being time
      * @param end End time
      * @return HttpResponse for flights in and
-     * @throws IOException
+     * @throws IOException IOException
      */
     private static HttpResponse getTrafficResponse(String reqUrl, String icao, String begin, String end) throws IOException {
         GenericUrl url = new GenericUrl(reqUrl);
@@ -76,7 +80,7 @@ public class AirportTrafficModel {
 
     /**
      * Calculates how many json items were returned from an http request
-     * @param resp Repsonse object
+     * @param resp Response object
      * @return Integer count of how many items where in the json array
      */
     private static int getReturnCount(HttpResponse resp) throws IOException {

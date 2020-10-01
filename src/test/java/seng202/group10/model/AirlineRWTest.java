@@ -1,10 +1,6 @@
 package seng202.group10.model;
 
 
-import org.junit.jupiter.api.BeforeEach;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Test class for AirlineRW.
+ */
 public class AirlineRWTest {
     private final String goodFileString = "src/test/resources/seng202.group10/model/airlinesGood.dat";
     private final String badFileString = "src/test/resources/seng202.group10/model/airlinesBad.dat";

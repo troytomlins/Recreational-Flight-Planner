@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Controller for the airlines tab
+ * Controller for the airlines tab.
  * @author Tom Rizzi
  */
 public class AirlinesTabController {
@@ -36,7 +36,7 @@ public class AirlinesTabController {
     @FXML private TextField countryFilterField;
 
     /**
-     * Injects main view controller into this controller
+     * Injects main view controller into this controller.
      * @param controller View controller to inject
      */
     public void injectMainController(ViewController controller) {
@@ -44,8 +44,8 @@ public class AirlinesTabController {
     }
 
     /**
-     * Opens file explorer for user to select a file
-     * once a file is selected, import it to the controller
+     * Opens file explorer for user to select a file.
+     * Once a file is selected, import it to the controller.
      * Once imported, update the table
      */
     public void importAirlines() {
@@ -92,27 +92,28 @@ public class AirlinesTabController {
     }
 
     /**
-     * Sets data for airline table in GUI according to airlineController.getAirlines
+     * Sets data for airline table in GUI according to airlineController.getAirlines.
+     * @param data ArrayList of Airline
      */
     public void updateTable(ArrayList<Airline> data) {
         airlineTable.setEditable(true);
-        nameCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("name"));
-        aliasCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("alias"));
-        icaoCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("icao"));
-        callsignCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("callsign"));
-        countryCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("country"));
-        iataCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("iata"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        aliasCol.setCellValueFactory(new PropertyValueFactory<>("alias"));
+        icaoCol.setCellValueFactory(new PropertyValueFactory<>("icao"));
+        callsignCol.setCellValueFactory(new PropertyValueFactory<>("callsign"));
+        countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+        iataCol.setCellValueFactory(new PropertyValueFactory<>("iata"));
 
         airlineTable.setItems(FXCollections.observableList(data));
     }
 
     /**
-     * Apply the selected/typed filters to the data, update the shown table
+     * Apply the selected/typed filters to the data, update the shown table.
      */
     public void applyAirlineFilters(){
         AirlineFilters filter = new AirlineFilters();
         AirlineController airlines = new AirlineController();
-        ArrayList<Airline> data = new ArrayList<Airline>();
+        ArrayList<Airline> data = new ArrayList<>();
         filter.addFilter("name", nameFilterField.getText());
         filter.addFilter("alias", aliasFilterField.getText());
         filter.addFilter("country", countryFilterField.getText());

@@ -8,7 +8,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -138,6 +137,10 @@ public class RouteRW extends RWStream {
         return routeList;
     }
 
+    /**
+     * Reads routes from database and returns Routes.
+     * @return ArrayList of Route
+     */
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
 
@@ -158,6 +161,10 @@ public class RouteRW extends RWStream {
         return output;
     }
 
+    /**
+     * Writes Route's to database.
+     * @param routes ArrayList of Route
+     */
     public void writeDatabaseRoutes(ArrayList<Route> routes) {
         databaseConnection.setAutoCommit(false);
         for (Route route: routes) {
@@ -188,11 +195,11 @@ public class RouteRW extends RWStream {
      * @param routes An ArrayList of Route objects.
      */
     public void writeRoute(ArrayList<Route> routes) {
-        ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> routeStrings = new ArrayList<>();
 
         for (Route route: routes) {
             routeStrings.add(
-                    new ArrayList<String>(Arrays.asList(
+                    new ArrayList<>(Arrays.asList(
                             route.getAirlineCode(),
                             null, // Field not preserved in database.
                             route.getSourceAirportCode(),

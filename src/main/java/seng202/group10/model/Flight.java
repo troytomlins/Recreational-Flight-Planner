@@ -3,7 +3,7 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * TODO write tests
+ * Class for defining a Flight.
  * @author Johnny Howe
  * @author Niko Tainui
  * @author Zach Kaye
@@ -15,16 +15,28 @@ public class Flight {
 
     private ArrayList<FlightPoint> points;
 
+    /**
+     * Constructor for Flight.
+     */
     public Flight() {
         totalDistance = 0;
         points = new ArrayList<>();
     }
 
+    /**
+     * Adds a new Point to flight.
+     * @param newPoint FlightPoint
+     */
     public void addPoint(FlightPoint newPoint) {
         points.add(newPoint);
         calculateDistance();
     }
 
+    /**
+     * Adds a new Point to flight at a certain index.
+     * @param newPoint FlightPoint
+     * @param index position to insert
+     */
     public void addPoint(FlightPoint newPoint, int index) {
         points.add(index, newPoint);
         calculateDistance();
@@ -132,7 +144,8 @@ public class Flight {
     }
 
     /**
-     * @return can the aircraft go the distance?
+     * Checks if the aircraft can successfully go the distance.
+     * @return boolean t/f value
      */
     public boolean checkFlightLength(double distance, Aircraft aircraft) {
         // TODO should this be here?

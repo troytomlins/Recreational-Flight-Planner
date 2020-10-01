@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+/**
+ * Test Class for RouteRW.
+ */
 public class RouteRWTest {
     public class AirlineRWTest {
         private final String goodFileString = "src/test/resources/seng202.group10/model/routesGood.dat";

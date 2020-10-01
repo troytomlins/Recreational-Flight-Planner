@@ -3,7 +3,7 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * Holds a list of Airport's in an ArrayList.
+ * Model Class for Airport.
  */
 public class AirportModel {
 
@@ -22,9 +22,7 @@ public class AirportModel {
         airportRW = new AirportRW();
 
         ArrayList<Airport> databaseAirports = airportRW.readDatabaseAirports();
-        for (Airport airport: databaseAirports) {
-            airports.add(airport);
-        }
+        airports.addAll(databaseAirports);
     }
 
     public ArrayList<Airport> getAirports() {
@@ -43,7 +41,7 @@ public class AirportModel {
     /**
      * Returns the index in arraylist of the airport with the same values as provided.
      * @param airport Airport to look for in list
-     * @return Index in arraylist or -1 if non existant
+     * @return Index in arraylist or -1 if non existent
      */
     public int getIndexOfAirport(Airport airport) {
         for (int i = 0; i < airports.size(); i++) {

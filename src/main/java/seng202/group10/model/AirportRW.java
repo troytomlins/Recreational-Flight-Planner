@@ -19,21 +19,27 @@ import java.util.Arrays;
  */
 public class AirportRW extends RWStream {
 
-
+    /**
+     * Constructor for AirportRW with an in file.
+     * @param inFile file
+     */
     public AirportRW(String inFile) {
         super(inFile, "airport.csv");
     }
 
+    /**
+     * Stand-Alone Constructor for AirportRW.
+     */
     public AirportRW() {
         super("airport.csv");
     }
 
     /**
-     * Parses an airports data file
+     * Parses an airports data file.
      * @param ignoreLines List of line indices to ignore (1 origin)
      * @return Arraylist of airports read from the in file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Airport> readAirports(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -104,17 +110,17 @@ public class AirportRW extends RWStream {
     }
 
     /**
-     * Parses all lines from an airports data file
+     * Parses all lines from an airports data file.
      * @return Arraylist of airports read from the in file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
         return readAirports(new ArrayList<>());
     }
 
     /**
-     * reads airports from the database
+     * Reads airports from the database.
      * @return ArrayList of Airport objects
      */
     public ArrayList<Airport> readDatabaseAirports() {
@@ -147,7 +153,7 @@ public class AirportRW extends RWStream {
     }
 
     /**
-     * writes airports to database
+     * Writes airports to database.
      * @param airports ArrayList of Airports
      */
     public void writeDatabaseAirports(ArrayList<Airport> airports) {
@@ -200,7 +206,7 @@ public class AirportRW extends RWStream {
 
         for (Airport airport: airports) {
             airportStrings.add(
-                    new ArrayList<String>(Arrays.asList(
+                    new ArrayList<>(Arrays.asList(
                             null, // Field not preserved in database.
                             airport.getName(),
                             airport.getCity(),

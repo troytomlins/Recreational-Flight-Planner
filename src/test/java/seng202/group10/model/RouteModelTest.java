@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test Class for RouteModel.
+ */
 public class RouteModelTest {
 
     private Route testRoute;
@@ -20,13 +23,11 @@ public class RouteModelTest {
         file.delete();
         model = new RouteModel();
         compare = new ArrayList<>();
-        ArrayList<String> equipment = new ArrayList<>();
         testRoute = new Route("test", "code1", "code2", 5);
     }
 
     @Test
     public void addRouteTest() {
-        ArrayList<Route> compare = new ArrayList<>();
         int initLen = model.getRoutes().size();
         model.addRoute(testRoute);
         model.save();
@@ -62,7 +63,6 @@ public class RouteModelTest {
     @Test
     public void bothBothInputTypeTest() {
         int initLen = model.getRoutes().size();
-        ArrayList<String> equipment = new ArrayList<>();
         Route testRoute2 = new Route("code1", "Airport1", "code2", 2);
         model.addRoute(testRoute);
         model.addRoute(testRoute2);

@@ -2,16 +2,15 @@ package seng202.group10.model;
 
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+/**
+ * Test Class for AirportRW.
+ */
 public class AirportRWTest {
 
     private final String goodFileString = "src/test/resources/seng202.group10/model/airportsGood.dat";

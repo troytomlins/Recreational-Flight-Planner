@@ -2,17 +2,15 @@ package seng202.group10.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seng202.group10.controller.AircraftController;
-import seng202.group10.model.Aircraft;
 
 
 /**
- * Controller for the create aircraft window
+ * Controller for the create aircraft window.
  * @author Tom Rizzi
  */
 public class CreateAircraftWindow {
@@ -29,8 +27,8 @@ public class CreateAircraftWindow {
     public Stage stage;
 
     /**
-     * Attempts to create aircraft from the information in the text fields
-     * Validates entry fields, then add to model and update table
+     * Attempts to create aircraft from the information in the text fields.
+     * Validates entry fields, then add to model and update table.
      */
     public void createAircraft() {
         // TODO split function up?
@@ -44,19 +42,15 @@ public class CreateAircraftWindow {
         if (name.equals("")) {
             // Name empty
             showErrorMessage("The 'name' field can't be empty!");
-            return;
         } else if (icao.equals("")) {
             // Icao empty
             showErrorMessage("The 'icao' field can't be empty!");
-            return;
         } else if (iata.equals("")) {
             // Iata empty
             showErrorMessage("The 'iata' field can't be empty!");
-            return;
         } else if (rangeField.getText().equals("")) {
             // Range empty
             showErrorMessage("The 'range' field can't be empty!");
-            return;
         } else {
 
             double range;
@@ -77,7 +71,7 @@ public class CreateAircraftWindow {
     }
 
     /**
-     * Show error message on window
+     * Show error message on window.
      * @param message Message to show on the window
      */
     public void showErrorMessage(String message) {
@@ -86,7 +80,7 @@ public class CreateAircraftWindow {
     }
 
     /**
-     * Injects the stage into controller
+     * Injects the stage into controller.
      * @param stage Stage of the window
      */
     public void injectStage(Stage stage, AircraftTabController controller) {
@@ -95,8 +89,8 @@ public class CreateAircraftWindow {
     }
 
     /**
-     * Closes the create aircraft modal
-     * @param actionEvent
+     * Closes the create aircraft modal.
+     * @param actionEvent Action Event
      */
     public void cancel(ActionEvent actionEvent) {
         stage.close();

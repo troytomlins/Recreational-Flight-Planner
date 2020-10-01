@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Test Class for AirlineModel.
+ */
 public class AirlineModelTest {
 
     private AirlineModel airlineModel;

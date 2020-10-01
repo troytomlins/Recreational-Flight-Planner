@@ -1,5 +1,8 @@
 package seng202.group10.model;
 
+/**
+ * Facade for Model Classes.
+ */
 public class ModelFacade {
 
     private RouteModel routeModel;
