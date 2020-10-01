@@ -1,7 +1,7 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class RouteRWTest {
         private final String badFileString = "src/test/resources/seng202.group10/model/routesBad.dat";
         private final String corruptFileString = "src/test/resources/seng202.group10/model/routesCorrupt.dat";
 
-        @AfterAll
+        @AfterClass
         public static void tearDown() {
             DatabaseConnection.getInstance().disconnect();
         }

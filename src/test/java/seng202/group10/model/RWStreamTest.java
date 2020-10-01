@@ -1,7 +1,7 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RWStreamTest {
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
     }
@@ -54,7 +54,7 @@ public class RWStreamTest {
             ArrayList<ArrayList<String>> testArray = new ArrayList<>();
             testArray.add(new ArrayList<>(Arrays.asList("1", "2", "3")));
             testArray.add(new ArrayList<>(Arrays.asList("4", "5", "6")));
-            String expected = "1, 2, 3\n4, 5, 6\n";
+            String expected = "1,2,3\n4,5,6";
 
             // Write to file
             RWStream stream = new RWStream("", filePath);
@@ -62,7 +62,7 @@ public class RWStreamTest {
 
             // Check file
             String readString = Files.readString(Path.of(filePath));
-            assertEquals(readString, expected);
+            assertEquals(expected, readString);
 
         } catch (IOException ignore) {
         } finally {

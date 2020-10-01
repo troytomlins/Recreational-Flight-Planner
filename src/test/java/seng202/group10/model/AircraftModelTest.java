@@ -1,8 +1,8 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class AircraftModelTest {
     private Aircraft aircraft;
     private ArrayList<Aircraft> compareCraft;
 
-    @BeforeEach
+    @Before
     public void init() {
         aircraftModel = new AircraftModel();
         aircraft = new Aircraft("test", "testCraft", "test", 1000);
@@ -23,7 +23,7 @@ public class AircraftModelTest {
         compareCraft.add(aircraft);
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
     }

@@ -1,9 +1,9 @@
 package seng202.group10.model;
 
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.AfterClass;
+import org.junit.Test;
+import org.junit.Before;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +19,7 @@ public class AirportRWTest {
     private final String badFileString = "src/test/resources/seng202.group10/model/airportsBad.dat";
     private final String corruptFileString = "src/test/resources/seng202.group10/model/airportsCorrupt.dat";
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         RWStream stream = new RWStream("a");
         stream.closeDb();

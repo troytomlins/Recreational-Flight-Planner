@@ -1,15 +1,16 @@
 package seng202.group10.controller;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
 import seng202.group10.model.DatabaseConnection;
 import seng202.group10.model.FileFormatException;
 import seng202.group10.model.IncompatibleFileException;
 import seng202.group10.model.Route;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,34 +18,36 @@ public class RouteControllerTest {
 
     public RouteController controller;
 
-    @BeforeAll
-    static void setup() {
+    @BeforeClass
+    public static void setup() {
         DatabaseConnection.getInstance().disconnect();
     }
 
-    @BeforeEach
+    @Before
     public void init() {
         controller = new RouteController();
     }
 
-    @AfterEach
+    @After
     public void teardown() {
         DatabaseConnection.getInstance().disconnect();
     }
 
     @Test
-    public void writeAirportsTest() throws FileFormatException, IncompatibleFileException {
-        String outFile = "test.txt";
-        RouteController controllerB = new RouteController();;
+    public void writeRoutesTest() throws FileFormatException, IncompatibleFileException {
+        String outFile = "testWriteRoutes.txt";
         try {
 
             controller.importRoutes("src/test/resources/seng202.group10/model/routesGood.dat");
             controller.writeRoutes(outFile);
+            ArrayList<Route> beforeRoutes = controller.getRoutes();
 
+            DatabaseConnection.getInstance().disconnect();
+            new File("database.db").delete();
+            controller = new RouteController();
+            controller.importRoutes(outFile);
 
-            controllerB.importRoutes(outFile);
-
-            assertEquals(controller.getRoutes().size(), controllerB.getRoutes().size());
+            assertEquals(beforeRoutes.size(), controller.getRoutes().size());
         } finally {
             File file = new File(outFile);
             file.delete();

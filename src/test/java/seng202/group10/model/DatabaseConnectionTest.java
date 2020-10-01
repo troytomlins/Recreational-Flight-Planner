@@ -2,8 +2,8 @@ package seng202.group10.model;
 
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ public class DatabaseConnectionTest {
 
     DatabaseConnection database;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         database = DatabaseConnection.getInstance();
         File file = new File("database.db");

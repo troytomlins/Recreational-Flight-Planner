@@ -1,8 +1,8 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 import seng202.group10.controller.AirportController;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class AirportModelTest {
     private Airport airport;
     private ArrayList<Airport> compareAirport;
 
-    @BeforeEach
+    @Before
     public void init() {
         airportModel = new AirportModel();
         airport = new Airport("Christchurch Intl","Christchurch","New Zealand","CHCa","NZCHa",-43.489358,172.532225,123,12,"Z","Pacific/Auckland");
@@ -26,8 +26,8 @@ public class AirportModelTest {
         compareAirport.add(airport);
     }
 
-    @AfterAll
-    static void tearDown() {
+    @AfterClass
+    public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
     }
 

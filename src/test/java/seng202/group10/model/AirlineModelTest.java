@@ -1,8 +1,8 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class AirlineModelTest {
     private Airline airline;
     private ArrayList<Airline> compareAirline;
 
-    @BeforeEach
+    @Before
     public void init() {
         airlineModel = new AirlineModel();
         airline = new Airline("Air New Zealand", "N/A","NZ","ANZ","NEW ZEALAND","New Zealand");
@@ -25,7 +25,7 @@ public class AirlineModelTest {
         compareAirline.add(airline);
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         RWStream stream = new RWStream("a");
         stream.closeDb();

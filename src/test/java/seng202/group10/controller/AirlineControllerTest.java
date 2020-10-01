@@ -1,7 +1,7 @@
 package seng202.group10.controller;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Test;
 import seng202.group10.model.*;
 
 import java.io.File;
@@ -43,7 +43,7 @@ public class AirlineControllerTest {
         }
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
     }

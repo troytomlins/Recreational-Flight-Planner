@@ -1,8 +1,8 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class RouteModelTest {
     private RouteModel model;
     private ArrayList<Route> compare;
 
-    @BeforeEach
+    @Before
     public void init() {
         DatabaseConnection.getInstance().disconnect();
         File file = new File("database.db");
@@ -26,7 +26,7 @@ public class RouteModelTest {
         testRoute = new Route("test", "code1", "code2", 5);
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
     }

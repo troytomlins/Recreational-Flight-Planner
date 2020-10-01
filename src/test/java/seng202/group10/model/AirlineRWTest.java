@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Test;
 
 
 public class AirlineRWTest {
@@ -52,7 +52,7 @@ public class AirlineRWTest {
         assertThrows(IncompatibleFileException.class, stream::readAirlines);
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         if (stream != null) {
             stream.closeDb();
