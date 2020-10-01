@@ -77,7 +77,7 @@ public class RouteRW extends RWStream {
                             routes.add(route);
 
                         } catch (Exception e) {
-
+                            e.printStackTrace();
                             // There was an error parsing the line, add to errorLines
                             errorLines.add(lineNum);
                         }
@@ -165,14 +165,14 @@ public class RouteRW extends RWStream {
             routeStrings.add(
                     new ArrayList<String>(Arrays.asList(
                             route.getAirlineCode(),
-                            null, // Field not preserved in database.
+                            "NULL", // Field not preserved in database.
                             route.getSourceAirportCode(),
-                            null, // Field not preserved in database.
+                            "NULL", // Field not preserved in database.
                             route.getDestinationAirportCode(),
-                            null, // Field not preserved in database.
-                            null, // Field not preserved in database.
+                            "NULL", // Field not preserved in database.
+                            "NULL", // Field not preserved in database.
                             Integer.toString(route.getStops()),
-                            null  // Field not preserved in database.
+                            "NULL"  // Field not preserved in database.
                     )));
         }
         writeAll(routeStrings);

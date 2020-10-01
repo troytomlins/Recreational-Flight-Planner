@@ -142,15 +142,19 @@ public class RWStream {
             fileWriter = new FileWriter(outFilename);
             StringBuilder builder;
             StringBuilder fileContent = new StringBuilder();
+            int count = 0;
             for (ArrayList<String> line: data) {
                 builder = new StringBuilder();
                 for (int i = 0; i < line.size(); i++) {
                     builder.append(line.get(i));
                     if (i < line.size() -1) {
-                        builder.append(", ");
+                        builder.append(",");
                     }
                 }
-                builder.append('\n');
+                if (count < data.size() - 1) {
+                    builder.append('\n');
+                }
+                count++;
                 fileContent.append(builder.toString());
             }
             fileWriter.write(fileContent.toString());
