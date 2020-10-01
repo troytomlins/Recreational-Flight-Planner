@@ -154,16 +154,10 @@ public class GUIApp extends Application {
             ArrayList<Airport> airports = new ArrayList<Airport>();
             System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
             for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
-                if (airport.getLatitude() <= lat1 &&
-                        airport.getLatitude() >= lat2 &&
-                        ((airport.getLongitude() <= long1 &&
-                                airport.getLongitude() >= long2 &&
-                                long2 <= long1) /*||
-                        (airport.getLongitude() >= long1 &&
-                                airport.getLongitude() <= long2 &&
-                                long2 > long1)*/
-                        )
-                        ) {
+                boolean latitudeCheck = airport.getLatitude() <= lat1 && airport.getLatitude() >= lat2;
+                boolean longitudeCheck = (airport.getLongitude() <= long1 && airport.getLongitude() >= long2 && long2 <= long1) ||
+                        (long2 > long1 && (airport.getLongitude() >= long2 && airport.getLongitude() < 180) || airport.getLongitude() >= long1 && airport.getLongitude() > 180);
+                if (latitudeCheck && longitudeCheck) {
                     System.out.println("Adding " + airport.getName());
                     airports.add(airport);
                 }
