@@ -93,9 +93,6 @@ public class RouteController {
             int stops = Integer.parseInt(data[7]);
             String equipmentString = data[8];
 
-            // Convert values to the type required for creating a route.
-            ArrayList<String> equipment = new ArrayList<>(Arrays.asList(equipmentString.split(" ")));
-
             // Create route and add to model
             // Route route = new Route(airlineCode, airlineId, sourceAirportCode, sourceAirport, destinationAirportCode, destinationAirport, stops, equipment);
             Route route = new Route(airlineCode, sourceAirportCode, destinationAirportCode, stops);

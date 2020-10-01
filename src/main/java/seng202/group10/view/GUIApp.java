@@ -9,8 +9,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
-import seng202.group10.controller.ControllerFacade;
-import seng202.group10.view.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
 import java.net.URL;
@@ -33,7 +31,7 @@ public class GUIApp extends Application {
      * Loads up the scene from the main.fxml file, sets the controller (according to setController),
      *  adds google maps (according to addGoogleMaps).
      * @param primaryStage - stage to set the scene on
-     * @throws Exception
+     * @throws Exception exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception {

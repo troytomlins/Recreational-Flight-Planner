@@ -118,7 +118,7 @@ public class AircraftRW extends RWStream {
 
         for (Aircraft aircraft: aircrafts) {
             aircraftStrings.add(
-                    new ArrayList<String>(Arrays.asList(
+                    new ArrayList<>(Arrays.asList(
                             aircraft.getIata(),
                             aircraft.getName(),
                             aircraft.getIcao(),

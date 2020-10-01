@@ -125,7 +125,6 @@ public class AirportTabController {
      */
     public void applyAirportFilters() {
         AirportFilters filter = new AirportFilters();
-        AirportController airports = new AirportController();
         ArrayList<Airport> data = new ArrayList<>();
         filter.addFilter("name", nameFilterField.getText());
         filter.addFilter("city", cityFilterField.getText());

@@ -20,7 +20,7 @@ import java.util.Arrays;
 public class AirlineRW extends RWStream {
     /**
      * creates instance of class with a default outfile
-     * @param inFile
+     * @param inFile in file
      */
     public AirlineRW(String inFile) {
         super(inFile, "airline.csv");
@@ -31,15 +31,15 @@ public class AirlineRW extends RWStream {
     }
 
     public ArrayList<Airline> readAirlines() throws IncompatibleFileException, FileFormatException {
-        return readAirlines(new ArrayList<Integer>());
+        return readAirlines(new ArrayList<>());
     }
 
     /**
      * Read airlines from file
      * @param ignoreLines List of lines index's to ignore (1 origin)
      * @return Arraylist of airlines read from file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Airline> readAirlines(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -115,7 +115,7 @@ public class AirlineRW extends RWStream {
     public ArrayList<Airline> readDatabaseAirlines() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM airlines");
 
-        ArrayList<Airline> output = new ArrayList<Airline>();
+        ArrayList<Airline> output = new ArrayList<>();
 
         try {
             while (results.next()) {
@@ -135,8 +135,8 @@ public class AirlineRW extends RWStream {
     }
 
     /**
-     * Writes airlines to database
-     * @param airlines
+     * Writes airlines to database.
+     * @param airlines ArrayList of Airline
      */
     public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
         databaseConnection.setAutoCommit(false);
@@ -174,7 +174,7 @@ public class AirlineRW extends RWStream {
 
         for (Airline airline: airlines) {
             airlineStrings.add(
-                    new ArrayList<String>(Arrays.asList(
+                    new ArrayList<>(Arrays.asList(
                             null, // Field is not preserved in database.
                             airline.getName(),
                             airline.getAlias(),

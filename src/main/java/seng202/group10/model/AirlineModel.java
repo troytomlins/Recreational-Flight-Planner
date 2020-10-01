@@ -20,9 +20,7 @@ public class AirlineModel {
     public AirlineModel() {
         airlineRW = new AirlineRW();
         ArrayList<Airline> databaseAirlines = airlineRW.readDatabaseAirlines();
-        for (Airline airline: databaseAirlines) {
-            airlines.add(airline);
-        }
+        airlines.addAll(databaseAirlines);
     }
 
     public ArrayList<Airline> getAirlines() {
