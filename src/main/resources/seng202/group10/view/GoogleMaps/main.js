@@ -9,8 +9,8 @@ var markers = [];
 class LabelHandler {
     constructor() {
         this.labelIndex = 0;
-        this.firstLabel = "start";
-        this.endLabel = "end";
+        this.firstLabel = "0";
+//        this.endLabel = "end";
     }
 
     /**
@@ -31,7 +31,8 @@ class LabelHandler {
             label = "start";
         } else {
             // let letterLabels = Math.max(0, this.labelIndex - 2);
-            label = this.makeLetterLabel(this.labelIndex - 1);
+//            label = this.makeLetterLabel(this.labelIndex - 1);
+            label = this.labelIndex.toString();
         }
         return [label, this.labelIndex++];
     }
@@ -62,6 +63,8 @@ class MyMarker {
         this.label = label;
         this.labelIndex = labelIndex;
 
+        javaConnector.newMarker(label, latLng.lat(), latLng.lng());
+
         this.mapsMarker = new google.maps.Marker({
             position: latLng,
             label: this.label,
@@ -75,7 +78,8 @@ class MyMarker {
         });
 
         google.maps.event.addListener(this.mapsMarker, 'drag', function(event) {
-            sendMarkersToJava();
+//            sendMarkersToJava();
+            javaConnector.moveMarker(label, latLng.lat(), latLng.lng());
         });
     }
 
@@ -133,12 +137,13 @@ function addMarker(location) {
     let [label, labelIndex] = labelHandler.getNextLabel();
     let marker = new MyMarker(label, labelIndex, location);
     markers[currentIndex] = marker
-    sendMarkersToJava();
+//    sendMarkersToJava();
 }
 
 
 
 function removeMarker(marker) {
+    javaConnector.removeMarker(marker.label);
     // Remove from map
     marker.delete();
     // Remove from markers array
@@ -150,9 +155,7 @@ function removeMarker(marker) {
         let [newLabel, newIndex] = labelHandler.getNextLabel()
         markers[i].setLabel(newLabel, newIndex);
     }
-
     labelIndex -= 1;
-    sendMarkersToJava();
 }
 
 

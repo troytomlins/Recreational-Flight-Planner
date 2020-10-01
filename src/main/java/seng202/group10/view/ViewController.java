@@ -8,6 +8,7 @@ import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -182,7 +183,7 @@ public class ViewController {
      *
      * @param e Exception to display
      * @return Boolean value, representing weather to import non-erroneous lines
-     */
+//     */
     public Boolean showFileFormatError(FileFormatException e) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("File Format Error");
@@ -203,29 +204,6 @@ public class ViewController {
         aircraftSelector.setItems(observableAircraft);
     }
 
-    /**
-     * (re)set all the markers in the window
-     * @param labels
-     * @param lats
-     * @param lngs
-     */
-    public void setMarkers(ArrayList<String> labels, ArrayList<Float> lats, ArrayList<Float> lngs) {
-        locationsPane.getChildren().clear();    // Delete old
-        flight = new Flight();
-
-        for (int i = 0; i < labels.size(); i++) {
-            String label = labels.get(i);
-            double lat = lats.get(i);
-            double lng = lngs.get(i);
-
-            newMarker(label, lat, lng);
-
-            FlightPoint point = new FlightPoint("NA", label, 0, lat, lng);
-            flight.addPoint(point);
-        }
-    }
-
-    private int numMarkers = 1;     // How many markers do we currently have?
 
     /**
      * Add a new marker into the plan flight section
@@ -235,8 +213,67 @@ public class ViewController {
      * @param lng - position longitude
      */
     public void newMarker(String id, double lat, double lng) {
-        newLocationBox(id, numMarkers, lat, lng);
-        numMarkers += 1;
+        flight.addPoint(new FlightPoint("NA", id, 0, lat, lng));
+        newLocationBox(id, getRowFromId(id), lat, lng);
+    }
+
+    /**
+     * Remove the location box with id
+     * @param id id of marker to remove
+     */
+    public void removeMarker(String id) {
+        // Remove marker id
+        int row = getRowFromId(id);
+        ObservableList<Node> children = locationsPane.getChildren();
+        children.remove(row - 1, row);
+        // shuffle box ids after id back
+
+        for (int i = row - 1; i < children.size(); i++) {
+            String label = Integer.toString(i);
+            if (i == 0) {
+                label = "start";
+            }
+            editLocationBox(i, label, 0, 0);
+        }
+        ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
+        flightPoints.removeIf(point -> point.getId().equals(id));
+        locationsPane.getChildren().clear();
+        for (FlightPoint point : flightPoints) {
+            String pId = point.getId();
+            int pRow = getRowFromId(pId);
+            if (pRow >= row) {
+                pId = Integer.toString(Integer.parseInt(pId) - 1);
+            }
+            newLocationBox(pId, getRowFromId(pId), point.getLatitude(), point.getLongitude());
+        }
+    }
+
+    /**
+     * Edit the location box at row
+     * @param row row to edit
+     * @param newId
+     * @param newLat
+     * @param newLng
+     */
+    public void editLocationBox(int row, String newId, int newLat, int newLng) {
+        ObservableList<Node> children = locationsPane.getChildren();
+        GridPane pane = (GridPane) children.get(row);
+
+        ((Label) pane.getChildren().get(0)).setText(newId + " " + newLat +" " + newLng);
+    }
+
+    /**
+     * What's the row index of the marker/location box with id
+     * @param id id of box
+     */
+    private int getRowFromId(String id) {
+        int row;
+        if (id.equals("start")) {
+            row = 0;
+        } else {
+            row = Integer.parseInt(id);
+        }
+        return row + 1;
     }
 
     /**
@@ -272,18 +309,6 @@ public class ViewController {
 
         //Add the thing
         locationsPane.add(pane, 0, row);
-
-        // This broken
-//        if (setAltitude.isPressed()) {
-//            try {
-//                FlightPoint point = new FlightPoint(id, "NA", lat, lng, Double.parseDouble(altitude.getText()));
-//                flight.addPoint(point);
-//                System.out.println(point);
-//                setAltitude.disarm();
-//            } catch (NumberFormatException e) {
-//                showErrorWindow("Altitude field not valid");
-//            }
-//        }
     }
 
     /**
@@ -299,12 +324,10 @@ public class ViewController {
      */
     public void saveFlight() {
         String filepath = new String();
-//        locationsPane.getChildren().clear();
         FlightModel model= new FlightModel();
         filepath = showFileWriter();
         FlightRW write = new FlightRW(filepath,filepath);
         model.addFlight(flight);
         write.writeFlight(flight);
-//        flight = new Flight();
     }
 }

@@ -102,8 +102,18 @@ public class GUIApp extends Application {
          * @param lat - latitude
          * @param lng - longitude
          */
-        public void newLatLng(String id, float lat, float lng) {
+        public void newMarker(String id, float lat, float lng) {
             viewController.newMarker(id, lat, lng);
+//            System.out.println("new " + id + " at " + lat + " " + lng);
+        }
+
+        public void removeMarker(String id) {
+//            System.out.println("Remove " + id);
+            viewController.removeMarker(id);
+        }
+
+        public void moveMarker(String id, double newLat, double newLng) {
+            System.out.println(id + " move to " + newLat + " " + newLng);
         }
 
         ArrayList<String> labels;
@@ -123,7 +133,7 @@ public class GUIApp extends Application {
         }
 
         public void confirmMarkers() {
-            viewController.setMarkers(labels, lats, lngs);
+//            viewController.setMarkers(labels, lats, lngs);
             // Check the flight distance
         }
 
