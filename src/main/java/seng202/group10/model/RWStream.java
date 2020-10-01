@@ -27,6 +27,7 @@ public class RWStream {
     public DatabaseConnection databaseConnection;
 
     /**
+     * Constructor for RWStream, sets in and out file to inputted filename.
      * Creates the out file, gets the database instance
      * @param filename - file to import
      */
@@ -37,6 +38,12 @@ public class RWStream {
         getDatabase();
     }
 
+    /**
+     * Constructor for RWStream, sets in and out to separate files.
+     * Creates the out file, gets the database instance.
+     * @param inFilename in file
+     * @param outFilename out file
+     */
     public RWStream(String inFilename, String outFilename) {
         this.inFilename = inFilename;
         this.outFilename = outFilename;
@@ -82,10 +89,10 @@ public class RWStream {
         } catch (FileNotFoundException error) {
             displayError("File not found");
         }
-        ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> lines = new ArrayList<>();
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
-            ArrayList<String> lineList = new ArrayList<String>(Arrays.asList(line.split("[, ]+")));
+            ArrayList<String> lineList = new ArrayList<>(Arrays.asList(line.split("[, ]+")));
             lines.add(lineList);
         }
         fileReader.close();
@@ -177,6 +184,10 @@ public class RWStream {
         outFilename = filepath;
     }
 
+    /**
+     * Displays Error message.
+     * @param message Message to display
+     */
     public void displayError(String message) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setHeaderText(message);

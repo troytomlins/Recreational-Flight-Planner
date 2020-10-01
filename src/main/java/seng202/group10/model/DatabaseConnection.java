@@ -202,7 +202,7 @@ public final class DatabaseConnection {
      *
      * @param sqlStatement The statement that will be sent to the database
      * @return The PreparedStatement
-     * @throws SQLException
+     * @throws SQLException SQL Exception
      */
     public PreparedStatement getPreparedStatement(String sqlStatement) throws SQLException {
         return conn.prepareStatement(sqlStatement);

@@ -1,8 +1,6 @@
 package seng202.group10.controller.filters;
 
-import seng202.group10.model.Airport;
 import seng202.group10.model.Route;
-import seng202.group10.model.RouteRW;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,12 +13,22 @@ import java.util.ArrayList;
  * @author Mitchell Freeman
  */
 public class RouteFilters extends GenericFilters{
+
+    /**
+     * Constructor for RouteFilters.
+     * Sets table to "routes".
+     */
     public RouteFilters() {
         super("routes");
     }
 
+    /**
+     * Apply filters and returns list of Routes fitting applied conditions.
+     * @return ArrayList of Route
+     */
     public ArrayList<Route> applyFilters() {
-        ArrayList<Route> resultRoutes = new ArrayList<Route>();
+
+        ArrayList<Route> resultRoutes = new ArrayList<>();
 
         ResultSet results = filterSender.applyFilter();
         try {

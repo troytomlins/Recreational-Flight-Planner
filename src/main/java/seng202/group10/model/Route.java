@@ -1,19 +1,15 @@
 package seng202.group10.model;
 
-import java.util.ArrayList;
-
 /**
  * Class for defining a Route
  */
 public class Route {
     private String airlineCode;
-    private int airlineId;
     private String sourceAirportCode;
     private Airport sourceAirport;
     private String destinationAirportCode;
     private Airport destinationAirport;
     private int stops;
-    private ArrayList<String> equipment;
 
     /**
      * First Constructor for the Route Class
@@ -54,13 +50,11 @@ public class Route {
      */
     public boolean equals(Route other) {
         return airlineCode.equals(other.airlineCode) &&
-                airlineId == other.airlineId &&
                 sourceAirportCode.equals(other.sourceAirportCode) &&
                 sourceAirport.equals(other.sourceAirport) &&
                 destinationAirport.equals(other.destinationAirport) &&
                 destinationAirportCode.equals(other.destinationAirportCode) &&
-                stops == other.stops &&
-                equipment.equals(other.equipment);
+                stops == other.stops;
     }
 
     public String getAirlineCode() {

@@ -96,11 +96,11 @@ public class RouteTabController {
     public void updateTable(ArrayList<Route> data) {
         routeTable.setEditable(true);
 
-        airlineCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineCode"));
-        srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("sourceAirportCode"));
+        airlineCodeCol.setCellValueFactory(new PropertyValueFactory<>("airlineCode"));
+        srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<>("sourceAirportCode"));
 
-        destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("destinationAirportCode"));
-        stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
+        destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<>("destinationAirportCode"));
+        stopsCol.setCellValueFactory(new PropertyValueFactory<>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
     }
     // TODO write error checking for filters making sure data is loaded.

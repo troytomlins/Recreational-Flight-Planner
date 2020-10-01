@@ -13,7 +13,12 @@ public class FlightPoint {
     private double altitude;
 
     /**
-     * Build the flight point
+     * Constructor for Flight Point.
+     * @param type Type
+     * @param id Flight Point ID
+     * @param altitude Altitude value
+     * @param lat Latitude value
+     * @param lng Longitude value
      */
     public FlightPoint(String type, String id, double altitude, double lat, double lng) {
         this.id = id;

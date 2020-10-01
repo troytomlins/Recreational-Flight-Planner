@@ -11,7 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.AfterClass;
 import org.junit.Test;
 
-
+/**
+ * Test class for AirlineRW.
+ */
 public class AirlineRWTest {
     private final String goodFileString = "src/test/resources/seng202.group10/model/airlinesGood.dat";
     private final String badFileString = "src/test/resources/seng202.group10/model/airlinesBad.dat";

@@ -1,28 +1,33 @@
 package seng202.group10.controller.filters;
 
 import seng202.group10.model.Airport;
-import seng202.group10.model.AirportRW;
-import seng202.group10.model.DatabaseConnection;
 
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Class to filter Airport data.
  * @author Niko Tainui
  * @author Mitchell Freeman
  */
 
 public class AirportFilters extends GenericFilters {
 
-
+    /**
+     * Constructor for AirportFilters.
+     * Sets table to "airports".
+     */
     public AirportFilters() {
         super("airports");
     }
 
+    /**
+     * Apply filters and returns list of Airports fitting applied conditions.
+     * @return ArrayList of Airport
+     */
     public ArrayList<Airport> applyFilters() {
-        ArrayList<Airport> resultAirports = new ArrayList<Airport>();
+        ArrayList<Airport> resultAirports = new ArrayList<>();
 
         ResultSet results = filterSender.applyFilter();
         try {

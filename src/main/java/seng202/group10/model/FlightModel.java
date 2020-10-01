@@ -2,11 +2,18 @@ package seng202.group10.model;
 
 import java.util.ArrayList;
 
+/**
+ * Model class for Flight.
+ */
 public class FlightModel {
 
     private ArrayList<Flight> flights;
 
-    public FlightModel() { this.flights = new ArrayList<Flight>(); }
+    /**
+     * Constructor for FlightModel.
+     * Creates ArrayList of Flights.
+     */
+    public FlightModel() { this.flights = new ArrayList<>(); }
 
     public ArrayList<Flight> getFlights() {
         return flights;

@@ -7,23 +7,33 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+/**
+ * Read / Write Class for Flights.
+ */
 public class FlightRW extends RWStream {
 
+    /**
+     * Constructor for FlightRW with in and out file.
+     * @param inFile in file
+     * @param outFile out file
+     */
     public FlightRW(String inFile, String outFile) {
         super(inFile, outFile);
     }
 
+    /**
+     * Constructor for FlightRW with an in file.
+     * @param inFile file
+     */
     public FlightRW(String inFile) {
         super(inFile, "flights.csv");
     }
 
+    /**
+     * Stand-alone Constructor for FlightRW.
+     */
     public FlightRW() {
         super("flights.csv");
     }
@@ -31,8 +41,8 @@ public class FlightRW extends RWStream {
     /**
      * Read the file at inFile and create a Flight object
      * @return Flight object
-     * @throws IOException
-     * @throws IncompatibleFileException
+     * @throws IOException IO Exception
+     * @throws IncompatibleFileException Incompatible File
      */
     public Flight readFlight() throws IOException, IncompatibleFileException {
         Flight flight = new Flight();

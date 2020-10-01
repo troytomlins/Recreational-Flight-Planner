@@ -1,10 +1,8 @@
 package seng202.group10.view;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
@@ -14,6 +12,9 @@ import seng202.group10.model.FlightPoint;
 
 import java.util.ArrayList;
 
+/**
+ * Class for Individual Flight Window.
+ */
 public class IndividualFlightWindow {
 
     @FXML public Text flightText;
@@ -30,7 +31,7 @@ public class IndividualFlightWindow {
     private Stage stage;
 
     /**
-     * Injects the main view controller and stage into object
+     * Injects the main view controller and stage into object.
      * @param controller View Controller to inject into object
      * @param stage Stage object to inject into stage
      */
@@ -46,8 +47,8 @@ public class IndividualFlightWindow {
     }
 
     /**
-     * Populates the flight point table with values in data arraylist
-     * @param data Arraylist of flightpoints to populate the table with
+     * Populates the flight point table with values in data arraylist.
+     * @param data Arraylist of FlightPoint's to populate the table with
      */
     public void updateTable(ArrayList<FlightPoint> data) {
         legTable.setEditable(true);

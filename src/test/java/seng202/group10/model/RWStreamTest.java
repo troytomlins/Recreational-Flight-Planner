@@ -12,7 +12,9 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ * Test Class for RWStream.
+ */
 public class RWStreamTest {
 
     @AfterClass
@@ -23,9 +25,9 @@ public class RWStreamTest {
     @Test
     public void testRead() {
         String test_string = "this, is, a, test";
-        ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
-        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-        ArrayList<String> singleList = new ArrayList<String>(Arrays.asList(test_string.split("[, ]+")));
+        ArrayList<ArrayList<String>> list = new ArrayList<>();
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        ArrayList<String> singleList = new ArrayList<>(Arrays.asList(test_string.split("[, ]+")));
         list.add(singleList);
         RWStream rwstream = new RWStream("test.csv");
         data = rwstream.read();
@@ -34,10 +36,10 @@ public class RWStreamTest {
 
     @Test
     public void testWriteSingle() {
-        ArrayList<ArrayList<String>> read_info = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> read_info = new ArrayList<>();
         String test1 = "This, Is, a, test, of, the, write, single, class";
-        ArrayList<String> compareList = new ArrayList<String>(Arrays.asList(test1.split("[, ]+")));
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> compareList = new ArrayList<>(Arrays.asList(test1.split("[, ]+")));
+        ArrayList<String> list = new ArrayList<>();
         list.add(test1);
         RWStream rwstream = new RWStream("test1.csv");
         rwstream.writeSingle(list);

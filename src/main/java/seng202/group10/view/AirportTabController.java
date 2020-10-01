@@ -17,7 +17,7 @@ import seng202.group10.model.IncompatibleFileException;
 import java.util.ArrayList;
 
 /**
- * Controller for the airport tab of the GUI
+ * Controller for the airport tab of the GUI.
  * @author Tom Rizzi
  */
 public class AirportTabController {
@@ -40,19 +40,23 @@ public class AirportTabController {
     @FXML private TextField cityFilterField;
     @FXML private TextField countryFilterField;
 
+    /**
+     * Updates table with data.
+     * @param data ArrayList of Airport
+     */
     public void updateTable(ArrayList<Airport> data) {
         airportTable.setEditable(true);
-        nameCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("name"));
-        cityCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("city"));
-        latCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("latitude"));
-        lngCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("longitude"));
-        altCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("altitude"));
-        tzCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("timezone"));
-        distCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("dstType"));
-        tzdbCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("tzDatabase"));
-        iataCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("iata"));
-        icaoCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("icao"));
-        countryCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("country"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+        latCol.setCellValueFactory(new PropertyValueFactory<>("latitude"));
+        lngCol.setCellValueFactory(new PropertyValueFactory<>("longitude"));
+        altCol.setCellValueFactory(new PropertyValueFactory<>("altitude"));
+        tzCol.setCellValueFactory(new PropertyValueFactory<>("timezone"));
+        distCol.setCellValueFactory(new PropertyValueFactory<>("dstType"));
+        tzdbCol.setCellValueFactory(new PropertyValueFactory<>("tzDatabase"));
+        iataCol.setCellValueFactory(new PropertyValueFactory<>("iata"));
+        icaoCol.setCellValueFactory(new PropertyValueFactory<>("icao"));
+        countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
         airportTable.setItems(FXCollections.observableList(data));
     }
 
@@ -68,7 +72,7 @@ public class AirportTabController {
     }
 
     /**
-     * Sets this.mainController
+     * Sets this.mainController.
      * @param controller to set
      */
     public void injectMainController(ViewController controller) {
@@ -77,10 +81,10 @@ public class AirportTabController {
     }
 
     /**
-     * Opens file explorer for user to select a file
-     * once a file is selected, import it to the controller
+     * Opens file explorer for user to select a file.
+     * Once a file is selected, import it to the controller.
      * If file not compatible (not csv), a message is printed to the console.
-     * Once imported, update the table
+     * Once imported, update the table.
      */
     public void importAirports() {
         // Pick file
@@ -129,11 +133,10 @@ public class AirportTabController {
         }
     }
     /**
-     * Apply the selected/typed filters to the data, update the shown table
+     * Apply the selected/typed filters to the data, update the shown table.
      */
     public void applyAirportFilters() {
         AirportFilters filter = new AirportFilters();
-        AirportController airports = new AirportController();
         ArrayList<Airport> data = new ArrayList<>();
         filter.addFilter("name", nameFilterField.getText());
         filter.addFilter("city", cityFilterField.getText());

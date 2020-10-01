@@ -5,26 +5,31 @@ import seng202.group10.model.*;
 import java.util.ArrayList;
 
 /**
- * Controller class for airlines.
- *
+ * Controller Class for airlines.
  */
 public class AirlineController {
 
-    /**
-     * Model
-     */
     private AirlineModel model;
 
+    /**
+     * Constructor for AirlineController.
+     * Sets the model to an inputted instance of AirlineModel.
+     * @param model instance of Class Airline Model
+     */
     public AirlineController(AirlineModel model) {
         this.model = model;
     }
 
+    /**
+     * Constructor for AirlineController.
+     * Creates a new instance of AirlineModel.
+     */
     public AirlineController() {
         this.model = new AirlineModel();
     }
 
     /**
-     * Get a list of airlines from model
+     * Get a list of airlines from model.
      * @return Arraylist of airlines
      */
     public ArrayList<Airline> getAirlines() {

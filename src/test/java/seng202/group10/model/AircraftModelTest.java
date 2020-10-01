@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ * Test Class for AircraftModel.
+ */
 public class AircraftModelTest {
 
     private AircraftModel aircraftModel;

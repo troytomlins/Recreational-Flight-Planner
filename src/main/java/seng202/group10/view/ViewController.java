@@ -1,37 +1,21 @@
 package seng202.group10.view;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.group10.controller.ControllerFacade;
 import seng202.group10.model.*;
-import seng202.group10.view.AirlinesTabController;
-import seng202.group10.view.AirportTabController;
-import seng202.group10.view.RouteTabController;
 
-import java.awt.*;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 /**
  * View Controller
@@ -179,7 +163,6 @@ public class ViewController {
     }
     /**
      * Shows an information window with provided message
-     *
      * @param message Message to display on window
      */
     public void showInfoWindow(String message) {
@@ -190,7 +173,6 @@ public class ViewController {
 
     /**
      * Shows an error window with provided message
-     *
      * @param message Message to display on window
      */
     public void showErrorWindow(String message) {
@@ -201,7 +183,6 @@ public class ViewController {
 
     /**
      * Shows the error window for an incompatible file
-     *
      * @param e Exception to display
      */
     public void showIncompatibleFileError(IncompatibleFileException e) {
@@ -211,7 +192,6 @@ public class ViewController {
     /**
      * Shows an error window for a file format exception,
      * then waits for users choice of either import lines that are not causing errors or cancel
-     *
      * @param e Exception to display
      * @return Boolean value, representing weather to import non-erroneous lines
      */
@@ -237,9 +217,9 @@ public class ViewController {
 
     /**
      * (re)set all the markers in the window
-     * @param labels
-     * @param lats
-     * @param lngs
+     * @param labels ArrayList of labels
+     * @param lats ArrayList of latitudes
+     * @param lngs ArrayList of longitudes
      */
     public void setMarkers(ArrayList<String> labels, ArrayList<Float> lats, ArrayList<Float> lngs) {
         locationsPane.getChildren().clear();    // Delete old
