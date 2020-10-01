@@ -139,6 +139,17 @@ public class RouteTabController {
     }
 
     /**
+     * Remove any filters that have been applied
+     */
+    public void clearFilters() {
+        airlineCodeFilterField.setText("");
+        srcAirportCodeFilterField.setText("");
+        destAirportCodeFilterField.setText("");
+        numStopsFilterField.setText("");
+        applyRouteFilters();
+    }
+
+    /**
      * Opens a file explorer window to select where to save it to as a dat.
      * Then exports the data to the specified filepath
      */
