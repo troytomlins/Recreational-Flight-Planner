@@ -42,7 +42,7 @@ class LabelHandler {
      * n = 26; return aa
      * n = 27; return ab
      * etc
-     * @param {int} n 
+     * @param {int} n
      */
     makeLetterLabel(n) {
         let s = "";
@@ -94,6 +94,36 @@ class MyMarker {
     }
 }
 
+class Airport {
+    constructor(data) {
+        this.marker = new google.maps.Marker({
+            position: new google.maps.LatLng(data.latitude, data.longitude),
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                strokeColor: "#0066ff",
+                scale: 5
+            }
+        });
+        var content = "<div id='content'>" +
+            "<h2>" + data.name + "</h2><br>" +
+            "<h4>" + data.city + ", " + data.country + "</h4><br>" +
+            "<p>Altitude: " + data.altitude +"</p>" +
+            "</div>";
+        this.window = new google.maps.InfoWindow({
+            content: content
+        });
+        this.marker.addListener('click', () => {
+            println("hrer");
+            this.window.open(map, this.marker);
+            println("nre");
+        });
+    }
+
+    close() {
+        this.marker.setMap(null);
+    }
+}
 
 let labelHandler = new LabelHandler();
 
@@ -121,7 +151,6 @@ function initMap() {
         );
     });
     google.maps.event.addListener(map, 'bounds_changed', function() {
-        println("Bounds changed");
         removeAirports();
         var bounds = map.getBounds();
         javaConnector.setAirports(map.getZoom(),
@@ -209,24 +238,15 @@ function println(text) {
 var airports = [];
 var airportIndex = 0;
 
-function addAirport(name, lat, long) {
-    airports[airportIndex] = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, long),
-        label: name,
-        map: map
-    });
-    println(airportIndex);
+function addAirport(inAirport) {
+    airports[airportIndex] = new Airport(inAirport);
     airportIndex += 1;
-    println(airportIndex);
 }
 
 function removeAirports() {
-    println("Start deleting");
     for (var i = 0; i < airportIndex; i++) {
-        airports[i].setMap(null);
-        println("Deleting");
+        airports[i].close();
     }
-    println("Deleted");
     airports = [];
     airportIndex = 0;
 }

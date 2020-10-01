@@ -10,6 +10,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
 import seng202.group10.controller.ControllerFacade;
 import seng202.group10.model.Airport;
 import seng202.group10.view.ViewController;
@@ -152,13 +153,13 @@ public class GUIApp extends Application {
 
         public void setAirports(int zoom, double lat1, double long1, double lat2, double long2) {
             ArrayList<Airport> airports = new ArrayList<Airport>();
-            System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
+            //System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
             for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
                 boolean latitudeCheck = airport.getLatitude() <= lat1 && airport.getLatitude() >= lat2;
                 boolean longitudeCheck = (airport.getLongitude() <= long1 && airport.getLongitude() >= long2 && long2 <= long1) ||
                         (long2 > long1 && (airport.getLongitude() >= long2 && airport.getLongitude() < 180) || airport.getLongitude() >= long1 && airport.getLongitude() > 180);
                 if (latitudeCheck && longitudeCheck) {
-                    System.out.println("Adding " + airport.getName());
+                    //System.out.println("Adding " + airport.getName());
                     airports.add(airport);
                 }
             }
@@ -167,11 +168,18 @@ public class GUIApp extends Application {
 
             for (int i = 0; i < Math.min(100, airports.size()); i++) {
                 Airport airport = airports.get(i);
+                JSONObject json = new JSONObject();
+                json.put("name", airport.getName());
+                json.put("latitude", airport.getLatitude());
+                json.put("longitude", airport.getLongitude());
+                json.put("city", airport.getCity());
+                json.put("country", airport.getCountry());
+                json.put("altitude", airport.getAltitude());
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
 
-                        webEngine.executeScript(String.format("addAirport('', %f, %f)", airport.getLatitude(), airport.getLongitude()));
+                        webEngine.executeScript(String.format("addAirport(%s)", json.toJSONString()));
                     }
                 });
             }
