@@ -39,7 +39,7 @@ public class Flight {
         if (points.size() == 0) {
             return "";
         } else {
-            return String.format("%.8f", points.get(0).getLatitude());
+            return String.format("%.8f", points.get(0).latitude);
         }
     }
 
@@ -47,7 +47,7 @@ public class Flight {
         if (points.size() == 0) {
             return "";
         } else {
-            return String.format("%.8f", points.get(0).getLongitude());
+            return String.format("%.8f", points.get(0).longitude);
         }
     }
 
@@ -55,7 +55,7 @@ public class Flight {
         if (points.size() <= 1) {
             return "";
         } else {
-            return String.format("%.8f", points.get(points.size() - 1).getLatitude());
+            return String.format("%.8f", points.get(points.size() - 1).latitude);
         }
     }
 
@@ -63,7 +63,7 @@ public class Flight {
         if (points.size() <= 1) {
             return "";
         } else {
-            return String.format("%.8f", points.get(points.size() - 1).getLongitude());
+            return String.format("%.8f", points.get(points.size() - 1).longitude);
         }
     }
 
@@ -110,12 +110,12 @@ public class Flight {
      * @return distance - The calculated Great-circle distance.
      */
     public double getLegDistance(FlightPoint point1, FlightPoint point2) {
-        double latitude1 = point1.getLatitude();
-        double longitude1 = point1.getLongitude();
-        double latitude2 = point2.getLatitude();
-        double longitude2 = point2.getLongitude();
-        double altitude1 = point1.getAltitude();
-        double altitude2 = point2.getAltitude();
+        double latitude1 = point1.latitude;
+        double longitude1 = point1.longitude;
+        double latitude2 = point2.latitude;
+        double longitude2 = point2.longitude;
+        double altitude1 = point1.altitude;
+        double altitude2 = point2.altitude;
 
         final int radius = 6371; // Radius of Earth in km.
         double latitudeDistance = Math.toRadians(latitude2 - latitude1);

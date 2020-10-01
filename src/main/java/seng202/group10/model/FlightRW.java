@@ -79,11 +79,11 @@ public class FlightRW extends RWStream {
         for (FlightPoint point: flight.getFlightPoints()) {
             flightArr.add(
                     new ArrayList<String>(Arrays.asList(
-                            point.getType(),
-                            point.getId(),
-                            Double.toString(point.getAltitude()),
-                            Double.toString(point.getLatitude()),
-                            Double.toString(point.getLongitude())
+                            point.type,
+                            point.id,
+                            Double.toString(point.altitude),
+                            Double.toString(point.latitude),
+                            Double.toString(point.longitude)
                     )));
         }
         writeAll(flightArr);
