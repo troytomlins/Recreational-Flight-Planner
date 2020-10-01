@@ -1,8 +1,8 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.junit.Before;
+import org.junit.Test;
+
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -19,7 +19,7 @@ public class FlightTest {
     private Flight flight;
     private Flight compareFlight;
 
-    @BeforeEach
+    @Before
     public void init() {
         compareFlight = new Flight();
         flight = new Flight();
