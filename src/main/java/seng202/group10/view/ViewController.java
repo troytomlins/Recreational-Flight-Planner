@@ -6,6 +6,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -214,7 +215,7 @@ public class ViewController {
 
             FlightPoint point = flightPoints.get(i);
             point.id = Integer.toString(i);
-            newLocationBox(point.id, i + 1, point.latitude, point.longitude);
+            newLocationBox(i + 1, point);
         }
     }
 
@@ -268,36 +269,13 @@ public class ViewController {
     /**
      * Make a new box to show the marker location
      *
-     * @param id  - id of marker
      * @param row - row index to place it
-     * @param lat - position latitude
-     * @param lng - position longitude
      */
-    private void newLocationBox(String id, int row, double lat, double lng) {
-        //Make the thing
-        int height = 100;
-
-        // Making box
-        GridPane pane = new GridPane();
-        Button setAltitude = new Button("Set Altitude");
-        Label latLng = new Label(id + " " + lat + " " + lng);   // ID and position
-        pane.add(latLng, 0, 0);
-        TextField altitude = new TextField("0");                // Altitude text box
-        pane.add(altitude, 0, 1);
-        pane.add(setAltitude, 0, 2);
-
-        // Setting height
-        pane.setMinHeight(height);
-        pane.setMaxHeight(height);
-        pane.setPrefHeight(height);
-
-        // Padding
-        javafx.geometry.Insets inset = new javafx.geometry.Insets(5, 5, 5, 5);
-        altitude.setPadding(inset);
-        latLng.setPadding(inset);
+    private void newLocationBox(int row, FlightPoint point) {
 
         //Add the thing
-        locationsPane.add(pane, 0, row);
+        LocationBox box = new LocationBox(point);
+        locationsPane.add(box.pane, 0, row);
     }
 
     /**
@@ -319,5 +297,48 @@ public class ViewController {
         FlightRW write = new FlightRW(filepath,filepath);
         model.addFlight(flight);
         write.writeFlight(flight);
+    }
+}
+
+
+class LocationBox {
+    int height = 100;
+
+    FlightPoint flightPoint;
+
+    GridPane pane;
+    Label label;
+    TextField altitudeField;
+    Button button;
+
+    LocationBox(FlightPoint point) {
+        flightPoint = point;
+        // Making box
+        pane = new GridPane();
+        button = new Button("Set Altitude");
+        label = new Label(point.id + " " + point.latitude + " " + point.longitude);   // ID and position
+        pane.add(label, 0, 0);
+        altitudeField = new TextField("0");                // Altitude text box
+        pane.add(altitudeField, 0, 1);
+        pane.add(button, 0, 2);
+
+        // Setting height
+        pane.setMinHeight(height);
+        pane.setMaxHeight(height);
+        pane.setPrefHeight(height);
+
+        // Padding
+        javafx.geometry.Insets inset = new javafx.geometry.Insets(5, 5, 5, 5);
+        altitudeField.setPadding(inset);
+        label.setPadding(inset);
+
+//         Altitude change listener
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                String input = altitudeField.getText();
+                // TODO check input is number
+                flightPoint.altitude = Float.parseFloat(input);
+            }
+        });
     }
 }

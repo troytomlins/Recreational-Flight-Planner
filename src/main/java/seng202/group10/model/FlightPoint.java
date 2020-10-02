@@ -21,4 +21,25 @@ public class FlightPoint {
         this.longitude = lng;
         this.altitude = altitude;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getAltitude() {
+        return altitude;
+    }
+
 }
