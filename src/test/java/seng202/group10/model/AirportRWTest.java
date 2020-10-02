@@ -20,8 +20,7 @@ public class AirportRWTest {
 
     @AfterClass
     public static void tearDown() {
-        RWStream stream = new RWStream("a");
-        stream.closeDb();
+        DatabaseConnection.getInstance().disconnect();
     }
 
     @Test
