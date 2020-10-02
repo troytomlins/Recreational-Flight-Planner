@@ -1,6 +1,7 @@
 package seng202.group10.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,10 +10,15 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
+import seng202.group10.controller.ControllerFacade;
+import seng202.group10.model.Airport;
+import seng202.group10.view.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,6 +75,7 @@ public class GUIApp extends Application {
                 window.setMember("javaConnector", javaConnector);
             }
         });
+        javaConnector.setEngine(webEngine);
         webEngine.load(url.toString());
     }
 
@@ -137,6 +144,45 @@ public class GUIApp extends Application {
          */
         public void println(String text) {
             System.out.println(text);
+        }
+        WebEngine webEngine;
+
+        public void setEngine(WebEngine engine) {
+            webEngine = engine;
+        }
+
+        public void setAirports(int zoom, double lat1, double long1, double lat2, double long2) {
+            ArrayList<Airport> airports = new ArrayList<Airport>();
+            //System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
+            for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
+                boolean latitudeCheck = airport.getLatitude() <= lat1 && airport.getLatitude() >= lat2;
+                boolean longitudeCheck = (airport.getLongitude() <= long1 && airport.getLongitude() >= long2 && long2 <= long1) ||
+                        (long2 > long1 && (airport.getLongitude() >= long2 && airport.getLongitude() < 180) || airport.getLongitude() >= long1 && airport.getLongitude() > 180);
+                if (latitudeCheck && longitudeCheck) {
+                    //System.out.println("Adding " + airport.getName());
+                    airports.add(airport);
+                }
+            }
+
+            Collections.shuffle(airports);
+
+            for (int i = 0; i < Math.min(100, airports.size()); i++) {
+                Airport airport = airports.get(i);
+                JSONObject json = new JSONObject();
+                json.put("name", airport.getName());
+                json.put("latitude", airport.getLatitude());
+                json.put("longitude", airport.getLongitude());
+                json.put("city", airport.getCity());
+                json.put("country", airport.getCountry());
+                json.put("altitude", airport.getAltitude());
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        webEngine.executeScript(String.format("addAirport(%s)", json.toJSONString()));
+                    }
+                });
+            }
         }
     }
 
