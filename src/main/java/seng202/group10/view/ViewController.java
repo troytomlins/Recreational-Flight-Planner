@@ -204,6 +204,19 @@ public class ViewController {
         aircraftSelector.setItems(observableAircraft);
     }
 
+    /**
+     * Make location boxes from the flight points
+     */
+    public void remakeLocationBoxes() {
+        locationsPane.getChildren().clear();
+        ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
+        for (int i = 0; i < flightPoints.size(); i ++) {
+
+            FlightPoint point = flightPoints.get(i);
+            point.id = Integer.toString(i);
+            newLocationBox(point.id, i + 1, point.latitude, point.longitude);
+        }
+    }
 
     /**
      * Add a new marker into the plan flight section
@@ -214,7 +227,7 @@ public class ViewController {
      */
     public void newMarker(String id, double lat, double lng) {
         flight.addPoint(new FlightPoint("NA", id, 0, lat, lng));
-        newLocationBox(id, getRowFromId(id), lat, lng);
+        remakeLocationBoxes();
     }
 
     /**
@@ -222,59 +235,35 @@ public class ViewController {
      * @param id id of marker to remove
      */
     public void removeMarker(String id) {
-        // Remove marker id
-        int row = getRowFromId(id);
-        ObservableList<Node> children = locationsPane.getChildren();
-        children.remove(row - 1, row);
-        // shuffle box ids after id back
-
-        for (int i = row - 1; i < children.size(); i++) {
-            String label = Integer.toString(i);
-            if (i == 0) {
-                label = "start";
-            }
-            editLocationBox(i, label, 0, 0);
-        }
         ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
-        flightPoints.removeIf(point -> point.getId().equals(id));
-        locationsPane.getChildren().clear();
+        flightPoints.removeIf(flightPoint -> flightPoint.id.equals(id));
+        remakeLocationBoxes();
+    }
+
+    public void markerChange(String id, double newLat, double newLng) {
+        ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
         for (FlightPoint point : flightPoints) {
-            String pId = point.getId();
-            int pRow = getRowFromId(pId);
-            if (pRow >= row) {
-                pId = Integer.toString(Integer.parseInt(pId) - 1);
+            if (point.id.equals(id)) {
+                point.latitude = newLat;
+                point.longitude = newLng;
             }
-            newLocationBox(pId, getRowFromId(pId), point.getLatitude(), point.getLongitude());
         }
+        remakeLocationBoxes();
     }
 
-    /**
-     * Edit the location box at row
-     * @param row row to edit
-     * @param newId
-     * @param newLat
-     * @param newLng
-     */
-    public void editLocationBox(int row, String newId, int newLat, int newLng) {
-        ObservableList<Node> children = locationsPane.getChildren();
-        GridPane pane = (GridPane) children.get(row);
 
-        ((Label) pane.getChildren().get(0)).setText(newId + " " + newLat +" " + newLng);
-    }
-
-    /**
-     * What's the row index of the marker/location box with id
-     * @param id id of box
-     */
-    private int getRowFromId(String id) {
-        int row;
-        if (id.equals("start")) {
-            row = 0;
-        } else {
-            row = Integer.parseInt(id);
-        }
-        return row + 1;
-    }
+//    /**
+//     * Edit the location box at row
+//     * @param row row to edit
+//     * @param newId
+//     * @param newLat
+//     * @param newLng
+//     */
+//    public void editLocationBox(int row, String newId, double newLat, double newLng) {
+//        ObservableList<Node> children = locationsPane.getChildren();
+//        GridPane pane = (GridPane) children.get(row);
+//        ((Label) pane.getChildren().get(0)).setText(newId + " " + newLat +" " + newLng);
+//    }
 
     /**
      * Make a new box to show the marker location
@@ -315,6 +304,7 @@ public class ViewController {
      * Clear all the markers
      */
     public void clearMarkers() {
+        flight = new Flight();
         locationsPane.getChildren().clear();
         webEngine.executeScript("removeAllMarkers()");
     }

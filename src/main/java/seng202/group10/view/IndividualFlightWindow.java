@@ -80,7 +80,7 @@ public class IndividualFlightWindow {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    String code = String.format("newMarker(%f, %f)", point.getLatitude(), point.getLongitude());
+                    String code = String.format("newMarker(%f, %f)", point.latitude, point.longitude);
                     mainController.webEngine.executeScript(code);
                 }
             });

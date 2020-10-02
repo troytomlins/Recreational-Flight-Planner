@@ -28,7 +28,7 @@ class LabelHandler {
     getNextLabel() {
         let label;
         if (this.labelIndex == 0) {
-            label = "start";
+            label = this.firstLabel;
         } else {
             // let letterLabels = Math.max(0, this.labelIndex - 2);
 //            label = this.makeLetterLabel(this.labelIndex - 1);
@@ -78,8 +78,7 @@ class MyMarker {
         });
 
         google.maps.event.addListener(this.mapsMarker, 'drag', function(event) {
-//            sendMarkersToJava();
-            javaConnector.moveMarker(label, latLng.lat(), latLng.lng());
+            javaConnector.moveMarker(self.label, self.mapsMarker.position.lat(), self.mapsMarker.position.lng());
         });
     }
 
@@ -137,7 +136,6 @@ function addMarker(location) {
     let [label, labelIndex] = labelHandler.getNextLabel();
     let marker = new MyMarker(label, labelIndex, location);
     markers[currentIndex] = marker
-//    sendMarkersToJava();
 }
 
 
@@ -179,24 +177,6 @@ function makeJavaMarkerLists() {
         lngs.push(marker.getPosition().lng());
     }
     return [labels, lats, lngs];
-}
-
-
-/**
- * Send shit to java
- */
-function sendMarkersToJava() {
-    let [labels, lats, lngs] = makeJavaMarkerLists();
-    if (javaConnector) {
-        let [labels, lats, lngs] = makeJavaMarkerLists();
-        javaConnector.clearMarkers();
-        for (let i = 0; i < labels.length; i++) {
-            javaConnector.addMarker(labels[i], lats[i], lngs[i]);
-        }
-        javaConnector.confirmMarkers();
-    } else {
-        console.log("Cannot find javaConnector. Are you running the app?");
-    }
 }
 
 

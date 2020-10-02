@@ -113,28 +113,8 @@ public class GUIApp extends Application {
         }
 
         public void moveMarker(String id, double newLat, double newLng) {
-            System.out.println(id + " move to " + newLat + " " + newLng);
-        }
-
-        ArrayList<String> labels;
-        ArrayList<Float> lats;
-        ArrayList<Float> lngs;
-
-        public void clearMarkers() {
-            labels = new ArrayList<>();
-            lats = new ArrayList<>();
-            lngs = new ArrayList<>();
-        }
-
-        public void addMarker(String label, float lat, float lng) {
-            labels.add(label);
-            lats.add(lat);
-            lngs.add(lng);
-        }
-
-        public void confirmMarkers() {
-//            viewController.setMarkers(labels, lats, lngs);
-            // Check the flight distance
+//            System.out.println(id + " move to " + newLat + " " + newLng);
+            viewController.markerChange(id, newLat, newLng);
         }
 
         /**
