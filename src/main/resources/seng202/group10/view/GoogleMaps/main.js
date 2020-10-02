@@ -5,6 +5,7 @@ var map;
 var javaConnector; // Placeholder
 var markers = [];
 
+var bounds_changed = false;
 
 class LabelHandler {
     constructor() {
@@ -105,18 +106,17 @@ class Airport {
                 scale: 5
             }
         });
-        var content = "<div id='content'>" +
+        var content = "<body>" +
             "<h2>" + data.name + "</h2><br>" +
             "<h4>" + data.city + ", " + data.country + "</h4><br>" +
             "<p>Altitude: " + data.altitude +"</p>" +
-            "</div>";
+            "<button onclick='addMarker(new google.maps.LatLng("+ data.latitude +", " + data.longitude +"))'>Add to flight</button>" +
+            "</body>";
         this.window = new google.maps.InfoWindow({
             content: content
         });
         this.marker.addListener('click', () => {
-            println("hrer");
             this.window.open(map, this.marker);
-            println("nre");
         });
     }
 
@@ -142,27 +142,29 @@ function initMap() {
         addMarker(event.latLng);
     });
     google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
-        var bounds = map.getBounds();
-        javaConnector.setAirports(map.getZoom(),
-            bounds.getNorthEast().lat(),
-            bounds.getNorthEast().lng(),
-            bounds.getSouthWest().lat(),
-            bounds.getSouthWest().lng()
-        );
+        sendBounds();
     });
     google.maps.event.addListener(map, 'bounds_changed', function() {
-        removeAirports();
-        var bounds = map.getBounds();
-        javaConnector.setAirports(map.getZoom(),
-            bounds.getNorthEast().lat(),
-            bounds.getNorthEast().lng(),
-            bounds.getSouthWest().lat(),
-            bounds.getSouthWest().lng()
-        );
+        bounds_changed = true;
+    });
+    google.maps.event.addListener(map, 'idle', function() {
+        if (bounds_changed) {
+            bounds_changed = false;
+            removeAirports();
+            sendBounds();
+        }
     });
 }
 
-
+function sendBounds() {
+    var bounds = map.getBounds();
+    javaConnector.setAirports(map.getZoom(),
+        bounds.getNorthEast().lat(),
+        bounds.getNorthEast().lng(),
+        bounds.getSouthWest().lat(),
+        bounds.getSouthWest().lng()
+    );
+}
 /**
  * Make a new marker
  * tell java about it with sendLocationToJava
@@ -231,8 +233,8 @@ function sendMarkersToJava() {
 /**
  * Print some text into the java console
  */
-function println(text) {
-    javaConnector.println(text);
+function println() {
+    javaConnector.println("Arggh");
 }
 
 var airports = [];
