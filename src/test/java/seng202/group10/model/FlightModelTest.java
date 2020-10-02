@@ -4,6 +4,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -28,6 +29,7 @@ public class FlightModelTest {
     @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
     @Test

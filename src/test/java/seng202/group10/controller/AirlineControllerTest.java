@@ -45,5 +45,6 @@ public class AirlineControllerTest {
     @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 }
