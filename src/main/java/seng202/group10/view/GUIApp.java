@@ -157,7 +157,7 @@ public class GUIApp extends Application {
             for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
                 boolean latitudeCheck = airport.getLatitude() <= lat1 && airport.getLatitude() >= lat2;
                 boolean longitudeCheck = (airport.getLongitude() <= long1 && airport.getLongitude() >= long2 && long2 <= long1) ||
-                        (long2 > long1 && (airport.getLongitude() >= long2 && airport.getLongitude() < 180) || airport.getLongitude() >= long1 && airport.getLongitude() > 180);
+                        (long2 > long1 && (airport.getLongitude() >= long2 && airport.getLongitude() < 180) || airport.getLongitude() <= long1 && airport.getLongitude() > -180);
                 if (latitudeCheck && longitudeCheck) {
                     //System.out.println("Adding " + airport.getName());
                     airports.add(airport);
