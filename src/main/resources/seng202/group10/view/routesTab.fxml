@@ -56,47 +56,85 @@
                                 <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <TextField fx:id="airlineCodeFilterField" scaleX="0.6" translateX="50.0">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></TextField>
-                                <TextField fx:id="srcAirportCodeFilterField" scaleX="0.6" translateX="50.0" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></TextField>
-                                <TextField fx:id="destAirportCodeFilterField" scaleX="0.6" translateX="50.0" GridPane.rowIndex="2">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></TextField>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Code">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Src Airport Code" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Text>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dst Airport Code" GridPane.rowIndex="2">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Text>
-                                <TextField fx:id="numStopsFilterField" scaleX="0.6" translateX="50.0" GridPane.rowIndex="3">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></TextField>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Stops" GridPane.rowIndex="3">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Text>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="124.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="176.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <TextField fx:id="airlineCodeFilterField" GridPane.columnIndex="1" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+                                            <GridPane.margin>
+                                                <Insets left="5.0" />
+                                            </GridPane.margin>
+                                        </Text>
+                                    </children>
+                                </GridPane>
+                                <GridPane GridPane.rowIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="124.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="176.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <TextField fx:id="srcAirportCodeFilterField" GridPane.columnIndex="1" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Src Airport Code">
+                                            <GridPane.margin>
+                                                <Insets left="5.0" />
+                                            </GridPane.margin>
+                                        </Text>
+                                    </children>
+                                </GridPane>
+                                <GridPane GridPane.rowIndex="2">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="124.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="176.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints />
+                              <RowConstraints />
+                                    </rowConstraints>
+                                    <children>
+                                        <TextField fx:id="destAirportCodeFilterField" GridPane.columnIndex="1" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dst Airport Code">
+                                            <GridPane.margin>
+                                                <Insets left="5.0" />
+                                            </GridPane.margin>
+                                        </Text>
+                                    </children>
+                                </GridPane>
+                                <GridPane GridPane.rowIndex="3">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="124.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="176.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints />
+                              <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                              <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                    </rowConstraints>
+                                    <children>
+                                        <TextField fx:id="numStopsFilterField" GridPane.columnIndex="1" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Stops">
+                                            <GridPane.margin>
+                                                <Insets left="5.0" />
+                                            </GridPane.margin>
+                                        </Text>
+                                    </children>
+                                </GridPane>
+
                                 <Button mnemonicParsing="false" onAction="#applyRouteFilters" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                         <Button mnemonicParsing="false" onAction="#clearFilters" text="Clear" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                             </children>
