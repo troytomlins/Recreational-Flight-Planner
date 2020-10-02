@@ -7,6 +7,8 @@ var markers = [];
 
 var bounds_changed = false;
 
+var flightLine;
+
 class LabelHandler {
     constructor() {
         this.labelIndex = 0;
@@ -73,9 +75,11 @@ class MyMarker {
         let self = this;
         google.maps.event.addListener(this.mapsMarker, 'click', function(event) {
             removeMarker(self);
+            drawPath();
         });
 
         google.maps.event.addListener(this.mapsMarker, 'drag', function(event) {
+            drawPath();
             sendMarkersToJava();
         });
     }
@@ -140,6 +144,7 @@ function initMap() {
         mapTypeControl: false,
         streetViewControl: false
     });
+    flightLine = new google.maps.Polyline();
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
     });
@@ -179,6 +184,7 @@ function addMarker(location) {
     let [label, labelIndex] = labelHandler.getNextLabel();
     let marker = new MyMarker(label, labelIndex, location);
     markers[currentIndex] = marker
+    drawPath();
     sendMarkersToJava();
 }
 
@@ -214,18 +220,33 @@ function makeJavaMarkerLists() {
     return [labels, lats, lngs];
 }
 
+function drawPath() {
+    flightLine.setMap(null);
+    flightLine = new google.maps.Polyline({
+        strokeColor: "#00a9ff",
+        strokeWeight: 2
+    });
+    path = flightLine.getPath();
+    for (var i = 0; i < markers.length; i++) {
+        path.push(markers[i].getPosition());
+    }
+    flightLine.setPath(path);
+    flightLine.setMap(map);
+}
 
 /**
  * Send shit to java
  */
 function sendMarkersToJava() {
-    let [labels, lats, lngs] = makeJavaMarkerLists();
+    println("send markers");
     if (javaConnector) {
         let [labels, lats, lngs] = makeJavaMarkerLists();
         javaConnector.clearMarkers();
         for (let i = 0; i < labels.length; i++) {
             javaConnector.addMarker(labels[i], lats[i], lngs[i]);
         }
+        flightLine.setPath(path);
+        flightLine.setMap(map);
         javaConnector.confirmMarkers();
     } else {
         console.log("Cannot find javaConnector. Are you running the app?");
@@ -235,8 +256,8 @@ function sendMarkersToJava() {
 /**
  * Print some text into the java console
  */
-function println() {
-    javaConnector.println("Arggh");
+function println(text) {
+    javaConnector.println(text);
 }
 
 var airports = [];
