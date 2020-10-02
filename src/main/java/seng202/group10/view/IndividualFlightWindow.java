@@ -1,10 +1,9 @@
 package seng202.group10.view;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -13,6 +12,9 @@ import seng202.group10.model.FlightPoint;
 
 import java.util.ArrayList;
 
+/**
+ * Class for Individual Flight Window.
+ */
 public class IndividualFlightWindow {
 
     @FXML public Text flightText;
@@ -28,10 +30,8 @@ public class IndividualFlightWindow {
     private ViewController mainController;
     private Stage stage;
 
-    private Flight flight;
-
     /**
-     * Injects the main view controller and stage into object
+     * Injects the main view controller and stage into object.
      * @param controller View Controller to inject into object
      * @param stage Stage object to inject into stage
      */
@@ -39,7 +39,6 @@ public class IndividualFlightWindow {
         // Inject variables
         this.mainController = controller;
         this.stage = stage;
-        this.flight = flight;
 
         // Set table and text fields
         updateTable(flight.getFlightPoints());
@@ -48,8 +47,8 @@ public class IndividualFlightWindow {
     }
 
     /**
-     * Populates the flight point table with values in data arraylist
-     * @param data Arraylist of flightpoints to populate the table with
+     * Populates the flight point table with values in data arraylist.
+     * @param data Arraylist of FlightPoint's to populate the table with
      */
     public void updateTable(ArrayList<FlightPoint> data) {
         legTable.setEditable(true);
@@ -71,19 +70,19 @@ public class IndividualFlightWindow {
     /**
      * View the currently selected flight on the map
      */
-    public void viewOnMap() {
-        SingleSelectionModel<Tab> selectionModel = mainController.mainTabPane.getSelectionModel();
-        selectionModel.select(0);
-        // Add markers
-        mainController.clearMarkers();
-        for (FlightPoint point : flight.getFlightPoints()) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    String code = String.format("newMarker(%f, %f)", point.latitude, point.longitude);
-                    mainController.webEngine.executeScript(code);
-                }
-            });
-        }
-    }
+//    public void viewOnMap() {
+//        SingleSelectionModel<Tab> selectionModel = mainController.mainTabPane.getSelectionModel();
+//        selectionModel.select(0);
+//        // Add markers
+//        mainController.clearMarkers();
+//        for (FlightPoint point : flight.getFlightPoints()) {
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    String code = String.format("newMarker(%f, %f)", point.latitude, point.longitude);
+//                    mainController.webEngine.executeScript(code);
+//                }
+//            });
+//        }
+//    }
 }
