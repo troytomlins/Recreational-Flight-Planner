@@ -4,6 +4,11 @@ import seng202.group10.model.Aircraft;
 import seng202.group10.model.Airport;
 import seng202.group10.model.Flight;
 
+
+/**
+ * Placeholder
+ * @author Johnny Howe
+ */
 public class FlightPlanner {
     private Flight flight;
 

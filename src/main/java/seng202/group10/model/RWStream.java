@@ -93,7 +93,7 @@ public class RWStream {
      * Contents of file at inFilename
      * Each line is split by commas and put into an arraylist
      * Each line arraylist is then put into another arraylist which is returned
-     * @return ArrayList<ArrayList<String>> thing explained before
+     * @return thing explained before
      */
     public ArrayList<ArrayList<String>> read() {
         try {

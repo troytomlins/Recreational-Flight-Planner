@@ -1,7 +1,6 @@
 package seng202.group10.model;
 
 /**
- * Class for defining an Aircraft.
  * @author Tom Rizzi
  * @author Niko Tainui
  */
