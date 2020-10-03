@@ -298,8 +298,6 @@ public class ViewController {
      * @param row - row index to place it
      */
     private void newLocationBox(int row, FlightPoint point) {
-
-        //Add the thing
         LocationBox box = new LocationBox(point);
         locationsPane.add(box.pane, 0, row);
     }
@@ -323,9 +321,11 @@ public class ViewController {
         };
         FlightModel model = new FlightModel();
         String filepath = showFileWriter();
-        FlightRW write = new FlightRW(filepath,filepath);
-        model.addFlight(flight);
-        write.writeFlight(flight);
+        if (filepath != null) {
+            FlightRW write = new FlightRW(filepath, filepath);
+            model.addFlight(flight);
+            write.writeFlight(flight);
+        }
     }
 }
 
@@ -347,7 +347,7 @@ class LocationBox {
         button = new Button("Set Altitude");
         label = new Label(point.id + " " + point.latitude + " " + point.longitude);   // ID and position
         pane.add(label, 0, 0);
-        altitudeField = new TextField("0");                // Altitude text box
+        altitudeField = new TextField(Double.toString(point.altitude));                // Altitude text box
         pane.add(altitudeField, 0, 1);
         pane.add(button, 0, 2);
 
