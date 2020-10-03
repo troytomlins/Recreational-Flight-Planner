@@ -39,12 +39,12 @@ public class AircraftController {
         return model.getAircraftList();
     }
 
-    /**
-     * Deletes Aircraft from ArrayList.
-     * @param craft Aircraft to delete
-     */
-    public void deleteAircraft(Aircraft craft) {
-        model.deleteAircraft(craft);
-    }
+//    /**
+//     * Deletes Aircraft from ArrayList.
+//     * @param craft Aircraft to delete
+//     */
+//    public void deleteAircraft(Aircraft craft) {
+//        model.deleteAircraft(craft);
+//    }
 
 }
