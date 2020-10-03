@@ -47,7 +47,7 @@
          <children>
               <BorderPane prefHeight="500.0" prefWidth="50" GridPane.rowIndex="0">
                   <top>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Filters" BorderPane.alignment="CENTER">
                           <font>
                               <Font size="25.0" />
                           </font>
