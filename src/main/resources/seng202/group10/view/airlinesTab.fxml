@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -24,60 +25,6 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <BorderPane prefHeight="500.0" prefWidth="50" BorderPane.alignment="CENTER" GridPane.columnIndex="0">
-            <top>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="25.0" />
-                    </font>
-                </Text>
-            </top>
-            <bottom>
-                <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" BorderPane.alignment="CENTER">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#importAirlines" text="Airlines File" />
-                    </items>
-                </MenuButton>
-            </bottom>
-            <padding>
-                <Insets bottom="10.0" top="10.0" />
-            </padding>
-         <center>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="296.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.19998168945312" minWidth="0.0" prefWidth="0.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TextField fx:id="nameFilterField" scaleX="0.75" translateX="25.0" />
-                  <TextField fx:id="aliasFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="1" />
-                  <TextField fx:id="countryFilterField" scaleX="0.75" translateX="25.0" GridPane.rowIndex="2" />
-                  <Button fx:id="applyAirlineFilters" onAction="#applyAirlineFilters" mnemonicParsing="false" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
-                     <GridPane.margin>
-                        <Insets left="5.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alias" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="5.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="5.0" />
-                     </GridPane.margin>
-                  </Text>
-               </children>
-            </GridPane>
-         </center>
-        </BorderPane>
         <TableView fx:id="airlineTable" GridPane.columnIndex="1">
             <columns>
                 <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
@@ -88,5 +35,129 @@
                 <TableColumn fx:id="countryCol" prefWidth="75.0" text="Country" />
             </columns>
         </TableView>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="1000.0" minHeight="10.0" prefHeight="427.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <BorderPane prefHeight="500.0" prefWidth="50" GridPane.rowIndex="0">
+                  <top>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Filters" BorderPane.alignment="CENTER">
+                          <font>
+                              <Font size="25.0" />
+                          </font>
+                      </Text>
+                  </top>
+                  <padding>
+                      <Insets bottom="10.0" top="10.0" />
+                  </padding>
+               <center>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="296.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.19998168945312" minWidth="0.0" prefWidth="0.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="168.0" minHeight="10.0" prefHeight="109.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="applyAirlineFilters" mnemonicParsing="false" onAction="#applyAirlineFilters" text="Apply" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#clearFilters" text="Clear" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="77.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="219.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="nameFilterField" prefWidth="176.0" GridPane.columnIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="77.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="219.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextField fx:id="aliasFilterField" GridPane.columnIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alias">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="77.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="219.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <TextField fx:id="countryFilterField" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </center>
+              </BorderPane>
+            <Line endX="199.5" startX="-100.0" GridPane.rowIndex="1" />
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <MenuButton mnemonicParsing="false" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#exportDataCsv" text="CSV File" />
+                      <MenuItem mnemonicParsing="false" onAction="#exportDataDat" text="Dat File" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportDataTxt" text="Txt File" />
+                    </items>
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </GridPane.margin>
+                  </MenuButton>
+                      <MenuButton mnemonicParsing="false" popupSide="TOP" text="Import" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#importAirlines" text="Airlines File" />
+                          </items>
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </GridPane.margin>
+                      </MenuButton>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
     </children>
 </GridPane>

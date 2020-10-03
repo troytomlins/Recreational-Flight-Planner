@@ -8,41 +8,57 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
+ * Read/Write Class for Route
  * @author Mitchell Freeman, Tom Rizzi
  */
 public class RouteRW extends RWStream {
-    public RouteRW(String inFile) {
-        super(inFile, "route.csv");
+
+    /**
+     * Constructor for RouteRW
+     * @param inFile filename for the input file
+     * @param makeFile boolean value of weather to create the outfile
+     */
+    public RouteRW(String inFile, Boolean makeFile) {
+        super(inFile, "route.csv", makeFile);
     }
 
+    /**
+     * Constructor for RouteRW
+     * @param inFile filename for the input file
+     */
+    public RouteRW(String inFile) {
+        this(inFile, false);
+    }
+
+    /**
+     * Constructor for RouteRW
+     */
     public RouteRW() {
-        super("route.csv");
+        this("route.csv");
     }
 
     /**
      * Reads routes from routes data file
      * @return List of routes read from the file
-     * @throws FileFormatException - throws when file is not in the right format
-     * @throws IncompatibleFileException - throws when file is not compatible
+     * @throws FileFormatException Wrong File Format
+     * @throws IncompatibleFileException Incompatible File
      */
     public ArrayList<Route> readRoutes() throws FileFormatException, IncompatibleFileException {
-        return readRoutes(new ArrayList<Integer>());
+        return readRoutes(new ArrayList<>());
     }
 
     /**
      * Read routes from routes data file
      * @param ignoreLines List of line indices to ignore (1 origin)
      * @return List of routes read from the file
-     * @throws IncompatibleFileException - throws when file is not compatible
-     * @throws FileFormatException - throws when file is not in the right format
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Route> readRoutes(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -76,7 +92,7 @@ public class RouteRW extends RWStream {
                             routes.add(route);
 
                         } catch (Exception e) {
-
+                            e.printStackTrace();
                             // There was an error parsing the line, add to errorLines
                             errorLines.add(lineNum);
                         }
@@ -108,54 +124,14 @@ public class RouteRW extends RWStream {
         }
     }
 
-
-    public ArrayList<Route> readRoutes1() {
-        ArrayList<ArrayList<String>> data = read();
-
-        ArrayList<Route> routeList = new ArrayList<Route>();
-
-        for (ArrayList<String> dataLine: data) {
-            if (true/*ValidateData.validateRoute(dataLine)*/) {
-                Scanner scanner = new Scanner(dataLine.get(8));
-                scanner.useDelimiter(" ");
-
-                ArrayList<String> equipment = new ArrayList<String>();
-
-                while (scanner.hasNext()) {
-                    equipment.add(scanner.next());
-                }
-
-                Route route = new Route(
-                        dataLine.get(0),
-                        dataLine.get(1),
-                        dataLine.get(3),
-                        Integer.parseInt(dataLine.get(7))
-                );
-                routeList.add(route);
-            }
-        }
-        return routeList;
-    }
-
-    public void writeRoute(ArrayList<Route> routes) {
-        ArrayList<ArrayList<String>> routeStrings = new ArrayList<ArrayList<String>>();
-
-        for (Route route: routes) {
-            routeStrings.add(
-                    new ArrayList<String>(Arrays.asList(
-                            route.getAirlineCode(),
-                            route.getSourceAirportCode(),
-                            route.getDestinationAirportCode(),
-                            Integer.toString(route.getStops())
-                    )));
-        }
-        writeAll(routeStrings);
-    }
-
+    /**
+     * Reads and returns arraylist of routes from the database.
+     * @return ArrayList of routes from the database.
+     */
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
 
-        ArrayList<Route> output = new ArrayList<Route>();
+        ArrayList<Route> output = new ArrayList<>();
 
         try {
             while (results.next()) {
@@ -172,6 +148,10 @@ public class RouteRW extends RWStream {
         return output;
     }
 
+    /**
+     * Writes Route's to database.
+     * @param routes ArrayList of Route
+     */
     public void writeDatabaseRoutes(ArrayList<Route> routes) {
         databaseConnection.setAutoCommit(false);
         for (Route route: routes) {
@@ -195,4 +175,30 @@ public class RouteRW extends RWStream {
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
     }
+
+    /**
+     * Uses the super class RWStream to write all a route to a file.
+     * The Route object attributes have to be converted to strings.
+     * @param routes An ArrayList of Route objects.
+     */
+    public void writeRoute(ArrayList<Route> routes) {
+        ArrayList<ArrayList<String>> routeStrings = new ArrayList<>();
+
+        for (Route route: routes) {
+            routeStrings.add(
+                    new ArrayList<>(Arrays.asList(
+                            route.getAirlineCode(),
+                            "NULL", // Field not preserved in database.
+                            route.getSourceAirportCode(),
+                            "NULL", // Field not preserved in database.
+                            route.getDestinationAirportCode(),
+                            "NULL", // Field not preserved in database.
+                            "NULL", // Field not preserved in database.
+                            Integer.toString(route.getStops()),
+                            "NULL"  // Field not preserved in database.
+                    )));
+        }
+        writeAll(routeStrings);
+    }
+
 }

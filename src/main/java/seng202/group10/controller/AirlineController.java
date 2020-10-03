@@ -5,31 +5,31 @@ import seng202.group10.model.*;
 import java.util.ArrayList;
 
 /**
- * Retrieves airline data from the model
- * @author Johnny Howe
- * @author Mitchell Freeman
+ * Controller Class for airlines.
  */
 public class AirlineController {
 
     private AirlineModel model;
 
     /**
-     * Constructor that takes an already initialized airline model
-     * @param model model to use
+     * Constructor for AirlineController.
+     * Sets the model to an inputted instance of AirlineModel.
+     * @param model instance of Class Airline Model
      */
     public AirlineController(AirlineModel model) {
         this.model = model;
     }
 
     /**
-     * Constructor that initializes its own airline model
+     * Constructor for AirlineController.
+     * Creates a new instance of AirlineModel.
      */
     public AirlineController() {
         this.model = new AirlineModel();
     }
 
     /**
-     * Get a list of airlines from model
+     * Get a list of airlines from model.
      * @return Arraylist of airlines
      */
     public ArrayList<Airline> getAirlines() {
@@ -62,4 +62,13 @@ public class AirlineController {
         model.save();
     }
 
+    /**
+     * Writes airports to a file using RW class to specified filepath
+     * @param filepath Filepath to write data file to
+     */
+    public void writeAirlines(String filepath) {
+        AirlineRW stream = new AirlineRW();
+        stream.setOutFileName(filepath);
+        stream.writeAirlines(model.getAirlines());
+    }
 }

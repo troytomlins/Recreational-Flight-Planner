@@ -18,28 +18,47 @@ import java.util.Arrays;
  * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {
+
     /**
      * creates instance of class with a default outfile
-     * @param inFile
+     * @param inFile in file
+     * @param createFile determines weather to create the outfile or not
+     */
+    public AirlineRW(String inFile, Boolean createFile) {
+        super(inFile, "airline.csv", createFile);
+    }
+
+    /**
+     * creates instance of class with a default outfile
+     * @param inFile in file
      */
     public AirlineRW(String inFile) {
-        super(inFile, "airline.csv");
+        this(inFile, false);
     }
 
+    /**
+     * Constructor for airlinerw, uses all default values
+     */
     public AirlineRW() {
-        super("airline.csv");
+        this("airline.csv");
     }
 
+    /**
+     * Reads airlines from file using default parameters
+     * @return ArrayList of aircraft read from file
+     * @throws IncompatibleFileException Thrown when the whole file is incompatible
+     * @throws FileFormatException Thrown when parts of the file are incompatible
+     */
     public ArrayList<Airline> readAirlines() throws IncompatibleFileException, FileFormatException {
-        return readAirlines(new ArrayList<Integer>());
+        return readAirlines(new ArrayList<>());
     }
 
     /**
      * Read airlines from file
      * @param ignoreLines List of lines index's to ignore (1 origin)
      * @return Arraylist of airlines read from file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Airline> readAirlines(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -115,7 +134,7 @@ public class AirlineRW extends RWStream {
     public ArrayList<Airline> readDatabaseAirlines() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM airlines");
 
-        ArrayList<Airline> output = new ArrayList<Airline>();
+        ArrayList<Airline> output = new ArrayList<>();
 
         try {
             while (results.next()) {
@@ -135,8 +154,8 @@ public class AirlineRW extends RWStream {
     }
 
     /**
-     * Writes airlines to database
-     * @param airlines
+     * Writes airlines to database.
+     * @param airlines ArrayList of Airline
      */
     public void writeDatabaseAirlines(ArrayList<Airline> airlines) {
         databaseConnection.setAutoCommit(false);
@@ -163,4 +182,29 @@ public class AirlineRW extends RWStream {
         databaseConnection.commit();
         databaseConnection.setAutoCommit(true);
     }
+
+    /**
+     * Uses the super class RWStream to write all airlines to a file.
+     * The Airline object attributes have to be converted to strings.
+     * @param airlines An ArrayList of Airline objects.
+     */
+    public void writeAirlines(ArrayList<Airline> airlines) {
+        ArrayList<ArrayList<String>> airlineStrings = new ArrayList<>();
+
+        for (Airline airline: airlines) {
+            airlineStrings.add(
+                    new ArrayList<>(Arrays.asList(
+                            null, // Field is not preserved in database.
+                            airline.getName(),
+                            airline.getAlias(),
+                            airline.getIata(),
+                            airline.getIcao(),
+                            airline.getCallsign(),
+                            airline.getCountry(),
+                            null // Field is not preserved in database.
+                    )));
+        }
+        writeAll(airlineStrings);
+    }
+
 }

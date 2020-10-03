@@ -1,28 +1,31 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.*;
+import seng202.group10.model.Flight;
+import seng202.group10.model.FlightModel;
+import seng202.group10.model.FlightRW;
+import seng202.group10.model.IncompatibleFileException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
- * Retrieves flight data from the model
- * @author Johnny Howe
+ * Controller Class for Flight.
  */
 public class FlightController {
 
     private FlightModel model;
 
+    /**
+     * Constructor for FlightController.
+     * Set model as a new instance of FlightModel.
+     */
     public FlightController() {
         this.model = new FlightModel();
     }
 
     /**
-     * Import flight
+     * Import flight from file.
      * @param filepath Filepath for flight to import
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws IOException Signals that an I/O exception of some sort has occurred
      */
     public void importFlight(String filepath) throws IOException, IncompatibleFileException {
         FlightRW stream = new FlightRW(filepath);
@@ -30,6 +33,18 @@ public class FlightController {
         model.addFlight(flight);
     }
 
+    /**
+     * Adds a flight to the model
+     * @param flight flight to be added
+     */
+    public void addFlight(Flight flight) {
+        model.addFlight(flight);
+    }
+
+    /**
+     * Returns a list of Flights in model.
+     * @return ArrayList of Class Flight
+     */
     public ArrayList<Flight> getFlights() {
         return model.getFlights();
     }

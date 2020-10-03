@@ -1,15 +1,14 @@
 package seng202.group10.model;
 import javafx.scene.control.Alert;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.util.Arrays;
+
+import com.google.common.base.Joiner;
 
 
 /**
@@ -26,23 +25,49 @@ public class RWStream {
     private String inFilename;
     private String outFilename;
     public DatabaseConnection databaseConnection;
+    private boolean makeFile;
 
     /**
+     * Constructor for RWStream, sets in and out file to inputted filename.
+     * Creates the out file, gets the database instance
+     * @param filename - file to import
+     * @param outFilename - out file
+     * @param createFile - weather to create the outfile or not
+     */
+    public RWStream(String filename, String outFilename, Boolean createFile) {
+        this.inFilename = filename;
+        this.outFilename = outFilename;
+        this.makeFile = createFile;
+        if (createFile) {
+            makeFile();
+        }
+        getDatabase();
+    }
+
+    /**
+     * Constructor for RWStream, sets in and out file to inputted filename.
      * Creates the out file, gets the database instance
      * @param filename - file to import
      */
     public RWStream(String filename) {
-        inFilename = filename;
-        outFilename = filename;
-        makeFile();
-        getDatabase();
+        this(filename, filename, true);
     }
 
+    /**
+     * Constructor for RWStream, sets in and out to separate files.
+     * Creates the out file, gets the database instance.
+     * @param inFilename in file
+     * @param outFilename out file
+     */
     public RWStream(String inFilename, String outFilename) {
-        this.inFilename = inFilename;
-        this.outFilename = outFilename;
-        makeFile();
-        getDatabase();
+        this(inFilename, outFilename, true);
+    }
+
+    /**
+     * Closes the database connection
+     */
+    public void closeDb() {
+        databaseConnection.disconnect();
     }
 
     /**
@@ -76,10 +101,10 @@ public class RWStream {
         } catch (FileNotFoundException error) {
             displayError("File not found");
         }
-        ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> lines = new ArrayList<>();
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
-            ArrayList<String> lineList = new ArrayList<String>(Arrays.asList(line.split("[, ]+")));
+            ArrayList<String> lineList = new ArrayList<>(Arrays.asList(line.split("[, ]+")));
             lines.add(lineList);
         }
         fileReader.close();
@@ -98,21 +123,44 @@ public class RWStream {
     public void writeSingle(ArrayList<String> data) {
         try {
             fileWriter = new FileWriter(outFilename);
-
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < data.size() - 1; i++) {
-                builder.append(data.get(i));
-                builder.append(',');
-            }
-            builder.append(data.get(data.size() - 1));
-            builder.append('\n');
-
-            fileWriter.write(builder.toString());
-
+            fileWriter.write(getDataString(data));
             fileWriter.close();
         } catch (IOException error) {
             displayError("Unable to write to file");
         }
+    }
+
+    /**
+     * Write the data from dataArr to a file
+     * Assumes file exists and is writable
+     * @param dataArr list of lists of strings to write
+     */
+    public void writeLines(ArrayList<ArrayList<String>> dataArr) {
+        try {
+            fileWriter = new FileWriter(outFilename);
+            for (ArrayList<String> data : dataArr) {
+                fileWriter.write(getDataString(data));
+            }
+            fileWriter.close();
+        } catch (IOException error) {
+            displayError("Unable to write to file");
+        }
+    }
+
+    /**
+     *
+     * @param data list of data to write on the line
+     * @return string representation of data
+     */
+    public String getDataString(ArrayList<String> data) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < data.size() - 1; i++) {
+            builder.append(data.get(i));
+            builder.append(',');
+        }
+        builder.append(data.get(data.size() - 1));
+        builder.append('\n');
+        return builder.toString();
     }
 
     /**
@@ -129,16 +177,18 @@ public class RWStream {
         try {
             file.createNewFile();
         } catch(IOException error) {
-
+            error.printStackTrace();
         }
-        for (ArrayList<String> dataLine: data) {
-            writeSingle(dataLine);
-        }
+        writeLines(data);
     }
 
     public void displayError(String message) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setHeaderText(message);
         errorAlert.showAndWait();
+    }
+
+    public void setOutFileName(String filename) {
+        outFilename = filename;
     }
 }

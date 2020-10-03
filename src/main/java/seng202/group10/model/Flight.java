@@ -3,7 +3,7 @@ package seng202.group10.model;
 import java.util.ArrayList;
 
 /**
- * TODO write tests
+ * Class for defining a Flight.
  * @author Johnny Howe
  * @author Niko Tainui
  * @author Zach Kaye
@@ -12,19 +12,30 @@ import java.util.ArrayList;
 public class Flight {
     private double totalDistance;
     private Aircraft aircraft;      // null on commercial flights
-
     private ArrayList<FlightPoint> points;
 
+    /**
+     * Constructor for Flight.
+     */
     public Flight() {
         totalDistance = 0;
         points = new ArrayList<>();
     }
 
+    /**
+     * Adds a new Point to flight.
+     * @param newPoint FlightPoint
+     */
     public void addPoint(FlightPoint newPoint) {
         points.add(newPoint);
         calculateDistance();
     }
 
+    /**
+     * Adds a new Point to flight at a certain index.
+     * @param newPoint FlightPoint
+     * @param index position to insert
+     */
     public void addPoint(FlightPoint newPoint, int index) {
         points.add(index, newPoint);
         calculateDistance();
@@ -36,46 +47,76 @@ public class Flight {
 
     public String getAircraftName() {return this.aircraft != null ? this.aircraft.getName() : null; }
 
+    /**
+     * Returns the flight start latitude point as a string
+     * @return Start latitude point string.
+     */
     public String getStartLatitudeString() {
         if (points.size() == 0) {
             return "";
         } else {
-            return String.format("%.8f", points.get(0).getLatitude());
+            return String.format("%.8f", points.get(0).latitude);
         }
     }
 
+    /**
+     * Returns the flight start longitude point as a string.
+     * @return Start longitude point string.
+     */
     public String getStartLongitudeString() {
         if (points.size() == 0) {
             return "";
         } else {
-            return String.format("%.8f", points.get(0).getLongitude());
+            return String.format("%.8f", points.get(0).longitude);
         }
     }
 
+    /**
+     * Returns the destination latitude point as a string.
+     * @return Destination latitude point string.
+     */
     public String getDestLatitudeString() {
         if (points.size() <= 1) {
             return "";
         } else {
-            return String.format("%.8f", points.get(points.size() - 1).getLatitude());
+            return String.format("%.8f", points.get(points.size() - 1).latitude);
         }
     }
 
+    /**
+     * Returns the destination longitude point as a string.
+     * @return Destination longitude point string.
+     */
     public String getDestLongitudeString() {
         if (points.size() <= 1) {
             return "";
         } else {
-            return String.format("%.8f", points.get(points.size() - 1).getLongitude());
+            return String.format("%.8f", points.get(points.size() - 1).longitude);
         }
     }
 
+    /**
+     * Returns the start coordinates as a string.
+     * Formatted as "latitude, longitude"
+     * @return Start coordinates string.
+     */
     public String getStartCoordString() {
         return getStartLatitudeString() + ", " + getStartLongitudeString();
     }
 
+    /**
+     * Returns the destination coordinates as a string.
+     * formatted as "latitude, longitude"
+     * @return Start coordinates string.
+     */
     public String getDestCoordString() {
         return getDestLatitudeString() + ", " + getDestLongitudeString();
     }
 
+    /**
+     * Returns the number of flight legs as a string.
+     * @return Number of flight legs.
+     */
     public String getLegCount() {
         return "" + (points.size() - 1);
     }
@@ -94,6 +135,10 @@ public class Flight {
         totalDistance = total;
     }
 
+    public ArrayList<FlightPoint> getFlightPoints() {
+        return points;
+    }
+
     /**
      * Calculates the Great-circle distance between two points.
      * This distance is calculated using the Haversine formula:
@@ -107,12 +152,12 @@ public class Flight {
      * @return distance - The calculated Great-circle distance.
      */
     public double getLegDistance(FlightPoint point1, FlightPoint point2) {
-        double latitude1 = point1.getLatitude();
-        double longitude1 = point1.getLongitude();
-        double latitude2 = point2.getLatitude();
-        double longitude2 = point2.getLongitude();
-        double altitude1 = point1.getAltitude();
-        double altitude2 = point2.getAltitude();
+        double latitude1 = point1.latitude;
+        double longitude1 = point1.longitude;
+        double latitude2 = point2.latitude;
+        double longitude2 = point2.longitude;
+        double altitude1 = point1.altitude;
+        double altitude2 = point2.altitude;
 
         final int radius = 6371; // Radius of Earth in km.
         double latitudeDistance = Math.toRadians(latitude2 - latitude1);
@@ -127,28 +172,30 @@ public class Flight {
         return Math.sqrt(distance);
     }
 
-//    /**
-//     * @return can the aircraft go the distance?
-//     */
-//    public boolean checkFlightLength(double distance, Aircraft aircraft) {
-//        // TODO should this be here?
-//        return (aircraft.getRange() < distance);
-//    }
-//
-//    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
-//        // TODO does this need to exists - if so, here?
-//        return false;
-//    }
-//
-//    public String getDistanceMessage() {
-//        // TODO decide if should be here or not
-//        return "";
-//    }
+    /**
+     * Checks if the aircraft can successfully go the distance.
+     * @return false if it can't
+     */
+    public boolean canFly() {
+        if (aircraft == null) {
+            return true;
+        } else {
+            return (aircraft.getRange() > totalDistance);
+        }
+    }
 
     public void setAircraft(Aircraft aircraft) {
         this.aircraft = aircraft;
     }
 
+    public String toString() {
+        StringBuilder s = new StringBuilder("Flight(");
+        for (FlightPoint point : getFlightPoints()) {
+            s.append(point.toString()).append(", ");
+        }
+        s.append(")");
+        return s.toString();
+    }
 
 
 }

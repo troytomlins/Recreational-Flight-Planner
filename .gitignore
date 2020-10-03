@@ -17,3 +17,8 @@ target/
 
 # Database
 *.db
+/dependency-reduced-pom.xml
+/route.csv
+/airport.csv
+/airline.csv
+/aircraft.csv

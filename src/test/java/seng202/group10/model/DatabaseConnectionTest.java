@@ -2,23 +2,25 @@ package seng202.group10.model;
 
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * Test Class for DatabaseConnection.
+ */
 public class DatabaseConnectionTest {
 
     DatabaseConnection database;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         database = DatabaseConnection.getInstance();
         File file = new File("database.db");
@@ -34,7 +36,7 @@ public class DatabaseConnectionTest {
 
     @Test
     public void databaseSchemaCreationTest() throws SQLException {
-        ArrayList<String> expected = new ArrayList<String>();
+        ArrayList<String> expected = new ArrayList<>();
         expected.add("CREATE TABLE airlines (id integer PRIMARY KEY AUTOINCREMENT,name varchar,alias varchar,iata char(3),icao char(4) UNIQUE,callsign varchar,country varchar)");
         expected.add("CREATE TABLE airports (id integer PRIMARY KEY AUTOINCREMENT,name varchar,city varchar,country varchar,iata char(3) UNIQUE,icao char(4) UNIQUE,latitude double,longitude double,altitude float,timezone float,dstType char(1),tzDatabase varchar)");
         expected.add("CREATE TABLE aircrafts (id integer PRIMARY KEY AUTOINCREMENT,name varchar,iata char(3),icao char(4),range double)");
@@ -49,7 +51,7 @@ public class DatabaseConnectionTest {
                 "WHERE name in ('aircrafts', 'airlines', 'airports', 'routes', 'airlineTriggerIata', 'airlineTriggerIcao', 'airportTriggerIata', 'airportTriggerIcao')";
 
         ResultSet rs = database.executeQuery(sqlQuery);
-        ArrayList<String> actual = new ArrayList<String>();
+        ArrayList<String> actual = new ArrayList<>();
 
         while (rs.next()) {
             actual.add(rs.getString("sql"));

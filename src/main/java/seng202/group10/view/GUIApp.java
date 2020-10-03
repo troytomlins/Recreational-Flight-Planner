@@ -1,6 +1,7 @@
 package seng202.group10.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,11 +10,16 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
 import seng202.group10.controller.ControllerFacade;
+import seng202.group10.model.Airport;
 import seng202.group10.view.ViewController;
 import seng202.group10.model.DatabaseConnection;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * JavaFX GUI app
@@ -33,7 +39,7 @@ public class GUIApp extends Application {
      * Loads up the scene from the main.fxml file, sets the controller (according to setController),
      *  adds google maps (according to addGoogleMaps).
      * @param primaryStage - stage to set the scene on
-     * @throws Exception - Subclass of RuntimeException
+     * @throws Exception exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -47,7 +53,6 @@ public class GUIApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Recreational Flight Planner");
         primaryStage.show();
-
     }
 
     /**
@@ -69,7 +74,9 @@ public class GUIApp extends Application {
                 window.setMember("javaConnector", javaConnector);
             }
         });
+        javaConnector.setEngine(webEngine);
         webEngine.load(url.toString());
+        viewController.webEngine = webEngine;
     }
 
     @Override
@@ -100,8 +107,66 @@ public class GUIApp extends Application {
          * @param lat - latitude
          * @param lng - longitude
          */
-        public void newLatLng(String id, float lat, float lng) {
+        public void newMarker(String id, float lat, float lng) {
             viewController.newMarker(id, lat, lng);
+//            System.out.println("new " + id + " at " + lat + " " + lng);
+        }
+
+        public void removeMarker(String id) {
+//            System.out.println("Remove " + id);
+            viewController.removeMarker(id);
+        }
+
+        public void moveMarker(String id, double newLat, double newLng) {
+//            System.out.println(id + " move to " + newLat + " " + newLng);
+            viewController.markerChange(id, newLat, newLng);
+        }
+
+        /**
+         * Throw some text in the java console
+         * @param text text to print
+         */
+        public void println(String text) {
+            System.out.println(text);
+        }
+        WebEngine webEngine;
+
+        public void setEngine(WebEngine engine) {
+            webEngine = engine;
+        }
+
+        public void setAirports(int zoom, double lat1, double long1, double lat2, double long2) {
+            ArrayList<Airport> airports = new ArrayList<Airport>();
+            //System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
+            for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
+                boolean latitudeCheck = airport.getLatitude() <= lat1 && airport.getLatitude() >= lat2;
+                boolean longitudeCheck = (airport.getLongitude() <= long1 && airport.getLongitude() >= long2 && long2 <= long1) ||
+                        (long2 > long1 && (airport.getLongitude() >= long2 && airport.getLongitude() < 180) || airport.getLongitude() <= long1 && airport.getLongitude() > -180);
+                if (latitudeCheck && longitudeCheck) {
+                    //System.out.println("Adding " + airport.getName());
+                    airports.add(airport);
+                }
+            }
+
+            Collections.shuffle(airports);
+
+            for (int i = 0; i < Math.min(100, airports.size()); i++) {
+                Airport airport = airports.get(i);
+                JSONObject json = new JSONObject();
+                json.put("name", airport.getName());
+                json.put("latitude", airport.getLatitude());
+                json.put("longitude", airport.getLongitude());
+                json.put("city", airport.getCity());
+                json.put("country", airport.getCountry());
+                json.put("altitude", airport.getAltitude());
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        webEngine.executeScript(String.format("addAirport(%s)", json.toJSONString()));
+                    }
+                });
+            }
         }
     }
 

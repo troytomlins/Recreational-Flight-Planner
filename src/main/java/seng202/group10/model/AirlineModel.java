@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class AirlineModel {
 
     private AirlineRW airlineRW;
-
     private ArrayList<Airline> airlines = new ArrayList<>();
     private ArrayList<Airline> unsavedAirlines = new ArrayList<>();
 
@@ -20,9 +19,7 @@ public class AirlineModel {
     public AirlineModel() {
         airlineRW = new AirlineRW();
         ArrayList<Airline> databaseAirlines = airlineRW.readDatabaseAirlines();
-        for (Airline airline: databaseAirlines) {
-            airlines.add(airline);
-        }
+        airlines.addAll(databaseAirlines);
     }
 
     public ArrayList<Airline> getAirlines() {
@@ -48,6 +45,4 @@ public class AirlineModel {
         unsavedAirlines = new ArrayList<>();
         airlines = airlineRW.readDatabaseAirlines();
     }
-
-//    public void deleteAirline(Airline airline) { airlines.remove(airline); }
 }

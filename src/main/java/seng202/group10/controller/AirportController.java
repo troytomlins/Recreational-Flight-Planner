@@ -1,36 +1,34 @@
 package seng202.group10.controller;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import seng202.group10.model.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
- * Retrieves airport data from the model
- * @author Johnny Howe
- * @author Mitchell Freeman
+ * Controller Class for Airport.
  */
 public class AirportController {
 
     private AirportModel model;
 
+    /**
+     * Constructor for AirportController.
+     * Sets model to an inputted instance of AirportModel.
+     */
     public AirportController(AirportModel model) {
         this.model = model;
     }
 
+    /**
+     * Constructor for AirportController Class.
+     * Creates a new instance of AirportModel.
+     */
     public AirportController() {
         this.model = new AirportModel();
     }
 
     /**
-     * Get a list of airports from model
+     * Get a list of airports from model.
      * @return Arraylist of airports
      */
     public ArrayList<Airport> getAirports() {
@@ -38,11 +36,9 @@ public class AirportController {
     }
 
     /**
-     * Takes a filepath and imports all airports from the file into model.
+     * Takes a filepath and imports all airports from the file into model except for lines in ignoreLines.
      * @param filePath Filepath string for file to import.
-     * @param ignoreLines List of line indices to ignore (1 origin)
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws FileFormatException when file is incorrectly formatted
+     * @param ignoreLines ArrayList of lines of file to ignore.
      */
     public void importAirports(String filePath, ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         AirportRW stream = new AirportRW(filePath);
@@ -53,8 +49,22 @@ public class AirportController {
         model.save();
     }
 
+    /**
+     * Imports airport data into the model from the specified filepath
+     * @param filePath Filepath of the file to import
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong file Format
+     */
     public void importAirports(String filePath)
             throws IncompatibleFileException, FileFormatException {
         importAirports(filePath, new ArrayList<>());
+    }
+
+    /**
+     * Writes airport data from model into the specified filepath
+     * @param filepath Filepath to write to
+     */
+    public void writeAirports(String filepath) {
+        model.saveToFile(filepath);
     }
 }

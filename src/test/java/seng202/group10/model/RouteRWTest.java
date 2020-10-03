@@ -1,18 +1,28 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+/**
+ * Test Class for RouteRW.
+ */
 public class RouteRWTest {
-    public class AirlineRWTest {
+    public static class AirlineRWTest {
         private final String goodFileString = "src/test/resources/seng202.group10/model/routesGood.dat";
         private final String badFileString = "src/test/resources/seng202.group10/model/routesBad.dat";
         private final String corruptFileString = "src/test/resources/seng202.group10/model/routesCorrupt.dat";
+
+        @AfterClass
+        public static void tearDown() {
+            DatabaseConnection.getInstance().disconnect();
+            new File("database.db").delete();
+        }
 
         @Test
         public void readFileReturnsCorrectArrayGoodFile() throws FileFormatException, IncompatibleFileException {
@@ -24,6 +34,8 @@ public class RouteRWTest {
             RouteRW stream = new RouteRW(goodFileString);
             assertEquals(stream.readRoutes().size(), correctArray.size());
         }
+
+
 
         @Test
         public void readFileThrowsErrorBadFile() {
@@ -43,7 +55,6 @@ public class RouteRWTest {
         @Test
         public void readFileThrowsErrorCorruptFile() {
             RouteRW stream = new RouteRW(corruptFileString);
-            System.out.println();
             assertThrows(IncompatibleFileException.class, stream::readRoutes);
         }
     }

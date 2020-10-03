@@ -1,17 +1,25 @@
 package seng202.group10.model;
 
-import java.util.ArrayList;
-
+/**
+ * Class for defining a Route
+ */
 public class Route {
     private String airlineCode;
-    private int airlineId;
     private String sourceAirportCode;
     private Airport sourceAirport;
     private String destinationAirportCode;
     private Airport destinationAirport;
     private int stops;
-    private ArrayList<String> equipment;
 
+    /**
+     * First Constructor for the Route Class
+     * @param airlineCode Airline code
+     * @param sourceAirportCode Start airport code
+     * @param sourceAirport Start airport
+     * @param destinationAirportCode End airport code
+     * @param destinationAirport End airport
+     * @param stops Number of stops
+     */
     public Route(String airlineCode, String sourceAirportCode, Airport sourceAirport, String destinationAirportCode, Airport destinationAirport, int stops) {
         this.airlineCode = airlineCode;
         this.sourceAirportCode = sourceAirportCode;
@@ -21,6 +29,13 @@ public class Route {
         this.stops = stops;
     }
 
+    /**
+     * Second Constructor for the Route Class
+     * @param airlineCode Airline code
+     * @param sourceAirportCode Start airport code
+     * @param destinationAirportCode End airport code
+     * @param stops Number of stops
+     */
     public Route(String airlineCode, String sourceAirportCode, String destinationAirportCode, int stops) {
         this.airlineCode = airlineCode;
         this.sourceAirportCode = sourceAirportCode;
@@ -36,13 +51,11 @@ public class Route {
      */
     public boolean equals(Route other) {
         return airlineCode.equals(other.airlineCode) &&
-                airlineId == other.airlineId &&
                 sourceAirportCode.equals(other.sourceAirportCode) &&
                 sourceAirport.equals(other.sourceAirport) &&
                 destinationAirport.equals(other.destinationAirport) &&
                 destinationAirportCode.equals(other.destinationAirportCode) &&
-                stops == other.stops &&
-                equipment.equals(other.equipment);
+                stops == other.stops;
     }
 
     public String getAirlineCode() {

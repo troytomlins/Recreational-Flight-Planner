@@ -24,7 +24,7 @@
     <children>
         <BorderPane prefHeight="500.0" prefWidth="50" BorderPane.alignment="CENTER" GridPane.columnIndex="0">
             <top>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flight" BorderPane.alignment="CENTER">
                     <font>
                         <Font size="25.0" />
                     </font>
@@ -52,15 +52,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <children>
-
-                    </children>
                 </GridPane>
             </center>
         </BorderPane>
         <TableView fx:id="flightsTable" GridPane.columnIndex="1">
             <columns>
-                <TableColumn fx:id="aircraftCol" prefWidth="75.0" text="Aircraft" />
                 <TableColumn fx:id="startCoordCol" prefWidth="169.0" text="Start Coordinates" />
                 <TableColumn fx:id="destCoordCol" prefWidth="153.0" text="Destination Coordinates" />
                 <TableColumn fx:id="distCol" prefWidth="77.0" text="Distance" />

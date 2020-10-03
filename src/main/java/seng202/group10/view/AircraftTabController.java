@@ -11,14 +11,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seng202.group10.controller.AircraftController;
 import seng202.group10.model.Aircraft;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Controller for the aircraft tab
+ * Controller for the airlines tab.
  * @author Tom Rizzi
  */
 public class AircraftTabController {
@@ -32,21 +31,17 @@ public class AircraftTabController {
     public ViewController mainController;
 
     /**
-     * Injects main view controller into this controller
-     * @param controller - View controller to inject
+     * Injects main view controller into this controller.
+     * @param controller View controller to inject
      */
     public void injectMainController(ViewController controller) {
         this.mainController = controller;
     }
 
-    public void importAircraft(ActionEvent actionEvent) {
-        // TODO Implement
-    }
-
     /**
-     * Create a new "create aircraft" window/stage
-     * @param event - when user clicks on create aircraft
-     * @throws IOException - when loader does not load correctly this exception is thrown
+     * Create a new "create aircraft" window/stage.
+     * @param event Action event
+     * @throws IOException IO Exception
      */
     public void showCreateAircraftModel(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -63,8 +58,8 @@ public class AircraftTabController {
     }
 
     /**
-     * Updates aircraft table with data currently in the aircraft model
-     * @param data - updates table with aircraft data
+     * Updates aircraft table with data currently in the aircraft model.
+     * @param data ArrayList of Aircraft
      */
     public void updateTable(ArrayList<Aircraft> data) {
         aircraftTable.setEditable(true);

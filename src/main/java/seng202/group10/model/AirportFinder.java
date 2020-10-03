@@ -8,9 +8,12 @@ import java.util.ArrayList;
  */
 public class AirportFinder {
     private AirportRW airportRW;
-
     private ArrayList<Airport> airports;
 
+    /**
+     * Constructor for AirportFinder.
+     * Creates a new RW and reads Airports from it and saves to ArrayList.
+     */
     public AirportFinder() {
         airportRW = new AirportRW();
         try {
@@ -20,10 +23,15 @@ public class AirportFinder {
         }
     }
 
+    /**
+     * Finds Airport in ArrayList airports using the airport's code.
+     * @param airportCode Airport code
+     * @return Found Airport or null if not found
+     */
     public Airport findAirport(String airportCode) {
         Airport outputAirport = null;
         for (Airport airport: airports) {
-            if (airport.getIata() == airportCode || airport.getIcao() == airportCode) {
+            if (airport.getIata().equals(airportCode) || airport.getIcao().equals(airportCode)) {
                 outputAirport = airport;
             }
         }

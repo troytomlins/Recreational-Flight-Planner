@@ -8,26 +8,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 /**
- * Retrieves route data from the model
- * @author Johnny Howe
- * @author Mitchell Freeman
+ * Controller Class for Route.
  */
 public class RouteController {
 
     private RouteModel model;
 
+    /**
+     * Constructor for RouteController.
+     * Sets model to an inputted instance of model.
+     * @param model Instance of RouteModel class
+     */
     public RouteController(RouteModel model) {
         this.model = model;
     }
 
+    /**
+     * Constructor for RouteController.
+     * Sets model to a new instance of RouteModel.
+     */
     public RouteController() {
         this.model = new RouteModel();
     }
 
     /**
-     * Get a list of routes from model
+     * Get a list of routes from model.
      * @return Arraylist of routes
      */
     public ArrayList<Route> getRoutes() {
@@ -37,19 +43,17 @@ public class RouteController {
     /**
      * Takes a filepath and imports all routes from the file into model.
      * @param filepath Filepath string for file to import.
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws FileFormatException when file is incorrectly formatted
      */
     public void importRoutes(String filepath) throws IncompatibleFileException, FileFormatException {
-        importRoutes(filepath, new ArrayList<Integer>());
+        importRoutes(filepath, new ArrayList<>());
     }
 
     /**
      * Takes a filepath and imports all routes from the file into model.
      * @param filepath Filepath string for file to import.
      * @param indices List of line indices to ignore from file (1 origin)
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws FileFormatException when file is incorrectly formatted
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public void importRoutes(String filepath, ArrayList<Integer> indices) throws IncompatibleFileException, FileFormatException {
         RouteRW stream = new RouteRW(filepath);
@@ -63,8 +67,6 @@ public class RouteController {
     /**
      * Takes a filepath and imports all routes from the file into model.
      * @param filePath Filepath string for file to import.
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws IOException Signals that an I/O exception of some sort has occurred
      */
     public void importRoutes1(String filePath) throws IncompatibleFileException, IOException {
 
@@ -91,9 +93,6 @@ public class RouteController {
             int stops = Integer.parseInt(data[7]);
             String equipmentString = data[8];
 
-            // Convert values to the type required for creating a route.
-            ArrayList<String> equipment = new ArrayList<String>(Arrays.asList(equipmentString.split(" ")));
-
             // Create route and add to model
             // Route route = new Route(airlineCode, airlineId, sourceAirportCode, sourceAirport, destinationAirportCode, destinationAirport, stops, equipment);
             Route route = new Route(airlineCode, sourceAirportCode, destinationAirportCode, stops);
@@ -104,4 +103,13 @@ public class RouteController {
         csvReader.close();
     }
 
+    /**
+     * Writes data that is currently in the model to a file
+     * @param filepath Filepath to save the file to
+     */
+    public void writeRoutes(String filepath) {
+        RouteRW stream = new RouteRW();
+        stream.setOutFileName(filepath);
+        stream.writeRoute(model.getRoutes());
+    }
 }

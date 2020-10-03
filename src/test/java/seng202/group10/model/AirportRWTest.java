@@ -1,22 +1,29 @@
 package seng202.group10.model;
 
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.AfterClass;
+import org.junit.Test;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+/**
+ * Test Class for AirportRW.
+ */
 public class AirportRWTest {
 
     private final String goodFileString = "src/test/resources/seng202.group10/model/airportsGood.dat";
     private final String badFileString = "src/test/resources/seng202.group10/model/airportsBad.dat";
     private final String corruptFileString = "src/test/resources/seng202.group10/model/airportsCorrupt.dat";
+
+    @AfterClass
+    public static void tearDown() {
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
+    }
 
     @Test
     public void readFileReturnsCorrectArrayGoodFile() throws FileFormatException, IncompatibleFileException {

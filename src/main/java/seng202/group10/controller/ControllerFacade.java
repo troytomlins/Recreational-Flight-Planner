@@ -1,44 +1,28 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.ModelFacade;
 import seng202.group10.view.AirportTabController;
 
-
 /**
- * Allows access to any controller from one place
- * Facade pattern over all the controllers
- * @author Johnny Howe
+ * Controller Facade Class for holding all controllers.
  */
 public class ControllerFacade {
-    private DataController dataController;
-    private RawDataController rawDataController;
     private AircraftController aircraftController;
     private FlightPlanner flightPlanner;
-    private MapController mapController;
     private AirlineController airlineController;
-    private ModelFacade model;
     private AirportController airportController;
     private AirportTabController airportTabController;
     private RouteController routeController;
     private FlightController flightController;
 
     /**
-     * Sets the Model Facade to input
-     * @param modelFacade ModelFacade
+     * Constructor for ControllerFacade Class.
+     * Creates new controllers.
      */
-    public void setModel(ModelFacade modelFacade) {
-        model = modelFacade;
-    }
-
     public ControllerFacade() {
         this.airlineController = new AirlineController();
         this.airportController = new AirportController();
-        this.dataController = new DataController();
-        this.rawDataController = new RawDataController();
         this.aircraftController = new AircraftController();
         this.flightPlanner = new FlightPlanner();
-        this.mapController = new MapController();
-        this.model = new ModelFacade();
         this.routeController = new RouteController();
         this.flightController = new FlightController();
     }

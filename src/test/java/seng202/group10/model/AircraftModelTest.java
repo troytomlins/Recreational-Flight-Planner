@@ -1,25 +1,33 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-
+/**
+ * Test Class for AircraftModel.
+ */
 public class AircraftModelTest {
 
     private AircraftModel aircraftModel;
     private Aircraft aircraft;
     private ArrayList<Aircraft> compareCraft;
 
-    @BeforeEach
+    @Before
     public void init() {
         aircraftModel = new AircraftModel();
         aircraft = new Aircraft("test", "testCraft", "test", 1000);
         compareCraft = new ArrayList<>();
         compareCraft.add(aircraft);
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        DatabaseConnection.getInstance().disconnect();
     }
 
     @Test
@@ -32,7 +40,6 @@ public class AircraftModelTest {
 
     @Test
     public void addDuplicateAircraftTest() {
-        System.out.println(aircraftModel.getIndexOf(aircraft));
         while (aircraftModel.getIndexOf(aircraft) != -1) {
             aircraftModel.deleteAircraft(aircraft);
         }

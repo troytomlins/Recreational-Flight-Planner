@@ -1,11 +1,13 @@
 package seng202.group10.view;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import seng202.group10.controller.AirlineController;
 import seng202.group10.controller.RouteController;
 import seng202.group10.controller.filters.RouteFilters;
 import seng202.group10.model.Airline;
@@ -94,11 +96,11 @@ public class RouteTabController {
     public void updateTable(ArrayList<Route> data) {
         routeTable.setEditable(true);
 
-        airlineCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineCode"));
-        srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("sourceAirportCode"));
+        airlineCodeCol.setCellValueFactory(new PropertyValueFactory<>("airlineCode"));
+        srcAirportCodeCol.setCellValueFactory(new PropertyValueFactory<>("sourceAirportCode"));
 
-        destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<Airline, String>("destinationAirportCode"));
-        stopsCol.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("stops"));
+        destAirportCodeCol.setCellValueFactory(new PropertyValueFactory<>("destinationAirportCode"));
+        stopsCol.setCellValueFactory(new PropertyValueFactory<>("stops"));
         routeTable.setItems(FXCollections.observableList(data));
     }
     // TODO write error checking for filters making sure data is loaded.
@@ -114,5 +116,58 @@ public class RouteTabController {
         filter.addFilter("stops", numStopsFilterField.getText());
         ArrayList<Route> data = filter.applyFilters();
         updateTable(data);
+    }
+
+    /**
+     * Exports data to the specified filepath
+     * @param filepath Filepath to save the data to
+     */
+    public void exportData(String filepath) {
+        RouteController controller = mainController.controllerFacade.getRouteController();
+        controller.writeRoutes(filepath);
+    }
+
+    /**
+     * Opens a file explorer window to select where to save it to as a csv.
+     * Then exports the data to the specified filepath
+     */
+    public void exportDataCsv() {
+        String filepath = mainController.showFileWriterCsv();
+        if (filepath != null) {
+            exportData(filepath);
+        }
+    }
+
+    /**
+     * Remove any filters that have been applied
+     */
+    public void clearFilters() {
+        airlineCodeFilterField.setText("");
+        srcAirportCodeFilterField.setText("");
+        destAirportCodeFilterField.setText("");
+        numStopsFilterField.setText("");
+        applyRouteFilters();
+    }
+
+    /**
+     * Opens a file explorer window to select where to save it to as a dat.
+     * Then exports the data to the specified filepath
+     */
+    public void exportDataDat() {
+        String filepath = mainController.showFileWriterDat();
+        if (filepath != null) {
+            exportData(filepath);
+        }
+    }
+
+    /**
+     * Opens a file explorer window to select where to save it to as a txt.
+     * Then exports the data to the specified filepath
+     */
+    public void exportDataTxt() {
+        String filepath = mainController.showFileWriterTxt();
+        if (filepath != null) {
+            exportData(filepath);
+        }
     }
 }

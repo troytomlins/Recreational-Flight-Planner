@@ -14,18 +14,27 @@ import java.util.Arrays;
 public class AircraftRW extends RWStream {
 
     /**
+     * Creates aircraft read writer with defined infile and makeFile param
+     * @param inFile filename of input file
+     * @param makeFile boolean value of weather to make the output file or not
+     */
+    public AircraftRW (String inFile, Boolean makeFile) {
+        super(inFile, "aircraft.csv", makeFile);
+    }
+
+    /**
      * creates Aircraft read writer with a defined infile and a default outfile
      * @param inFile inFile name
      */
     public AircraftRW(String inFile) {
-        super(inFile, "aircraft.csv");
+        this(inFile, false);
     }
 
     /**
      * creates Aircraft read writer with a default infile
      */
     public AircraftRW() {
-        super("aircraft.csv");
+        this("aircraft.csv");
     }
 
     /**
@@ -56,25 +65,9 @@ public class AircraftRW extends RWStream {
     }
 
     /**
-     * takes aircraft objects as an arraylist and writes it to the outfile
-     * @param aircrafts ArrayList of Aircraft
+     * Reads an arraylist of aircraft from the database
+     * @return ArrayList of aircraft
      */
-
-    public void writeAircrafts(ArrayList<Aircraft> aircrafts) {
-        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
-
-        for (Aircraft aircraft: aircrafts) {
-            aircraftStrings.add(
-                    new ArrayList<String>(Arrays.asList(
-                            aircraft.getIata(),
-                            aircraft.getName(),
-                            aircraft.getIcao(),
-                            Double.toString(aircraft.getRange())
-                    )));
-        }
-        writeAll(aircraftStrings);
-    }
-
     public ArrayList<Aircraft> readDatabaseAircrafts() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM aircrafts");
 
@@ -95,6 +88,10 @@ public class AircraftRW extends RWStream {
         return output;
     }
 
+    /**
+     * Stores a arraylist of aircraft into the database
+     * @param aircrafts ArrayList of aircraft to store in the database
+     */
     public void writeDatabaseAircrafts(ArrayList<Aircraft> aircrafts) {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < aircrafts.size(); i++) {
@@ -127,4 +124,25 @@ public class AircraftRW extends RWStream {
         String sql = String.format("DELETE FROM aircrafts WHERE name = '%s' AND iata = '%s' AND icao = '%s' and range = %f", craft.getName(), craft.getIata(), craft.getIcao(), craft.getRange());
         databaseConnection.executeStatement(sql);
     }
+
+    /**
+     * Uses the super class RWStream to write all aircraft to a file.
+     * The Aircraft object attributes have to be converted to strings.
+     * @param aircrafts An ArrayList of Aircraft objects.
+     */
+    public void writeAircraft(ArrayList<Aircraft> aircrafts) {
+        ArrayList<ArrayList<String>> aircraftStrings = new ArrayList<>();
+
+        for (Aircraft aircraft: aircrafts) {
+            aircraftStrings.add(
+                    new ArrayList<>(Arrays.asList(
+                            aircraft.getIata(),
+                            aircraft.getName(),
+                            aircraft.getIcao(),
+                            Double.toString(aircraft.getRange())
+                    )));
+        }
+        writeAll(aircraftStrings);
+    }
+
 }

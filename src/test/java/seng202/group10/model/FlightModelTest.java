@@ -1,25 +1,35 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-
+/**
+ * Test Class for FLightModel.
+ */
 public class FlightModelTest {
     private FlightModel flightModel;
     private Flight flight;
     private ArrayList<Flight> compareFlight;
 
-    @BeforeEach
+    @Before
     public void init() {
         flightModel = new FlightModel();
         flight = new Flight();
         compareFlight = new ArrayList<>();
         compareFlight.add(flight);
 
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
     @Test

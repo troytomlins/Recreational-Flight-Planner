@@ -7,23 +7,34 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Read / Write Class for Flights.
+ */
 public class FlightRW extends RWStream {
 
+    /**
+     * Constructor for FlightRW with in and out file.
+     * @param inFile in file
+     * @param outFile out file
+     */
     public FlightRW(String inFile, String outFile) {
         super(inFile, outFile);
     }
 
+    /**
+     * Constructor for FlightRW with an in file.
+     * @param inFile file
+     */
     public FlightRW(String inFile) {
         super(inFile, "flights.csv");
     }
 
+    /**
+     * Stand-alone Constructor for FlightRW.
+     */
     public FlightRW() {
         super("flights.csv");
     }
@@ -31,8 +42,8 @@ public class FlightRW extends RWStream {
     /**
      * Read the file at inFile and create a Flight object
      * @return Flight object
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws IOException Signals that an I/O exception of some sort has occurred
+     * @throws IOException IO Exception
+     * @throws IncompatibleFileException Incompatible File
      */
     public Flight readFlight() throws IOException, IncompatibleFileException {
         Flight flight = new Flight();
@@ -64,12 +75,23 @@ public class FlightRW extends RWStream {
     }
 
     /**
-     * @param args default command line args
-     * @throws IncompatibleFileException when a non csv file is given
-     * @throws IOException Signals that an I/O exception of some sort has occurred
+     * Uses the super class RWStream to write a flight to a file.
+     * The Flight object attributes have to be converted to strings.
+     * @param flight A Flight object which contains points.
      */
-    public static void main(String[] args) throws IOException, IncompatibleFileException {
-        FlightRW test = new FlightRW();
-        test.readFlight();
+    public void writeFlight(Flight flight) {
+        ArrayList<ArrayList<String>> flightArr = new ArrayList<ArrayList<String>>();
+
+        for (FlightPoint point: flight.getFlightPoints()) {
+            flightArr.add(
+                    new ArrayList<String>(Arrays.asList(
+                            point.type,
+                            point.id,
+                            Double.toString(point.altitude),
+                            Double.toString(point.latitude),
+                            Double.toString(point.longitude)
+                    )));
+        }
+        writeAll(flightArr);
     }
 }

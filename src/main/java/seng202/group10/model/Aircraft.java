@@ -55,4 +55,8 @@ public class Aircraft {
                 icao.equals(other.getIcao()) &&
                 range == (other.getRange());
     }
+
+    public String toString() {
+        return String.format("Name: %s, Range: %fkm",name,range);
+    }
 }

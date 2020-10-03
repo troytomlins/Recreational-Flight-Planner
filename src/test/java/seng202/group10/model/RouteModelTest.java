@@ -1,32 +1,41 @@
 package seng202.group10.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Test Class for RouteModel.
+ */
 public class RouteModelTest {
 
     private Route testRoute;
     private RouteModel model;
     private ArrayList<Route> compare;
 
-    @BeforeEach
+    @Before
     public void init() {
+        DatabaseConnection.getInstance().disconnect();
         File file = new File("database.db");
         file.delete();
         model = new RouteModel();
         compare = new ArrayList<>();
-        ArrayList<String> equipment = new ArrayList<>();
         testRoute = new Route("test", "code1", "code2", 5);
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
     @Test
     public void addRouteTest() {
-        ArrayList<Route> compare = new ArrayList<>();
         int initLen = model.getRoutes().size();
         model.addRoute(testRoute);
         model.save();
@@ -62,7 +71,6 @@ public class RouteModelTest {
     @Test
     public void bothBothInputTypeTest() {
         int initLen = model.getRoutes().size();
-        ArrayList<String> equipment = new ArrayList<>();
         Route testRoute2 = new Route("code1", "Airport1", "code2", 2);
         model.addRoute(testRoute);
         model.addRoute(testRoute2);

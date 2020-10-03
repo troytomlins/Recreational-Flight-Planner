@@ -138,6 +138,9 @@ public final class DatabaseConnection {
         }
     }
 
+    /**
+     * Closes the database connection and removes the instance
+     */
     public void disconnect() {
         try {
             if (conn != null) {
@@ -149,6 +152,10 @@ public final class DatabaseConnection {
         }
     }
 
+    /**
+     * Executes an SQL statement on the database
+     * @param sqlStatement SQL statement to execute
+     */
     public void executeStatement(String sqlStatement) {
         try {
             Statement statement = conn.createStatement();
@@ -180,8 +187,8 @@ public final class DatabaseConnection {
      * @param firstLine The first part of the insert statement, upto but not including VALUES
      * @param nParameters The number of parameters to be placed after VALUES
      * @return A PreparedStatement of which the SQL parameters can be inserted into
-     * @throws SQLException Error with SQL
-     * @see DatabaseConnection #getPreparedStatement
+     * @throws SQLException
+     * @see DatabaseConnection#getPreparedStatement
      */
     public PreparedStatement getFormattedPreparedStatement(String firstLine, int nParameters) throws SQLException{
         String statement = firstLine + " VALUES \n";
@@ -202,7 +209,7 @@ public final class DatabaseConnection {
      *
      * @param sqlStatement The statement that will be sent to the database
      * @return The PreparedStatement
-     * @throws SQLException Error with SQL
+     * @throws SQLException SQL Exception
      */
     public PreparedStatement getPreparedStatement(String sqlStatement) throws SQLException {
         return conn.prepareStatement(sqlStatement);
@@ -236,7 +243,6 @@ public final class DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         DatabaseConnection database = DatabaseConnection.getInstance();

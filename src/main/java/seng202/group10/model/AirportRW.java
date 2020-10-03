@@ -19,21 +19,36 @@ import java.util.Arrays;
  */
 public class AirportRW extends RWStream {
 
-
-    public AirportRW(String inFile) {
-        super(inFile, "airport.csv");
-    }
-
-    public AirportRW() {
-        super("airport.csv");
+    /**
+     * Constructor for airport rw
+     * @param inFile filename for input file
+     * @param makeFile boolean value of weather the outfile should be created
+     */
+    public AirportRW(String inFile, Boolean makeFile) {
+        super(inFile, "airport.csv", makeFile);
     }
 
     /**
-     * Parses an airports data file
+     * Constructor for AirportRW with an in file.
+     * @param inFile file
+     */
+    public AirportRW(String inFile) {
+        this(inFile, false);
+    }
+
+    /**
+     * Stand-Alone Constructor for AirportRW.
+     */
+    public AirportRW() {
+        this("airport.csv");
+    }
+
+    /**
+     * Parses an airports data file.
      * @param ignoreLines List of line indices to ignore (1 origin)
      * @return Arraylist of airports read from the in file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Airport> readAirports(ArrayList<Integer> ignoreLines) throws IncompatibleFileException, FileFormatException {
         // Initialise file reader and airports list
@@ -104,17 +119,17 @@ public class AirportRW extends RWStream {
     }
 
     /**
-     * Parses all lines from an airports data file
+     * Parses all lines from an airports data file.
      * @return Arraylist of airports read from the in file
-     * @throws IncompatibleFileException
-     * @throws FileFormatException
+     * @throws IncompatibleFileException Incompatible File
+     * @throws FileFormatException Wrong File Format
      */
     public ArrayList<Airport> readAirports() throws IncompatibleFileException, FileFormatException {
         return readAirports(new ArrayList<>());
     }
 
     /**
-     * reads airports from the database
+     * Reads airports from the database.
      * @return ArrayList of Airport objects
      */
     public ArrayList<Airport> readDatabaseAirports() {
@@ -147,7 +162,7 @@ public class AirportRW extends RWStream {
     }
 
     /**
-     * writes airports to database
+     * Writes airports to database.
      * @param airports ArrayList of Airports
      */
     public void writeDatabaseAirports(ArrayList<Airport> airports) {
@@ -189,4 +204,35 @@ public class AirportRW extends RWStream {
         sql = String.format(sql, airport.getName(), airport.getCity(), airport.getCity(), airport.getIata(), airport.getIcao());
         databaseConnection.executeStatement(sql);
     }
+
+    /**
+     * Uses the super class RWStream to write all airports to a file.
+     * The Airport object attributes have to be converted to strings.
+     * @param airports An ArrayList of Airport objects.
+     */
+    public void writeAirports(ArrayList<Airport> airports) {
+        ArrayList<ArrayList<String>> airportStrings = new ArrayList<>();
+
+        for (Airport airport: airports) {
+            airportStrings.add(
+                    new ArrayList<>(Arrays.asList(
+                            null, // Field not preserved in database.
+                            airport.getName(),
+                            airport.getCity(),
+                            airport.getCountry(),
+                            airport.getIata(),
+                            airport.getIcao(),
+                            Double.toString(airport.getLatitude()),
+                            Double.toString(airport.getLongitude()),
+                            Float.toString(airport.getAltitude()),
+                            Float.toString(airport.getTimezone()),
+                            airport.getDstType(),
+                            airport.getTzDatabase(),
+                            null, // Field not preserved in database.
+                            null  // Field not preserved in database.
+                    )));
+        }
+        writeAll(airportStrings);
+    }
+
 }
