@@ -1,7 +1,10 @@
 package seng202.group10.view;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,6 +32,7 @@ public class IndividualFlightWindow {
 
     private ViewController mainController;
     private Stage stage;
+    Flight flight;
 
     /**
      * Injects the main view controller and stage into object.
@@ -44,6 +48,7 @@ public class IndividualFlightWindow {
         updateTable(flight.getFlightPoints());
         aircraftText.setText(flight.getAircraftName());
         distText.setText(String.format("%.2f km", flight.getTotalDistance()));
+        this.flight = flight;
     }
 
     /**
@@ -65,5 +70,24 @@ public class IndividualFlightWindow {
      */
     public void closeWindow() {
         stage.close();
+    }
+
+    /**
+     * View the currently selected flight on the map
+     */
+    public void viewOnMap() {
+        SingleSelectionModel<Tab> selectionModel = mainController.mainTabPane.getSelectionModel();
+        selectionModel.select(0);
+        // Add markers
+        mainController.clearMarkers();
+        for (FlightPoint point : flight.getFlightPoints()) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    String code = String.format("newMarker(%f, %f)", point.latitude, point.longitude);
+                    mainController.webEngine.executeScript(code);
+                }
+            });
+        }
     }
 }

@@ -84,20 +84,18 @@ public class FlightRW extends RWStream {
      * @param flight A Flight object which contains points.
      */
     public void writeFlight(Flight flight) {
-        ArrayList<ArrayList<String>> flightString = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> flightArr = new ArrayList<ArrayList<String>>();
 
         for (FlightPoint point: flight.getFlightPoints()) {
-            flightString.add(
+            flightArr.add(
                     new ArrayList<String>(Arrays.asList(
-                            point.getType(),
-                            point.getId(),
-                            Double.toString(point.getAltitude()),
-                            Double.toString(point.getLatitude()),
-                            Double.toString(point.getLongitude())
+                            point.type,
+                            point.id,
+                            Double.toString(point.altitude),
+                            Double.toString(point.latitude),
+                            Double.toString(point.longitude)
                     )));
         }
-        writeAll(flightString);
-
+        writeAll(flightArr);
     }
-
 }

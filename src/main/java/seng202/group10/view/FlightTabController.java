@@ -2,10 +2,12 @@ package seng202.group10.view;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -33,8 +35,8 @@ public class FlightTabController {
     @FXML public TableColumn<Flight, String> legCountCol;
     @FXML private TableView<Flight> flightsTable;
 
-
     public ViewController mainController;
+    private Flight flight;
 
     /**
      * Injects main controller into flight tab.
@@ -111,6 +113,7 @@ public class FlightTabController {
         legCountCol.setCellValueFactory(new PropertyValueFactory<>("legCount"));
 
         flightsTable.setItems(FXCollections.observableList(flights));
-
     }
+
+
 }

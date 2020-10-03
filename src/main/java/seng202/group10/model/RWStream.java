@@ -111,21 +111,44 @@ public class RWStream {
     public void writeSingle(ArrayList<String> data) {
         try {
             fileWriter = new FileWriter(outFilename);
-
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < data.size() - 1; i++) {
-                builder.append(data.get(i));
-                builder.append(',');
-            }
-            builder.append(data.get(data.size() - 1));
-            builder.append('\n');
-
-            fileWriter.write(builder.toString());
-
+            fileWriter.write(getDataString(data));
             fileWriter.close();
         } catch (IOException error) {
             displayError("Unable to write to file");
         }
+    }
+
+    /**
+     * Write the data from dataArr to a file
+     * Assumes file exists and is writable
+     * @param dataArr list of lists of strings to write
+     */
+    public void writeLines(ArrayList<ArrayList<String>> dataArr) {
+        try {
+            fileWriter = new FileWriter(outFilename);
+            for (ArrayList<String> data : dataArr) {
+                fileWriter.write(getDataString(data));
+            }
+            fileWriter.close();
+        } catch (IOException error) {
+            displayError("Unable to write to file");
+        }
+    }
+
+    /**
+     *
+     * @param data list of data to write on the line
+     * @return string representation of data
+     */
+    public String getDataString(ArrayList<String> data) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < data.size() - 1; i++) {
+            builder.append(data.get(i));
+            builder.append(',');
+        }
+        builder.append(data.get(data.size() - 1));
+        builder.append('\n');
+        return builder.toString();
     }
 
     /**
@@ -135,7 +158,6 @@ public class RWStream {
      * @param data list of line lists
      */
     public void writeAll(ArrayList<ArrayList<String>> data) {
-
         File file = new File(outFilename);
         if (file.exists()) {
             file.delete();
@@ -143,51 +165,11 @@ public class RWStream {
         try {
             file.createNewFile();
         } catch(IOException error) {
-
+            error.printStackTrace();
         }
-        try {
-            fileWriter = new FileWriter(outFilename);
-            StringBuilder builder;
-            StringBuilder fileContent = new StringBuilder();
-            int count = 0;
-            for (ArrayList<String> line: data) {
-                builder = new StringBuilder();
-                for (int i = 0; i < line.size(); i++) {
-                    builder.append(line.get(i));
-                    if (i < line.size() -1) {
-                        builder.append(",");
-                    }
-                }
-                if (count < data.size() - 1) {
-                    builder.append('\n');
-                }
-                count++;
-                fileContent.append(builder.toString());
-            }
-            fileWriter.write(fileContent.toString());
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
-        finally {
-            try {
-                fileWriter.close();
-            } catch (IOException ignore) {
-            }
-        }
+        writeLines(data);
     }
 
-    /**
-     * Sets the out file path
-     * @param filepath
-     */
-    public void setOutFileName(String filepath) {
-        outFilename = filepath;
-    }
-
-    /**
-     * Displays Error message.
-     * @param message Message to display
-     */
     public void displayError(String message) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setHeaderText(message);

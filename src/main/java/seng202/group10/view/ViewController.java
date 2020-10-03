@@ -2,13 +2,22 @@ package seng202.group10.view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.web.WebEngine;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seng202.group10.controller.ControllerFacade;
@@ -21,6 +30,7 @@ import java.util.*;
  * View Controller
  * Handles the file explorer, adding and removing markers (NOT IN RELEASE 1!)
  *
+ * @author Niko Tainui
  * @author Tom Rizzi
  * @author Johnny Howe
  */
@@ -47,6 +57,10 @@ public class ViewController {
     private ComboBox aircraftSelector;
     @FXML
     private TextField filename;
+    @FXML
+    public TabPane mainTabPane;
+
+    public WebEngine webEngine;
 
     public Stage stage;
     public ControllerFacade controllerFacade;
@@ -163,6 +177,7 @@ public class ViewController {
     }
     /**
      * Shows an information window with provided message
+     *
      * @param message Message to display on window
      */
     public void showInfoWindow(String message) {
@@ -173,6 +188,7 @@ public class ViewController {
 
     /**
      * Shows an error window with provided message
+     *
      * @param message Message to display on window
      */
     public void showErrorWindow(String message) {
@@ -183,6 +199,7 @@ public class ViewController {
 
     /**
      * Shows the error window for an incompatible file
+     *
      * @param e Exception to display
      */
     public void showIncompatibleFileError(IncompatibleFileException e) {
@@ -192,6 +209,7 @@ public class ViewController {
     /**
      * Shows an error window for a file format exception,
      * then waits for users choice of either import lines that are not causing errors or cancel
+     *
      * @param e Exception to display
      * @return Boolean value, representing weather to import non-erroneous lines
      */
@@ -221,10 +239,14 @@ public class ViewController {
      * @param lats ArrayList of latitudes
      * @param lngs ArrayList of longitudes
      */
-    public void setMarkers(ArrayList<String> labels, ArrayList<Float> lats, ArrayList<Float> lngs) {
-        locationsPane.getChildren().clear();    // Delete old
-        for (int i = 0; i < labels.size(); i++) {
-            newMarker(labels.get(i), lats.get(i), lngs.get(i));
+    public void remakeLocationBoxes() {
+        locationsPane.getChildren().clear();
+        ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
+        for (int i = 0; i < flightPoints.size(); i ++) {
+
+            FlightPoint point = flightPoints.get(i);
+            point.id = Integer.toString(i);
+            newLocationBox(i + 1, point);
         }
     }
 
@@ -243,25 +265,98 @@ public class ViewController {
     }
 
     /**
+     * Remove the location box with id
+     * @param id id of marker to remove
+     */
+    public void removeMarker(String id) {
+        ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
+        flightPoints.removeIf(flightPoint -> flightPoint.id.equals(id));
+        remakeLocationBoxes();
+    }
+
+    public void markerChange(String id, double newLat, double newLng) {
+        ArrayList<FlightPoint> flightPoints = flight.getFlightPoints();
+        for (FlightPoint point : flightPoints) {
+            if (point.id.equals(id)) {
+                point.latitude = newLat;
+                point.longitude = newLng;
+            }
+        }
+        remakeLocationBoxes();
+    }
+
+
+//    /**
+//     * Edit the location box at row
+//     * @param row row to edit
+//     * @param newId
+//     * @param newLat
+//     * @param newLng
+//     */
+//    public void editLocationBox(int row, String newId, double newLat, double newLng) {
+//        ObservableList<Node> children = locationsPane.getChildren();
+//        GridPane pane = (GridPane) children.get(row);
+//        ((Label) pane.getChildren().get(0)).setText(newId + " " + newLat +" " + newLng);
+//    }
+
+    /**
      * Make a new box to show the marker location
      *
      * @param id  - id of marker
      * @param row - row index to place it
-     * @param lat - position latitude
-     * @param lng - position longitude
      */
-    private void newLocationBox(String id, int row, double lat, double lng) {
-        //Make the thing
-        int height = 100;
+    private void newLocationBox(int row, FlightPoint point) {
 
+        //Add the thing
+        LocationBox box = new LocationBox(point);
+        locationsPane.add(box.pane, 0, row);
+    }
+
+    /**
+     * Clear all the markers
+     */
+    public void clearMarkers() {
+        flight = new Flight();
+        locationsPane.getChildren().clear();
+        webEngine.executeScript("removeAllMarkers()");
+    }
+
+    /**
+     * writes flight to file overwrites existing global flight
+     */
+    public void saveFlight() {
+        flight.setAircraft((Aircraft) aircraftSelector.getValue());
+        System.out.println(flight.getAircraftName());
+        String filepath = new String();
+        FlightModel model= new FlightModel();
+        filepath = showFileWriter();
+        FlightRW write = new FlightRW(filepath,filepath);
+        model.addFlight(flight);
+        write.writeFlight(flight);
+    }
+}
+
+
+class LocationBox {
+    int height = 100;
+
+    FlightPoint flightPoint;
+
+    GridPane pane;
+    Label label;
+    TextField altitudeField;
+    Button button;
+
+    LocationBox(FlightPoint point) {
+        flightPoint = point;
         // Making box
-        GridPane pane = new GridPane();
-        Button setAltitude = new Button("Set Altitude");
-        Label latLng = new Label(id + " " + lat + " " + lng);   // ID and position
-        pane.add(latLng, 0, 0);
-        TextField altitude = new TextField("0");                // Altitude text box
-        pane.add(altitude, 0, 1);
-        pane.add(setAltitude, 0, 2);
+        pane = new GridPane();
+        button = new Button("Set Altitude");
+        label = new Label(point.id + " " + point.latitude + " " + point.longitude);   // ID and position
+        pane.add(label, 0, 0);
+        altitudeField = new TextField("0");                // Altitude text box
+        pane.add(altitudeField, 0, 1);
+        pane.add(button, 0, 2);
 
         // Setting height
         pane.setMinHeight(height);
@@ -270,30 +365,16 @@ public class ViewController {
 
         // Padding
         javafx.geometry.Insets inset = new javafx.geometry.Insets(5, 5, 5, 5);
-        altitude.setPadding(inset);
-        latLng.setPadding(inset);
+        altitudeField.setPadding(inset);
+        label.setPadding(inset);
 
-        //Add the thing
-        locationsPane.add(pane, 0, row);
-        if (setAltitude.isPressed()) {
-            try {
-                FlightPoint point = new FlightPoint(id, "NA", lat, lng, Double.parseDouble(altitude.getText()));
-                flight.addPoint(point);
-                setAltitude.disarm();
-            } catch (NumberFormatException e) {
-                showErrorWindow("Altitude field not valid");
+//         Altitude change listener
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                String input = altitudeField.getText();
+                // TODO check input is number
+                flightPoint.altitude = Float.parseFloat(input);
             }
-        }
-    }
-
-    public void saveFlight() {
-        String filepath = new String();
-        locationsPane.getChildren().clear();
-        FlightModel model= new FlightModel();
-        filepath = showFileWriter();
-        FlightRW write = new FlightRW(filepath);
-        model.addFlight(flight);
-        write.writeFlight(flight);
-        flight = new Flight();
+        });
     }
 }

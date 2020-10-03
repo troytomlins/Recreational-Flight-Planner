@@ -9,8 +9,8 @@ var markers = [];
 class LabelHandler {
     constructor() {
         this.labelIndex = 0;
-        this.firstLabel = "start";
-        this.endLabel = "end";
+        this.firstLabel = "0";
+//        this.endLabel = "end";
     }
 
     /**
@@ -28,10 +28,11 @@ class LabelHandler {
     getNextLabel() {
         let label;
         if (this.labelIndex == 0) {
-            label = "start";
+            label = this.firstLabel;
         } else {
             // let letterLabels = Math.max(0, this.labelIndex - 2);
-            label = this.makeLetterLabel(this.labelIndex - 1);
+//            label = this.makeLetterLabel(this.labelIndex - 1);
+            label = this.labelIndex.toString();
         }
         return [label, this.labelIndex++];
     }
@@ -62,6 +63,8 @@ class MyMarker {
         this.label = label;
         this.labelIndex = labelIndex;
 
+        javaConnector.newMarker(label, latLng.lat(), latLng.lng());
+
         this.mapsMarker = new google.maps.Marker({
             position: latLng,
             label: this.label,
@@ -75,7 +78,7 @@ class MyMarker {
         });
 
         google.maps.event.addListener(this.mapsMarker, 'drag', function(event) {
-            sendMarkersToJava();
+            javaConnector.moveMarker(self.label, self.mapsMarker.position.lat(), self.mapsMarker.position.lng());
         });
     }
 
@@ -107,10 +110,17 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(ucPos.lat, ucPos.lng),
         zoom: 15,
+        disableDefaultUI: true,
     });
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
     });
+}
+
+
+function newMarker(lat, lng) {
+//    addMarker(new google.maps.LatLng(lat, lng));
+    addMarker(new google.maps.LatLng(lat, lng));
 }
 
 
@@ -126,11 +136,12 @@ function addMarker(location) {
     let [label, labelIndex] = labelHandler.getNextLabel();
     let marker = new MyMarker(label, labelIndex, location);
     markers[currentIndex] = marker
-    sendMarkersToJava();
 }
 
 
+
 function removeMarker(marker) {
+    javaConnector.removeMarker(marker.label);
     // Remove from map
     marker.delete();
     // Remove from markers array
@@ -142,9 +153,16 @@ function removeMarker(marker) {
         let [newLabel, newIndex] = labelHandler.getNextLabel()
         markers[i].setLabel(newLabel, newIndex);
     }
-
     labelIndex -= 1;
-    sendMarkersToJava();
+}
+
+
+function removeAllMarkers() {
+    for (let marker of markers) {
+        marker.delete();
+    }
+    labelHandler.labelIndex = 0;
+    markers = [];
 }
 
 
@@ -161,23 +179,6 @@ function makeJavaMarkerLists() {
     return [labels, lats, lngs];
 }
 
-
-/**
- * Send shit to java
- */
-function sendMarkersToJava() {
-    let [labels, lats, lngs] = makeJavaMarkerLists();
-    if (javaConnector) {
-        let [labels, lats, lngs] = makeJavaMarkerLists();
-        javaConnector.clearMarkers();
-        for (let i = 0; i < labels.length; i++) {
-            javaConnector.addMarker(labels[i], lats[i], lngs[i]);
-        }
-        javaConnector.confirmMarkers();
-    } else {
-        console.log("Cannot find javaConnector. Are you running the app?");
-    }
-}
 
 /**
  * Print some text into the java console

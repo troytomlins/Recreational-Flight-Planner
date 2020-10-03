@@ -4,13 +4,12 @@ package seng202.group10.model;
  * Flight point is a point the flight passes through, each leg of the flight has two FlightPoints
  * @author Zach Kaye
  */
-
 public class FlightPoint {
-    private String id;
-    private String type;
-    private double latitude;
-    private double longitude;
-    private double altitude;
+    public String id;
+    public String type;
+    public double latitude;
+    public double longitude;
+    public double altitude;
 
     /**
      * Constructor for Flight Point.
@@ -47,4 +46,5 @@ public class FlightPoint {
     public double getAltitude() {
         return altitude;
     }
+
 }

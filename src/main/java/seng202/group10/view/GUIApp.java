@@ -47,7 +47,6 @@ public class GUIApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Recreational Flight Planner");
         primaryStage.show();
-
     }
 
     /**
@@ -70,6 +69,7 @@ public class GUIApp extends Application {
             }
         });
         webEngine.load(url.toString());
+        viewController.webEngine = webEngine;
     }
 
     @Override
@@ -100,35 +100,19 @@ public class GUIApp extends Application {
          * @param lat - latitude
          * @param lng - longitude
          */
-        public void newLatLng(String id, float lat, float lng) {
+        public void newMarker(String id, float lat, float lng) {
             viewController.newMarker(id, lat, lng);
+//            System.out.println("new " + id + " at " + lat + " " + lng);
         }
 
-        ArrayList<String> labels;
-        ArrayList<Float> lats;
-        ArrayList<Float> lngs;
-
-        public void clearMarkers() {
-            labels = new ArrayList<>();
-            lats = new ArrayList<>();
-            lngs = new ArrayList<>();
+        public void removeMarker(String id) {
+//            System.out.println("Remove " + id);
+            viewController.removeMarker(id);
         }
 
-        public void addMarker(String label, float lat, float lng) {
-            labels.add(label);
-            lats.add(lat);
-            lngs.add(lng);
-        }
-
-        public void confirmMarkers() {
-            // Example on how things go
-//            for (int i = 0; i < labels.size(); i ++) {
-//                String id = labels.get(i);
-//                float lat = lats.get(i);
-//                float lng = lngs.get(i);
-//                viewController.newMarker(id, lat, lng);
-//            }
-            viewController.setMarkers(labels, lats, lngs);
+        public void moveMarker(String id, double newLat, double newLng) {
+//            System.out.println(id + " move to " + newLat + " " + newLng);
+            viewController.markerChange(id, newLat, newLng);
         }
 
         /**

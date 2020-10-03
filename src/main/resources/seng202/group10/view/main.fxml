@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,7 +17,7 @@
 
 <AnchorPane prefHeight="628.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.group10.view.ViewController">
    <children>
-   <TabPane prefHeight="628.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <TabPane fx:id="mainTabPane" prefHeight="628.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
          <Tab closable="false" text="Map">
            <content>
@@ -47,8 +46,8 @@
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints maxHeight="266.6000122070312" minHeight="10.0" prefHeight="98.20001831054688" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="354.1999816894531" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="95.60001220703123" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="397.1999572753906" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="49.200042724609375" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -63,26 +62,29 @@
                                                 </GridPane>
                                              </content>
                                           </ScrollPane>
-                                          <ComboBox fx:id="aircraftSelector" onAction="#listAircraft" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                          <ComboBox fx:id="aircraftSelector" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Aircraft" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets top="10.0" />
                                              </GridPane.margin>
                                           </Text>
-                                          <Button mnemonicParsing="false" onAction="#saveFlight" text="Save" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin></Button>
-                                          <TextField fx:id="filename" maxWidth="-Infinity" GridPane.rowIndex="2">
-                                             <GridPane.margin>
-                                                <Insets left="5.0" />
-                                             </GridPane.margin>
-                                          </TextField>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filename" translateX="-20.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                                             <GridPane.margin>
-                                                <Insets top="10.0" />
-                                             </GridPane.margin>
-                                          </Text>
+                                          <GridPane GridPane.rowIndex="2">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#saveFlight" text="Save" GridPane.halignment="CENTER">
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#clearMarkers" text="Clear" GridPane.columnIndex="1" />
+                                             </children>
+                                          </GridPane>
                                        </children>
                                     </GridPane>
                                  </center>
