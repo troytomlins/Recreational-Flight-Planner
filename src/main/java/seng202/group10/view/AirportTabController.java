@@ -102,7 +102,7 @@ public class AirportTabController {
                 updateTable(data);
 
                 // Show success message
-                mainController.showInfoWindow("Successfully imported airline data");
+                mainController.showInfoWindow("Successfully imported airport data");
 
             } catch (IncompatibleFileException e) {
                 mainController.showIncompatibleFileError(e);
