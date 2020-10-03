@@ -223,6 +223,7 @@ function removeAllMarkers() {
     }
     labelHandler.labelIndex = 0;
     markers = [];
+    drawPath();
 }
 
 
