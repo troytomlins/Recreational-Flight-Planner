@@ -319,7 +319,7 @@ public class ViewController {
      */
     public void saveFlight() {
         flight.setAircraft((Aircraft) aircraftSelector.getValue());
-        if (!flight.canFly()){
+        if (flight.canFly()){
             System.out.println(flight.canFly());
             showErrorWindow("Aircraft cannot fly path safely!");
         };
