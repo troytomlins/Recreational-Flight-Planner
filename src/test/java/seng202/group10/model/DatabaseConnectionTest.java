@@ -1,7 +1,8 @@
 package seng202.group10.model;
 
 
-import org.junit.jupiter.api.AfterEach;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
+
 
 /**
  * Test Class for DatabaseConnection.
@@ -27,7 +29,7 @@ public class DatabaseConnectionTest {
         assertTrue(file.exists());
     }
 
-    @AfterEach
+    @After
     public void tearDown() throws Exception {
         database.disconnect();
         File file = new File("database.db");
