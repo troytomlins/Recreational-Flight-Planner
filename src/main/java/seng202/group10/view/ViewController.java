@@ -224,9 +224,12 @@ public class ViewController {
         return result.get() == ButtonType.OK;
     }
 
+    /**
+     * Sets all items in the aircraft select combobox to current aircraft model
+     */
     public void listAircraft() {
         AircraftModel aircraftmodel = new AircraftModel();
-        ArrayList<Aircraft> aircraft = new ArrayList<>();
+        ArrayList<Aircraft> aircraft;
         aircraft = aircraftmodel.getAircraftList();
         ObservableList observableAircraft = FXCollections.observableArrayList(aircraft);
         aircraftSelector.setItems(observableAircraft);
