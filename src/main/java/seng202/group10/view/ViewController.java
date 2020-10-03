@@ -345,7 +345,8 @@ class LocationBox {
         // Making box
         pane = new GridPane();
         button = new Button("Set Altitude");
-        label = new Label(point.id + " " + point.latitude + " " + point.longitude);   // ID and position
+//        label = new Label(point.id + " " + point.latitude + " " + point.longitude);   // ID and position
+        label = new Label(String.format("Marker: %s at (%.3f, %.3f)", point.id, point.latitude, point.longitude));   // ID and position
         pane.add(label, 0, 0);
         altitudeField = new TextField(Double.toString(point.altitude));                // Altitude text box
         pane.add(altitudeField, 0, 1);
