@@ -291,6 +291,8 @@ public class ViewController {
      * writes flight to file overwrites existing global flight
      */
     public void saveFlight() {
+        flight.setAircraft((Aircraft) aircraftSelector.getValue());
+        System.out.println(flight.getAircraftName());
         String filepath = new String();
         FlightModel model= new FlightModel();
         filepath = showFileWriter();
