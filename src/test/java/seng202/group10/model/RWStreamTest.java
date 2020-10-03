@@ -63,7 +63,7 @@ public class RWStreamTest {
             ArrayList<ArrayList<String>> testArray = new ArrayList<>();
             testArray.add(new ArrayList<>(Arrays.asList("1", "2", "3")));
             testArray.add(new ArrayList<>(Arrays.asList("4", "5", "6")));
-            String expected = "1,2,3\n4,5,6";
+            String expected = "1,2,3\n4,5,6\n";
 
             // Write to file
             RWStream stream = new RWStream("", filePath);
