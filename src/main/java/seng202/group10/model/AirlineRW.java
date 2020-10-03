@@ -43,6 +43,12 @@ public class AirlineRW extends RWStream {
         this("airline.csv");
     }
 
+    /**
+     * Reads airlines from file using default parameters
+     * @return ArrayList of aircraft read from file
+     * @throws IncompatibleFileException Thrown when the whole file is incompatible
+     * @throws FileFormatException Thrown when parts of the file are incompatible
+     */
     public ArrayList<Airline> readAirlines() throws IncompatibleFileException, FileFormatException {
         return readAirlines(new ArrayList<>());
     }

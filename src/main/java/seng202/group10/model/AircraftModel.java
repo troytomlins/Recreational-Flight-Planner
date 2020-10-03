@@ -65,6 +65,10 @@ public class AircraftModel {
 
     }
 
+    /**
+     * Returns a list of the current state of aircraft
+     * @return ArrayList of aircraft
+     */
     public ArrayList<Aircraft> getAircraftList() {
         return aircraft;
     }

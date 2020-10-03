@@ -33,6 +33,10 @@ public class FlightController {
         model.addFlight(flight);
     }
 
+    /**
+     * Adds a flight to the model
+     * @param flight flight to be added
+     */
     public void addFlight(Flight flight) {
         model.addFlight(flight);
     }

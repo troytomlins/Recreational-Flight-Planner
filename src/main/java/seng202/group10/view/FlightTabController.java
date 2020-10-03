@@ -31,9 +31,8 @@ public class FlightTabController {
     @FXML public TableColumn<Flight, String> destCoordCol;
     @FXML public TableColumn<Flight, String> distCol;
     @FXML public TableColumn<Flight, String> legCountCol;
-    @FXML private TableView<Flight> flightsTable;
-
-
+    @FXML public TableView<Flight> flightsTable;
+    /** Controller for main javafx page. */
     public ViewController mainController;
 
     /**
@@ -61,12 +60,10 @@ public class FlightTabController {
     }
 
     /**
-     * Imports Flights from file using file explorer.
-     * @param actionEvent Action Event
+     * Imports Flights from file using file explorer.z
      * @throws IOException IO Exception
-     * @throws IncompatibleFileException Incompatible File
      */
-    public void importFlights(ActionEvent actionEvent) throws IOException, IncompatibleFileException {
+    public void importFlights() throws IOException {
         FlightController flightController = mainController.controllerFacade.getFlightController();
         String fileString = mainController.showFileExplorer();
         try {

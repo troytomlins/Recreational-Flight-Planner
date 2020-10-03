@@ -9,7 +9,6 @@ public class AirportModel {
 
     private ArrayList<Airport> airports;
     private ArrayList<Airport> unsavedAirports;
-
     private AirportRW airportRW;
 
     /**

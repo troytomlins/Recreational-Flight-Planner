@@ -74,11 +74,6 @@ public class FlightRW extends RWStream {
         return flight;
     }
 
-    public static void main(String[] args) throws IOException, IncompatibleFileException {
-        FlightRW test = new FlightRW();
-        test.readFlight();
-    }
-
     /**
      * Uses the super class RWStream to write a flight to a file.
      * The Flight object attributes have to be converted to strings.

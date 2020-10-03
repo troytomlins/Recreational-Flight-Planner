@@ -124,6 +124,10 @@ public class RouteRW extends RWStream {
         }
     }
 
+    /**
+     * Reads and returns arraylist of routes from the database.
+     * @return ArrayList of routes from the database.
+     */
     public ArrayList<Route> readDatabaseRoutes() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM routes");
 
