@@ -38,10 +38,6 @@ public class AircraftTabController {
         this.mainController = controller;
     }
 
-    public void importAircraft(ActionEvent actionEvent) {
-        // TODO Implement
-    }
-
     /**
      * Create a new "create aircraft" window/stage.
      * @param event Action event

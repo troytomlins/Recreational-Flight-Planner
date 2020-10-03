@@ -45,8 +45,8 @@
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.99999237060547" minWidth="10.0" prefWidth="95.20001983642578" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints maxHeight="266.6000122070312" minHeight="10.0" prefHeight="98.20001831054688" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="397.1999572753906" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="266.6000122070312" minHeight="10.0" prefHeight="111.00000610351563" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="425.799951171875" minHeight="10.0" prefHeight="382.9999938964844" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="412.9999755859375" minHeight="10.0" prefHeight="49.200042724609375" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
@@ -85,6 +85,11 @@
                                                 <Button mnemonicParsing="false" onAction="#clearMarkers" text="Clear" GridPane.columnIndex="1" />
                                              </children>
                                           </GridPane>
+                                          <Button mnemonicParsing="false" onAction="#listAircraft" text="Update Aircraft" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" />
+                                             </GridPane.margin>
+                                          </Button>
                                        </children>
                                     </GridPane>
                                  </center>
