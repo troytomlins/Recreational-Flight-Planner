@@ -1,7 +1,9 @@
 package seng202.group10.controller;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import seng202.group10.model.*;
 
 import java.io.File;
@@ -12,13 +14,19 @@ import static org.junit.Assert.assertEquals;
 
 public class AirlineControllerTest {
 
-    @Test
-    public void importAirlinesTest() {
-        // TODO Write Test
-
+    @BeforeEach
+    public void setup() {
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
-
+    @Test
+    public void importAirlinesTest() throws FileFormatException, IncompatibleFileException {
+        String filename = "src/test/resources/seng202/group10/controller/airlinesGood.dat";
+        AirlineController controller = new AirlineController();
+        controller.importAirlines(filename);
+        assertEquals(controller.getAirlines().size(), 3);
+    }
 
     @Test
     public void writeAirportsTest() throws FileFormatException, IncompatibleFileException {

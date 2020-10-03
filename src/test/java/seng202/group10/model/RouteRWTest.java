@@ -55,7 +55,6 @@ public class RouteRWTest {
         @Test
         public void readFileThrowsErrorCorruptFile() {
             RouteRW stream = new RouteRW(corruptFileString);
-            System.out.println();
             assertThrows(IncompatibleFileException.class, stream::readRoutes);
         }
     }

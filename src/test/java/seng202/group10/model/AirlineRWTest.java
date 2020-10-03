@@ -51,7 +51,6 @@ public class AirlineRWTest {
     @Test
     public void readFileThrowsErrorCorruptFile() {
         stream = new AirlineRW(corruptFileString);
-        System.out.println();
         assertThrows(IncompatibleFileException.class, stream::readAirlines);
     }
 

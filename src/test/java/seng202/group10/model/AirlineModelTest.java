@@ -36,10 +36,8 @@ public class AirlineModelTest {
     @Test
     public void addAirlineTest() {
         AirlineModel model = new AirlineModel();
-        System.out.println(model.getAirlines());
         model.addAirline(airline);
         model.save();
-        System.out.println(model.getAirlines());
         assertEquals(1, model.getAirlines().size());
     }
 
