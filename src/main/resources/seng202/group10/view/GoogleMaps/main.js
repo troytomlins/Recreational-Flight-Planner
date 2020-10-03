@@ -174,7 +174,7 @@ function newMarker(lat, lng) {
 
 function sendBounds() {
     var bounds = map.getBounds();
-    javaConnector.setAirports(map.getZoom(),
+    javaConnector.setAirports(
         bounds.getNorthEast().lat(),
         bounds.getNorthEast().lng(),
         bounds.getSouthWest().lat(),

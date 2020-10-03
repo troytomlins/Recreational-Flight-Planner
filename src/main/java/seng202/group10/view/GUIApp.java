@@ -135,7 +135,16 @@ public class GUIApp extends Application {
             webEngine = engine;
         }
 
-        public void setAirports(int zoom, double lat1, double long1, double lat2, double long2) {
+        /**
+         * When given the bounds of the map view, figures out the airports in view.
+         * If there are more than 100 airports in view it uses the very sophisticated algorithm of randomly selecting 100 to display.
+         *
+         * @param lat1 The northern bound
+         * @param long1 The eastern bound
+         * @param lat2 The southern bound
+         * @param long2 The western bound
+         */
+        public void setAirports(double lat1, double long1, double lat2, double long2) {
             ArrayList<Airport> airports = new ArrayList<Airport>();
             //System.out.println(String.format("Bounds: (%f, %f), (%f, %f)", lat1, long1, lat2, long2));
             for (Airport airport: viewController.controllerFacade.getAirportController().getAirports()) {
