@@ -235,9 +235,6 @@ public class ViewController {
 
     /**
      * (re)set all the markers in the window
-     * @param labels ArrayList of labels
-     * @param lats ArrayList of latitudes
-     * @param lngs ArrayList of longitudes
      */
     public void remakeLocationBoxes() {
         locationsPane.getChildren().clear();
@@ -250,8 +247,6 @@ public class ViewController {
         }
     }
 
-    private int numMarkers = 1;     // How many markers do we currently have?
-
     /**
      * Add a new marker into the plan flight section
      *
@@ -260,8 +255,8 @@ public class ViewController {
      * @param lng - position longitude
      */
     public void newMarker(String id, double lat, double lng) {
-        newLocationBox(id, numMarkers, lat, lng);
-        numMarkers += 1;
+        flight.addPoint(new FlightPoint("NA", id, 0, lat, lng));
+        remakeLocationBoxes();
     }
 
     /**
@@ -301,8 +296,6 @@ public class ViewController {
 
     /**
      * Make a new box to show the marker location
-     *
-     * @param id  - id of marker
      * @param row - row index to place it
      */
     private void newLocationBox(int row, FlightPoint point) {

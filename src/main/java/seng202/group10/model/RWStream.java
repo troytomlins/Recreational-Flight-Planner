@@ -175,4 +175,8 @@ public class RWStream {
         errorAlert.setHeaderText(message);
         errorAlert.showAndWait();
     }
+
+    public void setOutFileName(String filename) {
+        outFilename = filename;
+    }
 }
