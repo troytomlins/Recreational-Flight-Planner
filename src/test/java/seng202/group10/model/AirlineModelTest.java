@@ -29,17 +29,15 @@ public class AirlineModelTest {
 
     @AfterClass
     public static void tearDown() {
-        RWStream stream = new RWStream("a");
-        stream.closeDb();
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
     @Test
     public void addAirlineTest() {
         AirlineModel model = new AirlineModel();
-        System.out.println(model.getAirlines());
         model.addAirline(airline);
         model.save();
-        System.out.println(model.getAirlines());
         assertEquals(1, model.getAirlines().size());
     }
 

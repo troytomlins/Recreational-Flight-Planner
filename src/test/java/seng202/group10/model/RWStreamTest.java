@@ -20,31 +20,38 @@ public class RWStreamTest {
     @AfterClass
     public static void tearDown() {
         DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
     @Test
     public void testRead() {
         String test_string = "this, is, a, test";
         ArrayList<ArrayList<String>> list = new ArrayList<>();
-        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        ArrayList<ArrayList<String>> data;
         ArrayList<String> singleList = new ArrayList<>(Arrays.asList(test_string.split("[, ]+")));
         list.add(singleList);
-        RWStream rwstream = new RWStream("test.csv");
+        RWStream rwstream = new RWStream("src/test/resources/seng202.group10/model/testRwStreamRead.csv");
         data = rwstream.read();
         assertEquals(list, data);
     }
 
     @Test
     public void testWriteSingle() {
-        ArrayList<ArrayList<String>> read_info = new ArrayList<>();
-        String test1 = "This, Is, a, test, of, the, write, single, class";
-        ArrayList<String> compareList = new ArrayList<>(Arrays.asList(test1.split("[, ]+")));
-        ArrayList<String> list = new ArrayList<>();
-        list.add(test1);
-        RWStream rwstream = new RWStream("test1.csv");
-        rwstream.writeSingle(list);
-        read_info = rwstream.read();
-        assertEquals(compareList, read_info.get(0));
+        try {
+            ArrayList<ArrayList<String>> read_info = new ArrayList<>();
+            String test1 = "This, Is, a, test, of, the, write, single, class";
+            ArrayList<String> compareList = new ArrayList<>(Arrays.asList(test1.split("[, ]+")));
+            ArrayList<String> list = new ArrayList<>();
+            list.add(test1);
+            RWStream rwstream = new RWStream("test1.csv");
+            rwstream.writeSingle(list);
+            read_info = rwstream.read();
+            assertEquals(compareList, read_info.get(0));
+        }
+        finally {
+            File file = new File("test1.csv");
+            file.delete();
+        }
     }
 
     @Test

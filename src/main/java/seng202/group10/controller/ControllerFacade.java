@@ -1,9 +1,6 @@
 package seng202.group10.controller;
 
-import seng202.group10.model.Flight;
-import seng202.group10.model.ModelFacade;
 import seng202.group10.view.AirportTabController;
-import seng202.group10.view.FlightTabController;
 
 /**
  * Controller Facade Class for holding all controllers.
@@ -12,19 +9,10 @@ public class ControllerFacade {
     private AircraftController aircraftController;
     private FlightPlanner flightPlanner;
     private AirlineController airlineController;
-    private ModelFacade model;
     private AirportController airportController;
     private AirportTabController airportTabController;
     private RouteController routeController;
     private FlightController flightController;
-
-    /**
-     * Sets the Model Facade to input.
-     * @param modelFacade ModelFacade
-     */
-    public void setModel(ModelFacade modelFacade) {
-        model = modelFacade;
-    }
 
     /**
      * Constructor for ControllerFacade Class.
@@ -35,7 +23,6 @@ public class ControllerFacade {
         this.airportController = new AirportController();
         this.aircraftController = new AircraftController();
         this.flightPlanner = new FlightPlanner();
-        this.model = new ModelFacade();
         this.routeController = new RouteController();
         this.flightController = new FlightController();
     }

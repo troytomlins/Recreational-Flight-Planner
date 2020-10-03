@@ -40,7 +40,6 @@ public class AircraftModelTest {
 
     @Test
     public void addDuplicateAircraftTest() {
-        System.out.println(aircraftModel.getIndexOf(aircraft));
         while (aircraftModel.getIndexOf(aircraft) != -1) {
             aircraftModel.deleteAircraft(aircraft);
         }

@@ -3,6 +3,7 @@ package seng202.group10.model;
 
 
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -50,14 +51,12 @@ public class AirlineRWTest {
     @Test
     public void readFileThrowsErrorCorruptFile() {
         stream = new AirlineRW(corruptFileString);
-        System.out.println();
         assertThrows(IncompatibleFileException.class, stream::readAirlines);
     }
 
     @AfterClass
     public static void tearDown() {
-        if (stream != null) {
-            stream.closeDb();
-        }
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 }

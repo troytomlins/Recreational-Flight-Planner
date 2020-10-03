@@ -4,6 +4,7 @@ package seng202.group10.model;
 import org.junit.AfterClass;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -20,8 +21,8 @@ public class AirportRWTest {
 
     @AfterClass
     public static void tearDown() {
-        RWStream stream = new RWStream("a");
-        stream.closeDb();
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
     }
 
     @Test

@@ -25,6 +25,24 @@ public class RWStream {
     private String inFilename;
     private String outFilename;
     public DatabaseConnection databaseConnection;
+    private boolean makeFile;
+
+    /**
+     * Constructor for RWStream, sets in and out file to inputted filename.
+     * Creates the out file, gets the database instance
+     * @param filename - file to import
+     * @param outFilename - out file
+     * @param createFile - weather to create the outfile or not
+     */
+    public RWStream(String filename, String outFilename, Boolean createFile) {
+        this.inFilename = filename;
+        this.outFilename = outFilename;
+        this.makeFile = createFile;
+        if (createFile) {
+            makeFile();
+        }
+        getDatabase();
+    }
 
     /**
      * Constructor for RWStream, sets in and out file to inputted filename.
@@ -32,10 +50,7 @@ public class RWStream {
      * @param filename - file to import
      */
     public RWStream(String filename) {
-        inFilename = filename;
-        outFilename = filename;
-        makeFile();
-        getDatabase();
+        this(filename, filename, true);
     }
 
     /**
@@ -45,10 +60,7 @@ public class RWStream {
      * @param outFilename out file
      */
     public RWStream(String inFilename, String outFilename) {
-        this.inFilename = inFilename;
-        this.outFilename = outFilename;
-        makeFile();
-        getDatabase();
+        this(inFilename, outFilename, true);
     }
 
     /**

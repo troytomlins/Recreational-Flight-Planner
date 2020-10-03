@@ -15,7 +15,6 @@ public class FilterSender {
 
     private String tableName;
     private ArrayList<Filter> filters = new ArrayList<>();
-
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     /**

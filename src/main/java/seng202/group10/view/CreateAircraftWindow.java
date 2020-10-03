@@ -90,10 +90,8 @@ public class CreateAircraftWindow {
 
     /**
      * Closes the create aircraft modal.
-     * @param actionEvent Action Event
      */
-    public void cancel(ActionEvent actionEvent) {
+    public void cancel() {
         stage.close();
-
     }
 }
