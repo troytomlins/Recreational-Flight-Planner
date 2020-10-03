@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class FlightTabController {
 
 
-    @FXML public TableColumn<Flight, String> aircraftCol;
     @FXML public TableColumn<Flight, String> startCoordCol;
     @FXML public TableColumn<Flight, String> destCoordCol;
     @FXML public TableColumn<Flight, String> distCol;
@@ -106,7 +105,6 @@ public class FlightTabController {
     public void updateTable(ArrayList<Flight> flights) {
 
         flightsTable.setEditable(true);
-        aircraftCol.setCellValueFactory(new PropertyValueFactory<>("aircraftName"));
         startCoordCol.setCellValueFactory(new PropertyValueFactory<>("startCoordString"));
         destCoordCol.setCellValueFactory(new PropertyValueFactory<>("destCoordString"));
         distCol.setCellValueFactory(new PropertyValueFactory<>("totalDistance"));

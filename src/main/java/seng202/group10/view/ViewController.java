@@ -319,7 +319,10 @@ public class ViewController {
      */
     public void saveFlight() {
         flight.setAircraft((Aircraft) aircraftSelector.getValue());
-        System.out.println(flight.getAircraftName());
+        if (!flight.canFly()){
+            System.out.println(flight.canFly());
+            showErrorWindow("Aircraft cannot fly path safely!");
+        };
         String filepath = new String();
         FlightModel model= new FlightModel();
         filepath = showFileWriter();

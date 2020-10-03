@@ -174,20 +174,14 @@ public class Flight {
 
     /**
      * Checks if the aircraft can successfully go the distance.
-     * @return boolean t/f value
+     * @return false if it can't
      */
     public boolean canFly() {
-        return (aircraft.getRange() < totalDistance);
-    }
-
-//    public boolean checkHalfFlightLength(double distance, Aircraft aircraft) {
-//        // TODO does this need to exists - if so, here?
-//        return false;
-//    }
-
-    public String getDistanceMessage() {
-        // TODO decide if should be here or not
-        return "TODO";
+        if (aircraft == null) {
+            return true;
+        } else {
+            return (aircraft.getRange() > totalDistance);
+        }
     }
 
     public void setAircraft(Aircraft aircraft) {

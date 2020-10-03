@@ -37,7 +37,7 @@
             <children>
                 <BorderPane prefHeight="500.0" prefWidth="379.0" BorderPane.alignment="CENTER">
                     <top>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filters" BorderPane.alignment="CENTER">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Route Filters" BorderPane.alignment="CENTER">
                             <font>
                                 <Font size="25.0" />
                             </font>
