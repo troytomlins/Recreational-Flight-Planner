@@ -3,6 +3,7 @@ package seng202.group10.model;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class AirlineModelTest {
 
     @Before
     public void init() {
+        DatabaseConnection.getInstance().disconnect();
+        new File("database.db").delete();
         airlineModel = new AirlineModel();
         airline = new Airline("Air New Zealand", "N/A","NZ","ANZ","NEW ZEALAND","New Zealand");
         compareAirline = new ArrayList<>();
@@ -45,6 +48,7 @@ public class AirlineModelTest {
     public void addDuplicateAirlineTest() {
         airlineModel.addAirline(airline);
         airlineModel.addAirline(airline); // Try and add the same airline again.
+        airlineModel.save();
         assertEquals(1, airlineModel.getAirlines().size()); // The duplicate should not be added.
     }
 
