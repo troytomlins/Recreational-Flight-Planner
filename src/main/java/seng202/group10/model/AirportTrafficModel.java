@@ -19,7 +19,6 @@ public class AirportTrafficModel {
     private static int TIME_RANGE = 500;
     private static final String apiUrlArrival = "https://opensky-network.org/api/flights/arrival";
     private static final String apiUrlDep = "https://opensky-network.org/api/flights/departure";
-
     private static HttpTransport TRANSPORT;
 
     /**

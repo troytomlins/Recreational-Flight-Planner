@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class AirportFinder {
     private AirportRW airportRW;
-
     private ArrayList<Airport> airports;
 
     /**

@@ -64,6 +64,10 @@ public class AircraftRW extends RWStream {
         return aircraftList;
     }
 
+    /**
+     * Reads an arraylist of aircraft from the database
+     * @return ArrayList of aircraft
+     */
     public ArrayList<Aircraft> readDatabaseAircrafts() {
         ResultSet results = databaseConnection.executeQuery("SELECT * FROM aircrafts");
 
@@ -84,6 +88,10 @@ public class AircraftRW extends RWStream {
         return output;
     }
 
+    /**
+     * Stores a arraylist of aircraft into the database
+     * @param aircrafts ArrayList of aircraft to store in the database
+     */
     public void writeDatabaseAircrafts(ArrayList<Aircraft> aircrafts) {
         databaseConnection.setAutoCommit(false);
         for (int i = 0; i < aircrafts.size(); i++) {

@@ -9,7 +9,6 @@ public class RouteModel {
 
     private ArrayList<Route> routes = new ArrayList<>();
     private ArrayList<Route> unsavedRoutes = new ArrayList<>();
-
     private RouteRW routeRW = new RouteRW();
 
     /**
@@ -49,6 +48,4 @@ public class RouteModel {
         unsavedRoutes = new ArrayList<>();
         routes = routeRW.readDatabaseRoutes();
     }
-
-//    public void deleteRoute(Route route) { routes.remove(route); }
 }

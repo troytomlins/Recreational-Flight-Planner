@@ -138,6 +138,9 @@ public final class DatabaseConnection {
         }
     }
 
+    /**
+     * Closes the database connection and removes the instance
+     */
     public void disconnect() {
         try {
             if (conn != null) {
@@ -149,6 +152,10 @@ public final class DatabaseConnection {
         }
     }
 
+    /**
+     * Executes an SQL statement on the database
+     * @param sqlStatement SQL statement to execute
+     */
     public void executeStatement(String sqlStatement) {
         try {
             Statement statement = conn.createStatement();
@@ -236,7 +243,6 @@ public final class DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         DatabaseConnection database = DatabaseConnection.getInstance();

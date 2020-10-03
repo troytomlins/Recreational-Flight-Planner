@@ -60,7 +60,6 @@ public class AirportTabController {
         airportTable.setItems(FXCollections.observableList(data));
     }
 
-
     /**
      * Remove any filters that have been applied
      */
@@ -156,27 +155,24 @@ public class AirportTabController {
 
     /**
      * Method runs when export airports to csv is clicked. Opens dialogue for exporting data.
-     * @param actionEvent
      */
-    public void exportDataCsv(ActionEvent actionEvent) {
+    public void exportDataCsv() {
         String filepath = mainController.showFileWriterCsv();
         exportData(filepath);
     }
 
     /**
      * Method runs when export airports to csv is clicked. Opens dialogue for exporting data.
-     * @param actionEvent
      */
-    public void exportDataDat(ActionEvent actionEvent) {
+    public void exportDataDat() {
         String filepath = mainController.showFileWriterDat();
         exportData(filepath);
     }
 
     /**
      * Method runs when export airports to csv is clicked. Opens dialogue for exporting data.
-     * @param actionEvent
      */
-    public void exportDataTxt(ActionEvent actionEvent) {
+    public void exportDataTxt() {
         String filepath = mainController.showFileWriterTxt();
         exportData(filepath);
     }

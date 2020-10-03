@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Flight {
     private double totalDistance;
     private Aircraft aircraft;      // null on commercial flights
-
     private ArrayList<FlightPoint> points;
 
     /**
@@ -48,6 +47,10 @@ public class Flight {
 
     public String getAircraftName() {return this.aircraft != null ? this.aircraft.getName() : null; }
 
+    /**
+     * Returns the flight start latitude point as a string
+     * @return Start latitude point string.
+     */
     public String getStartLatitudeString() {
         if (points.size() == 0) {
             return "";
@@ -56,6 +59,10 @@ public class Flight {
         }
     }
 
+    /**
+     * Returns the flight start longitude point as a string.
+     * @return Start longitude point string.
+     */
     public String getStartLongitudeString() {
         if (points.size() == 0) {
             return "";
@@ -64,6 +71,10 @@ public class Flight {
         }
     }
 
+    /**
+     * Returns the destination latitude point as a string.
+     * @return Destination latitude point string.
+     */
     public String getDestLatitudeString() {
         if (points.size() <= 1) {
             return "";
@@ -72,6 +83,10 @@ public class Flight {
         }
     }
 
+    /**
+     * Returns the destination longitude point as a string.
+     * @return Destination longitude point string.
+     */
     public String getDestLongitudeString() {
         if (points.size() <= 1) {
             return "";
@@ -80,14 +95,28 @@ public class Flight {
         }
     }
 
+    /**
+     * Returns the start coordinates as a string.
+     * Formatted as "latitude, longitude"
+     * @return Start coordinates string.
+     */
     public String getStartCoordString() {
         return getStartLatitudeString() + ", " + getStartLongitudeString();
     }
 
+    /**
+     * Returns the destination coordinates as a string.
+     * formatted as "latitude, longitude"
+     * @return Start coordinates string.
+     */
     public String getDestCoordString() {
         return getDestLatitudeString() + ", " + getDestLongitudeString();
     }
 
+    /**
+     * Returns the number of flight legs as a string.
+     * @return Number of flight legs.
+     */
     public String getLegCount() {
         return "" + (points.size() - 1);
     }
