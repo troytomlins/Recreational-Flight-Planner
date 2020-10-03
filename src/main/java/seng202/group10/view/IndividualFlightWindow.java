@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class IndividualFlightWindow {
 
     @FXML public Text flightText;
-    @FXML public Text aircraftText;
     @FXML public Text distText;
     @FXML public TableView<FlightPoint> legTable;
     @FXML public TableColumn<FlightPoint, String> idCol;
@@ -46,7 +45,6 @@ public class IndividualFlightWindow {
 
         // Set table and text fields
         updateTable(flight.getFlightPoints());
-        aircraftText.setText(flight.getAircraftName());
         distText.setText(String.format("%.2f km", flight.getTotalDistance()));
         this.flight = flight;
     }
