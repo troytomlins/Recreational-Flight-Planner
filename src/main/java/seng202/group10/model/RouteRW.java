@@ -18,12 +18,29 @@ import java.util.Arrays;
  * @author Mitchell Freeman, Tom Rizzi
  */
 public class RouteRW extends RWStream {
-    public RouteRW(String inFile) {
-        super(inFile, "route.csv");
+
+    /**
+     * Constructor for RouteRW
+     * @param inFile filename for the input file
+     * @param makeFile boolean value of weather to create the outfile
+     */
+    public RouteRW(String inFile, Boolean makeFile) {
+        super(inFile, "route.csv", makeFile);
     }
 
+    /**
+     * Constructor for RouteRW
+     * @param inFile filename for the input file
+     */
+    public RouteRW(String inFile) {
+        this(inFile, false);
+    }
+
+    /**
+     * Constructor for RouteRW
+     */
     public RouteRW() {
-        super("route.csv");
+        this("route.csv");
     }
 
     /**

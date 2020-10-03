@@ -20,18 +20,27 @@ import java.util.Arrays;
 public class AirportRW extends RWStream {
 
     /**
+     * Constructor for airport rw
+     * @param inFile filename for input file
+     * @param makeFile boolean value of weather the outfile should be created
+     */
+    public AirportRW(String inFile, Boolean makeFile) {
+        super(inFile, "airport.csv", makeFile);
+    }
+
+    /**
      * Constructor for AirportRW with an in file.
      * @param inFile file
      */
     public AirportRW(String inFile) {
-        super(inFile, "airport.csv");
+        this(inFile, false);
     }
 
     /**
      * Stand-Alone Constructor for AirportRW.
      */
     public AirportRW() {
-        super("airport.csv");
+        this("airport.csv");
     }
 
     /**

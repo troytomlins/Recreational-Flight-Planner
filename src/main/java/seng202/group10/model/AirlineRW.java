@@ -18,16 +18,29 @@ import java.util.Arrays;
  * @author Mitchell Freeman
  */
 public class AirlineRW extends RWStream {
+
+    /**
+     * creates instance of class with a default outfile
+     * @param inFile in file
+     * @param createFile determines weather to create the outfile or not
+     */
+    public AirlineRW(String inFile, Boolean createFile) {
+        super(inFile, "airline.csv", createFile);
+    }
+
     /**
      * creates instance of class with a default outfile
      * @param inFile in file
      */
     public AirlineRW(String inFile) {
-        super(inFile, "airline.csv");
+        this(inFile, false);
     }
 
+    /**
+     * Constructor for airlinerw, uses all default values
+     */
     public AirlineRW() {
-        super("airline.csv");
+        this("airline.csv");
     }
 
     public ArrayList<Airline> readAirlines() throws IncompatibleFileException, FileFormatException {
