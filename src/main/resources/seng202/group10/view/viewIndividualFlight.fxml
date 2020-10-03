@@ -29,8 +29,8 @@
       </Text>
       <GridPane GridPane.rowIndex="1">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.4430847167969" minWidth="10.0" prefWidth="273.9396667480469" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.0603332519531" minWidth="10.0" prefWidth="426.0603332519531" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.4430847167969" minWidth="10.0" prefWidth="299.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.0603332519531" minWidth="10.0" prefWidth="301.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
