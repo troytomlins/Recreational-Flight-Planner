@@ -5,6 +5,9 @@ var map;
 var javaConnector; // Placeholder
 var markers = [];
 
+var bounds_changed = false;
+
+var flightLine;
 
 class LabelHandler {
     constructor() {
@@ -43,7 +46,7 @@ class LabelHandler {
      * n = 26; return aa
      * n = 27; return ab
      * etc
-     * @param {int} n 
+     * @param {int} n
      */
     makeLetterLabel(n) {
         let s = "";
@@ -75,10 +78,12 @@ class MyMarker {
         let self = this;
         google.maps.event.addListener(this.mapsMarker, 'click', function(event) {
             removeMarker(self);
+            drawPath();
         });
 
         google.maps.event.addListener(this.mapsMarker, 'drag', function(event) {
             javaConnector.moveMarker(self.label, self.mapsMarker.position.lat(), self.mapsMarker.position.lng());
+            drawPath();
         });
     }
 
@@ -97,6 +102,35 @@ class MyMarker {
     }
 }
 
+class Airport {
+    constructor(data) {
+        this.marker = new google.maps.Marker({
+            position: new google.maps.LatLng(data.latitude, data.longitude),
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                strokeColor: "#0066ff",
+                scale: 5
+            }
+        });
+        var content = "<body>" +
+            "<h2>" + data.name + "</h2><br>" +
+            "<h4>" + data.city + ", " + data.country + "</h4><br>" +
+            "<p>Altitude: " + data.altitude +"</p>" +
+            "<button onclick='addMarker(new google.maps.LatLng("+ data.latitude +", " + data.longitude +"))'>Add to flight</button>" +
+            "</body>";
+        this.window = new google.maps.InfoWindow({
+            content: content
+        });
+        this.marker.addListener('click', () => {
+            this.window.open(map, this.marker);
+        });
+    }
+
+    close() {
+        this.marker.setMap(null);
+    }
+}
 
 let labelHandler = new LabelHandler();
 
@@ -109,11 +143,26 @@ function initMap() {
     var ucPos = { lat: -43.522456, lng: 172.579422 };
     map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(ucPos.lat, ucPos.lng),
-        zoom: 15,
-        disableDefaultUI: true,
+        zoom: 10,
+        mapTypeControl: false,
+        streetViewControl: false
     });
+    flightLine = new google.maps.Polyline();
     google.maps.event.addListener(map, 'click', function(event) {
         addMarker(event.latLng);
+    });
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+        sendBounds();
+    });
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+        bounds_changed = true;
+    });
+    google.maps.event.addListener(map, 'idle', function() {
+        if (bounds_changed) {
+            bounds_changed = false;
+            removeAirports();
+            sendBounds();
+        }
     });
 }
 
@@ -123,6 +172,15 @@ function newMarker(lat, lng) {
     addMarker(new google.maps.LatLng(lat, lng));
 }
 
+function sendBounds() {
+    var bounds = map.getBounds();
+    javaConnector.setAirports(map.getZoom(),
+        bounds.getNorthEast().lat(),
+        bounds.getNorthEast().lng(),
+        bounds.getSouthWest().lat(),
+        bounds.getSouthWest().lng()
+    );
+}
 
 /**
  * Make a new marker
@@ -136,6 +194,8 @@ function addMarker(location) {
     let [label, labelIndex] = labelHandler.getNextLabel();
     let marker = new MyMarker(label, labelIndex, location);
     markers[currentIndex] = marker
+    drawPath();
+    sendMarkersToJava();
 }
 
 
@@ -179,6 +239,19 @@ function makeJavaMarkerLists() {
     return [labels, lats, lngs];
 }
 
+function drawPath() {
+    flightLine.setMap(null);
+    flightLine = new google.maps.Polyline({
+        strokeColor: "#00a9ff",
+        strokeWeight: 2
+    });
+    path = flightLine.getPath();
+    for (var i = 0; i < markers.length; i++) {
+        path.push(markers[i].getPosition());
+    }
+    flightLine.setPath(path);
+    flightLine.setMap(map);
+}
 
 /**
  * Print some text into the java console
@@ -187,6 +260,21 @@ function println(text) {
     javaConnector.println(text);
 }
 
+var airports = [];
+var airportIndex = 0;
+
+function addAirport(inAirport) {
+    airports[airportIndex] = new Airport(inAirport);
+    airportIndex += 1;
+}
+
+function removeAirports() {
+    for (var i = 0; i < airportIndex; i++) {
+        airports[i].close();
+    }
+    airports = [];
+    airportIndex = 0;
+}
 
 /**
  * Control vertical map resizing
