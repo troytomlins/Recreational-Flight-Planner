@@ -3,13 +3,15 @@ RECREATIONAL FLIGHT PLANNER
 ----------------------------------------
 Johnny Howe, Niko Tainui, Troy Tomlins, Mitchell Freeman, Tom Rizzi & Zachary Kaye
 
-An application which can be used to import airline, airport, route and flight data and then display this data in a table view. 
+An application for recreational pilots to plan flights so they are less likely to be involved in fuel exhuastion events.
+The user can use imported/created airport and aircraft data to plan flights that are within range of their aircraft.
+Airline, route and flight data can be imported and viewed in a raw data viewer.
 
 ----------------------------------------
 IMPORTING SOURCE CODE INTO INTELLIJ IDEA
 ----------------------------------------
 1. Open IntelliJ IDEA.
-2. From the main menu select File -> New -> Project from Existing Sources -> seng202_2020_team10_phase2 (supplied folder) -> Create project from existing sources -> ...
+2. From the main menu select File -> New -> Project from Existing Sources -> seng202_2020_team10_3 (supplied folder) -> Create project from existing sources -> ...
 3. The source code for the Recreational Flight Planner Application should now be imported into IntelliJ IDEA.
 
 ----------------------------------------
@@ -17,4 +19,4 @@ RUNNING APPLICATION
 ----------------------------------------
 1. Ensure Java 11 is installed on your machine.
 2. Open the supplied zip folder in a terminal window.
-3. Run the JAR file by entering "java -jar RecreationalFlightPlanner-1.0-SNAPSHOT.jar"
+3. Run the JAR file by entering "java -jar seng202_2020_team10_3.jar"
