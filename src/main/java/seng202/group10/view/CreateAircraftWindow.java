@@ -62,6 +62,12 @@ public class CreateAircraftWindow {
                 return;
             }
 
+            if (range <= 0.0) {
+                showErrorMessage("The 'range' field must be greater than 0!");
+                return;
+            }
+
+
             // All fields valid, add aircraft to model and update table
             AircraftController aircraftController = controller.mainController.controllerFacade.getAircraftController();
             aircraftController.addAircraft(iata, name, icao, range);
