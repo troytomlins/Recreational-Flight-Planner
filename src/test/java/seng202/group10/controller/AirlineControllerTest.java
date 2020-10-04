@@ -34,7 +34,7 @@ public class AirlineControllerTest {
         AirlineController controller = new AirlineController();
         try {
             // Setup
-            controller.importAirlines("src/test/resources/seng202.group10/model/airportsGood.dat");
+            controller.importAirlines("src/test/resources/seng202.group10/model/airlinesGood.dat");
             controller.writeAirlines(outFile);
             ArrayList<Airline> beforeContent = controller.getAirlines();
 
