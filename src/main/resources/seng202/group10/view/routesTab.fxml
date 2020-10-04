@@ -71,7 +71,7 @@
                                     </rowConstraints>
                                     <children>
                                         <TextField fx:id="airlineCodeFilterField" GridPane.columnIndex="1" />
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Code">
                                             <GridPane.margin>
                                                 <Insets left="5.0" />
                                             </GridPane.margin>
