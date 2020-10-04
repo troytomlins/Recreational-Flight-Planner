@@ -29,6 +29,7 @@ public class RouteTabController {
     @FXML public TableColumn<Airline, String> srcAirportCodeCol;
     @FXML public TableColumn<Airline, String> destAirportCodeCol;
     @FXML public TableColumn<Airline, Integer> stopsCol;
+    @FXML private TextField airlineCodeFilterField;
     @FXML private TextField srcAirportCodeFilterField;
     @FXML private TextField destAirportCodeFilterField;
     @FXML private TextField numStopsFilterField;
@@ -109,6 +110,7 @@ public class RouteTabController {
      */
     public void applyRouteFilters() {
         RouteFilters filter = new RouteFilters();
+        filter.addFilter("airlineCode", airlineCodeFilterField.getText());
         filter.addFilter("sourceAirportCode", srcAirportCodeFilterField.getText());
         filter.addFilter("destinationAirportCode", destAirportCodeFilterField.getText());
         filter.addFilter("stops", numStopsFilterField.getText());
@@ -140,6 +142,7 @@ public class RouteTabController {
      * Remove any filters that have been applied
      */
     public void clearFilters() {
+        airlineCodeFilterField.setText("");
         srcAirportCodeFilterField.setText("");
         destAirportCodeFilterField.setText("");
         numStopsFilterField.setText("");
