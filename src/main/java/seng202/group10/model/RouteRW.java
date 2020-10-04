@@ -81,7 +81,13 @@ public class RouteRW extends RWStream {
 
                     // Check if the line is to be ignored
                     if (!ignoreLines.contains(lineNum)) {
+
                         try {
+                            // Check the record is correct size
+                            if (csvRecord.size() != 9) {
+                                throw new Exception("Wrong record size");
+                            }
+
                             // Get corresponding values from the csv record
                             Route route = new Route(
                                     csvRecord.get(0),

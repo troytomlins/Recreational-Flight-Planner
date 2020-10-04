@@ -71,6 +71,10 @@ public class AirportRW extends RWStream {
                 // Check if the line is to be ignored
                 if (!ignoreLines.contains(lineNum)) {
                     try {
+                        // Check the record is correct size
+                        if (csvRecord.size() != 12) {
+                            throw new Exception("Wrong record size");
+                        }
 
                         // Get corresponding values from the csv record
                         String name = csvRecord.get(1);

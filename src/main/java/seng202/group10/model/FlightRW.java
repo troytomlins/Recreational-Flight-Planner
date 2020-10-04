@@ -55,6 +55,11 @@ public class FlightRW extends RWStream {
         CSVParser parser = CSVParser.parse(csvReader, CSVFormat.EXCEL);
         for (CSVRecord csvRecord : parser) {    // For each line
             try {
+                // Check the record is correct size
+                if (csvRecord.size() != 5) {
+                    throw new Exception("Wrong record size");
+                }
+
                 // Make point from each line
                 FlightPoint flightPoint = new FlightPoint(
                         csvRecord.get(0),
