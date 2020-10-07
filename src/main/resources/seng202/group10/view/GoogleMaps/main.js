@@ -1,19 +1,17 @@
-var labels = ["Start", "A", "B", "C", "D", "E", "F", "aaaaaaaaaaaa"]
-var labelIndex = 0;
-
 var map;
 var javaConnector; // Placeholder
 var markers = [];
 
 var bounds_changed = false;
-
 var flightLine;
 
+
+/**
+ * Handles/gives out labels for the markers
+ */
 class LabelHandler {
     constructor() {
         this.labelIndex = 0;
-        this.firstLabel = "0";
-//        this.endLabel = "end";
     }
 
     /**
@@ -29,15 +27,7 @@ class LabelHandler {
      * @returns {[string, int]} the label and the index
      */
     getNextLabel() {
-        let label;
-        if (this.labelIndex == 0) {
-            label = this.firstLabel;
-        } else {
-            // let letterLabels = Math.max(0, this.labelIndex - 2);
-//            label = this.makeLetterLabel(this.labelIndex - 1);
-            label = this.labelIndex.toString();
-        }
-        return [label, this.labelIndex++];
+        return [this.labelIndex.toString(), this.labelIndex++];
     }
 
     /**
@@ -60,6 +50,9 @@ class LabelHandler {
 }
 
 
+/**
+ * Wrapper for the google maps marker
+ */
 class MyMarker {
 
     constructor(label, labelIndex, latLng) {
@@ -101,6 +94,7 @@ class MyMarker {
         this.mapsMarker.setLabel(this.label);
     }
 }
+
 
 class Airport {
     constructor(data) {
